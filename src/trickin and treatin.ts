@@ -173,7 +173,7 @@ export function runBlocks(blocks: number = -1) {
       : parseInt(get("questG04Nemesis").substring(4), 10);
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
   const nemesis = () => {
-    return !doingNemesis ? true : nemesisStep() < 25;
+    return !doingNemesis || nemesisStep() < 25;
   };
   const startTime = gametimeToInt();
   try {

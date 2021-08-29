@@ -9,22 +9,13 @@ import {
   retrieveItem,
   autosellPrice,
 } from "kolmafia";
-import {
-  get,
-  $item,
-  $location,
-  have,
-  $effect,
-  Macro,
-  $locations,
-  Guzzlr,
-} from "libram";
+import { get, $item, $location, have, $effect, Macro, $locations, Guzzlr } from "libram";
 
-interface ZonePotion {
+type ZonePotion = {
   zone: string;
   effect: Effect;
   potion: Item;
-}
+};
 
 const zonePotions: ZonePotion[] = [
   {
@@ -170,7 +161,6 @@ export function advMacroAA(
   }
 }
 
-
 const valueMap: Map<Item, number> = new Map();
 
 const MALL_VALUE_MODIFIER = 0.9;
@@ -195,3 +185,5 @@ export function saleValue(...items: Item[]): number {
       .reduce((s, price) => s + price, 0) / items.length
   );
 }
+
+
