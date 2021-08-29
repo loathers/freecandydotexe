@@ -1,23 +1,18 @@
 import {
-  buy,
   equip,
   gametimeToInt,
   getCounters,
-  haveEffect,
   haveFamiliar,
   inebrietyLimit,
   inMultiFight,
-  mallPrice,
   myAdventures,
   myFamiliar,
   myInebriety,
-  numericModifier,
   outfit,
   print,
   runChoice,
   runCombat,
   totalTurnsPlayed,
-  use,
   useFamiliar,
   useSkill,
   visitUrl,
@@ -36,11 +31,11 @@ import {
   set,
   SourceTerminal,
 } from "libram";
+import { pickBjorn } from "./bjorn";
 import {
   advMacro,
   advMacroAA,
-  pickBjorn,
-  prepWandererZone,
+  determineDraggableZoneAndEnsureAccess,
   getRandFromArray,
   funBuddyNames,
 } from "./lib";
@@ -133,7 +128,7 @@ function freeFight(macro: Macro, condition?: () => boolean, prep?: () => void) {
   if (have(bjorn)) pickBjorn();
   if (have(proton)) ghostCheck();
   if (prep) prep();
-  advMacroAA(prepWandererZone(), macro, condition);
+  advMacroAA(determineDraggableZoneAndEnsureAccess(), macro, condition);
 }
 
 export function runBlocks(blocks: number = -1) {
@@ -280,7 +275,7 @@ export function runBlocks(blocks: number = -1) {
 
       if (doingNemesis && getCounters("Nemesis Assassin window end", -11, 0) !== "") {
         useFamiliar(trickFamiliar);
-        advMacroAA(prepWandererZone(), trickMacro);
+        advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
         outfit("freefight stasis");
         if (have(bjorn)) pickBjorn();
         if (have(proton)) ghostCheck();
