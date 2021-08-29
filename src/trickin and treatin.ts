@@ -33,7 +33,6 @@ import {
 } from "libram";
 import { pickBjorn } from "./bjorn";
 import {
-  advMacro,
   advMacroAA,
   determineDraggableZoneAndEnsureAccess,
   getRandFromArray,
@@ -246,7 +245,7 @@ export function runBlocks(blocks: number = -1) {
         }
         print(`Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.`, "blue");
         () => equip($slot`back`, proton);
-        advMacro(
+        advMacroAA(
           ghostLocation,
           Macro.skill("shoot ghost").skill("shoot ghost").skill("shoot ghost").skill("trap ghost"),
           () => get("questPAGhost") !== "unstarted"

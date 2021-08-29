@@ -179,40 +179,11 @@ export function advMacroAA(
   const condition = () => {
     return typeof parameter === "number" ? n < parameter : parameter();
   };
-  const isFunc = typeof macro === "function";
-  const macroFunc = () => {
-    return typeof macro === "function" ? macro() : macro;
-  };
-  const macroText = macro.toString();
-  macroFunc().setAutoAttack();
-  while (condition()) {
-    if (isFunc) macroFunc().setAutoAttack();
-    adv1(location, -1, (round: number, foe: Monster, text: string) => {
-      return isFunc ? macroFunc().toString() : macroText;
-    });
-    if (afterCombatAction) afterCombatAction();
-    n++;
-  }
-}
 
-export function advMacro(
-  location: Location,
-  macro: Macro | (() => Macro),
-  parameter: number | (() => boolean) = 1,
-  afterCombatAction?: () => void
-) {
-  setAutoAttack(0);
-  let n = 0;
-  const condition = () => {
-    return typeof parameter === "number" ? n < parameter : parameter();
-  };
-  const macroFunc = () => {
-    return typeof macro === "function" ? macro() : macro;
-  };
+  if (typeof macro !== "function") macro.setAutoAttack();
   while (condition()) {
-    adv1(location, -1, () => {
-      return macroFunc().toString();
-    });
+    if (typeof macro === "function") macro().setAutoAttack();
+    adv1(location, -1, () => Macro.cachedAutoAttack ?? Macro.abort().toString());
     if (afterCombatAction) afterCombatAction();
     n++;
   }
