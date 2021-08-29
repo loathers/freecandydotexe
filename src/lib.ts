@@ -1,42 +1,23 @@
 import { canAdv } from "canadv.ash";
 import {
   use,
-  haveEffect,
-  availableAmount,
   buy,
   cliExecute,
-  itemAmount,
   print,
-  visitUrl,
-  runChoice,
   mallPrice,
-  myFamiliar,
-  equip,
-  bjornifyFamiliar,
-  setAutoAttack,
   adv1,
-  getClanName,
-  putStash,
   retrieveItem,
-  takeStash,
-  myTurncount,
   autosellPrice,
 } from "kolmafia";
 import {
   get,
-  set,
   $item,
   $location,
-  $items,
   have,
   $effect,
-  $familiar,
-  $slot,
   Macro,
-  property,
   $locations,
   Guzzlr,
-  SourceTerminal,
 } from "libram";
 
 interface ZonePotion {
@@ -189,78 +170,6 @@ export function advMacroAA(
   }
 }
 
-function inClan<T>(clanName: string, action: () => T) {
-  clanName = clanName.toLowerCase();
-  const startingClanName = getClanName().toLowerCase();
-  if (startingClanName !== clanName) cliExecute("/whitelist " + clanName);
-  if (getClanName().toLowerCase() !== clanName) {
-    throw `Failed to move to clan ${clanName} (currently in ${getClanName()})`;
-  }
-  try {
-    return action();
-  } finally {
-    if (startingClanName !== clanName) cliExecute("/whitelist " + startingClanName);
-  }
-}
-
-export function withStash<T>(itemsToTake: Item[], action: () => T) {
-  if (itemsToTake.every((item) => availableAmount(item) > 0)) return action();
-
-  const stashClanName = "Alliance From Heck";
-
-  return inClan(stashClanName, () => {
-    const quantitiesTaken = new Map<Item, number>();
-    try {
-      for (const item of itemsToTake) {
-        if (getClanName() !== stashClanName)
-          throw "Wrong clan! Don't take stuff out of the stash here!";
-        const succeeded = takeStash(1, item);
-        if (succeeded) {
-          print(`Took ${item.plural} from stash.`, "blue");
-          quantitiesTaken.set(item, (quantitiesTaken.get(item) ?? 0) + (succeeded ? 1 : 0));
-        }
-      }
-      return action();
-    } finally {
-      for (const [item, quantityTaken] of quantitiesTaken.entries()) {
-        // eslint-disable-next-line no-unsafe-finally
-        if (getClanName() !== stashClanName)
-          throw "Wrong clan! Don't put stuff back in the stash here!";
-        retrieveItem(quantityTaken, item);
-        putStash(quantityTaken, item);
-        print(`Returned ${quantityTaken} ${item.plural} to stash.`, "blue");
-      }
-    }
-  });
-}
-
-export const funBuddyNames = [
-  "cowboy",
-  "pardner",
-  "friend",
-  "friend-o",
-  "pal",
-  "buddy",
-  "guy",
-  "dude",
-  "comrade",
-  "heart of my heart",
-  "matey",
-  "daddy",
-  "Mr. Anderson",
-  "Shrek, the ogre from the Shrek franchise",
-  "bad boy",
-  "stretchy little man",
-  "coward",
-  "you block, you stone, you worse than senseless thing",
-  "nerd",
-  "you handsome, handsome man",
-  "sport",
-];
-
-export function getRandFromArray(messages: Array<string>) {
-  return messages[Math.floor(Math.random() * messages.length)];
-}
 
 const valueMap: Map<Item, number> = new Map();
 

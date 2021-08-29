@@ -32,12 +32,7 @@ import {
   SourceTerminal,
 } from "libram";
 import { pickBjorn } from "./bjorn";
-import {
-  advMacroAA,
-  determineDraggableZoneAndEnsureAccess,
-  getRandFromArray,
-  funBuddyNames,
-} from "./lib";
+import { advMacroAA, determineDraggableZoneAndEnsureAccess } from "./lib";
 
 const stasisFamiliars = $familiars`stocking mimic, ninja pirate zombie robot, comma chameleon, feather boa constrictor`;
 
@@ -84,10 +79,7 @@ function treat() {
 }
 
 function trick(trickFamiliar: Familiar, trickMacro: Macro) {
-  print(
-    `You're a tricksy little hobbitses, aren't you, ${getRandFromArray(funBuddyNames)}.`,
-    "blue"
-  );
+  print(`You're a tricksy little hobbitses, aren't you?`, "blue");
   prepareToTrick(trickFamiliar, trickMacro);
   if (!block().includes("whichhouse=")) {
     if (myAdventures() < 5) {
@@ -192,7 +184,7 @@ export function runBlocks(blocks: number = -1) {
       outfit("trick");
       if (terminal) {
         if (getCounters("Digitize", -11, 0) !== "") {
-          print(`It's digitize time, ${getRandFromArray(funBuddyNames)}!`, "blue");
+          print(`It's digitize time!`, "blue");
           const digitizeMacro = Macro.externalIf(
             myAdventures() * 1.1 <
               (3 - digitizes) *
@@ -260,9 +252,7 @@ export function runBlocks(blocks: number = -1) {
         )
       ) {
         print(
-          `Sorry ${getRandFromArray(
-            funBuddyNames
-          )}, we encountered a digitized monster but haven't initialized the counter yet!`,
+          `Sorry, we encountered a digitized monster but haven't initialized the counter yet!`,
           "red"
         );
         print("Sorry if that red message freaked you out, we're all fine.", "grey");
