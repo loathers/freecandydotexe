@@ -2,7 +2,7 @@
   "name": "freecandydotexe",
   "version": "1.0.0",
   "description": "A trick-or-treating script for the 2003 browser-based RPG Kingdom of Loathing.",
-  "main": "KoLmafia/scripts/kol-js-starter/main-script-name.js",
+  "main": "KoLmafia/scripts/freecandydotexe/freecandy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:types && npm run build:js",
