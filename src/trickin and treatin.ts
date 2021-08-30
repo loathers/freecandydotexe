@@ -131,14 +131,14 @@ export function runBlocks(blocks = -1): void {
         .tryItem($item`Time-Spinner`)
         .tryItem($item`nasty-smelling moss`)
         .tryItem($item`Mayor Ghost's scissors`)
-        .skill("silent treatment")
+        .trySkill($skill`Silent Treatment`)
         .trySkillRepeat($skill`Shieldbutt`)
         .trySkillRepeat($skill`Kneebutt`)
         .attack()
         .repeat()
-    : Macro.trySkill("curse of weaksauce")
-        .trySkill("sing along")
-        .trySkill("extract")
+    : Macro.trySkill($skill`Curse of Weaksauce`)
+        .trySkill($skill`Sing Along`)
+        .trySkill($skill`Extract`)
         .attack()
         .repeat();
 
@@ -172,7 +172,7 @@ export function runBlocks(blocks = -1): void {
                   (get("_sourceTerminalDigitizeMonsterCount") *
                     (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
                   3),
-            Macro.trySkill("digitize")
+            Macro.trySkill($skill`Digitize`)
           ).step(trickMacro);
           fightOutfit("Digitize");
           advMacroAA(
@@ -204,7 +204,7 @@ export function runBlocks(blocks = -1): void {
         if (getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3) {
           const voteMacro = Macro.externalIf(
             get("_voteMonster") === $monster`angry ghost`,
-            Macro.skill("silent treatment")
+            Macro.trySkill($skill`Silent Treatment`)
           ).step(trickMacro);
           fightOutfit("Voter");
           advMacroAA(
@@ -223,7 +223,10 @@ export function runBlocks(blocks = -1): void {
         print(`Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.`, "blue");
         advMacroAA(
           ghostLocation,
-          Macro.skill("shoot ghost").skill("shoot ghost").skill("shoot ghost").skill("trap ghost"),
+          Macro.trySkill($skill`Shoot Ghost`)
+            .trySkill($skill`Shoot Ghost`)
+            .trySkill($skill`Shoot Ghost`)
+            .trySkill($skill`Trap Ghost`),
           () => get("questPAGhost") !== "unstarted"
         );
       }
