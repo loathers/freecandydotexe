@@ -38,7 +38,7 @@ const stasisFamiliars = new Map<Familiar, stasisValue>([
 
 type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 
-export function figthOutfit(type: fightType = "Trick"): void {
+export function fightOutfit(type: fightType = "Trick"): void {
   if (!trickHats.some((hat) => have(hat))) {
     buy(1, trickHats.sort((a, b) => mallPrice(b) - mallPrice(a))[0]);
   }
