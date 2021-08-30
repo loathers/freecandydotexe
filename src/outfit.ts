@@ -6,16 +6,7 @@ import {
   myFamiliar,
   numericModifier,
 } from "kolmafia";
-import {
-  $effect,
-  $familiar,
-  $familiars,
-  $item,
-  $items,
-  getFoldGroup,
-  have,
-  MaximizeOptions,
-} from "libram";
+import { $familiar, $familiars, $item, $items, getFoldGroup, have } from "libram";
 import { clamp } from "./lib";
 
 const actionRateBonus = () =>
@@ -32,15 +23,15 @@ type stasisValue = {
 };
 
 const trickHats = $items`invisible bag, witch hat, beholed bedsheet`;
-const adventureFamiliars = $familiars`temporal riftlet, unagnimated gnome`;
+const adventureFamiliars = $familiars`Temporal Riftlet, Reagnimated Gnome`;
 const stasisFamiliars = new Map<Familiar, stasisValue>([
-  [$familiar`ninja pirate zombie robot`, { baseRate: 1 / 2, meatPerLb: 14.52 }],
+  [$familiar`Ninja Pirate Zombie Robot`, { baseRate: 1 / 2, meatPerLb: 14.52 }],
   [$familiar`Cocoabo`, { baseRate: 1 / 3, meatPerLb: 13.2 }],
-  [$familiar`stocking mimic`, { baseRate: 1 / 3, meatPerLb: 13.2 }],
-  [$familiar`feather boa constrictor`, { baseRate: 1 / 3, meatPerLb: 27.5 }],
+  [$familiar`Stocking Mimic`, { baseRate: 1 / 3, meatPerLb: 13.2 }],
+  [$familiar`Feather Boa Constrictor`, { baseRate: 1 / 3, meatPerLb: 27.5 }],
 ]);
 
-export function trickOutfit() {
+export function trickOutfit(): void {
   if (!trickHats.some((hat) => have(hat))) {
     buy(1, trickHats.sort((a, b) => mallPrice(b) - mallPrice(a))[0]);
   }
@@ -52,9 +43,9 @@ export function trickOutfit() {
   if (stasisData) {
     if (
       stasisData.baseRate + actionRateBonus() < 1 &&
-      getFoldGroup($item`Loathing Legion Helicopter`).some((foldable) => have(foldable))
+      getFoldGroup($item`Loathing Legion helicopter`).some((foldable) => have(foldable))
     ) {
-      forceEquips.push($item`loathing Legion helicopter`);
+      forceEquips.push($item`Loathing Legion helicopter`);
     }
   }
 
@@ -64,8 +55,8 @@ export function trickOutfit() {
     ? clamp(
         stasisData.baseRate +
           actionRateBonus() +
-          (forceEquips.includes($item`loathing legion helicopter`) &&
-          !haveEquipped($item`loathing legion helicopter`)
+          (forceEquips.includes($item`Loathing Legion helicopter`) &&
+          !haveEquipped($item`Loathing Legion helicopter`)
             ? 0.25
             : 0),
         0,

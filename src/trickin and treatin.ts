@@ -34,7 +34,7 @@ import {
 import { pickBjorn } from "./bjorn";
 import { advMacroAA, determineDraggableZoneAndEnsureAccess } from "./lib";
 
-const stasisFamiliars = $familiars`stocking mimic, ninja pirate zombie robot, comma chameleon, feather boa constrictor`;
+const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
 
 const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
   trickMacro.setAutoAttack();
@@ -43,7 +43,7 @@ const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
 };
 
 const treatOutfit = get<string>("spoopTreatOutfit") || "Eldritch Equipage";
-const tot = $familiar`trick-or-treating tot`;
+const tot = $familiar`Trick-or-Treating Tot`;
 const prepareToTreat = () => {
   if (haveFamiliar(tot)) useFamiliar(tot);
   outfit("birthday suit");
@@ -71,10 +71,10 @@ function treat() {
     } else if (thisBlock.match(RegExp(`whichhouse=${i}>[^>]*?starhouse`))) {
       visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${i}&pwd`);
       runChoice(2);
-      /value="\l+/;
+      /value="l+/;
     }
   }
-  if (block().match(RegExp(`whichhouse=\d+>[^>]*?house_l`)))
+  if (block().match(/whichhouse=\d*>[^>]*?house_l/))
     throw "I thought I was out of light houses, but I wasn't. Alas!";
 }
 
@@ -96,7 +96,7 @@ function trick(trickFamiliar: Familiar, trickMacro: Macro) {
       while (inMultiFight()) runCombat(trickMacro.toString());
     }
   }
-  if (block().match(RegExp(`whichhouse=\d+>[^>]*?house_d`)))
+  if (block().match(/whichhouse=\d*>[^>]*?house_d/))
     throw "I thought I was out of dark houses, but I wasn't. Alas!";
 }
 
@@ -112,7 +112,7 @@ function ghostCheck() {
   }
 }
 
-const bjorn = $item`buddy bjorn`;
+const bjorn = $item`Buddy Bjorn`;
 
 function freeFight(macro: Macro, condition?: () => boolean, prep?: () => void) {
   outfit("freefight stasis");
@@ -122,8 +122,8 @@ function freeFight(macro: Macro, condition?: () => boolean, prep?: () => void) {
   advMacroAA(determineDraggableZoneAndEnsureAccess(), macro, condition);
 }
 
-export function runBlocks(blocks: number = -1) {
-  SourceTerminal.educate([$skill`digitize`, $skill`extract`]);
+export function runBlocks(blocks = -1): void {
+  SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
 
   const terminal = SourceTerminal.have();
 
@@ -161,7 +161,7 @@ export function runBlocks(blocks: number = -1) {
         .attack()
         .repeat();
 
-  let n = 0;
+  const n = 0;
   const condition = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
   const nemesisStep = () =>
     get("questG04Nemesis") === "unstarted"
@@ -256,9 +256,9 @@ export function runBlocks(blocks: number = -1) {
           "red"
         );
         print("Sorry if that red message freaked you out, we're all fine.", "grey");
-        useFamiliar($familiar`frumious bandersnatch`);
-        useSkill(1, $skill`ode to booze`);
-        advMacroAA($location`the dire warren`, Macro.step("runaway"));
+        useFamiliar($familiar`Frumious Bandersnatch`);
+        useSkill(1, $skill`The Ode to Booze`);
+        advMacroAA($location`The Dire Warren`, Macro.step("runaway"));
       }
       trickTreat(trickFamiliar, trickMacro);
 
