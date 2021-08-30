@@ -7,6 +7,7 @@ import {
   myAdventures,
   myFamiliar,
   myInebriety,
+  myName,
   outfit,
   print,
   runChoice,
@@ -77,7 +78,10 @@ function treat() {
 }
 
 function trick(trickFamiliar: Familiar, trickMacro: Macro) {
-  print(`You're a tricksy little hobbitses, aren't you?`, "blue");
+  print(
+    `Illusion, ${myName()}. A trick is something an adventurer does for meat. Or candy!`,
+    "blue"
+  );
   prepareToTrick(trickFamiliar, trickMacro);
   if (!block().includes("whichhouse=")) {
     if (myAdventures() < 5) {
