@@ -2,7 +2,7 @@ import { myFamiliar } from "kolmafia";
 import { $familiar, $item, $items, get, have } from "libram";
 import { saleValue } from "./lib";
 
-type BjornedFamiliar = {
+export type BjornedFamiliar = {
   familiar: Familiar;
   meatVal: () => number;
   probability: number;
