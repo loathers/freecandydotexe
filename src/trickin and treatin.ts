@@ -41,7 +41,7 @@ const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
   fightOutfit("Trick");
 };
 
-const treatOutfit = get<string>("spoopTreatOutfit") || "Eldritch Equipage";
+const treatOutfit = get<string>("fcdeTreatOutfit") || "Eldritch Equipage";
 const tot = $familiar`Trick-or-Treating Tot`;
 const prepareToTreat = () => {
   if (haveFamiliar(tot)) useFamiliar(tot);

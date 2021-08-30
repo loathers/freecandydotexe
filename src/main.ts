@@ -1,13 +1,12 @@
-import { myMp, print } from "kolmafia";
+import { print } from "kolmafia";
+import { runBlocks } from "./trickin and treatin";
 
-export function checkMP() {
-  if (myMp() < 200) {
-    return "Your MP is less than 200.";
-  } else {
-    return "Your MP is greater than or equal to 200.";
-  }
-}
-
-export function main() {
-  print(checkMP());
+export function main(args: string): void {
+  if (args.includes("help")) {
+    print(
+      "Set the property fcdeTreatOutfit with the name of the outfit you'd like to trick or treat in. Take out the familiar you want to use for trick or treating. Enjoy.",
+      "blue"
+    );
+  } else if (args) runBlocks(parseInt(args));
+  else runBlocks();
 }
