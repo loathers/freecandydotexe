@@ -37,7 +37,7 @@ const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Co
 const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
   trickMacro.setAutoAttack();
   useFamiliar(trickFamiliar);
-  outfit("trick");
+  fightOutfit("Trick");
 };
 
 const treatOutfit = get<string>("spoopTreatOutfit") || "Eldritch Equipage";
@@ -103,16 +103,14 @@ function trickTreat(trickFamiliar: Familiar, trickMacro: Macro) {
   trick(trickFamiliar, trickMacro);
 }
 
-const proton = $item`protonic accelerator pack`;
-
 export function runBlocks(blocks = -1): void {
   SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
-
   const terminal = SourceTerminal.have();
 
   const kramco = $item`Kramco Sausage-o-Matic™`;
   const sausage = have(kramco);
 
+  const proton = $item`protonic accelerator pack`;
   const ghost = have(proton);
 
   const voteBadge = $item`"I Voted!" sticker`;
@@ -121,24 +119,24 @@ export function runBlocks(blocks = -1): void {
   const trickFamiliar = myFamiliar();
 
   const trickMacro = stasisFamiliars.includes(trickFamiliar)
-    ? Macro.skill("curse of weaksauce")
-        .skill("micrometeor")
-        .skill("shadow noodles")
-        .skill("sing along")
-        .skill("extract")
-        .skill("summon love gnats")
-        .skill("shell up")
-        .item("time-spinner", "HOA citation pad")
-        .item("little red book")
-        .item("nasty-smelling moss")
-        .item("great wolf's lice")
-        .item("mayor ghost's scissors")
+    ? Macro.trySkill($skill`Curse of Weaksauce`)
+        .trySkill($skill`Micrometeorite`)
+        .trySkill($skill`Shadow Noodles`)
+        .trySkill($skill`Sing Along`)
+        .trySkill($skill`Extract`)
+        .trySkill($skill`Summon Love Gnats`)
+        .trySkill($skill`Shell Up`)
+        .tryItem([$item`Great Wolf's lice`, $item`HOA citation pad`])
+        .tryItem($item`little red book`)
+        .tryItem($item`Time-Spinner`)
+        .tryItem($item`nasty-smelling moss`)
+        .tryItem($item`Mayor Ghost's scissors`)
         .skill("silent treatment")
-        .trySkillRepeat("shieldbutt")
-        .trySkillRepeat("kneebutt")
+        .trySkillRepeat($skill`Shieldbutt`)
+        .trySkillRepeat($skill`Kneebutt`)
         .attack()
         .repeat()
-    : Macro.skill("curse of weaksauce")
+    : Macro.trySkill("curse of weaksauce")
         .trySkill("sing along")
         .trySkill("extract")
         .attack()
