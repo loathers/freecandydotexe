@@ -13,7 +13,6 @@ import {
   runCombat,
   totalTurnsPlayed,
   useFamiliar,
-  useSkill,
   visitUrl,
 } from "kolmafia";
 import {
@@ -26,10 +25,11 @@ import {
   get,
   have,
   Macro,
+  maximizeRequirementsCached,
   set,
   SourceTerminal,
 } from "libram";
-import { advMacroAA, determineDraggableZoneAndEnsureAccess } from "./lib";
+import { advMacroAA, determineDraggableZoneAndEnsureAccess, findRun } from "./lib";
 import { fightOutfit } from "./outfit";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
@@ -232,20 +232,17 @@ export function runBlocks(blocks = -1): void {
       }
       if (
         digitizes !== get("_sourceTerminalDigitizeUses") &&
-        !(
-          votes !== get("_voteFreeFights") ||
-          sausages !== get("_sausageFights") ||
-          ghosting !== (get("questPAGhost") !== "unstarted")
-        )
+        !(votes !== get("_voteFreeFights") || sausages !== get("_sausageFights"))
       ) {
         print(
           `Sorry, we encountered a digitized monster but haven't initialized the counter yet!`,
           "red"
         );
-        print("Sorry if that red message freaked you out, we're all fine.", "grey");
-        useFamiliar($familiar`Frumious Bandersnatch`);
-        useSkill(1, $skill`The Ode to Booze`);
-        advMacroAA($location`The Dire Warren`, Macro.step("runaway"));
+        print("Sorry if that red message freaked you out, everything is cool and good.", "grey");
+        const runSource = findRun();
+        if (runSource.prepare) runSource.prepare();
+        if (runSource.requirement) maximizeRequirementsCached([runSource.requirement]);
+        advMacroAA($location`The Dire Warren`, runSource.macro);
       }
       trickTreat(trickFamiliar, trickMacro);
 
