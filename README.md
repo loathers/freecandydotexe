@@ -1,4 +1,5 @@
 # TO DO
  * Update wanderer code
- * Create outfit constructor functions (a big deal)
+ * Set up main.ts
+ * Update pantsgiving/estimate value of adventure
  * Create RELEASE branch, set up OAF
