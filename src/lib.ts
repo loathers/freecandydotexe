@@ -1,15 +1,15 @@
 import { canAdv } from "canadv.ash";
 import {
-  use,
+  adv1,
+  autosellPrice,
   buy,
   cliExecute,
-  print,
   mallPrice,
-  adv1,
+  print,
   retrieveItem,
-  autosellPrice,
+  use,
 } from "kolmafia";
-import { get, $item, $location, have, $effect, Macro, $locations, Guzzlr } from "libram";
+import { $effect, $item, $location, $locations, get, Guzzlr, have, Macro } from "libram";
 
 type ZonePotion = {
   zone: string;
@@ -146,7 +146,7 @@ export function advMacroAA(
   macro: Macro | (() => Macro),
   parameter: number | (() => boolean) = 1,
   afterCombatAction?: () => void
-) {
+): void {
   let n = 0;
   const condition = () => {
     return typeof parameter === "number" ? n < parameter : parameter();

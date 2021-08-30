@@ -1,4 +1,5 @@
 import {
+  bjornifyFamiliar,
   buy,
   effectModifier,
   fullnessLimit,
@@ -9,8 +10,19 @@ import {
   myFullness,
   numericModifier,
   toSlot,
+  totalTurnsPlayed,
 } from "kolmafia";
-import { $familiar, $familiars, $item, $items, $slot, get, getFoldGroup, have } from "libram";
+import {
+  $familiar,
+  $familiars,
+  $item,
+  $items,
+  $slot,
+  get,
+  getFoldGroup,
+  have,
+  maximizeCached,
+} from "libram";
 import { BjornedFamiliar, pickBjorn } from "./bjorn";
 import { clamp, saleValue } from "./lib";
 
@@ -36,7 +48,7 @@ const stasisFamiliars = new Map<Familiar, stasisValue>([
   [$familiar`Feather Boa Constrictor`, { baseRate: 1 / 3, meatPerLb: 27.5 }],
 ]);
 
-type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
+export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 
 export function fightOutfit(type: fightType = "Trick"): void {
   if (!trickHats.some((hat) => have(hat))) {
@@ -78,6 +90,13 @@ export function fightOutfit(type: fightType = "Trick"): void {
       break;
   }
 
+  if (
+    forceEquips.every((item) => toSlot(item) !== $slot`back`) &&
+    get("questPAGhost") === "unstarted" &&
+    get("nextParanormalActivity") <= totalTurnsPlayed()
+  )
+    forceEquips.push($item`protonic accelerator pack`);
+
   const stasisData = stasisFamiliars.get(myFamiliar());
   if (stasisData) {
     if (
@@ -113,7 +132,13 @@ export function fightOutfit(type: fightType = "Trick"): void {
       : $item`Crown of Thrones`;
   const bjornValue = (choice: BjornedFamiliar) => choice.meatVal() * choice.probability;
   if (have(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
-  //Bonus Equips
+
+  maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`], {
+    forceEquip: forceEquips,
+    bonusEquip: bonusEquips,
+  });
+  if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
+  if (haveEquipped($item`Crown of Thrones`)) bjornifyFamiliar(pickBjorn().familiar);
 }
 
 function snowSuit() {
@@ -137,6 +162,7 @@ function mayflowerBouquet() {
     ) * Math.max(0.01, 0.5 - get("_mayflowerDrops") * 0.11);
   return new Map<Item, number>([[$item`Mayflower bouquet`, averageFlowerValue]]);
 }
+
 function pantsgiving(): Map<Item, number> {
   if (!have($item`Pantsgiving`)) return new Map<Item, number>();
   const count = get("_pantsgivingCount");

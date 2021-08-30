@@ -1,5 +1,4 @@
 import {
-  equip,
   gametimeToInt,
   getCounters,
   haveFamiliar,
@@ -24,15 +23,14 @@ import {
   $location,
   $monster,
   $skill,
-  $slot,
   get,
   have,
   Macro,
   set,
   SourceTerminal,
 } from "libram";
-import { pickBjorn } from "./bjorn";
 import { advMacroAA, determineDraggableZoneAndEnsureAccess } from "./lib";
+import { fightOutfit } from "./outfit";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
 
@@ -106,21 +104,6 @@ function trickTreat(trickFamiliar: Familiar, trickMacro: Macro) {
 }
 
 const proton = $item`protonic accelerator pack`;
-function ghostCheck() {
-  if (get("questPAGhost") === "unstarted" && get("nextParanormalActivity") <= totalTurnsPlayed()) {
-    equip($slot`back`, proton);
-  }
-}
-
-const bjorn = $item`Buddy Bjorn`;
-
-function freeFight(macro: Macro, condition?: () => boolean, prep?: () => void) {
-  outfit("freefight stasis");
-  if (have(bjorn)) pickBjorn();
-  if (have(proton)) ghostCheck();
-  if (prep) prep();
-  advMacroAA(determineDraggableZoneAndEnsureAccess(), macro, condition);
-}
 
 export function runBlocks(blocks = -1): void {
   SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
@@ -181,7 +164,6 @@ export function runBlocks(blocks = -1): void {
       const digitizes = get("_sourceTerminalDigitizeUses");
       const sausages = get("_sausageFights");
       const votes = get("_voteFreeFights");
-      outfit("trick");
       if (terminal) {
         if (getCounters("Digitize", -11, 0) !== "") {
           print(`It's digitize time!`, "blue");
@@ -194,9 +176,12 @@ export function runBlocks(blocks = -1): void {
                   3),
             Macro.trySkill("digitize")
           ).step(trickMacro);
-          freeFight(digitizeMacro, () => {
-            return getCounters("Digitize", -11, 0) !== "";
-          });
+          fightOutfit("Digitize");
+          advMacroAA(
+            determineDraggableZoneAndEnsureAccess(),
+            digitizeMacro,
+            () => getCounters("Digitize", -11, 0) !== ""
+          );
         }
       }
 
@@ -204,10 +189,11 @@ export function runBlocks(blocks = -1): void {
         const kramcoNumber =
           5 + 3 * get("_sausageFights") + Math.pow(Math.max(0, get("_sausageFights") - 5), 3);
         if (totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber) {
-          freeFight(
+          fightOutfit("Kramco");
+          advMacroAA(
+            determineDraggableZoneAndEnsureAccess(),
             trickMacro,
-            () => totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber,
-            () => equip($slot`off-hand`, kramco)
+            () => totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber
           );
         }
       }
@@ -222,10 +208,11 @@ export function runBlocks(blocks = -1): void {
             get("_voteMonster") === $monster`angry ghost`,
             Macro.skill("silent treatment")
           ).step(trickMacro);
-          freeFight(
+          fightOutfit("Voter");
+          advMacroAA(
+            determineDraggableZoneAndEnsureAccess(),
             voteMacro,
-            () => getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3,
-            () => equip($slot`acc3`, voteBadge)
+            () => getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3
           );
         }
       }
@@ -236,7 +223,6 @@ export function runBlocks(blocks = -1): void {
           throw `Something went wrong with my ghosts. Dammit, Walter Peck!`;
         }
         print(`Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.`, "blue");
-        () => equip($slot`back`, proton);
         advMacroAA(
           ghostLocation,
           Macro.skill("shoot ghost").skill("shoot ghost").skill("shoot ghost").skill("trap ghost"),
@@ -264,10 +250,8 @@ export function runBlocks(blocks = -1): void {
 
       if (doingNemesis && getCounters("Nemesis Assassin window end", -11, 0) !== "") {
         useFamiliar(trickFamiliar);
+        fightOutfit("Digitize");
         advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
-        outfit("freefight stasis");
-        if (have(bjorn)) pickBjorn();
-        if (have(proton)) ghostCheck();
       }
     }
   } finally {
