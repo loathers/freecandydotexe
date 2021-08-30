@@ -109,7 +109,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
   if (myFamiliar() === $familiar`Reagnimated Gnome`)
     forceEquips.push($item`gnomish housemaid's kgnee`);
 
-  const baseMeat = 3;
+  const baseMeat = 25000;
 
   const weightValue = stasisData
     ? clamp(
