@@ -1,5 +1,2 @@
-# TO DO
- * Update wanderer code
- * Set up main.ts
- * Update pantsgiving/estimate value of adventure
- * Create RELEASE branch, set up OAF
+# freecandy.exe
+freecandy.exe is a perfectly legitimate and inconspicuous script for running blocks on hallowe'en.
