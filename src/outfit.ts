@@ -204,7 +204,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
         1
       ) * stasisData.meatPerLb
     : adventureFamiliars.includes(myFamiliar())
-    ? (1000 * baseAdventureValue) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2)
+    ? (1000 * baseAdventureValue()) /
+      Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2)
     : 0;
 
   const bjornalikeToUse =
@@ -293,7 +294,7 @@ function overallAdventureValue(): number {
       }),
       (number: number) => number
     ) +
-    baseAdventureValue +
+    baseAdventureValue() +
     (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`)
       ? bjornValue(pickBjorn())
       : 0);

@@ -424,15 +424,21 @@ export function getPantsgivingFood(): Item {
   return pantsgivingFood;
 }
 
-export const baseAdventureValue =
-  (1 / 5) *
-  (3 *
-    sum(
-      Object.entries(outfitTreats(get("fcdeTreatOutfit", "Eldritch Equipage"))).map(
-        ([candyName, probability]) => saleValue(toItem(candyName)) * probability
-      ),
-      (number: number) => number
-    ) *
-    (have($familiar`Trick-or-Treating Tot`) ? 1.6 : 0) +
-    (1 / 5) * saleValue($item`huge bowl of candy`) +
-    (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
+let cachedBaseAdventureValue: number;
+export function baseAdventureValue(): number {
+  if (cachedBaseAdventureValue === undefined) {
+    cachedBaseAdventureValue =
+      (1 / 5) *
+      (3 *
+        sum(
+          Object.entries(outfitTreats(get("fcdeTreatOutfit", "Eldritch Equipage"))).map(
+            ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+          ),
+          (number: number) => number
+        ) *
+        (have($familiar`Trick-or-Treating Tot`) ? 1.6 : 0) +
+        (1 / 5) * saleValue($item`huge bowl of candy`) +
+        (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
+  }
+  return cachedBaseAdventureValue;
+}
