@@ -421,4 +421,3 @@ export function getPantsgivingFood(): Item {
   }
   return pantsgivingFood;
 }
-
