@@ -213,6 +213,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
   maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`], {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
+    preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
   });
   if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
   if (haveEquipped($item`Crown of Thrones`)) bjornifyFamiliar(pickBjorn().familiar);
