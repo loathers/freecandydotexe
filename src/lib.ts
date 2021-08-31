@@ -5,6 +5,7 @@ import {
   buy,
   cliExecute,
   mallPrice,
+  myLevel,
   print,
   restoreMp,
   retrieveItem,
@@ -406,3 +407,18 @@ export function findRun(useFamiliar = true): FreeRun {
 export function sum<T>(addends: T[], mappingFunction: (element: T) => number): number {
   return addends.reduce((subtotal, element) => subtotal + mappingFunction(element), 0);
 }
+
+let pantsgivingFood: Item;
+export function getPantsgivingFood(): Item {
+  if (!pantsgivingFood) {
+    if (get("affirmationCookiesEaten") >= 4) pantsgivingFood = $item`Affirmation Cookie`;
+    else if (
+      myLevel() >= 20 &&
+      (have($item`Dreadsylvanian stew`) || have($item`Freddy Kruegerand`, 20))
+    )
+      pantsgivingFood = $item`Dreadsylvanian stew`;
+    else pantsgivingFood = $item`meteoreo`;
+  }
+  return pantsgivingFood;
+}
+

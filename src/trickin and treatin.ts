@@ -1,4 +1,6 @@
 import {
+  eat,
+  fullnessLimit,
   gametimeToInt,
   getCounters,
   haveFamiliar,
@@ -6,13 +8,16 @@ import {
   inMultiFight,
   myAdventures,
   myFamiliar,
+  myFullness,
   myInebriety,
   myName,
   outfit,
   print,
+  retrieveItem,
   runChoice,
   runCombat,
   totalTurnsPlayed,
+  use,
   useFamiliar,
   visitUrl,
 } from "kolmafia";
@@ -30,7 +35,12 @@ import {
   set,
   SourceTerminal,
 } from "libram";
-import { advMacroAA, determineDraggableZoneAndEnsureAccess, findRun } from "./lib";
+import {
+  advMacroAA,
+  determineDraggableZoneAndEnsureAccess,
+  findRun,
+  getPantsgivingFood,
+} from "./lib";
 import { fightOutfit } from "./outfit";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
@@ -96,6 +106,7 @@ function trick(trickFamiliar: Familiar, trickMacro: Macro) {
       visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${i}&pwd`);
       runCombat(trickMacro.toString());
       while (inMultiFight()) runCombat(trickMacro.toString());
+      fillPantsgivingFullness();
     }
   }
   if (block().match(/whichhouse=\d*>[^>]*?house_d/))
@@ -105,6 +116,16 @@ function trick(trickFamiliar: Familiar, trickMacro: Macro) {
 function trickTreat(trickFamiliar: Familiar, trickMacro: Macro) {
   treat();
   trick(trickFamiliar, trickMacro);
+}
+
+function fillPantsgivingFullness(): void {
+  if (myFullness() >= fullnessLimit()) return;
+  if (!get("_fudgeSporkUsed")) {
+    retrieveItem($item`fudge spork`);
+    use($item`fudge spork`);
+  }
+  retrieveItem(getPantsgivingFood());
+  eat(getPantsgivingFood());
 }
 
 export function runBlocks(blocks = -1): void {
@@ -182,7 +203,8 @@ export function runBlocks(blocks = -1): void {
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
             digitizeMacro,
-            () => getCounters("Digitize", -11, 0) !== ""
+            () => getCounters("Digitize", -11, 0) !== "",
+            fillPantsgivingFullness
           );
         }
       }
@@ -195,7 +217,8 @@ export function runBlocks(blocks = -1): void {
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
             trickMacro,
-            () => totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber
+            () => totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber,
+            fillPantsgivingFullness
           );
         }
       }
@@ -214,7 +237,8 @@ export function runBlocks(blocks = -1): void {
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
             voteMacro,
-            () => getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3
+            () => getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3,
+            fillPantsgivingFullness
           );
         }
       }
@@ -231,7 +255,8 @@ export function runBlocks(blocks = -1): void {
             .trySkill($skill`Shoot Ghost`)
             .trySkill($skill`Shoot Ghost`)
             .trySkill($skill`Trap Ghost`),
-          () => get("questPAGhost") !== "unstarted"
+          () => get("questPAGhost") !== "unstarted",
+          fillPantsgivingFullness
         );
       }
       if (
@@ -247,6 +272,7 @@ export function runBlocks(blocks = -1): void {
         if (runSource.prepare) runSource.prepare();
         if (runSource.requirement) maximizeRequirementsCached([runSource.requirement]);
         advMacroAA($location`The Dire Warren`, runSource.macro);
+        fillPantsgivingFullness();
       }
       trickTreat(trickFamiliar, trickMacro);
 
@@ -254,6 +280,7 @@ export function runBlocks(blocks = -1): void {
         useFamiliar(trickFamiliar);
         fightOutfit("Digitize");
         advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
+        fillPantsgivingFullness();
       }
     }
   } finally {

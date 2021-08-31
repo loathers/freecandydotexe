@@ -22,12 +22,13 @@ import {
   $slot,
   $slots,
   get,
+  getAverageAdventures,
   getFoldGroup,
   have,
   maximizeCached,
 } from "libram";
 import { BjornedFamiliar, pickBjorn } from "./bjorn";
-import { clamp, saleValue, sum } from "./lib";
+import { clamp, getPantsgivingFood, saleValue, sum } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -252,10 +253,18 @@ function pantsgiving(): Map<Item, number> {
   const turns = turnArray[index] || 50000;
 
   if (turns - count > myAdventures()) return new Map<Item, number>();
-
+  const baseMeat = 1;
+  const food = getPantsgivingFood();
+  const value =
+    food === $item`Dreadsylvanian stew`
+      ? (1 / 20) *
+        Math.max(mallPrice($item`electric Kool-Aid`), mallPrice($item`bottle of Bloodweiser`))
+      : mallPrice(food);
   const fullnessValue =
-    get("valueOfAdventure") * 6.5 -
-    (mallPrice($item`jumping horseradish`) + mallPrice($item`Special Seasoning`));
+    baseMeat * (getAverageAdventures(food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
+    value -
+    mallPrice($item`Special Seasoning`) -
+    (get("_fudgeSporkUsed") ? mallPrice($item`fudge spork`) : 0);
   const pantsgivingBonus = fullnessValue / (turns * 0.9);
   return new Map<Item, number>([[$item`Pantsgiving`, pantsgivingBonus]]);
 }
