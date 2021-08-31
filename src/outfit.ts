@@ -89,10 +89,15 @@ function estimateOutfitWeight(): number {
           )
           .splice(0, accessoriesFree)
       : [];
-    outfitWeightEstimate = sum(
-      [...accessoryWeightEquips, ...nonAccessoryWeightEquips],
-      (item: Item) => numericModifier(item, "Familiar Weight")
-    );
+    outfitWeightEstimate =
+      sum([...accessoryWeightEquips, ...nonAccessoryWeightEquips], (item: Item) =>
+        numericModifier(item, "Familiar Weight")
+      ) +
+      (have($familiar`Temporal Riftlet`) ? 10 : 0) +
+      (get("_pantogramModifier").includes("Drops Items") &&
+      get("_pantogramModifier").includes("Familiar Weight")
+        ? 10
+        : 0);
   }
   return outfitWeightEstimate;
 }
