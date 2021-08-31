@@ -102,23 +102,27 @@ function estimateOutfitWeight(): number {
   return outfitWeightEstimate;
 }
 
-function effectWeight(): number {
-  return sum(
-    Object.entries(myEffects())
-      .map(([name, duration]) => {
-        return {
-          effect: toEffect(name),
-          duration: duration,
-        };
-      })
-      .filter(
-        (effectAndDuration) =>
-          numericModifier(effectAndDuration.effect, "Familiar Weight") &&
-          effectAndDuration.duration >= myAdventures()
-      )
-      .map((effectAndDuration) => effectAndDuration.effect),
-    (effect) => numericModifier(effect, "Familiar Weight")
-  );
+let effectWeight: number;
+function getEffectWeight(): number {
+  if (!effectWeight) {
+    effectWeight = sum(
+      Object.entries(myEffects())
+        .map(([name, duration]) => {
+          return {
+            effect: toEffect(name),
+            duration: duration,
+          };
+        })
+        .filter(
+          (effectAndDuration) =>
+            numericModifier(effectAndDuration.effect, "Familiar Weight") &&
+            effectAndDuration.duration >= myAdventures()
+        )
+        .map((effectAndDuration) => effectAndDuration.effect),
+      (effect) => numericModifier(effect, "Familiar Weight")
+    );
+  }
+  return effectWeight;
 }
 
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
@@ -196,7 +200,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
         1
       ) * stasisData.meatPerLb
     : adventureFamiliars.includes(myFamiliar())
-    ? (1000 * baseMeat) / Math.pow(1000 - (estimateOutfitWeight() + effectWeight()), 2)
+    ? (1000 * baseMeat) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2)
     : 0;
 
   const bjornalikeToUse =
