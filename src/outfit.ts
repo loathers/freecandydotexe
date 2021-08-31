@@ -2,6 +2,8 @@ import {
   bjornifyFamiliar,
   buy,
   effectModifier,
+  equippedItem,
+  familiarWeight,
   fullnessLimit,
   haveEquipped,
   mallPrice,
@@ -13,6 +15,7 @@ import {
   toEffect,
   toSlot,
   totalTurnsPlayed,
+  weightAdjustment,
 } from "kolmafia";
 import {
   $familiar,
@@ -28,7 +31,7 @@ import {
   maximizeCached,
 } from "libram";
 import { BjornedFamiliar, pickBjorn } from "./bjorn";
-import { clamp, getPantsgivingFood, saleValue, sum } from "./lib";
+import { baseAdventureValue, clamp, getPantsgivingFood, saleValue, sum } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -128,6 +131,7 @@ function getEffectWeight(): number {
 }
 
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
+const bjornValue = (choice: BjornedFamiliar) => choice.meatVal() * choice.probability;
 
 export function fightOutfit(type: fightType = "Trick"): void {
   if (!trickHats.some((hat) => have(hat))) {
@@ -188,8 +192,6 @@ export function fightOutfit(type: fightType = "Trick"): void {
   if (myFamiliar() === $familiar`Reagnimated Gnome`)
     forceEquips.push($item`gnomish housemaid's kgnee`);
 
-  const baseMeat = 25000; //figure out basemeat
-
   const weightValue = stasisData
     ? clamp(
         stasisData.baseRate +
@@ -202,14 +204,13 @@ export function fightOutfit(type: fightType = "Trick"): void {
         1
       ) * stasisData.meatPerLb
     : adventureFamiliars.includes(myFamiliar())
-    ? (1000 * baseMeat) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2)
+    ? (1000 * baseAdventureValue) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2)
     : 0;
 
   const bjornalikeToUse =
     have($item`Buddy Bjorn`) && forceEquips.every((item) => toSlot(item) !== $slot`back`)
       ? $item`Buddy Bjorn`
       : $item`Crown of Thrones`;
-  const bjornValue = (choice: BjornedFamiliar) => choice.meatVal() * choice.probability;
   if (have(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
 
   maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`], {
@@ -254,7 +255,6 @@ function pantsgiving(): Map<Item, number> {
   const turns = turnArray[index] || 50000;
 
   if (turns - count > myAdventures()) return new Map<Item, number>();
-  const baseMeat = 1; //figure out basemeat
   const food = getPantsgivingFood();
   const value =
     food === $item`Dreadsylvanian stew`
@@ -262,10 +262,51 @@ function pantsgiving(): Map<Item, number> {
         Math.max(mallPrice($item`electric Kool-Aid`), mallPrice($item`bottle of Bloodweiser`))
       : mallPrice(food);
   const fullnessValue =
-    baseMeat * (getAverageAdventures(food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
+    overallAdventureValue() * (getAverageAdventures(food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
     value -
     mallPrice($item`Special Seasoning`) -
     (get("_fudgeSporkUsed") ? mallPrice($item`fudge spork`) : 0);
   const pantsgivingBonus = fullnessValue / (turns * 0.9);
   return new Map<Item, number>([[$item`Pantsgiving`, pantsgivingBonus]]);
+}
+
+function overallAdventureValue(): number {
+  const bonuses = new Map<Item, number>([
+    [$item`garbage sticker`, 100],
+    [$item`lucky gold ring`, 400],
+    [$item`Mr. Cheeng's spectacles`, 250],
+    [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
+    [$item`Mr. Screege's spectacles`, 180],
+    [
+      $item`bag of many confections`,
+      saleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
+    ],
+    ...snowSuit(),
+    ...mayflowerBouquet(),
+  ]);
+  const treatsAndBonusEquips =
+    sum(
+      Slot.all().map((slot) => {
+        const equip = equippedItem(slot);
+        const bonus = bonuses.get(equip);
+        return bonus === undefined ? 0 : bonus;
+      }),
+      (number: number) => number
+    ) +
+    baseAdventureValue +
+    (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`)
+      ? bjornValue(pickBjorn())
+      : 0);
+  const stasisData = stasisFamiliars.get(myFamiliar());
+  if (stasisData) {
+    return (
+      treatsAndBonusEquips +
+      (weightAdjustment() + familiarWeight(myFamiliar())) *
+        (stasisData.meatPerLb * clamp(stasisData.baseRate + actionRateBonus(), 0, 1))
+    );
+  } else if (adventureFamiliars.includes(myFamiliar())) {
+    return (
+      (treatsAndBonusEquips * 1000) / Math.pow(1000 - getEffectWeight() - estimateOutfitWeight(), 2)
+    );
+  } else return treatsAndBonusEquips;
 }
