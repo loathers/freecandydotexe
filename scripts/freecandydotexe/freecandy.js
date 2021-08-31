@@ -19368,7 +19368,8 @@ var stasisFamiliars = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar
 }], [(0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Feather Boa Constrictor"]))), {
   baseRate: 1 / 3,
   meatPerLb: 27.5
-}]]);
+}]]); //Note: both this and the weight --> weightvalue function undervalue weight. Consider fixing that.
+
 var outfitWeightEstimate;
 
 function estimateOutfitWeight() {
@@ -19479,7 +19480,8 @@ function fightOutfit() {
   }
 
   if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
-  var baseMeat = 25000;
+  var baseMeat = 25000; //figure out basemeat
+
   var weightValue = stasisData ? (0,_lib__WEBPACK_IMPORTED_MODULE_2__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)()) ? 1000 * baseMeat / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2) : 0;
   var bjornalikeToUse = (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Buddy Bjorn"])))) && forceEquips.every(function (item) {
     return (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_3__.$slot)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["back"])));
@@ -19524,7 +19526,8 @@ function pantsgiving() {
   });
   var turns = turnArray[index] || 50000;
   if (turns - count > (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)()) return new Map();
-  var baseMeat = 1;
+  var baseMeat = 1; //figure out basemeat
+
   var food = (0,_lib__WEBPACK_IMPORTED_MODULE_2__.getPantsgivingFood)();
   var value = food === (0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Dreadsylvanian stew"]))) ? 1 / 20 * Math.max((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["electric Kool-Aid"])))), (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["bottle of Bloodweiser"]))))) : (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.mallPrice)(food);
   var fullnessValue = baseMeat * ((0,libram__WEBPACK_IMPORTED_MODULE_3__.getAverageAdventures)(food) + 1 + ((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_fudgeSporkUsed") ? 3 : 0)) - value - (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["Special Seasoning"])))) - ((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_fudgeSporkUsed") ? (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["fudge spork"])))) : 0);
