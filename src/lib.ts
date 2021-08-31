@@ -402,3 +402,7 @@ export function findRun(useFamiliar = true): FreeRun {
     ) ?? cheapestItemRun
   );
 }
+
+export function sum<T>(addends: T[], mappingFunction: (element: T) => number): number {
+  return addends.reduce((subtotal, element) => subtotal + mappingFunction(element), 0);
+}

@@ -6,9 +6,11 @@ import {
   haveEquipped,
   mallPrice,
   myAdventures,
+  myEffects,
   myFamiliar,
   myFullness,
   numericModifier,
+  toEffect,
   toSlot,
   totalTurnsPlayed,
 } from "kolmafia";
@@ -18,13 +20,14 @@ import {
   $item,
   $items,
   $slot,
+  $slots,
   get,
   getFoldGroup,
   have,
   maximizeCached,
 } from "libram";
 import { BjornedFamiliar, pickBjorn } from "./bjorn";
-import { clamp, saleValue } from "./lib";
+import { clamp, saleValue, sum } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -47,6 +50,71 @@ const stasisFamiliars = new Map<Familiar, stasisValue>([
   [$familiar`Stocking Mimic`, { baseRate: 1 / 3, meatPerLb: 13.2 }],
   [$familiar`Feather Boa Constrictor`, { baseRate: 1 / 3, meatPerLb: 27.5 }],
 ]);
+
+let outfitWeightEstimate: number;
+function estimateOutfitWeight(): number {
+  if (!outfitWeightEstimate) {
+    const accessoriesFree =
+      3 -
+      $items`Mr. Screege's spectacles, Mr. Cheeng's spectacles, lucky gold ring`.filter((item) =>
+        have(item)
+      ).length;
+    const openSlots = [
+      $slot`shirt`,
+      ...(have($item`Buddy Bjorn`) ? [] : $slots`back`),
+      ...(get("_pantogramModifier").includes("Drops Items") ? [] : $slots`pants`),
+      ...(have($item`KoL Con 13 snowglobe`) || have($item`garbage sticker`, 2)
+        ? []
+        : $slots`off-hand`),
+      ...(have($item`garbage sticker`) ? [] : $slots`weapon`),
+    ];
+    const viableItems = Item.all().filter(
+      (item) =>
+        have(item) &&
+        (openSlots.includes(toSlot(item)) || (toSlot(item) === $slot`acc1` && accessoriesFree))
+    );
+    const nonAccessoryWeightEquips = openSlots.map(
+      (slot) =>
+        viableItems
+          .filter((item) => toSlot(item) === slot)
+          .sort(
+            (a, b) => numericModifier(b, "Familiar Weight") - numericModifier(a, "Familiar Weight")
+          )[0]
+    );
+    const accessoryWeightEquips = accessoriesFree
+      ? viableItems
+          .filter((item) => toSlot(item) === $slot`acc1`)
+          .sort(
+            (a, b) => numericModifier(b, "Familiar Weight") - numericModifier(a, "Familiar Weight")
+          )
+          .splice(0, accessoriesFree)
+      : [];
+    outfitWeightEstimate = sum(
+      [...accessoryWeightEquips, ...nonAccessoryWeightEquips],
+      (item: Item) => numericModifier(item, "Familiar Weight")
+    );
+  }
+  return outfitWeightEstimate;
+}
+
+function effectWeight(): number {
+  return sum(
+    Object.entries(myEffects())
+      .map(([name, duration]) => {
+        return {
+          effect: toEffect(name),
+          duration: duration,
+        };
+      })
+      .filter(
+        (effectAndDuration) =>
+          numericModifier(effectAndDuration.effect, "Familiar Weight") &&
+          effectAndDuration.duration >= myAdventures()
+      )
+      .map((effectAndDuration) => effectAndDuration.effect),
+    (effect) => numericModifier(effect, "Familiar Weight")
+  );
+}
 
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 
@@ -123,7 +191,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
         1
       ) * stasisData.meatPerLb
     : adventureFamiliars.includes(myFamiliar())
-    ? (1000 * baseMeat) / Math.pow(1000 - 130, 2)
+    ? (1000 * baseMeat) / Math.pow(1000 - (estimateOutfitWeight() + effectWeight()), 2)
     : 0;
 
   const bjornalikeToUse =
