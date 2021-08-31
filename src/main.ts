@@ -10,3 +10,5 @@ export function main(args: string): void {
   } else if (args) runBlocks(parseInt(args));
   else runBlocks();
 }
+
+//note: set properties
