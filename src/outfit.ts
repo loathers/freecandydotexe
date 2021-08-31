@@ -52,6 +52,7 @@ const stasisFamiliars = new Map<Familiar, stasisValue>([
   [$familiar`Feather Boa Constrictor`, { baseRate: 1 / 3, meatPerLb: 27.5 }],
 ]);
 
+//Note: both this and the weight --> weightvalue function undervalue weight. Consider fixing that.
 let outfitWeightEstimate: number;
 function estimateOutfitWeight(): number {
   if (!outfitWeightEstimate) {
@@ -187,7 +188,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
   if (myFamiliar() === $familiar`Reagnimated Gnome`)
     forceEquips.push($item`gnomish housemaid's kgnee`);
 
-  const baseMeat = 25000;
+  const baseMeat = 25000; //figure out basemeat
 
   const weightValue = stasisData
     ? clamp(
@@ -253,7 +254,7 @@ function pantsgiving(): Map<Item, number> {
   const turns = turnArray[index] || 50000;
 
   if (turns - count > myAdventures()) return new Map<Item, number>();
-  const baseMeat = 1;
+  const baseMeat = 1; //figure out basemeat
   const food = getPantsgivingFood();
   const value =
     food === $item`Dreadsylvanian stew`
