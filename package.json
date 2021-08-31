@@ -30,6 +30,7 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "core-js": "^3.16.4",
     "kolmafia": "^1.2.1",
     "libram": "^0.3.2"
   },

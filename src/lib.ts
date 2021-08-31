@@ -1,3 +1,4 @@
+import "core-js/modules/es.object.entries";
 import { canAdv } from "canadv.ash";
 import {
   adv1,

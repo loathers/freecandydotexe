@@ -1,3 +1,4 @@
+import "core-js/modules/es.object.entries";
 import {
   bjornifyFamiliar,
   buy,
