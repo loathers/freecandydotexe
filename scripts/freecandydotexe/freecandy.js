@@ -19346,15 +19346,22 @@ function getPantsgivingFood() {
 
   return pantsgivingFood;
 }
-var baseAdventureValue = 1 / 5 * (3 * sum(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)((0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("fcdeTreatOutfit", "Eldritch Equipage"))).map(function (_ref) {
-  var _ref2 = _slicedToArray(_ref, 2),
-      candyName = _ref2[0],
-      probability = _ref2[1];
+var cachedBaseAdventureValue;
+function baseAdventureValue() {
+  if (cachedBaseAdventureValue === undefined) {
+    cachedBaseAdventureValue = 1 / 5 * (3 * sum(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)((0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("fcdeTreatOutfit", "Eldritch Equipage"))).map(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          candyName = _ref2[0],
+          probability = _ref2[1];
 
-  return saleValue((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
-}), function (number) {
-  return number;
-}) * ((0,libram__WEBPACK_IMPORTED_MODULE_2__.have)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_2__.have)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Prunets"])))) : 0));
+      return saleValue((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
+    }), function (number) {
+      return number;
+    }) * ((0,libram__WEBPACK_IMPORTED_MODULE_2__.have)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_2__.have)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Prunets"])))) : 0));
+  }
+
+  return cachedBaseAdventureValue;
+}
 
 /***/ }),
 
@@ -19566,7 +19573,7 @@ function fightOutfit() {
   }
 
   if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
-  var weightValue = stasisData ? (0,_lib__WEBPACK_IMPORTED_MODULE_2__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)()) ? 1000 * _lib__WEBPACK_IMPORTED_MODULE_2__.baseAdventureValue / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2) : 0;
+  var weightValue = stasisData ? (0,_lib__WEBPACK_IMPORTED_MODULE_2__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)()) ? 1000 * (0,_lib__WEBPACK_IMPORTED_MODULE_2__.baseAdventureValue)() / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2) : 0;
   var bjornalikeToUse = (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Buddy Bjorn"])))) && forceEquips.every(function (item) {
     return (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_3__.$slot)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["back"])));
   }) ? (0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Buddy Bjorn"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["Crown of Thrones"])));
@@ -19620,7 +19627,7 @@ function overallAdventureValue() {
     return bonus === undefined ? 0 : bonus;
   }), function (number) {
     return number;
-  }) + _lib__WEBPACK_IMPORTED_MODULE_2__.baseAdventureValue + ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Crown of Thrones"])))) ? bjornValue((0,_bjorn__WEBPACK_IMPORTED_MODULE_1__.pickBjorn)()) : 0);
+  }) + (0,_lib__WEBPACK_IMPORTED_MODULE_2__.baseAdventureValue)() + ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Crown of Thrones"])))) ? bjornValue((0,_bjorn__WEBPACK_IMPORTED_MODULE_1__.pickBjorn)()) : 0);
   var stasisData = stasisFamiliars.get((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)());
 
   if (stasisData) {
