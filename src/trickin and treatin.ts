@@ -27,7 +27,6 @@ import {
   $familiars,
   $item,
   $location,
-  $monster,
   $skill,
   $skills,
   get,
@@ -218,14 +217,10 @@ export function runBlocks(blocks = -1): void {
           "blue"
         );
         if (getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3) {
-          const voteMacro = Macro.externalIf(
-            get("_voteMonster") === $monster`angry ghost`,
-            Macro.trySkill($skill`Silent Treatment`)
-          ).step(trickMacro);
           fightOutfit("Voter");
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
-            voteMacro,
+            trickMacro,
             () => getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3,
             fillPantsgivingFullness
           );
