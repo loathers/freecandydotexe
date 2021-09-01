@@ -17,6 +17,9 @@ export function main(args: string): void {
       hpAutoRecoveryTarget: 1.0,
       trackVoteMonster: "free",
       customCombatScript: "twiddle",
+      autoSatisfyWithMall: true,
+      autoSatisfyWithNPCs: true,
+      autoSatisfyWithStorage: true,
     });
     runBlocks(blocks);
     manager.resetAll();
