@@ -33,9 +33,12 @@ import {
   Guzzlr,
   have,
   Macro,
+  PropertiesManager,
   property,
   Requirement,
 } from "libram";
+
+export const manager = new PropertiesManager();
 
 type ZonePotion = {
   zone: string;

@@ -1,4 +1,5 @@
 import { print } from "kolmafia";
+import { manager } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
 export function main(args: string): void {
@@ -9,7 +10,16 @@ export function main(args: string): void {
     );
   } else {
     const blocks = args ? parseInt(args) : undefined;
+    manager.set({
+      battleAction: "custom combat script",
+      dontStopForCounters: true,
+      maximizerFoldables: true,
+      hpAutoRecoveryTarget: 1.0,
+      trackVoteMonster: "free",
+      customCombatScript: "twiddle",
+    });
     runBlocks(blocks);
+    manager.resetAll();
   }
 }
 
