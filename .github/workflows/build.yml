@@ -57,6 +57,8 @@ jobs:
       - run: |
           git config user.name "Gh.O.S.T."
           git config user.email "<>"
+      - run: |
+          cp -R mafia mafiafiles
       - run: yarn install --frozen-lockfile
       - run: yarn run build
       - run: |
