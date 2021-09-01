@@ -18,7 +18,6 @@ import {
   runChoice,
   runCombat,
   totalTurnsPlayed,
-  use,
   useFamiliar,
   visitUrl,
 } from "kolmafia";
@@ -117,7 +116,7 @@ function fillPantsgivingFullness(): void {
   if (myFullness() >= fullnessLimit()) return;
   if (!get("_fudgeSporkUsed")) {
     retrieveItem($item`fudge spork`);
-    use($item`fudge spork`);
+    eat($item`fudge spork`);
   }
   retrieveItem(getPantsgivingFood());
   eat(getPantsgivingFood());
