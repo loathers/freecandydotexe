@@ -20116,7 +20116,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FreeRun": () => (/* binding */ FreeRun),
 /* harmony export */   "findRun": () => (/* binding */ findRun),
 /* harmony export */   "sum": () => (/* binding */ sum),
-/* harmony export */   "sumNumbers": () => (/* binding */ sumNumbers)
+/* harmony export */   "sumNumbers": () => (/* binding */ sumNumbers),
+/* harmony export */   "questStep": () => (/* binding */ questStep)
 /* harmony export */ });
 /* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
 /* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0__);
@@ -20455,6 +20456,16 @@ function sum(addends, mappingFunction) {
 function sumNumbers(addends) {
   return sum(addends, x => x);
 }
+function questStep(questName) {
+  var stringStep = libram__WEBPACK_IMPORTED_MODULE_3__.property.getString(questName);
+  if (stringStep === "unstarted" || stringStep === "") return -1;else if (stringStep === "started") return 0;else if (stringStep === "finished") return 999;else {
+    if (stringStep.substring(0, 4) !== "step") {
+      throw "Quest state parsing error.";
+    }
+
+    return parseInt(stringStep.substring(4), 10);
+  }
+}
 
 /***/ }),
 
@@ -20480,6 +20491,21 @@ function main(args) {
   if (args.includes("help")) {
     (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Set the property freecandy_TreatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.", "blue");
   } else {
+    if ((0,_lib__WEBPACK_IMPORTED_MODULE_1__.questStep)("questM23Meatsmith") === -1) {
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("shop.php?whichshop=meatsmith&action=talk");
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.runChoice)(1);
+    }
+
+    if ((0,_lib__WEBPACK_IMPORTED_MODULE_1__.questStep)("questM24Doc") === -1) {
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("shop.php?whichshop=doc&action=talk");
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.runChoice)(1);
+    }
+
+    if ((0,_lib__WEBPACK_IMPORTED_MODULE_1__.questStep)("questM25Armorer") === -1) {
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("shop.php?whichshop=armory&action=talk");
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.runChoice)(1);
+    }
+
     var blocks = args ? parseInt(args) : undefined;
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
       battleAction: "custom combat script",
