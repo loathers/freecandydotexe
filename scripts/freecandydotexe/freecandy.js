@@ -20759,7 +20759,9 @@ function bestOutfit() {
   if (!bestFit) {
     var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_3__.property.getString("fcde_TreatOutfit");
     if (playerChosenOutfit) bestFit = playerChosenOutfit;
-    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.getOutfits)().map(function (outfitName) {
+    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.getOutfits)().filter(function (outfitName) {
+      return (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.outfitPieces)(outfitName).every(kolmafia__WEBPACK_IMPORTED_MODULE_2__.canEquip);
+    }).map(function (outfitName) {
       return [outfitName, sum(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.outfitTreats)(outfitName)).map(function (_ref3) {
         var _ref4 = _slicedToArray(_ref3, 2),
             candyName = _ref4[0],
