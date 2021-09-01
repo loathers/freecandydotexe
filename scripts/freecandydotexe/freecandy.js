@@ -20482,8 +20482,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! kolmafia */ "kolmafia");
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(kolmafia__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! libram */ "./node_modules/libram/dist/index.js");
+/* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(libram__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
 /* harmony import */ var _trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./trickin and treatin */ "./src/trickin and treatin.ts");
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+
 
 
 
@@ -20523,6 +20530,15 @@ function main(args) {
       autoSatisfyWithNPCs: true,
       autoSatisfyWithStorage: true
     });
+
+    if ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject || (_templateObject = _taggedTemplateLiteral(["portable pantogram"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["pantogram pants"]))))) {
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.retrieveItem)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["ten-leaf clover"]))));
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.retrieveItem)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["bubblin' crude"]))));
+      var m = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_3__.$stat)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["Muscle"]))), 1], [(0,libram__WEBPACK_IMPORTED_MODULE_3__.$stat)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["Mysticality"]))), 2], [(0,libram__WEBPACK_IMPORTED_MODULE_3__.$stat)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Moxie"]))), 3]]).get((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myPrimestat)());
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("inv_use.php?pwd&whichitem=9573");
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("choice.php?whichchoice=1270&pwd&option=1&m=".concat(m, "&e=5&s1=5789,1&s2=-1,0&s3=24,1"));
+    }
+
     (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
   }
