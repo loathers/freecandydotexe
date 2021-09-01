@@ -4,17 +4,11 @@ import {
   adv1,
   autosellPrice,
   buy,
-  canEquip,
   cliExecute,
-  getOutfits,
   mallPrice,
-  myLevel,
-  outfitPieces,
-  outfitTreats,
   print,
   restoreMp,
   retrieveItem,
-  toItem,
   use,
   useFamiliar,
   visitUrl,
@@ -38,7 +32,6 @@ import {
   maximizeCached,
   MaximizeOptions,
   PropertiesManager,
-  property,
 } from "libram";
 
 export const manager = new PropertiesManager();
@@ -465,64 +458,4 @@ export function sum<T>(addends: T[], mappingFunction: (element: T) => number): n
 
 export function sumNumbers(addends: number[]): number {
   return sum(addends, (x: number) => x);
-}
-
-let pantsgivingFood: Item;
-export function getPantsgivingFood(): Item {
-  if (!pantsgivingFood) {
-    if (get("affirmationCookiesEaten") >= 4) pantsgivingFood = $item`Affirmation Cookie`;
-    else if (
-      myLevel() >= 20 &&
-      (have($item`Dreadsylvanian stew`) || have($item`Freddy Kruegerand`, 20))
-    )
-      pantsgivingFood = $item`Dreadsylvanian stew`;
-    else pantsgivingFood = $item`meteoreo`;
-  }
-  return pantsgivingFood;
-}
-
-let cachedBaseAdventureValue: number;
-export function baseAdventureValue(): number {
-  if (cachedBaseAdventureValue === undefined) {
-    cachedBaseAdventureValue =
-      (1 / 5) *
-      (3 *
-        sumNumbers(
-          Object.entries(outfitTreats(bestOutfit())).map(
-            ([candyName, probability]) => saleValue(toItem(candyName)) * probability
-          )
-        ) *
-        (have($familiar`Trick-or-Treating Tot`) ? 1.6 : 0) +
-        (1 / 5) * saleValue($item`huge bowl of candy`) +
-        (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
-  }
-  return cachedBaseAdventureValue;
-}
-
-let bestFit: string;
-export function bestOutfit(): string {
-  if (!bestFit) {
-    const playerChosenOutfit = property.getString("fcde_TreatOutfit");
-    if (playerChosenOutfit) bestFit = playerChosenOutfit;
-
-    const flyestFit = getOutfits()
-      .filter((outfitName) => outfitPieces(outfitName).every(canEquip))
-      .map(
-        (outfitName) =>
-          [
-            outfitName,
-            sum(
-              Object.entries(outfitTreats(outfitName)).map(
-                ([candyName, probability]) => saleValue(toItem(candyName)) * probability
-              ),
-              (number) => number
-            ),
-          ] as [string, number]
-      )
-      .sort((a, b) => b[1] - a[1])[0][0];
-
-    if (!flyestFit) throw "You somehow have no outfits, dude!";
-    bestFit = flyestFit;
-  }
-  return bestFit;
 }

@@ -2,21 +2,25 @@ import "core-js/modules/es.object.entries";
 import {
   bjornifyFamiliar,
   buy,
+  canEquip,
   effectModifier,
   equippedItem,
-  familiarWeight,
   fullnessLimit,
+  getOutfits,
   haveEquipped,
   mallPrice,
   myAdventures,
   myEffects,
   myFamiliar,
   myFullness,
+  myLevel,
   numericModifier,
+  outfitPieces,
+  outfitTreats,
   toEffect,
+  toItem,
   toSlot,
   totalTurnsPlayed,
-  weightAdjustment,
 } from "kolmafia";
 import {
   $familiar,
@@ -30,9 +34,10 @@ import {
   getFoldGroup,
   have,
   maximizeCached,
+  property,
 } from "libram";
 import { BjornedFamiliar, pickBjorn } from "./bjorn";
-import { baseAdventureValue, clamp, getPantsgivingFood, saleValue, sum } from "./lib";
+import { clamp, saleValue, sum, sumNumbers } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -206,7 +211,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
       ) * stasisData.meatPerLb
     : adventureFamiliars.includes(myFamiliar())
     ? (1000 * baseAdventureValue()) /
-      Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight()), 2)
+      Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
     : 0;
 
   const bjornalikeToUse =
@@ -303,12 +308,73 @@ function overallAdventureValue(): number {
   if (stasisData) {
     return (
       treatsAndBonusEquips +
-      (weightAdjustment() + familiarWeight(myFamiliar())) *
+      (20 + estimateOutfitWeight() + getEffectWeight()) *
         (stasisData.meatPerLb * clamp(stasisData.baseRate + actionRateBonus(), 0, 1))
     );
   } else if (adventureFamiliars.includes(myFamiliar())) {
     return (
-      (treatsAndBonusEquips * 1000) / Math.pow(1000 - getEffectWeight() - estimateOutfitWeight(), 2)
+      (treatsAndBonusEquips * 1000) /
+      Math.pow(1000 - getEffectWeight() - estimateOutfitWeight() - 20, 2)
     );
   } else return treatsAndBonusEquips;
+}
+
+let pantsgivingFood: Item;
+export function getPantsgivingFood(): Item {
+  if (!pantsgivingFood) {
+    if (get("affirmationCookiesEaten") >= 4) pantsgivingFood = $item`Affirmation Cookie`;
+    else if (
+      myLevel() >= 20 &&
+      (have($item`Dreadsylvanian stew`) || have($item`Freddy Kruegerand`, 20))
+    )
+      pantsgivingFood = $item`Dreadsylvanian stew`;
+    else pantsgivingFood = $item`meteoreo`;
+  }
+  return pantsgivingFood;
+}
+
+let cachedBaseAdventureValue: number;
+export function baseAdventureValue(): number {
+  if (cachedBaseAdventureValue === undefined) {
+    cachedBaseAdventureValue =
+      (1 / 5) *
+      (3 *
+        sumNumbers(
+          Object.entries(outfitTreats(bestOutfit())).map(
+            ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+          )
+        ) *
+        (have($familiar`Trick-or-Treating Tot`) ? 1.6 : 0) +
+        (1 / 5) * saleValue($item`huge bowl of candy`) +
+        (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
+  }
+  return cachedBaseAdventureValue;
+}
+
+let bestFit: string;
+export function bestOutfit(): string {
+  if (!bestFit) {
+    const playerChosenOutfit = property.getString("fcde_TreatOutfit");
+    if (playerChosenOutfit) bestFit = playerChosenOutfit;
+
+    const flyestFit = getOutfits()
+      .filter((outfitName) => outfitPieces(outfitName).every(canEquip))
+      .map(
+        (outfitName) =>
+          [
+            outfitName,
+            sum(
+              Object.entries(outfitTreats(outfitName)).map(
+                ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+              ),
+              (number) => number
+            ),
+          ] as [string, number]
+      )
+      .sort((a, b) => b[1] - a[1])[0][0];
+
+    if (!flyestFit) throw "You somehow have no outfits, dude!";
+    bestFit = flyestFit;
+  }
+  return bestFit;
 }
