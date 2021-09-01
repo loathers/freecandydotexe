@@ -32,6 +32,7 @@ import {
   maximizeCached,
   MaximizeOptions,
   PropertiesManager,
+  property,
 } from "libram";
 
 export const manager = new PropertiesManager();
@@ -458,4 +459,17 @@ export function sum<T>(addends: T[], mappingFunction: (element: T) => number): n
 
 export function sumNumbers(addends: number[]): number {
   return sum(addends, (x: number) => x);
+}
+
+export function questStep(questName: string): number {
+  const stringStep = property.getString(questName);
+  if (stringStep === "unstarted" || stringStep === "") return -1;
+  else if (stringStep === "started") return 0;
+  else if (stringStep === "finished") return 999;
+  else {
+    if (stringStep.substring(0, 4) !== "step") {
+      throw "Quest state parsing error.";
+    }
+    return parseInt(stringStep.substring(4), 10);
+  }
 }

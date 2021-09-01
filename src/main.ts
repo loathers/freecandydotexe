@@ -1,5 +1,5 @@
-import { print } from "kolmafia";
-import { manager } from "./lib";
+import { print, runChoice, visitUrl } from "kolmafia";
+import { manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
 export function main(args: string): void {
@@ -9,6 +9,18 @@ export function main(args: string): void {
       "blue"
     );
   } else {
+    if (questStep("questM23Meatsmith") === -1) {
+      visitUrl("shop.php?whichshop=meatsmith&action=talk");
+      runChoice(1);
+    }
+    if (questStep("questM24Doc") === -1) {
+      visitUrl("shop.php?whichshop=doc&action=talk");
+      runChoice(1);
+    }
+    if (questStep("questM25Armorer") === -1) {
+      visitUrl("shop.php?whichshop=armory&action=talk");
+      runChoice(1);
+    }
     const blocks = args ? parseInt(args) : undefined;
     manager.set({
       battleAction: "custom combat script",
