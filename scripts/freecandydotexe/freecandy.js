@@ -21239,7 +21239,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
 /* harmony import */ var _outfit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./outfit */ "./src/outfit.ts");
 /* harmony import */ var _combat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./combat */ "./src/combat.ts");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -21422,9 +21422,8 @@ function runBlocks() {
         (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
 
         if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Vote", 0, 0) !== "" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights") < 3) {
-          var voteMacro = _combat__WEBPACK_IMPORTED_MODULE_3__.default.externalIf((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteMonster") === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$monster)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["angry ghost"]))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Silent Treatment"]))))).step(trickMacro);
           (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Voter");
-          (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), voteMacro, function () {
+          (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), trickMacro, function () {
             return (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Vote", 0, 0) !== "" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights") < 3;
           }, fillPantsgivingFullness);
         }
@@ -21433,14 +21432,14 @@ function runBlocks() {
       var ghosting = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted";
 
       if (ghost && ghosting && (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)()) {
-        var ghostLocation = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("ghostLocation") || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["none"])));
+        var ghostLocation = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("ghostLocation") || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["none"])));
 
-        if (ghostLocation === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["none"])))) {
+        if (ghostLocation === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["none"])))) {
           throw "Something went wrong with my ghosts. Dammit, Walter Peck!";
         }
 
         (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.", "blue");
-        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)(ghostLocation, _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Trap Ghost"])))), function () {
+        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)(ghostLocation, _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Trap Ghost"])))), function () {
           return (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted";
         }, fillPantsgivingFullness);
       }
@@ -21451,7 +21450,7 @@ function runBlocks() {
         var runSource = (0,_lib__WEBPACK_IMPORTED_MODULE_1__.findRun)();
         if (runSource.prepare) runSource.prepare();
         if (runSource.requirement) _lib__WEBPACK_IMPORTED_MODULE_1__.Requirement.maximize([runSource.requirement]);
-        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["The Dire Warren"]))), runSource.macro);
+        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["The Dire Warren"]))), runSource.macro);
         fillPantsgivingFullness();
       }
 
