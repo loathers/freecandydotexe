@@ -20478,7 +20478,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function main(args) {
   if (args.includes("help")) {
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Set the property fcdeTreatOutfit with the name of the outfit you'd like to trick or treat in. Take out the familiar you want to use for trick or treating. Enjoy.", "blue");
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Set the property freecandy_TreatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.", "blue");
   } else {
     var blocks = args ? parseInt(args) : undefined;
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
@@ -20729,7 +20729,7 @@ function baseAdventureValue() {
 var bestFit;
 function bestOutfit() {
   if (!bestFit) {
-    var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_4__.property.getString("fcde_TreatOutfit");
+    var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_4__.property.getString("freecandy_TreatOutfit");
     if (playerChosenOutfit) bestFit = playerChosenOutfit;
     var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)).map(outfitName => [outfitName, (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
       var _ref6 = _slicedToArray(_ref5, 2),
