@@ -219,6 +219,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
     preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
+    preventEquip: [bjornalikeToUse === $item`Buddy Bjorn` ? $item`Crown of Thrones` : $item`Buddy Bjorn`]
   });
   if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
   if (haveEquipped($item`Crown of Thrones`)) bjornifyFamiliar(pickBjorn().familiar);
