@@ -17,10 +17,13 @@ import {
   numericModifier,
   outfitPieces,
   outfitTreats,
+  runChoice,
   toEffect,
+  toInt,
   toItem,
   toSlot,
   totalTurnsPlayed,
+  visitUrl,
 } from "kolmafia";
 import {
   $familiar,
@@ -195,8 +198,15 @@ export function fightOutfit(type: fightType = "Trick"): void {
       forceEquips.push($item`Loathing Legion helicopter`);
     }
   }
-  if (myFamiliar() === $familiar`Reagnimated Gnome`)
-    forceEquips.push($item`gnomish housemaid's kgnee`);
+  if (myFamiliar() === $familiar`Reagnimated Gnome`) {
+    const kgnee = $item`gnomish housemaid's kgnee`;
+    forceEquips.push(kgnee);
+    if (!have(kgnee)) {
+      const selection = toInt(kgnee) - toInt($item`gnomish swimmer's ears`) + 1;
+      visitUrl("arena.php");
+      runChoice(selection);
+    }
+  }
 
   const weightValue = stasisData
     ? clamp(
