@@ -315,7 +315,7 @@ export function pickBjorn(): BjornedFamiliar {
   if (!bjornList.length) {
     generateBjornList();
   }
-  while (bjornList[0]?.dropPredicate && !bjornList[0].dropPredicate()) bjornList.shift();
+  while (bjornList[0].dropPredicate && !bjornList[0].dropPredicate()) bjornList.shift();
   if (myFamiliar() !== bjornList[0].familiar) return bjornList[0];
   while (bjornList[1].dropPredicate && !bjornList[1].dropPredicate()) bjornList.splice(1, 1);
   return bjornList[1];
