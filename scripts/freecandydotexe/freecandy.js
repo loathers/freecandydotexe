@@ -20330,8 +20330,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FreeRun": () => (/* binding */ FreeRun),
 /* harmony export */   "findRun": () => (/* binding */ findRun),
 /* harmony export */   "sum": () => (/* binding */ sum),
+/* harmony export */   "sumNumbers": () => (/* binding */ sumNumbers),
 /* harmony export */   "getPantsgivingFood": () => (/* binding */ getPantsgivingFood),
-/* harmony export */   "baseAdventureValue": () => (/* binding */ baseAdventureValue)
+/* harmony export */   "baseAdventureValue": () => (/* binding */ baseAdventureValue),
+/* harmony export */   "bestOutfit": () => (/* binding */ bestOutfit)
 /* harmony export */ });
 /* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
 /* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0__);
@@ -20652,6 +20654,11 @@ function sum(addends, mappingFunction) {
     return subtotal + mappingFunction(element);
   }, 0);
 }
+function sumNumbers(addends) {
+  return sum(addends, function (x) {
+    return x;
+  });
+}
 var pantsgivingFood;
 function getPantsgivingFood() {
   if (!pantsgivingFood) {
@@ -20663,18 +20670,40 @@ function getPantsgivingFood() {
 var cachedBaseAdventureValue;
 function baseAdventureValue() {
   if (cachedBaseAdventureValue === undefined) {
-    cachedBaseAdventureValue = 1 / 5 * (3 * sum(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.outfitTreats)((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("fcdeTreatOutfit", "Eldritch Equipage"))).map(function (_ref) {
+    cachedBaseAdventureValue = 1 / 5 * (3 * sumNumbers(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.outfitTreats)(bestOutfit())).map(function (_ref) {
       var _ref2 = _slicedToArray(_ref, 2),
           candyName = _ref2[0],
           probability = _ref2[1];
 
       return saleValue((0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.toItem)(candyName)) * probability;
-    }), function (number) {
-      return number;
-    }) * ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Prunets"])))) : 0));
+    })) * ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * saleValue((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Prunets"])))) : 0));
   }
 
   return cachedBaseAdventureValue;
+}
+var bestFit;
+function bestOutfit() {
+  if (!bestFit) {
+    var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_3__.property.getString("fcde_TreatOutfit");
+    if (playerChosenOutfit) bestFit = playerChosenOutfit;
+    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.getOutfits)().map(function (outfitName) {
+      return [outfitName, sum(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.outfitTreats)(outfitName)).map(function (_ref3) {
+        var _ref4 = _slicedToArray(_ref3, 2),
+            candyName = _ref4[0],
+            probability = _ref4[1];
+
+        return saleValue((0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.toItem)(candyName)) * probability;
+      }), function (number) {
+        return number;
+      })];
+    }).sort(function (a, b) {
+      return b[1] - a[1];
+    })[0][0];
+    if (!flyestFit) throw "You somehow have no outfits, dude!";
+    bestFit = flyestFit;
+  }
+
+  return bestFit;
 }
 
 /***/ }),
@@ -20989,7 +21018,7 @@ var prepareToTrick = function prepareToTrick(trickFamiliar, trickMacro) {
   (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Trick");
 };
 
-var treatOutfit = (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("fcdeTreatOutfit", "Eldritch Equipage");
+var treatOutfit = (0,_lib__WEBPACK_IMPORTED_MODULE_1__.bestOutfit)();
 var tot = (0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])));
 
 var prepareToTreat = function prepareToTreat() {
