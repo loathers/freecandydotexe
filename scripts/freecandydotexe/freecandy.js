@@ -20487,7 +20487,10 @@ function main(args) {
       maximizerFoldables: true,
       hpAutoRecoveryTarget: 1.0,
       trackVoteMonster: "free",
-      customCombatScript: "twiddle"
+      customCombatScript: "twiddle",
+      autoSatisfyWithMall: true,
+      autoSatisfyWithNPCs: true,
+      autoSatisfyWithStorage: true
     });
     (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
