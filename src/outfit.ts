@@ -76,8 +76,6 @@ function estimateOutfitWeight(): number {
       $slot`shirt`,
       ...(have($item`Buddy Bjorn`) ? [] : $slots`back`),
       ...(get("_pantogramModifier").includes("Drops Items") ? [] : $slots`pants`),
-      ...(have($item`garbage sticker`, 2) ? [] : $slots`off-hand`),
-      ...(have($item`garbage sticker`) ? [] : $slots`weapon`),
     ];
     const viableItems = Item.all().filter(
       (item) =>
@@ -148,7 +146,6 @@ export function fightOutfit(type: fightType = "Trick"): void {
   const forceEquips: Item[] = [];
 
   const bonusEquips = new Map<Item, number>([
-    [$item`garbage sticker`, 100],
     [$item`lucky gold ring`, 400],
     [$item`Mr. Cheeng's spectacles`, 250],
     [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
@@ -165,11 +162,9 @@ export function fightOutfit(type: fightType = "Trick"): void {
   switch (type) {
     case "Kramco":
       forceEquips.push($item`Kramco Sausage-o-Matic™`);
-      bonusEquips.delete($item`garbage sticker`);
       break;
     case "Voter":
       forceEquips.push($item`"I Voted!" sticker`);
-      if (get("_voteMonster")?.maxMeat) bonusEquips.delete($item`garbage sticker`);
       break;
     case "Ghost":
       forceEquips.push($item`protonic accelerator pack`);
@@ -284,7 +279,6 @@ function pantsgiving(): Map<Item, number> {
 
 function overallAdventureValue(): number {
   const bonuses = new Map<Item, number>([
-    [$item`garbage sticker`, 100],
     [$item`lucky gold ring`, 400],
     [$item`Mr. Cheeng's spectacles`, 250],
     [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],

@@ -1,5 +1,5 @@
-import { haveEquipped, haveSkill, retrieveItem } from "kolmafia";
-import { $item, $items, $skill, $skills, have, Macro as LibramMacro, SourceTerminal } from "libram";
+import { haveSkill, retrieveItem } from "kolmafia";
+import { $item, $items, $skill, have, Macro as LibramMacro, SourceTerminal } from "libram";
 
 export default class Macro extends LibramMacro {
   tryHaveSkill(skill: Skill | null): Macro {
@@ -81,7 +81,7 @@ export default class Macro extends LibramMacro {
       $item`Mayor Ghost's scissors`,
       $item`Rain-Doh indigo cup`,
       $skill`Summon Love Gnats`,
-      ...(haveEquipped($item`garbage sticker`) ? [] : $skills`Sing Along`),
+      $skill`Sing Along`,
     ])
       .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
       .while_("!pastround 11", Macro.stasisItem());
