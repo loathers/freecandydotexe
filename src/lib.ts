@@ -33,12 +33,57 @@ import {
   Guzzlr,
   have,
   Macro,
+  maximizeCached,
+  MaximizeOptions,
   PropertiesManager,
   property,
-  Requirement,
 } from "libram";
 
 export const manager = new PropertiesManager();
+
+export class Requirement {
+  maximizeParameters_: string[];
+  maximizeOptions_: MaximizeOptions;
+
+  constructor(maximizeParameters_: string[], maximizeOptions_: MaximizeOptions) {
+    this.maximizeParameters_ = maximizeParameters_;
+    this.maximizeOptions_ = maximizeOptions_;
+  }
+
+  maximizeParameters(): string[] {
+    return this.maximizeParameters_;
+  }
+
+  maximizeOptions(): MaximizeOptions {
+    return this.maximizeOptions_;
+  }
+
+  merge(other: Requirement): Requirement {
+    const optionsA = this.maximizeOptions();
+    const optionsB = other.maximizeOptions();
+    return new Requirement([...this.maximizeParameters(), ...other.maximizeParameters()], {
+      ...optionsA,
+      ...optionsB,
+      bonusEquip: new Map([
+        ...(optionsA.bonusEquip?.entries() ?? []),
+        ...(optionsB.bonusEquip?.entries() ?? []),
+      ]),
+      forceEquip: [...(optionsA.forceEquip ?? []), ...(optionsB.forceEquip ?? [])],
+      preventEquip: [...(optionsA.preventEquip ?? []), ...(optionsB.preventEquip ?? [])],
+      onlySlot: [...(optionsA.onlySlot ?? []), ...(optionsB.onlySlot ?? [])],
+      preventSlot: [...(optionsA.preventSlot ?? []), ...(optionsB.preventSlot ?? [])],
+    });
+  }
+
+  static merge(allRequirements: Requirement[]): Requirement {
+    return allRequirements.reduce((x, y) => x.merge(y), new Requirement([], {}));
+  }
+
+  static maximize(requirements: Requirement[]): void {
+    const compiledRequirement = Requirement.merge(requirements);
+    maximizeCached(compiledRequirement.maximizeParameters(), compiledRequirement.maximizeOptions());
+  }
+}
 
 type ZonePotion = {
   zone: string;
@@ -478,3 +523,4 @@ export function bestOutfit(): string {
   }
   return bestFit;
 }
+

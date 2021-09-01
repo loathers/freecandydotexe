@@ -31,7 +31,6 @@ import {
   get,
   have,
   Macro,
-  maximizeRequirementsCached,
   set,
   SourceTerminal,
 } from "libram";
@@ -41,6 +40,7 @@ import {
   determineDraggableZoneAndEnsureAccess,
   findRun,
   getPantsgivingFood,
+  Requirement,
 } from "./lib";
 import { fightOutfit } from "./outfit";
 
@@ -271,7 +271,7 @@ export function runBlocks(blocks = -1): void {
         print("Sorry if that red message freaked you out, everything is cool and good.", "grey");
         const runSource = findRun();
         if (runSource.prepare) runSource.prepare();
-        if (runSource.requirement) maximizeRequirementsCached([runSource.requirement]);
+        if (runSource.requirement) Requirement.maximize([runSource.requirement]);
         advMacroAA($location`The Dire Warren`, runSource.macro);
         fillPantsgivingFullness();
       }
