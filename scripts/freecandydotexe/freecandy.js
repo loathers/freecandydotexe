@@ -19931,7 +19931,7 @@ var bjornFams = [{
 var bjornList = [];
 
 function generateBjornList() {
-  return _toConsumableArray(bjornFams).sort((a, b) => (!b.dropPredicate || b.dropPredicate() ? b.meatVal() * b.probability : 0) - (!a.dropPredicate || a.dropPredicate() ? a.meatVal() * a.probability : 0));
+  bjornList.push.apply(bjornList, _toConsumableArray(_toConsumableArray(bjornFams).sort((a, b) => (!b.dropPredicate || b.dropPredicate() ? b.meatVal() * b.probability : 0) - (!a.dropPredicate || a.dropPredicate() ? a.meatVal() * a.probability : 0))));
 }
 
 function pickBjorn() {
