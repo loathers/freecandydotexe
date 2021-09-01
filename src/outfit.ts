@@ -76,9 +76,7 @@ function estimateOutfitWeight(): number {
       $slot`shirt`,
       ...(have($item`Buddy Bjorn`) ? [] : $slots`back`),
       ...(get("_pantogramModifier").includes("Drops Items") ? [] : $slots`pants`),
-      ...(have($item`KoL Con 13 snowglobe`) || have($item`garbage sticker`, 2)
-        ? []
-        : $slots`off-hand`),
+      ...(have($item`garbage sticker`, 2) ? [] : $slots`off-hand`),
       ...(have($item`garbage sticker`) ? [] : $slots`weapon`),
     ];
     const viableItems = Item.all().filter(
