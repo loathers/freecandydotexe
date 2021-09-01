@@ -449,24 +449,29 @@ export function baseAdventureValue(): number {
   return cachedBaseAdventureValue;
 }
 
+let bestFit: string;
 export function bestOutfit(): string {
-  const playerChosenOutfit = property.getString("fcde_TreatOutfit");
-  if (playerChosenOutfit) return playerChosenOutfit;
-  const flyestFit = getOutfits()
-    .map(
-      (outfitName) =>
-        [
-          outfitName,
-          sum(
-            Object.entries(outfitTreats(outfitName)).map(
-              ([candyName, probability]) => saleValue(toItem(candyName)) * probability
-            ),
-            (number) => number
-          ),
-        ] as [string, number]
-    )
-    .sort((a, b) => b[1] - a[1])[0][0];
+  if (!bestFit) {
+    const playerChosenOutfit = property.getString("fcde_TreatOutfit");
+    if (playerChosenOutfit) bestFit = playerChosenOutfit;
 
-  if (!flyestFit) throw "You somehow have no outfits, dude!";
-  return flyestFit;
+    const flyestFit = getOutfits()
+      .map(
+        (outfitName) =>
+          [
+            outfitName,
+            sum(
+              Object.entries(outfitTreats(outfitName)).map(
+                ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+              ),
+              (number) => number
+            ),
+          ] as [string, number]
+      )
+      .sort((a, b) => b[1] - a[1])[0][0];
+
+    if (!flyestFit) throw "You somehow have no outfits, dude!";
+    bestFit = flyestFit;
+  }
+  return bestFit;
 }
