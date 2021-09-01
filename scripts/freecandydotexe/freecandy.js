@@ -20322,6 +20322,7 @@ function pickBjorn() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "manager": () => (/* binding */ manager),
 /* harmony export */   "determineDraggableZoneAndEnsureAccess": () => (/* binding */ determineDraggableZoneAndEnsureAccess),
 /* harmony export */   "advMacroAA": () => (/* binding */ advMacroAA),
 /* harmony export */   "saleValue": () => (/* binding */ saleValue),
@@ -20367,6 +20368,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
+var manager = new libram__WEBPACK_IMPORTED_MODULE_3__.PropertiesManager();
 var zonePotions = [{
   zone: "Spaaace",
   effect: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Transpondent"]))),
@@ -20721,13 +20723,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! kolmafia */ "kolmafia");
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(kolmafia__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _trickin_and_treatin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./trickin and treatin */ "./src/trickin and treatin.ts");
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
+/* harmony import */ var _trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./trickin and treatin */ "./src/trickin and treatin.ts");
+
 
 
 function main(args) {
   if (args.includes("help")) {
     (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Set the property fcdeTreatOutfit with the name of the outfit you'd like to trick or treat in. Take out the familiar you want to use for trick or treating. Enjoy.", "blue");
-  } else if (args) (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_1__.runBlocks)(parseInt(args));else (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_1__.runBlocks)();
+  } else {
+    var blocks = args ? parseInt(args) : undefined;
+    _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
+      battleAction: "custom combat script",
+      dontStopForCounters: true,
+      maximizerFoldables: true,
+      hpAutoRecoveryTarget: 1.0,
+      trackVoteMonster: "free",
+      customCombatScript: "twiddle"
+    });
+    (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
+    _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
+  }
 } //note: set properties
 
 /***/ }),
