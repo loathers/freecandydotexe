@@ -4,13 +4,16 @@ import {
   inebrietyLimit,
   myFullness,
   myInebriety,
+  myPrimestat,
   mySpleenUse,
   print,
+  retrieveItem,
   runChoice,
   spleenLimit,
   userConfirm,
   visitUrl,
 } from "kolmafia";
+import { $item, $stat, have } from "libram";
 import { manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -57,6 +60,17 @@ export function main(args: string): void {
       autoSatisfyWithNPCs: true,
       autoSatisfyWithStorage: true,
     });
+    if (have($item`portable pantogram`) && !have($item`pantogram pants`)) {
+      retrieveItem($item`ten-leaf clover`);
+      retrieveItem($item`bubblin' crude`);
+      const m = new Map([
+        [$stat`Muscle`, 1],
+        [$stat`Mysticality`, 2],
+        [$stat`Moxie`, 3],
+      ]).get(myPrimestat());
+      visitUrl("inv_use.php?pwd&whichitem=9573");
+      visitUrl(`choice.php?whichchoice=1270&pwd&option=1&m=${m}&e=5&s1=5789,1&s2=-1,0&s3=24,1`);
+    }
     runBlocks(blocks);
     manager.resetAll();
   }
