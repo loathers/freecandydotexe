@@ -3,6 +3,7 @@ import {
   fullnessLimit,
   gametimeToInt,
   getCounters,
+  haveEquipped,
   haveFamiliar,
   inebrietyLimit,
   inMultiFight,
@@ -28,9 +29,9 @@ import {
   $location,
   $monster,
   $skill,
+  $skills,
   get,
   have,
-  Macro,
   set,
   SourceTerminal,
 } from "libram";
@@ -43,6 +44,7 @@ import {
   Requirement,
 } from "./lib";
 import { fightOutfit } from "./outfit";
+import Macro from "./combat";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
 
@@ -145,28 +147,14 @@ export function runBlocks(blocks = -1): void {
   const trickFamiliar = myFamiliar();
 
   const trickMacro = stasisFamiliars.includes(trickFamiliar)
-    ? Macro.trySkill($skill`Curse of Weaksauce`)
-        .trySkill($skill`Micrometeorite`)
-        .trySkill($skill`Shadow Noodles`)
-        .trySkill($skill`Sing Along`)
-        .trySkill($skill`Extract`)
-        .trySkill($skill`Summon Love Gnats`)
-        .trySkill($skill`Shell Up`)
-        .tryItem([$item`Great Wolf's lice`, $item`HOA citation pad`])
-        .tryItem($item`little red book`)
-        .tryItem($item`Time-Spinner`)
-        .tryItem($item`nasty-smelling moss`)
-        .tryItem($item`Mayor Ghost's scissors`)
-        .trySkill($skill`Silent Treatment`)
-        .trySkillRepeat($skill`Shieldbutt`)
-        .trySkillRepeat($skill`Kneebutt`)
-        .attack()
-        .repeat()
-    : Macro.trySkill($skill`Curse of Weaksauce`)
-        .trySkill($skill`Sing Along`)
-        .trySkill($skill`Extract`)
-        .attack()
-        .repeat();
+    ? Macro.stasis().kill()
+    : Macro.try([
+        ...$skills`Curse of Weaksauce, Micrometeorite`,
+        ...(haveEquipped($item`garbage sticker`) ? $skills`Sing Along` : []),
+        $item`porquoise-handled sixgun`,
+      ])
+        .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
+        .kill();
 
   const n = 0;
   const condition = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
