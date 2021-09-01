@@ -37,6 +37,7 @@ import {
 } from "libram";
 import {
   advMacroAA,
+  bestOutfit,
   determineDraggableZoneAndEnsureAccess,
   findRun,
   getPantsgivingFood,
@@ -51,7 +52,7 @@ const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
   fightOutfit("Trick");
 };
 
-const treatOutfit = get("fcdeTreatOutfit", "Eldritch Equipage");
+const treatOutfit = bestOutfit();
 const tot = $familiar`Trick-or-Treating Tot`;
 const prepareToTreat = () => {
   if (haveFamiliar(tot)) useFamiliar(tot);

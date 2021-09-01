@@ -5,6 +5,7 @@ import {
   autosellPrice,
   buy,
   cliExecute,
+  getOutfits,
   mallPrice,
   myLevel,
   outfitTreats,
@@ -32,6 +33,7 @@ import {
   Guzzlr,
   have,
   Macro,
+  property,
   Requirement,
 } from "libram";
 
@@ -411,6 +413,10 @@ export function sum<T>(addends: T[], mappingFunction: (element: T) => number): n
   return addends.reduce((subtotal, element) => subtotal + mappingFunction(element), 0);
 }
 
+export function sumNumbers(addends: number[]): number {
+  return sum(addends, (x: number) => x);
+}
+
 let pantsgivingFood: Item;
 export function getPantsgivingFood(): Item {
   if (!pantsgivingFood) {
@@ -431,15 +437,36 @@ export function baseAdventureValue(): number {
     cachedBaseAdventureValue =
       (1 / 5) *
       (3 *
-        sum(
-          Object.entries(outfitTreats(get("fcdeTreatOutfit", "Eldritch Equipage"))).map(
+        sumNumbers(
+          Object.entries(outfitTreats(bestOutfit())).map(
             ([candyName, probability]) => saleValue(toItem(candyName)) * probability
-          ),
-          (number: number) => number
+          )
         ) *
         (have($familiar`Trick-or-Treating Tot`) ? 1.6 : 0) +
         (1 / 5) * saleValue($item`huge bowl of candy`) +
         (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
   }
   return cachedBaseAdventureValue;
+}
+
+export function bestOutfit(): string {
+  const playerChosenOutfit = property.getString("fcde_TreatOutfit");
+  if (playerChosenOutfit) return playerChosenOutfit;
+  const flyestFit = getOutfits()
+    .map(
+      (outfitName) =>
+        [
+          outfitName,
+          sum(
+            Object.entries(outfitTreats(outfitName)).map(
+              ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+            ),
+            (number) => number
+          ),
+        ] as [string, number]
+    )
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+  if (!flyestFit) throw "You somehow have no outfits, dude!";
+  return flyestFit;
 }
