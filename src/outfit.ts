@@ -52,7 +52,7 @@ type stasisValue = {
   meatPerLb: number;
 };
 
-const trickHats = $items`invisible bag, witch hat, beholed bedsheet`;
+const trickHats = $items`invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume`;
 const adventureFamiliars = $familiars`Temporal Riftlet, Reagnimated Gnome`;
 const stasisFamiliars = new Map<Familiar, stasisValue>([
   [$familiar`Ninja Pirate Zombie Robot`, { baseRate: 1 / 2, meatPerLb: 14.52 }],
