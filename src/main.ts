@@ -5,7 +5,7 @@ import { runBlocks } from "./trickin and treatin";
 export function main(args: string): void {
   if (args.includes("help")) {
     print(
-      "Set the property fcdeTreatOutfit with the name of the outfit you'd like to trick or treat in. Take out the familiar you want to use for trick or treating. Enjoy.",
+      "Set the property freecandy_TreatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.",
       "blue"
     );
   } else {

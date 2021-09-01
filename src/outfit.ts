@@ -354,7 +354,7 @@ export function baseAdventureValue(): number {
 let bestFit: string;
 export function bestOutfit(): string {
   if (!bestFit) {
-    const playerChosenOutfit = property.getString("fcde_TreatOutfit");
+    const playerChosenOutfit = property.getString("freecandy_TreatOutfit");
     if (playerChosenOutfit) bestFit = playerChosenOutfit;
 
     const flyestFit = getOutfits()
