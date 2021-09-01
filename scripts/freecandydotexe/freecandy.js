@@ -20649,13 +20649,11 @@ function fightOutfit() {
   }
 
   if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) {
-    var kgnee = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"])));
-    forceEquips.push(kgnee);
+    forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
 
-    if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(kgnee)) {
-      var selection = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toInt)(kgnee) - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toInt)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["gnomish swimmer's ears"])))) + 1;
+    if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))))) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.visitUrl)("arena.php");
-      (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.runChoice)(selection);
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.runChoice)(4);
     }
   }
 
