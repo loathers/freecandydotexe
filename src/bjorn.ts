@@ -301,11 +301,13 @@ const bjornFams: BjornedFamiliar[] = [
 
 const bjornList: BjornedFamiliar[] = [];
 
-function generateBjornList(): BjornedFamiliar[] {
-  return [...bjornFams].sort(
-    (a, b) =>
-      (!b.dropPredicate || b.dropPredicate() ? b.meatVal() * b.probability : 0) -
-      (!a.dropPredicate || a.dropPredicate() ? a.meatVal() * a.probability : 0)
+function generateBjornList(): void {
+  bjornList.push(
+    ...[...bjornFams].sort(
+      (a, b) =>
+        (!b.dropPredicate || b.dropPredicate() ? b.meatVal() * b.probability : 0) -
+        (!a.dropPredicate || a.dropPredicate() ? a.meatVal() * a.probability : 0)
+    )
   );
 }
 
@@ -313,7 +315,7 @@ export function pickBjorn(): BjornedFamiliar {
   if (!bjornList.length) {
     generateBjornList();
   }
-  while (bjornList[0].dropPredicate && !bjornList[0].dropPredicate()) bjornList.shift();
+  while (bjornList[0]?.dropPredicate && !bjornList[0].dropPredicate()) bjornList.shift();
   if (myFamiliar() !== bjornList[0].familiar) return bjornList[0];
   while (bjornList[1].dropPredicate && !bjornList[1].dropPredicate()) bjornList.splice(1, 1);
   return bjornList[1];
