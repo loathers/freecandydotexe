@@ -7,8 +7,10 @@ export function main(args: string): void {
       "Set the property fcdeTreatOutfit with the name of the outfit you'd like to trick or treat in. Take out the familiar you want to use for trick or treating. Enjoy.",
       "blue"
     );
-  } else if (args) runBlocks(parseInt(args));
-  else runBlocks();
+  } else {
+    const blocks = args ? parseInt(args) : undefined;
+    runBlocks(blocks);
+  }
 }
 
 //note: set properties
