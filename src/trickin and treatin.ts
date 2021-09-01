@@ -34,15 +34,8 @@ import {
   set,
   SourceTerminal,
 } from "libram";
-import {
-  advMacroAA,
-  bestOutfit,
-  determineDraggableZoneAndEnsureAccess,
-  findRun,
-  getPantsgivingFood,
-  Requirement,
-} from "./lib";
-import { fightOutfit } from "./outfit";
+import { advMacroAA, determineDraggableZoneAndEnsureAccess, findRun, Requirement } from "./lib";
+import { bestOutfit, fightOutfit, getPantsgivingFood } from "./outfit";
 import Macro from "./combat";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
