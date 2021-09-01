@@ -4,10 +4,12 @@ import {
   adv1,
   autosellPrice,
   buy,
+  canEquip,
   cliExecute,
   getOutfits,
   mallPrice,
   myLevel,
+  outfitPieces,
   outfitTreats,
   print,
   restoreMp,
@@ -504,6 +506,7 @@ export function bestOutfit(): string {
     if (playerChosenOutfit) bestFit = playerChosenOutfit;
 
     const flyestFit = getOutfits()
+      .filter((outfitName) => outfitPieces(outfitName).every(canEquip))
       .map(
         (outfitName) =>
           [
