@@ -20738,7 +20738,7 @@ function bestOutfit() {
   if (!bestFit) {
     var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_4__.property.getString("freecandy_TreatOutfit");
     if (playerChosenOutfit) bestFit = playerChosenOutfit;
-    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)).map(outfitName => [outfitName, (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
+    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(fit => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)(fit))).map(outfitName => [outfitName, (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
       var _ref6 = _slicedToArray(_ref5, 2),
           candyName = _ref6[0],
           probability = _ref6[1];
