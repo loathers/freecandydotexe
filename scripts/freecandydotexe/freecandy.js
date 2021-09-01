@@ -20323,6 +20323,7 @@ function pickBjorn() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "manager": () => (/* binding */ manager),
+/* harmony export */   "Requirement": () => (/* binding */ Requirement),
 /* harmony export */   "determineDraggableZoneAndEnsureAccess": () => (/* binding */ determineDraggableZoneAndEnsureAccess),
 /* harmony export */   "advMacroAA": () => (/* binding */ advMacroAA),
 /* harmony export */   "saleValue": () => (/* binding */ saleValue),
@@ -20350,25 +20351,95 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
 var manager = new libram__WEBPACK_IMPORTED_MODULE_3__.PropertiesManager();
+var Requirement = /*#__PURE__*/function () {
+  function Requirement(maximizeParameters_, maximizeOptions_) {
+    _classCallCheck(this, Requirement);
+
+    _defineProperty(this, "maximizeParameters_", void 0);
+
+    _defineProperty(this, "maximizeOptions_", void 0);
+
+    this.maximizeParameters_ = maximizeParameters_;
+    this.maximizeOptions_ = maximizeOptions_;
+  }
+
+  _createClass(Requirement, [{
+    key: "maximizeParameters",
+    value: function maximizeParameters() {
+      return this.maximizeParameters_;
+    }
+  }, {
+    key: "maximizeOptions",
+    value: function maximizeOptions() {
+      return this.maximizeOptions_;
+    }
+  }, {
+    key: "merge",
+    value: function merge(other) {
+      var _optionsA$bonusEquip$, _optionsA$bonusEquip, _optionsB$bonusEquip$, _optionsB$bonusEquip, _optionsA$forceEquip, _optionsB$forceEquip, _optionsA$preventEqui, _optionsB$preventEqui, _optionsA$onlySlot, _optionsB$onlySlot, _optionsA$preventSlot, _optionsB$preventSlot;
+
+      var optionsA = this.maximizeOptions();
+      var optionsB = other.maximizeOptions();
+      return new Requirement([].concat(_toConsumableArray(this.maximizeParameters()), _toConsumableArray(other.maximizeParameters())), _objectSpread(_objectSpread(_objectSpread({}, optionsA), optionsB), {}, {
+        bonusEquip: new Map([].concat(_toConsumableArray((_optionsA$bonusEquip$ = (_optionsA$bonusEquip = optionsA.bonusEquip) === null || _optionsA$bonusEquip === void 0 ? void 0 : _optionsA$bonusEquip.entries()) !== null && _optionsA$bonusEquip$ !== void 0 ? _optionsA$bonusEquip$ : []), _toConsumableArray((_optionsB$bonusEquip$ = (_optionsB$bonusEquip = optionsB.bonusEquip) === null || _optionsB$bonusEquip === void 0 ? void 0 : _optionsB$bonusEquip.entries()) !== null && _optionsB$bonusEquip$ !== void 0 ? _optionsB$bonusEquip$ : []))),
+        forceEquip: [].concat(_toConsumableArray((_optionsA$forceEquip = optionsA.forceEquip) !== null && _optionsA$forceEquip !== void 0 ? _optionsA$forceEquip : []), _toConsumableArray((_optionsB$forceEquip = optionsB.forceEquip) !== null && _optionsB$forceEquip !== void 0 ? _optionsB$forceEquip : [])),
+        preventEquip: [].concat(_toConsumableArray((_optionsA$preventEqui = optionsA.preventEquip) !== null && _optionsA$preventEqui !== void 0 ? _optionsA$preventEqui : []), _toConsumableArray((_optionsB$preventEqui = optionsB.preventEquip) !== null && _optionsB$preventEqui !== void 0 ? _optionsB$preventEqui : [])),
+        onlySlot: [].concat(_toConsumableArray((_optionsA$onlySlot = optionsA.onlySlot) !== null && _optionsA$onlySlot !== void 0 ? _optionsA$onlySlot : []), _toConsumableArray((_optionsB$onlySlot = optionsB.onlySlot) !== null && _optionsB$onlySlot !== void 0 ? _optionsB$onlySlot : [])),
+        preventSlot: [].concat(_toConsumableArray((_optionsA$preventSlot = optionsA.preventSlot) !== null && _optionsA$preventSlot !== void 0 ? _optionsA$preventSlot : []), _toConsumableArray((_optionsB$preventSlot = optionsB.preventSlot) !== null && _optionsB$preventSlot !== void 0 ? _optionsB$preventSlot : []))
+      }));
+    }
+  }], [{
+    key: "merge",
+    value: function merge(allRequirements) {
+      return allRequirements.reduce(function (x, y) {
+        return x.merge(y);
+      }, new Requirement([], {}));
+    }
+  }, {
+    key: "maximize",
+    value: function maximize(requirements) {
+      var compiledRequirement = Requirement.merge(requirements);
+      (0,libram__WEBPACK_IMPORTED_MODULE_3__.maximizeCached)(compiledRequirement.maximizeParameters(), compiledRequirement.maximizeOptions());
+    }
+  }]);
+
+  return Requirement;
+}();
 var zonePotions = [{
   zone: "Spaaace",
   effect: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Transpondent"]))),
@@ -20576,12 +20647,12 @@ code removed because of boss monsters
 */
 new FreeRun("Bander", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Frumious Bandersnatch"])))) && ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Ode to Booze"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_3__.getSongCount)() < (0,libram__WEBPACK_IMPORTED_MODULE_3__.getSongLimit)()) && libram__WEBPACK_IMPORTED_MODULE_3__.Bandersnatch.getRemainingRunaways() > 0;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement(["Familiar Weight"], {}), function () {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new Requirement(["Familiar Weight"], {}), function () {
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.useFamiliar)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Frumious Bandersnatch"]))));
   ensureEffect((0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Ode to Booze"]))));
 }), new FreeRun("Boots", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["Pair of Stomping Boots"])))) && libram__WEBPACK_IMPORTED_MODULE_3__.Bandersnatch.getRemainingRunaways() > 0;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement(["Familiar Weight"], {}), function () {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new Requirement(["Familiar Weight"], {}), function () {
   return (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.useFamiliar)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Pair of Stomping Boots"]))));
 }), new FreeRun("Snokebomb", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_snokebombUsed") < 3 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Snokebomb"]))));
@@ -20591,23 +20662,23 @@ new FreeRun("Bander", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_feelHatredUsed") < 3 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Emotionally Chipped"]))));
 }, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Feel Hatred"]))))), new FreeRun("KGB", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_kgbTranquilizerDartUses") < 3;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["KGB tranquilizer dart"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["KGB tranquilizer dart"])))), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"])))
 })), new FreeRun("Latte", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["latte lovers member's mug"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_latteBanishUsed");
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Throw Latte on Opponent"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Throw Latte on Opponent"), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["latte lovers member's mug"])))
 })), new FreeRun("Docbag", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_reflexHammerUsed") < 3;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Reflex Hammer"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Reflex Hammer"])))), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))
 })), new FreeRun("Middle Finger", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["mafia middle finger ring"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_mafiaMiddleFingerRingUsed");
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["Show them your ring"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["Show them your ring"])))), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["mafia middle finger ring"])))
 })), new FreeRun("VMask", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["V for Vivala mask"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_vmaskBanisherUsed");
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Creepy Grin"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Creepy Grin"])))), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["V for Vivala mask"])))
 }), function () {
   return (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.restoreMp)(30);
@@ -20615,22 +20686,22 @@ new FreeRun("Bander", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["stinky cheese diaper"])))).some(function (item) {
     return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)(item);
   }) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_stinkyCheeseBanisherUsed");
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Give Your Opponent the Stinkeye"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Give Your Opponent the Stinkeye"), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["stinky cheese eye"])))
 }), function () {
   if (!(0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["stinky cheese eye"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.cliExecute)("fold stinky cheese eye");
 }), new FreeRun("Navel Ring", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["navel ring of navel gazing"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["navel ring of navel gazing"])))
 })), new FreeRun("GAP", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["Greatest American Pants"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["Greatest American Pants"])))
 })), new FreeRun("Scrapbook", function () {
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.visitUrl)("desc_item.php?whichitem=463063785");
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["familiar scrapbook"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("scrapbookCharges") >= 100;
-}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Show Your Boring Familiar Pictures"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Show Your Boring Familiar Pictures"), new Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["familiar scrapbook"])))
 })), new FreeRun("Parasol", function () {
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["peppermint parasol"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("parasolUsed") < 9 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3;
@@ -21216,7 +21287,7 @@ function runBlocks() {
         (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Sorry if that red message freaked you out, everything is cool and good.", "grey");
         var runSource = (0,_lib__WEBPACK_IMPORTED_MODULE_1__.findRun)();
         if (runSource.prepare) runSource.prepare();
-        if (runSource.requirement) (0,libram__WEBPACK_IMPORTED_MODULE_3__.maximizeRequirementsCached)([runSource.requirement]);
+        if (runSource.requirement) _lib__WEBPACK_IMPORTED_MODULE_1__.Requirement.maximize([runSource.requirement]);
         (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$location)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["The Dire Warren"]))), runSource.macro);
         fillPantsgivingFullness();
       }
