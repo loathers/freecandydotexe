@@ -357,7 +357,7 @@ export function bestOutfit(): string {
     if (playerChosenOutfit) bestFit = playerChosenOutfit;
 
     const flyestFit = getOutfits()
-      .filter((outfitName) => outfitPieces(outfitName).every(canEquip))
+      .filter((outfitName) => outfitPieces(outfitName).every((fit) => canEquip(fit)))
       .map(
         (outfitName) =>
           [
