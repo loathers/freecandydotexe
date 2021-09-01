@@ -1,4 +1,16 @@
-import { abort, fullnessLimit, inebrietyLimit, myFullness, myInebriety, mySpleenUse, print, runChoice, spleenLimit, userConfirm, visitUrl } from "kolmafia";
+import {
+  abort,
+  fullnessLimit,
+  inebrietyLimit,
+  myFullness,
+  myInebriety,
+  mySpleenUse,
+  print,
+  runChoice,
+  spleenLimit,
+  userConfirm,
+  visitUrl,
+} from "kolmafia";
 import { manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -9,9 +21,17 @@ export function main(args: string): void {
       "blue"
     );
   } else {
-    if (myFullness() < fullnessLimit() || myInebriety() < inebrietyLimit() || mySpleenUse() < spleenLimit()) {
-      const keepGoinCowboy = userConfirm("Your organs are not full. Are you sure you wish to proceed?", 69, false);
-      if (!keepGoinCowboy) abort()
+    if (
+      myFullness() < fullnessLimit() ||
+      myInebriety() < inebrietyLimit() ||
+      mySpleenUse() < spleenLimit()
+    ) {
+      const keepGoinCowboy = userConfirm(
+        "Your organs are not full. Are you sure you wish to proceed?",
+        69,
+        false
+      );
+      if (!keepGoinCowboy) abort();
     }
     if (questStep("questM23Meatsmith") === -1) {
       visitUrl("shop.php?whichshop=meatsmith&action=talk");
