@@ -19,7 +19,6 @@ import {
   outfitTreats,
   runChoice,
   toEffect,
-  toInt,
   toItem,
   toSlot,
   totalTurnsPlayed,
@@ -199,12 +198,10 @@ export function fightOutfit(type: fightType = "Trick"): void {
     }
   }
   if (myFamiliar() === $familiar`Reagnimated Gnome`) {
-    const kgnee = $item`gnomish housemaid's kgnee`;
-    forceEquips.push(kgnee);
-    if (!have(kgnee)) {
-      const selection = toInt(kgnee) - toInt($item`gnomish swimmer's ears`) + 1;
+    forceEquips.push($item`gnomish housemaid's kgnee`);
+    if (!have($item`gnomish housemaid's kgnee`)) {
       visitUrl("arena.php");
-      runChoice(selection);
+      runChoice(4);
     }
   }
 
