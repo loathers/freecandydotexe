@@ -63,9 +63,12 @@ jobs:
           git fetch --all
           git switch release
           rm -r scripts/
+          rm -r ccs/
+          mv mafiafiles/ccs ./ccs
           mv KoLmafia/scripts scripts
       - run: |
           git add scripts/
+          git add ccs/
           {
             git commit -m "Build Mafia files for commit $GITHUB_SHA"
             git push origin release
