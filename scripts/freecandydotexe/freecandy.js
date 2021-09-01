@@ -20553,7 +20553,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var actionRateBonus = () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)("Familiar Action Bonus") / 100 + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject || (_templateObject = _taggedTemplateLiteral(["short stack of pancakes, short stick of butter, short glass of water"]))).map(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.effectModifier)(item, "Effect")).some(effect => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(effect)) ? 1 : 0);
 
-var trickHats = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["invisible bag, witch hat, beholed bedsheet"])));
+var trickHats = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume"])));
 var adventureFamiliars = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiars)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["Temporal Riftlet, Reagnimated Gnome"])));
 var stasisFamiliars = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["Ninja Pirate Zombie Robot"]))), {
   baseRate: 1 / 2,
