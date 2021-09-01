@@ -523,4 +523,3 @@ export function bestOutfit(): string {
   }
   return bestFit;
 }
-
