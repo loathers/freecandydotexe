@@ -37,6 +37,7 @@ export function main(args: string): void {
       );
       if (!keepGoinCowboy) abort();
     }
+
     if (questStep("questM23Meatsmith") === -1) {
       visitUrl("shop.php?whichshop=meatsmith&action=talk");
       runChoice(1);
@@ -49,7 +50,7 @@ export function main(args: string): void {
       visitUrl("shop.php?whichshop=armory&action=talk");
       runChoice(1);
     }
-    const blocks = args ? parseInt(args) : undefined;
+
     manager.set({
       battleAction: "custom combat script",
       dontStopForCounters: true,
@@ -79,6 +80,8 @@ export function main(args: string): void {
       visitUrl("inv_use.php?pwd&whichitem=9573");
       visitUrl(`choice.php?whichchoice=1270&pwd&option=1&m=${m}&e=5&s1=5789,1&s2=-1,0&s3=24,1`);
     }
+
+    const blocks = args ? parseInt(args) : undefined;
     runBlocks(blocks);
     manager.resetAll();
   }

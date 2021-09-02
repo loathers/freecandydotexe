@@ -4,6 +4,7 @@ import {
   buy,
   canEquip,
   effectModifier,
+  enthroneFamiliar,
   equippedItem,
   fullnessLimit,
   getOutfits,
@@ -38,7 +39,7 @@ import {
   maximizeCached,
   property,
 } from "libram";
-import { BjornedFamiliar, pickBjorn } from "./bjorn";
+import { bjornValue, pickBjorn } from "./bjorn";
 import { clamp, saleValue, sum, sumNumbers } from "./lib";
 
 const actionRateBonus = () =>
@@ -49,13 +50,14 @@ const actionRateBonus = () =>
     ? 1
     : 0);
 
+const trickHats = $items`invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume`;
+const adventureFamiliars = $familiars`Temporal Riftlet, Reagnimated Gnome`;
+
 type stasisValue = {
   baseRate: number;
   meatPerLb: number;
 };
 
-const trickHats = $items`invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume`;
-const adventureFamiliars = $familiars`Temporal Riftlet, Reagnimated Gnome`;
 const stasisFamiliars = new Map<Familiar, stasisValue>([
   [$familiar`Ninja Pirate Zombie Robot`, { baseRate: 1 / 2, meatPerLb: 14.52 }],
   [$familiar`Cocoabo`, { baseRate: 1 / 3, meatPerLb: 13.2 }],
@@ -72,16 +74,19 @@ function estimateOutfitWeight(): number {
       $items`Mr. Screege's spectacles, Mr. Cheeng's spectacles, lucky gold ring`.filter((item) =>
         have(item)
       ).length;
+
     const openSlots = [
       $slot`shirt`,
       ...(have($item`Buddy Bjorn`) ? [] : $slots`back`),
       ...(get("_pantogramModifier").includes("Drops Items") ? [] : $slots`pants`),
     ];
+
     const viableItems = Item.all().filter(
       (item) =>
         have(item) &&
         (openSlots.includes(toSlot(item)) || (toSlot(item) === $slot`acc1` && accessoriesFree))
     );
+
     const nonAccessoryWeightEquips = openSlots.map(
       (slot) =>
         viableItems
@@ -98,6 +103,7 @@ function estimateOutfitWeight(): number {
           )
           .splice(0, accessoriesFree)
       : [];
+
     outfitWeightEstimate =
       sum([...accessoryWeightEquips, ...nonAccessoryWeightEquips], (item: Item) =>
         numericModifier(item, "Familiar Weight")
@@ -130,8 +136,6 @@ function getEffectWeight(): number {
 }
 
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
-const bjornValue = (choice: BjornedFamiliar) => choice.meatVal() * choice.probability;
-
 export function fightOutfit(type: fightType = "Trick"): void {
   if (!trickHats.some((hat) => have(hat))) {
     buy(1, trickHats.sort((a, b) => mallPrice(b) - mallPrice(a))[0]);
@@ -176,6 +180,14 @@ export function fightOutfit(type: fightType = "Trick"): void {
   )
     forceEquips.push($item`protonic accelerator pack`);
 
+  if (myFamiliar() === $familiar`Reagnimated Gnome`) {
+    forceEquips.push($item`gnomish housemaid's kgnee`);
+    if (!have($item`gnomish housemaid's kgnee`)) {
+      visitUrl("arena.php");
+      runChoice(4);
+    }
+  }
+
   const stasisData = stasisFamiliars.get(myFamiliar());
   if (stasisData) {
     if (
@@ -183,13 +195,6 @@ export function fightOutfit(type: fightType = "Trick"): void {
       getFoldGroup($item`Loathing Legion helicopter`).some((foldable) => have(foldable))
     ) {
       forceEquips.push($item`Loathing Legion helicopter`);
-    }
-  }
-  if (myFamiliar() === $familiar`Reagnimated Gnome`) {
-    forceEquips.push($item`gnomish housemaid's kgnee`);
-    if (!have($item`gnomish housemaid's kgnee`)) {
-      visitUrl("arena.php");
-      runChoice(4);
     }
   }
 
@@ -219,12 +224,12 @@ export function fightOutfit(type: fightType = "Trick"): void {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
     preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
-    preventEquip: [
-      bjornalikeToUse === $item`Buddy Bjorn` ? $item`Crown of Thrones` : $item`Buddy Bjorn`,
-    ],
+    preventEquip:
+      bjornalikeToUse === $item`Buddy Bjorn` ? $items`Crown of Thrones` : $items`Buddy Bjorn`,
   });
+
   if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
-  if (haveEquipped($item`Crown of Thrones`)) bjornifyFamiliar(pickBjorn().familiar);
+  if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(pickBjorn().familiar);
 }
 
 function snowSuit() {
@@ -232,6 +237,7 @@ function snowSuit() {
 
   return new Map<Item, number>([[$item`Snow Suit`, saleValue($item`carrot nose`) / 10]]);
 }
+
 function mayflowerBouquet() {
   // +40% meat drop 12.5% of the time (effectively 5%)
   // Drops flowers 50% of the time, wiki says 5-10 a day.
