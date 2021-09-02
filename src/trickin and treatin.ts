@@ -3,7 +3,6 @@ import {
   fullnessLimit,
   gametimeToInt,
   getCounters,
-  haveEquipped,
   haveFamiliar,
   inebrietyLimit,
   inMultiFight,
@@ -140,8 +139,7 @@ export function runBlocks(blocks = -1): void {
   const trickMacro = stasisFamiliars.includes(trickFamiliar)
     ? Macro.stasis().kill()
     : Macro.try([
-        ...$skills`Curse of Weaksauce, Micrometeorite`,
-        ...(haveEquipped($item`garbage sticker`) ? $skills`Sing Along` : []),
+        ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
         $item`porquoise-handled sixgun`,
       ])
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
