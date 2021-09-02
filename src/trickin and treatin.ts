@@ -265,4 +265,3 @@ export function runBlocks(blocks = -1): void {
     print(`I spent ${duration} milliseconds!`, "blue");
   }
 }
-
