@@ -20528,7 +20528,18 @@ function main(args) {
       customCombatScript: "twiddle",
       autoSatisfyWithMall: true,
       autoSatisfyWithNPCs: true,
-      autoSatisfyWithStorage: true
+      autoSatisfyWithStorage: true,
+      currentMood: "apathetic"
+    });
+    if ((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("hpAutoRecovery") < 0.35) _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
+      hpAutoRecovery: 0.35
+    });
+    if ((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("mpAutoRecovery") < 0.25) _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
+      mpAutoRecovery: 0.25
+    });
+    var mpTarget = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myLevel)() < 18 ? 0.5 : 0.3;
+    if ((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("mpAutoRecoveryTarget") < mpTarget) _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
+      mpAutoRecoveryTarget: mpTarget
     });
 
     if ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject || (_templateObject = _taggedTemplateLiteral(["portable pantogram"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["pantogram pants"]))))) {
