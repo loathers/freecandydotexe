@@ -20832,7 +20832,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
 /* harmony import */ var _outfit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./outfit */ "./src/outfit.ts");
 /* harmony import */ var _combat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./combat */ "./src/combat.ts");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -20960,7 +20960,7 @@ function runBlocks() {
   var voteBadge = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\"I Voted!\" sticker"])));
   var voting = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(voteBadge) && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteToday");
   var trickFamiliar = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)();
-  var trickMacro = stasisFamiliars.includes(trickFamiliar) ? _combat__WEBPACK_IMPORTED_MODULE_3__.default.stasis().kill() : _combat__WEBPACK_IMPORTED_MODULE_3__.default.try([].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite"])))), _toConsumableArray((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["garbage sticker"])))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Sing Along"]))) : []), [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.isCurrentSkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Extract"])))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.skill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Extract"]))))).kill();
+  var trickMacro = stasisFamiliars.includes(trickFamiliar) ? _combat__WEBPACK_IMPORTED_MODULE_3__.default.stasis().kill() : _combat__WEBPACK_IMPORTED_MODULE_3__.default.try([].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite, Sing Along"])))), [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.isCurrentSkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Extract"])))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.skill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Extract"]))))).kill();
   var n = 0;
 
   var condition = () => blocks >= 0 ? n < blocks : (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() >= 5;
@@ -20984,7 +20984,7 @@ function runBlocks() {
       if (terminal) {
         if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "") {
           (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("It's digitize time!", "blue");
-          var digitizeMacro = _combat__WEBPACK_IMPORTED_MODULE_3__.default.externalIf((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() * 1.1 < (3 - digitizes) * (5 * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount") * (1 + (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount"))) - 3), _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Digitize"]))))).step(trickMacro);
+          var digitizeMacro = _combat__WEBPACK_IMPORTED_MODULE_3__.default.externalIf((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() * 1.1 < (3 - digitizes) * (5 * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount") * (1 + (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount"))) - 3), _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Digitize"]))))).step(trickMacro);
           (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Digitize");
           (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), digitizeMacro, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "", fillPantsgivingFullness);
         }
@@ -21013,14 +21013,14 @@ function runBlocks() {
       var ghosting = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted";
 
       if (ghost && ghosting && (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)()) {
-        var ghostLocation = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("ghostLocation") || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["none"])));
+        var ghostLocation = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("ghostLocation") || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["none"])));
 
-        if (ghostLocation === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["none"])))) {
+        if (ghostLocation === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["none"])))) {
           throw "Something went wrong with my ghosts. Dammit, Walter Peck!";
         }
 
         (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.", "blue");
-        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)(ghostLocation, _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Trap Ghost"])))), () => (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted", fillPantsgivingFullness);
+        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)(ghostLocation, _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Trap Ghost"])))), () => (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted", fillPantsgivingFullness);
       }
 
       if (digitizes !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeUses") && !(votes !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights") || sausages !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights"))) {
@@ -21029,7 +21029,7 @@ function runBlocks() {
         var runSource = (0,_lib__WEBPACK_IMPORTED_MODULE_1__.findRun)();
         if (runSource.prepare) runSource.prepare();
         if (runSource.requirement) _lib__WEBPACK_IMPORTED_MODULE_1__.Requirement.maximize([runSource.requirement]);
-        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["The Dire Warren"]))), runSource.macro);
+        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["The Dire Warren"]))), runSource.macro);
         fillPantsgivingFullness();
       }
 
