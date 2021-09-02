@@ -19678,7 +19678,8 @@ module.exports = toPlainObject;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "pickBjorn": () => (/* binding */ pickBjorn)
+/* harmony export */   "pickBjorn": () => (/* binding */ pickBjorn),
+/* harmony export */   "bjornValue": () => (/* binding */ bjornValue)
 /* harmony export */ });
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! kolmafia */ "kolmafia");
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(kolmafia__WEBPACK_IMPORTED_MODULE_0__);
@@ -19931,7 +19932,7 @@ var bjornFams = [{
 var bjornList = [];
 
 function generateBjornList() {
-  bjornList.push.apply(bjornList, _toConsumableArray(_toConsumableArray(bjornFams).sort((a, b) => (!b.dropPredicate || b.dropPredicate() ? b.meatVal() * b.probability : 0) - (!a.dropPredicate || a.dropPredicate() ? a.meatVal() * a.probability : 0))));
+  bjornList.push.apply(bjornList, _toConsumableArray(_toConsumableArray(bjornFams).sort((a, b) => bjornValue(b) - bjornValue(a))));
 }
 
 function pickBjorn() {
@@ -19951,6 +19952,7 @@ function pickBjorn() {
 
   return bjornList[1];
 }
+var bjornValue = choice => !choice.dropPredicate || choice.dropPredicate() ? choice.meatVal() * choice.probability : 0;
 
 /***/ }),
 
@@ -20518,7 +20520,6 @@ function main(args) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.runChoice)(1);
     }
 
-    var blocks = args ? parseInt(args) : undefined;
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
       battleAction: "custom combat script",
       dontStopForCounters: true,
@@ -20550,6 +20551,7 @@ function main(args) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("choice.php?whichchoice=1270&pwd&option=1&m=".concat(m, "&e=5&s1=5789,1&s2=-1,0&s3=24,1"));
     }
 
+    var blocks = args ? parseInt(args) : undefined;
     (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
   }
@@ -20661,8 +20663,6 @@ function getEffectWeight() {
   return effectWeight;
 }
 
-var bjornValue = choice => choice.meatVal() * choice.probability;
-
 function fightOutfit() {
   var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Trick";
 
@@ -20694,34 +20694,35 @@ function fightOutfit() {
   }
 
   if (forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["back"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") === "unstarted" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("nextParanormalActivity") <= (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.totalTurnsPlayed)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
-  var stasisData = stasisFamiliars.get((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)());
 
-  if (stasisData) {
-    if (stasisData.baseRate + actionRateBonus() < 1 && (0,libram__WEBPACK_IMPORTED_MODULE_4__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))).some(foldable => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(foldable))) {
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["Loathing Legion helicopter"]))));
-    }
-  }
+  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) {
+    forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
 
-  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) {
-    forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
-
-    if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))))) {
+    if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))))) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.visitUrl)("arena.php");
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.runChoice)(4);
     }
   }
 
+  var stasisData = stasisFamiliars.get((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)());
+
+  if (stasisData) {
+    if (stasisData.baseRate + actionRateBonus() < 1 && (0,libram__WEBPACK_IMPORTED_MODULE_4__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))).some(foldable => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(foldable))) {
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["Loathing Legion helicopter"]))));
+    }
+  }
+
   var weightValue = stasisData ? (0,_lib__WEBPACK_IMPORTED_MODULE_3__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)()) ? 1000 * baseAdventureValue() / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2) : 0;
   var bjornalikeToUse = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Buddy Bjorn"])))) && forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["back"])))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["Buddy Bjorn"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Crown of Thrones"])));
-  if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, bjornValue((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()));
+  if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, (0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.bjornValue)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()));
   (0,libram__WEBPACK_IMPORTED_MODULE_4__.maximizeCached)(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight")], {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
     preventSlot: (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slots)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["buddy-bjorn, crown-of-thrones"]))),
-    preventEquip: [bjornalikeToUse === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Buddy Bjorn"]))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Crown of Thrones"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Buddy Bjorn"])))]
+    preventEquip: bjornalikeToUse === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Buddy Bjorn"]))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Crown of Thrones"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Buddy Bjorn"])))
   });
   if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Buddy Bjorn"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.bjornifyFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
-  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Crown of Thrones"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.bjornifyFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
+  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Crown of Thrones"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.enthroneFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
 }
 
 function snowSuit() {
@@ -20760,7 +20761,7 @@ function overallAdventureValue() {
     var equip = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.equippedItem)(slot);
     var bonus = bonuses.get(equip);
     return bonus === undefined ? 0 : bonus;
-  }), number => number) + baseAdventureValue() + ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["Crown of Thrones"])))) ? bjornValue((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()) : 0);
+  }), number => number) + baseAdventureValue() + ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["Crown of Thrones"])))) ? (0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.bjornValue)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()) : 0);
   var stasisData = stasisFamiliars.get((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)());
 
   if (stasisData) {
