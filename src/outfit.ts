@@ -199,7 +199,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
   }
 
   const weightValue = stasisData
-    ? clamp(
+    ? //action rate times weight per lb
+      clamp(
         stasisData.baseRate +
           actionRateBonus() +
           (forceEquips.includes($item`Loathing Legion helicopter`) &&
@@ -210,7 +211,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
         1
       ) * stasisData.meatPerLb
     : adventureFamiliars.includes(myFamiliar())
-    ? (1000 * baseAdventureValue()) /
+    ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
+      (1.1 * (1000 * baseAdventureValue())) /
       Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
     : 0;
 
