@@ -76,7 +76,7 @@ function estimateOutfitWeight(): number {
       ).length;
 
     const openSlots = [
-      $slot`shirt`,
+      ...$slots`shirt, weapon, off-hand`,
       ...(have($item`Buddy Bjorn`) ? [] : $slots`back`),
       ...(get("_pantogramModifier").includes("Drops Items") ? [] : $slots`pants`),
     ];
