@@ -4,6 +4,7 @@ import {
   inebrietyLimit,
   myFullness,
   myInebriety,
+  myLevel,
   myPrimestat,
   mySpleenUse,
   print,
@@ -13,7 +14,7 @@ import {
   userConfirm,
   visitUrl,
 } from "kolmafia";
-import { $item, $stat, have } from "libram";
+import { $item, $stat, get, have } from "libram";
 import { manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -59,7 +60,14 @@ export function main(args: string): void {
       autoSatisfyWithMall: true,
       autoSatisfyWithNPCs: true,
       autoSatisfyWithStorage: true,
+      currentMood: "apathetic",
     });
+
+    if (get("hpAutoRecovery") < 0.35) manager.set({ hpAutoRecovery: 0.35 });
+    if (get("mpAutoRecovery") < 0.25) manager.set({ mpAutoRecovery: 0.25 });
+    const mpTarget = myLevel() < 18 ? 0.5 : 0.3;
+    if (get("mpAutoRecoveryTarget") < mpTarget) manager.set({ mpAutoRecoveryTarget: mpTarget });
+
     if (have($item`portable pantogram`) && !have($item`pantogram pants`)) {
       retrieveItem($item`ten-leaf clover`);
       retrieveItem($item`bubblin' crude`);
