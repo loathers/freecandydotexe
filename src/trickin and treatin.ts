@@ -3,7 +3,6 @@ import {
   fullnessLimit,
   gametimeToInt,
   getCounters,
-  haveFamiliar,
   inebrietyLimit,
   inMultiFight,
   myAdventures,
@@ -47,7 +46,7 @@ const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
 const treatOutfit = bestOutfit();
 const tot = $familiar`Trick-or-Treating Tot`;
 const prepareToTreat = () => {
-  if (haveFamiliar(tot)) useFamiliar(tot);
+  if (have(tot)) useFamiliar(tot);
   outfit("birthday suit");
   outfit(treatOutfit);
 };

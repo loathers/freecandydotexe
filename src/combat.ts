@@ -1,10 +1,10 @@
-import { haveSkill, retrieveItem } from "kolmafia";
+import { retrieveItem } from "kolmafia";
 import { $item, $items, $skill, have, Macro as LibramMacro, SourceTerminal } from "libram";
 
 export default class Macro extends LibramMacro {
   tryHaveSkill(skill: Skill | null): Macro {
     if (!skill) return this;
-    return this.externalIf(haveSkill(skill), Macro.trySkill(skill));
+    return this.externalIf(have(skill), Macro.trySkill(skill));
   }
 
   static tryHaveSkill(skill: Skill | null): Macro {
