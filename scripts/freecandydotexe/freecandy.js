@@ -20025,7 +20025,7 @@ var Macro = /*#__PURE__*/function (_LibramMacro) {
     key: "tryHaveSkill",
     value: function tryHaveSkill(skill) {
       if (!skill) return this;
-      return this.externalIf((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveSkill)(skill), Macro.trySkill(skill));
+      return this.externalIf((0,libram__WEBPACK_IMPORTED_MODULE_1__.have)(skill), Macro.trySkill(skill));
     }
   }, {
     key: "tryHaveItem",
@@ -20867,7 +20867,7 @@ var treatOutfit = (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.bestOutfit)();
 var tot = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])));
 
 var prepareToTreat = () => {
-  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.haveFamiliar)(tot)) (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.useFamiliar)(tot);
+  if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(tot)) (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.useFamiliar)(tot);
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.outfit)("birthday suit");
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.outfit)(treatOutfit);
 };
