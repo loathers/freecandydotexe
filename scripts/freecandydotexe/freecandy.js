@@ -20956,15 +20956,8 @@ function fillPantsgivingFullness() {
 function runBlocks() {
   var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
   libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.educate([(0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["Digitize"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["Extract"])))]);
-  var terminal = libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.have();
-  var kramco = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])));
-  var sausage = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(kramco);
-  var proton = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["protonic accelerator pack"])));
-  var ghost = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(proton);
-  var voteBadge = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\"I Voted!\" sticker"])));
-  var voting = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(voteBadge) && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteToday");
   var trickFamiliar = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)();
-  var trickMacro = stasisFamiliars.includes(trickFamiliar) ? _combat__WEBPACK_IMPORTED_MODULE_3__.default.stasis().kill() : _combat__WEBPACK_IMPORTED_MODULE_3__.default.try([].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite, Sing Along"])))), [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.isCurrentSkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Extract"])))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.skill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Extract"]))))).kill();
+  var trickMacro = stasisFamiliars.includes(trickFamiliar) ? _combat__WEBPACK_IMPORTED_MODULE_3__.default.stasis().kill() : _combat__WEBPACK_IMPORTED_MODULE_3__.default.try([].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite, Sing Along"])))), [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.isCurrentSkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["Extract"])))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.skill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Extract"]))))).kill();
   var n = 0;
 
   var condition = () => blocks >= 0 ? n < blocks : (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() >= 5;
@@ -20985,16 +20978,14 @@ function runBlocks() {
       var sausages = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights");
       var votes = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights");
 
-      if (terminal) {
-        if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "") {
-          (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("It's digitize time!", "blue");
-          var digitizeMacro = _combat__WEBPACK_IMPORTED_MODULE_3__.default.externalIf((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() * 1.1 < (3 - digitizes) * (5 * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount") * (1 + (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount"))) - 3), _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Digitize"]))))).step(trickMacro);
-          (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Digitize");
-          (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), digitizeMacro, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "", fillPantsgivingFullness);
-        }
+      if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "") {
+        (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("It's digitize time!", "blue");
+        var digitizeMacro = _combat__WEBPACK_IMPORTED_MODULE_3__.default.externalIf((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() * 1.1 < (3 - digitizes) * (5 * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount") * (1 + (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeMonsterCount"))) - 3), _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["Digitize"]))))).step(trickMacro);
+        (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Digitize");
+        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), digitizeMacro, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "", fillPantsgivingFullness);
       }
 
-      if (sausage) {
+      if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"]))))) {
         (function () {
           var kramcoNumber = 5 + 3 * (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights") + Math.pow(Math.max(0, (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights") - 5), 3);
 
@@ -21005,7 +20996,7 @@ function runBlocks() {
         })();
       }
 
-      if (voting) {
+      if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\"I Voted!\" sticker"]))))) {
         (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
 
         if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Vote", 0, 0) !== "" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights") < 3) {
@@ -21016,7 +21007,7 @@ function runBlocks() {
 
       var ghosting = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted";
 
-      if (ghost && ghosting && (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)()) {
+      if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["protonic accelerator pack"])))) && ghosting && (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)()) {
         var ghostLocation = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("ghostLocation") || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["none"])));
 
         if (ghostLocation === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["none"])))) {
