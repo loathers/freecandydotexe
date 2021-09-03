@@ -28,7 +28,6 @@ import {
   $skills,
   get,
   have,
-  set,
   SourceTerminal,
 } from "libram";
 import { advMacroAA, determineDraggableZoneAndEnsureAccess, findRun, Requirement } from "./lib";
@@ -55,7 +54,6 @@ const block = () => visitUrl("place.php?whichplace=town&action=town_trickortreat
 
 function treat() {
   print("It's time to treat yourself (to the downfall of capitalism, ideally)", "blue");
-  set("choiceAdventure806", "1");
   prepareToTreat();
   if (!block().includes("whichhouse=")) {
     if (myAdventures() < 5) {

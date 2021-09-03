@@ -63,6 +63,7 @@ export function main(args: string): void {
       autoSatisfyWithStorage: true,
       currentMood: "apathetic",
     });
+    manager.setChoices({ 806: 1 });
 
     if (get("hpAutoRecovery") < 0.35) manager.set({ hpAutoRecovery: 0.35 });
     if (get("mpAutoRecovery") < 0.25) manager.set({ mpAutoRecovery: 0.25 });
