@@ -20532,6 +20532,9 @@ function main(args) {
       autoSatisfyWithStorage: true,
       currentMood: "apathetic"
     });
+    _lib__WEBPACK_IMPORTED_MODULE_1__.manager.setChoices({
+      806: 1
+    });
     if ((0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("hpAutoRecovery") < 0.35) _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
       hpAutoRecovery: 0.35
     });
@@ -20876,7 +20879,6 @@ var block = () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("place.php?
 
 function treat() {
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("It's time to treat yourself (to the downfall of capitalism, ideally)", "blue");
-  (0,libram__WEBPACK_IMPORTED_MODULE_4__.set)("choiceAdventure806", "1");
   prepareToTreat();
 
   if (!block().includes("whichhouse=")) {
