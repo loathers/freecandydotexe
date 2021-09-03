@@ -120,17 +120,6 @@ function fillPantsgivingFullness(): void {
 
 export function runBlocks(blocks = -1): void {
   SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
-  const terminal = SourceTerminal.have();
-
-  const kramco = $item`Kramco Sausage-o-Matic™`;
-  const sausage = have(kramco);
-
-  const proton = $item`protonic accelerator pack`;
-  const ghost = have(proton);
-
-  const voteBadge = $item`"I Voted!" sticker`;
-  const voting = have(voteBadge) && get("_voteToday");
-
   const trickFamiliar = myFamiliar();
 
   const trickMacro = stasisFamiliars.includes(trickFamiliar)
@@ -162,29 +151,28 @@ export function runBlocks(blocks = -1): void {
       const digitizes = get("_sourceTerminalDigitizeUses");
       const sausages = get("_sausageFights");
       const votes = get("_voteFreeFights");
-      if (terminal) {
-        if (getCounters("Digitize", -11, 0) !== "") {
-          print(`It's digitize time!`, "blue");
-          const digitizeMacro = Macro.externalIf(
-            myAdventures() * 1.1 <
-              (3 - digitizes) *
-                (5 *
-                  (get("_sourceTerminalDigitizeMonsterCount") *
-                    (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
-                  3),
-            Macro.trySkill($skill`Digitize`)
-          ).step(trickMacro);
-          fightOutfit("Digitize");
-          advMacroAA(
-            determineDraggableZoneAndEnsureAccess(),
-            digitizeMacro,
-            () => getCounters("Digitize", -11, 0) !== "",
-            fillPantsgivingFullness
-          );
-        }
+
+      if (getCounters("Digitize", -11, 0) !== "") {
+        print(`It's digitize time!`, "blue");
+        const digitizeMacro = Macro.externalIf(
+          myAdventures() * 1.1 <
+            (3 - digitizes) *
+              (5 *
+                (get("_sourceTerminalDigitizeMonsterCount") *
+                  (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
+                3),
+          Macro.trySkill($skill`Digitize`)
+        ).step(trickMacro);
+        fightOutfit("Digitize");
+        advMacroAA(
+          determineDraggableZoneAndEnsureAccess(),
+          digitizeMacro,
+          () => getCounters("Digitize", -11, 0) !== "",
+          fillPantsgivingFullness
+        );
       }
 
-      if (sausage) {
+      if (have($item`Kramco Sausage-o-Matic™`)) {
         const kramcoNumber =
           5 + 3 * get("_sausageFights") + Math.pow(Math.max(0, get("_sausageFights") - 5), 3);
         if (totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber) {
@@ -198,7 +186,7 @@ export function runBlocks(blocks = -1): void {
         }
       }
 
-      if (voting) {
+      if (have($item`"I Voted!" sticker`)) {
         print(
           "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
           "blue"
@@ -214,7 +202,7 @@ export function runBlocks(blocks = -1): void {
         }
       }
       const ghosting = get("questPAGhost") !== "unstarted";
-      if (ghost && ghosting && myInebriety() < inebrietyLimit()) {
+      if (have($item`protonic accelerator pack`) && ghosting && myInebriety() < inebrietyLimit()) {
         const ghostLocation = get("ghostLocation") || $location`none`;
         if (ghostLocation === $location`none`) {
           throw `Something went wrong with my ghosts. Dammit, Walter Peck!`;
