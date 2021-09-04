@@ -224,12 +224,12 @@ function testZoneForWanderers(location: Location): boolean {
 export function advMacroAA(
   location: Location,
   macro: Macro | (() => Macro),
-  parameter: number | (() => boolean) = 1,
+  whileParameter: number | (() => boolean) = 1,
   afterCombatAction?: () => void
 ): void {
   let n = 0;
   const condition = () => {
-    return typeof parameter === "number" ? n < parameter : parameter();
+    return typeof whileParameter === "number" ? n < whileParameter : whileParameter();
   };
 
   if (typeof macro !== "function") macro.setAutoAttack();

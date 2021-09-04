@@ -138,7 +138,7 @@ export function runBlocks(blocks = -1): void {
         .kill();
 
   const n = 0;
-  const condition = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
+  const hasBlocksRemaining = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
   const nemesisStep = () => questStep("questG04Nemesis");
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
   const nemesis = () => {
@@ -146,7 +146,7 @@ export function runBlocks(blocks = -1): void {
   };
   const startTime = gametimeToInt();
   try {
-    while (condition() && nemesis()) {
+    while (hasBlocksRemaining() && nemesis()) {
       const digitizes = get("_sourceTerminalDigitizeUses");
       const sausages = get("_sausageFights");
       const votes = get("_voteFreeFights");
