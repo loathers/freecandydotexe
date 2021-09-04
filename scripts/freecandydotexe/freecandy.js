@@ -20109,6 +20109,7 @@ var Macro = /*#__PURE__*/function (_LibramMacro) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "manager": () => (/* binding */ manager),
+/* harmony export */   "cache": () => (/* binding */ cache),
 /* harmony export */   "Requirement": () => (/* binding */ Requirement),
 /* harmony export */   "determineDraggableZoneAndEnsureAccess": () => (/* binding */ determineDraggableZoneAndEnsureAccess),
 /* harmony export */   "advMacroAA": () => (/* binding */ advMacroAA),
@@ -20119,7 +20120,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "findRun": () => (/* binding */ findRun),
 /* harmony export */   "sum": () => (/* binding */ sum),
 /* harmony export */   "sumNumbers": () => (/* binding */ sumNumbers),
-/* harmony export */   "questStep": () => (/* binding */ questStep)
+/* harmony export */   "questStep": () => (/* binding */ questStep),
+/* harmony export */   "trickFamiliar": () => (/* binding */ trickFamiliar)
 /* harmony export */ });
 /* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.entries */ "./node_modules/core-js/modules/es.object.entries.js");
 /* harmony import */ var core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_entries__WEBPACK_IMPORTED_MODULE_0__);
@@ -20162,6 +20164,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var manager = new libram__WEBPACK_IMPORTED_MODULE_3__.PropertiesManager();
+var cache = {};
 var Requirement = /*#__PURE__*/function () {
   function Requirement(maximizeParameters_, maximizeOptions_) {
     _classCallCheck(this, Requirement);
@@ -20332,12 +20335,12 @@ function testZoneForWanderers(location) {
 }
 
 function advMacroAA(location, macro) {
-  var parameter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+  var whileParameter = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var afterCombatAction = arguments.length > 3 ? arguments[3] : undefined;
   var n = 0;
 
   var condition = () => {
-    return typeof parameter === "number" ? n < parameter : parameter();
+    return typeof whileParameter === "number" ? n < whileParameter : whileParameter();
   };
 
   if (typeof macro !== "function") macro.setAutoAttack();
@@ -20468,6 +20471,10 @@ function questStep(questName) {
     return parseInt(stringStep.substring(4), 10);
   }
 }
+function trickFamiliar() {
+  if (!cache.trickFamiliar) cache.trickFamiliar = (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.myFamiliar)();
+  return cache.trickFamiliar;
+}
 
 /***/ }),
 
@@ -20584,7 +20591,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(libram__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _bjorn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bjorn */ "./src/bjorn.ts");
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75;
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -20632,26 +20639,22 @@ var stasisFamiliars = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar
   meatPerLb: 27.5
 }]]); //Note: both this and the weight --> weightvalue function undervalue weight. Consider fixing that.
 
-var outfitWeightEstimate;
-
 function estimateOutfitWeight() {
-  if (!outfitWeightEstimate) {
+  if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.outfightWeight) {
     var accessoriesFree = 3 - (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["Mr. Screege's spectacles, Mr. Cheeng's spectacles, lucky gold ring"]))).filter(item => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(item)).length;
     var openSlots = [].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$slots)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["shirt, weapon, off-hand"])))), _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Buddy Bjorn"])))) ? [] : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slots)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["back"])))), _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? [] : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slots)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["pants"])))));
     var viableItems = Item.all().filter(item => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(item) && (openSlots.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item)) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["acc1"]))) && accessoriesFree));
     var nonAccessoryWeightEquips = openSlots.map(slot => viableItems.filter(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) === slot).sort((a, b) => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(b, "Familiar Weight") - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(a, "Familiar Weight"))[0]);
     var accessoryWeightEquips = accessoriesFree ? viableItems.filter(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["acc1"])))).sort((a, b) => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(b, "Familiar Weight") - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(a, "Familiar Weight")).splice(0, accessoriesFree) : [];
-    outfitWeightEstimate = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)([].concat(_toConsumableArray(accessoryWeightEquips), _toConsumableArray(nonAccessoryWeightEquips)), item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(item, "Familiar Weight")) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Temporal Riftlet"])))) ? 10 : 0);
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.outfightWeight = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)([].concat(_toConsumableArray(accessoryWeightEquips), _toConsumableArray(nonAccessoryWeightEquips)), item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(item, "Familiar Weight")) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Temporal Riftlet"])))) ? 10 : 0) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Amphibian Sympathy"])))) ? 5 : 0);
   }
 
-  return outfitWeightEstimate;
+  return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.outfightWeight;
 }
 
-var effectWeight;
-
 function getEffectWeight() {
-  if (!effectWeight) {
-    effectWeight = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myEffects)()).map(_ref => {
+  if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.effectWeight) {
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.effectWeight = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myEffects)()).map(_ref => {
       var _ref2 = _slicedToArray(_ref, 2),
           name = _ref2[0],
           duration = _ref2[1];
@@ -20663,7 +20666,7 @@ function getEffectWeight() {
     }).filter(effectAndDuration => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(effectAndDuration.effect, "Familiar Weight") && effectAndDuration.duration >= (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myAdventures)()).map(effectAndDuration => effectAndDuration.effect), effect => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(effect, "Familiar Weight"));
   }
 
-  return effectWeight;
+  return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.effectWeight;
 }
 
 function fightOutfit() {
@@ -20673,22 +20676,22 @@ function fightOutfit() {
     (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.buy)(1, trickHats.sort((a, b) => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)(b) - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)(a))[0]);
   }
 
-  var trickHat = trickHats.find(hat => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(hat)) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["beholed bedsheet"]))); //Just to stop it from being undefined
+  var trickHat = trickHats.find(hat => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(hat)) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["beholed bedsheet"]))); //Just to stop it from being undefined
 
   var forceEquips = [];
-  var bonusEquips = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["bag of many confections"]))), _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet()), _toConsumableArray(pantsgiving())));
+  var bonusEquips = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["bag of many confections"]))), _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet()), _toConsumableArray(pantsgiving())));
 
   switch (type) {
     case "Kramco":
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"]))));
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"]))));
       break;
 
     case "Voter":
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\"I Voted!\" sticker"]))));
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\"I Voted!\" sticker"]))));
       break;
 
     case "Ghost":
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
       break;
 
     case "Trick":
@@ -20696,12 +20699,12 @@ function fightOutfit() {
       break;
   }
 
-  if (forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["back"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") === "unstarted" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("nextParanormalActivity") <= (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.totalTurnsPlayed)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
+  if (forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["back"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") === "unstarted" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("nextParanormalActivity") <= (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.totalTurnsPlayed)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
 
-  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) {
-    forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
+  if ((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)() === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["Reagnimated Gnome"])))) {
+    forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))));
 
-    if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))))) {
+    if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))))) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.visitUrl)("arena.php");
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.runChoice)(4);
     }
@@ -20710,29 +20713,29 @@ function fightOutfit() {
   var stasisData = stasisFamiliars.get((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)());
 
   if (stasisData) {
-    if (stasisData.baseRate + actionRateBonus() < 1 && (0,libram__WEBPACK_IMPORTED_MODULE_4__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))).some(foldable => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(foldable))) {
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["Loathing Legion helicopter"]))));
+    if (stasisData.baseRate + actionRateBonus() < 1 && (0,libram__WEBPACK_IMPORTED_MODULE_4__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))).some(foldable => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(foldable))) {
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["Loathing Legion helicopter"]))));
     }
   }
 
   var weightValue = stasisData ? //action rate times weight per lb
-  (0,_lib__WEBPACK_IMPORTED_MODULE_3__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)()) ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
+  (0,_lib__WEBPACK_IMPORTED_MODULE_3__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)()) ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
   1.1 * (1000 * baseAdventureValue()) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2) : 0;
-  var bjornalikeToUse = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Buddy Bjorn"])))) && forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["back"])))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["Buddy Bjorn"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Crown of Thrones"])));
+  var bjornalikeToUse = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["Buddy Bjorn"])))) && forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["back"])))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Buddy Bjorn"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["Crown of Thrones"])));
   if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, (0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.bjornValue)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()));
   (0,libram__WEBPACK_IMPORTED_MODULE_4__.maximizeCached)(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight")], {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
-    preventSlot: (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slots)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["buddy-bjorn, crown-of-thrones"]))),
-    preventEquip: bjornalikeToUse === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Buddy Bjorn"]))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Crown of Thrones"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Buddy Bjorn"])))
+    preventSlot: (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slots)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["buddy-bjorn, crown-of-thrones"]))),
+    preventEquip: bjornalikeToUse === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["Buddy Bjorn"]))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Crown of Thrones"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Buddy Bjorn"])))
   });
-  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Buddy Bjorn"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.bjornifyFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
-  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Crown of Thrones"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.enthroneFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
+  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Buddy Bjorn"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.bjornifyFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
+  if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["Crown of Thrones"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.enthroneFamiliar)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)().familiar);
 }
 
 function snowSuit() {
-  if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["Snow Suit"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_carrotNoseDrops") >= 3) return new Map([]);
-  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Snow Suit"]))), (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["carrot nose"])))) / 10]]);
+  if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Snow Suit"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_carrotNoseDrops") >= 3) return new Map([]);
+  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["Snow Suit"]))), (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["carrot nose"])))) / 10]]);
 }
 
 function mayflowerBouquet() {
@@ -20741,68 +20744,65 @@ function mayflowerBouquet() {
   // Theorized that flower drop rate drops off but no info on wiki.
   // During testing I got 4 drops then the 5th took like 40 more adventures
   // so let's just assume rate drops by 11% with a min of 1% ¯\_(ツ)_/¯
-  if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["Mayflower bouquet"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") >= 10) return new Map([]);
-  var averageFlowerValue = _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["tin magnolia, upsy daisy, lesser grodulated violet, half-orchid, begpwnia"]))))) * Math.max(0.01, 0.5 - (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") * 0.11);
-  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Mayflower bouquet"]))), averageFlowerValue]]);
+  if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["Mayflower bouquet"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") >= 10) return new Map([]);
+  var averageFlowerValue = _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["tin magnolia, upsy daisy, lesser grodulated violet, half-orchid, begpwnia"]))))) * Math.max(0.01, 0.5 - (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") * 0.11);
+  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Mayflower bouquet"]))), averageFlowerValue]]);
 }
 
 function pantsgiving() {
-  if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Pantsgiving"]))))) return new Map();
+  if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["Pantsgiving"]))))) return new Map();
   var count = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantsgivingCount");
   var turnArray = [5, 50, 500, 5000];
   var index = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFullness)() === (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.fullnessLimit)() ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantsgivingFullness") : turnArray.findIndex(x => count < x);
   var turns = turnArray[index] || 50000;
   if (turns - count > (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myAdventures)()) return new Map();
   var food = getPantsgivingFood();
-  var value = food === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["Dreadsylvanian stew"]))) ? 1 / 20 * Math.max((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["electric Kool-Aid"])))), (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["bottle of Bloodweiser"]))))) : (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)(food);
-  var fullnessValue = overallAdventureValue() * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.getAverageAdventures)(food) + 1 + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_fudgeSporkUsed") ? 3 : 0)) - value - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["Special Seasoning"])))) - ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_fudgeSporkUsed") ? (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["fudge spork"])))) : 0);
+  var value = food === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["Dreadsylvanian stew"]))) ? 1 / 20 * Math.max((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["electric Kool-Aid"])))), (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["bottle of Bloodweiser"]))))) : (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)(food);
+  var fullnessValue = overallAdventureValue() * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.getAverageAdventures)(food) + 1 + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_fudgeSporkUsed") ? 3 : 0)) - value - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Special Seasoning"])))) - ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_fudgeSporkUsed") ? (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.mallPrice)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["fudge spork"])))) : 0);
   var pantsgivingBonus = fullnessValue / (turns * 0.9);
-  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["Pantsgiving"]))), pantsgivingBonus]]);
+  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["Pantsgiving"]))), pantsgivingBonus]]);
 }
 
 function overallAdventureValue() {
-  var bonuses = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["bag of many confections"]))), _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet())));
+  var bonuses = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["bag of many confections"]))), _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet())));
   var treatsAndBonusEquips = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Slot.all().map(slot => {
     var equip = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.equippedItem)(slot);
     var bonus = bonuses.get(equip);
     return bonus === undefined ? 0 : bonus;
-  }), number => number) + baseAdventureValue() + ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["Crown of Thrones"])))) ? (0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.bjornValue)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()) : 0);
-  var stasisData = stasisFamiliars.get((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)());
+  }), number => number) + baseAdventureValue() + ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["Crown of Thrones"])))) ? (0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.bjornValue)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()) : 0);
+  var stasisData = stasisFamiliars.get((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)());
 
   if (stasisData) {
     return treatsAndBonusEquips + (20 + estimateOutfitWeight() + getEffectWeight()) * (stasisData.meatPerLb * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.clamp)(stasisData.baseRate + actionRateBonus(), 0, 1));
-  } else if (adventureFamiliars.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myFamiliar)())) {
+  } else if (adventureFamiliars.includes((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)())) {
     return treatsAndBonusEquips * 1000 / Math.pow(1000 - getEffectWeight() - estimateOutfitWeight() - 20, 2);
   } else return treatsAndBonusEquips;
 }
 
-var pantsgivingFood;
 function getPantsgivingFood() {
-  if (!pantsgivingFood) {
-    if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("affirmationCookiesEaten") >= 4) pantsgivingFood = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["Affirmation Cookie"])));else if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myLevel)() >= 20 && ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["Dreadsylvanian stew"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Freddy Kruegerand"]))), 20))) pantsgivingFood = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["Dreadsylvanian stew"])));else pantsgivingFood = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["meteoreo"])));
+  if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.pantsgivingFood) {
+    if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("affirmationCookiesEaten") >= 4) _lib__WEBPACK_IMPORTED_MODULE_3__.cache.pantsgivingFood = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["Affirmation Cookie"])));else if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myLevel)() >= 20 && ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Dreadsylvanian stew"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["Freddy Kruegerand"]))), 20))) _lib__WEBPACK_IMPORTED_MODULE_3__.cache.pantsgivingFood = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Dreadsylvanian stew"])));else _lib__WEBPACK_IMPORTED_MODULE_3__.cache.pantsgivingFood = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["meteoreo"])));
   }
 
-  return pantsgivingFood;
+  return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.pantsgivingFood;
 }
-var cachedBaseAdventureValue;
 function baseAdventureValue() {
-  if (cachedBaseAdventureValue === undefined) {
-    cachedBaseAdventureValue = 1 / 5 * (3 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sumNumbers)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(bestOutfit())).map(_ref3 => {
+  if (_lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue === undefined) {
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue = 1 / 5 * (3 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sumNumbers)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(bestOutfit())).map(_ref3 => {
       var _ref4 = _slicedToArray(_ref3, 2),
           candyName = _ref4[0],
           probability = _ref4[1];
 
       return (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
-    })) * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Prunets"])))) : 0));
+    })) * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Prunets"])))) : 0));
   }
 
-  return cachedBaseAdventureValue;
+  return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue;
 }
-var bestFit;
 function bestOutfit() {
-  if (!bestFit) {
+  if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit) {
     var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_4__.property.getString("freecandy_treatOutfit");
-    if (playerChosenOutfit) bestFit = playerChosenOutfit;
+    if (playerChosenOutfit) _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit = playerChosenOutfit;
     var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(fit => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)(fit))).map(outfitName => [outfitName, (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
       var _ref6 = _slicedToArray(_ref5, 2),
           candyName = _ref6[0],
@@ -20811,10 +20811,10 @@ function bestOutfit() {
       return (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
     }), number => number)]).sort((a, b) => b[1] - a[1])[0][0];
     if (!flyestFit) throw "You somehow have no outfits, dude!";
-    bestFit = flyestFit;
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit = flyestFit;
   }
 
-  return bestFit;
+  return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit;
 }
 
 /***/ }),
@@ -20860,9 +20860,9 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var stasisFamiliars = (0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiars)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor"])));
 
-var prepareToTrick = (trickFamiliar, trickMacro) => {
+var prepareToTrick = trickMacro => {
   trickMacro.setAutoAttack();
-  (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.useFamiliar)(trickFamiliar);
+  (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.useFamiliar)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.trickFamiliar)());
   (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Trick");
 };
 
@@ -20906,9 +20906,9 @@ function treat() {
   if (block().match(/whichhouse=\d*>[^>]*?house_l/)) throw "I thought I was out of light houses, but I wasn't. Alas!";
 }
 
-function trick(trickFamiliar, trickMacro) {
+function trick(trickMacro) {
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Illusion, ".concat((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myName)(), ". A trick is something an adventurer does for meat. Or candy!"), "blue");
-  prepareToTrick(trickFamiliar, trickMacro);
+  prepareToTrick(trickMacro);
 
   if (!block().includes("whichhouse=")) {
     if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() < 5) {
@@ -20936,9 +20936,9 @@ function trick(trickFamiliar, trickMacro) {
   if (block().match(/whichhouse=\d*>[^>]*?house_d/)) throw "I thought I was out of dark houses, but I wasn't. Alas!";
 }
 
-function trickTreat(trickFamiliar, trickMacro) {
+function trickTreat(trickMacro) {
   treat();
-  trick(trickFamiliar, trickMacro);
+  trick(trickMacro);
 }
 
 function fillPantsgivingFullness() {
@@ -20956,13 +20956,13 @@ function fillPantsgivingFullness() {
 function runBlocks() {
   var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
   libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.educate([(0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["Digitize"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["Extract"])))]);
-  var trickFamiliar = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFamiliar)();
-  var trickMacro = stasisFamiliars.includes(trickFamiliar) ? _combat__WEBPACK_IMPORTED_MODULE_3__.default.stasis().kill() : _combat__WEBPACK_IMPORTED_MODULE_3__.default.try([].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite, Sing Along"])))), [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.isCurrentSkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["Extract"])))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.skill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Extract"]))))).kill();
+  (0,_lib__WEBPACK_IMPORTED_MODULE_1__.trickFamiliar)();
+  var trickMacro = stasisFamiliars.includes((0,_lib__WEBPACK_IMPORTED_MODULE_1__.trickFamiliar)()) ? _combat__WEBPACK_IMPORTED_MODULE_3__.default.stasis().kill() : _combat__WEBPACK_IMPORTED_MODULE_3__.default.try([].concat(_toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skills)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite, Sing Along"])))), [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(libram__WEBPACK_IMPORTED_MODULE_4__.SourceTerminal.isCurrentSkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["Extract"])))), _combat__WEBPACK_IMPORTED_MODULE_3__.default.skill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["Extract"]))))).kill();
   var n = 0;
 
-  var condition = () => blocks >= 0 ? n < blocks : (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() >= 5;
+  var hasBlocksRemaining = () => blocks >= 0 ? n < blocks : (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myAdventures)() >= 5;
 
-  var nemesisStep = () => (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questG04Nemesis") === "unstarted" ? -1 : (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questG04Nemesis") === "started" ? 0 : (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questG04Nemesis") === "finished" ? 69 : parseInt((0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questG04Nemesis").substring(4), 10);
+  var nemesisStep = () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.questStep)("questG04Nemesis");
 
   var doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
 
@@ -20973,7 +20973,7 @@ function runBlocks() {
   var startTime = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.gametimeToInt)();
 
   try {
-    while (condition() && nemesis()) {
+    while (hasBlocksRemaining() && nemesis()) {
       var digitizes = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeUses");
       var sausages = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights");
       var votes = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights");
@@ -21024,14 +21024,14 @@ function runBlocks() {
         var runSource = (0,_lib__WEBPACK_IMPORTED_MODULE_1__.findRun)();
         if (runSource.prepare) runSource.prepare();
         if (runSource.requirement) _lib__WEBPACK_IMPORTED_MODULE_1__.Requirement.maximize([runSource.requirement]);
-        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["The Dire Warren"]))), runSource.macro);
+        (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$location)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Noob Cave"]))), runSource.macro);
         fillPantsgivingFullness();
       }
 
-      trickTreat(trickFamiliar, trickMacro);
+      trickTreat(trickMacro);
 
       if (doingNemesis && (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Nemesis Assassin window end", -11, 0) !== "") {
-        (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.useFamiliar)(trickFamiliar);
+        (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.useFamiliar)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.trickFamiliar)());
         (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Digitize");
         (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), trickMacro);
         fillPantsgivingFullness();
