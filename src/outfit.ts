@@ -30,6 +30,7 @@ import {
   $familiars,
   $item,
   $items,
+  $skill,
   $slot,
   $slots,
   get,
@@ -40,7 +41,7 @@ import {
   property,
 } from "libram";
 import { bjornValue, pickBjorn } from "./bjorn";
-import { clamp, saleValue, sum, sumNumbers } from "./lib";
+import { cache, clamp, saleValue, sum, sumNumbers, trickFamiliar } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -66,9 +67,8 @@ const stasisFamiliars = new Map<Familiar, stasisValue>([
 ]);
 
 //Note: both this and the weight --> weightvalue function undervalue weight. Consider fixing that.
-let outfitWeightEstimate: number;
 function estimateOutfitWeight(): number {
-  if (!outfitWeightEstimate) {
+  if (!cache.outfightWeight) {
     const accessoriesFree =
       3 -
       $items`Mr. Screege's spectacles, Mr. Cheeng's spectacles, lucky gold ring`.filter((item) =>
@@ -104,18 +104,19 @@ function estimateOutfitWeight(): number {
           .splice(0, accessoriesFree)
       : [];
 
-    outfitWeightEstimate =
+    cache.outfightWeight =
       sum([...accessoryWeightEquips, ...nonAccessoryWeightEquips], (item: Item) =>
         numericModifier(item, "Familiar Weight")
-      ) + (have($familiar`Temporal Riftlet`) ? 10 : 0);
+      ) +
+      (have($familiar`Temporal Riftlet`) ? 10 : 0) +
+      (have($skill`Amphibian Sympathy`) ? 5 : 0);
   }
-  return outfitWeightEstimate;
+  return cache.outfightWeight;
 }
 
-let effectWeight: number;
 function getEffectWeight(): number {
-  if (!effectWeight) {
-    effectWeight = sum(
+  if (!cache.effectWeight) {
+    cache.effectWeight = sum(
       Object.entries(myEffects())
         .map(([name, duration]) => {
           return {
@@ -132,7 +133,7 @@ function getEffectWeight(): number {
       (effect) => numericModifier(effect, "Familiar Weight")
     );
   }
-  return effectWeight;
+  return cache.effectWeight;
 }
 
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
@@ -180,7 +181,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
   )
     forceEquips.push($item`protonic accelerator pack`);
 
-  if (myFamiliar() === $familiar`Reagnimated Gnome`) {
+  if (trickFamiliar() === $familiar`Reagnimated Gnome`) {
     forceEquips.push($item`gnomish housemaid's kgnee`);
     if (!have($item`gnomish housemaid's kgnee`)) {
       visitUrl("arena.php");
@@ -210,7 +211,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
         0,
         1
       ) * stasisData.meatPerLb
-    : adventureFamiliars.includes(myFamiliar())
+    : adventureFamiliars.includes(trickFamiliar())
     ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
       (1.1 * (1000 * baseAdventureValue())) /
       Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
@@ -309,14 +310,14 @@ function overallAdventureValue(): number {
     (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`)
       ? bjornValue(pickBjorn())
       : 0);
-  const stasisData = stasisFamiliars.get(myFamiliar());
+  const stasisData = stasisFamiliars.get(trickFamiliar());
   if (stasisData) {
     return (
       treatsAndBonusEquips +
       (20 + estimateOutfitWeight() + getEffectWeight()) *
         (stasisData.meatPerLb * clamp(stasisData.baseRate + actionRateBonus(), 0, 1))
     );
-  } else if (adventureFamiliars.includes(myFamiliar())) {
+  } else if (adventureFamiliars.includes(trickFamiliar())) {
     return (
       (treatsAndBonusEquips * 1000) /
       Math.pow(1000 - getEffectWeight() - estimateOutfitWeight() - 20, 2)
@@ -324,24 +325,22 @@ function overallAdventureValue(): number {
   } else return treatsAndBonusEquips;
 }
 
-let pantsgivingFood: Item;
 export function getPantsgivingFood(): Item {
-  if (!pantsgivingFood) {
-    if (get("affirmationCookiesEaten") >= 4) pantsgivingFood = $item`Affirmation Cookie`;
+  if (!cache.pantsgivingFood) {
+    if (get("affirmationCookiesEaten") >= 4) cache.pantsgivingFood = $item`Affirmation Cookie`;
     else if (
       myLevel() >= 20 &&
       (have($item`Dreadsylvanian stew`) || have($item`Freddy Kruegerand`, 20))
     )
-      pantsgivingFood = $item`Dreadsylvanian stew`;
-    else pantsgivingFood = $item`meteoreo`;
+      cache.pantsgivingFood = $item`Dreadsylvanian stew`;
+    else cache.pantsgivingFood = $item`meteoreo`;
   }
-  return pantsgivingFood;
+  return cache.pantsgivingFood;
 }
 
-let cachedBaseAdventureValue: number;
 export function baseAdventureValue(): number {
-  if (cachedBaseAdventureValue === undefined) {
-    cachedBaseAdventureValue =
+  if (cache.baseAdventureValue === undefined) {
+    cache.baseAdventureValue =
       (1 / 5) *
       (3 *
         sumNumbers(
@@ -353,14 +352,13 @@ export function baseAdventureValue(): number {
         (1 / 5) * saleValue($item`huge bowl of candy`) +
         (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
   }
-  return cachedBaseAdventureValue;
+  return cache.baseAdventureValue;
 }
 
-let bestFit: string;
 export function bestOutfit(): string {
-  if (!bestFit) {
+  if (!cache.bestOutfit) {
     const playerChosenOutfit = property.getString("freecandy_treatOutfit");
-    if (playerChosenOutfit) bestFit = playerChosenOutfit;
+    if (playerChosenOutfit) cache.bestOutfit = playerChosenOutfit;
 
     const flyestFit = getOutfits()
       .filter((outfitName) => outfitPieces(outfitName).every((fit) => canEquip(fit)))
@@ -379,7 +377,7 @@ export function bestOutfit(): string {
       .sort((a, b) => b[1] - a[1])[0][0];
 
     if (!flyestFit) throw "You somehow have no outfits, dude!";
-    bestFit = flyestFit;
+    cache.bestOutfit = flyestFit;
   }
-  return bestFit;
+  return cache.bestOutfit;
 }

@@ -6,6 +6,7 @@ import {
   buy,
   cliExecute,
   mallPrice,
+  myFamiliar,
   print,
   restoreMp,
   retrieveItem,
@@ -36,6 +37,15 @@ import {
 } from "libram";
 
 export const manager = new PropertiesManager();
+
+export const cache: {
+  trickFamiliar?: Familiar;
+  outfightWeight?: number;
+  bestOutfit?: string;
+  pantsgivingFood?: Item;
+  baseAdventureValue?: number;
+  effectWeight?: number;
+} = {};
 
 export class Requirement {
   maximizeParameters_: string[];
@@ -472,4 +482,9 @@ export function questStep(questName: string): number {
     }
     return parseInt(stringStep.substring(4), 10);
   }
+}
+
+export function trickFamiliar(): Familiar {
+  if (!cache.trickFamiliar) cache.trickFamiliar = myFamiliar();
+  return cache.trickFamiliar;
 }

@@ -6,7 +6,6 @@ import {
   inebrietyLimit,
   inMultiFight,
   myAdventures,
-  myFamiliar,
   myFullness,
   myInebriety,
   myName,
@@ -30,15 +29,22 @@ import {
   have,
   SourceTerminal,
 } from "libram";
-import { advMacroAA, determineDraggableZoneAndEnsureAccess, findRun, Requirement } from "./lib";
+import {
+  advMacroAA,
+  determineDraggableZoneAndEnsureAccess,
+  findRun,
+  questStep,
+  Requirement,
+  trickFamiliar,
+} from "./lib";
 import { bestOutfit, fightOutfit, getPantsgivingFood } from "./outfit";
 import Macro from "./combat";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
 
-const prepareToTrick = (trickFamiliar: Familiar, trickMacro: Macro) => {
+const prepareToTrick = (trickMacro: Macro) => {
   trickMacro.setAutoAttack();
-  useFamiliar(trickFamiliar);
+  useFamiliar(trickFamiliar());
   fightOutfit("Trick");
 };
 
@@ -77,12 +83,12 @@ function treat() {
     throw "I thought I was out of light houses, but I wasn't. Alas!";
 }
 
-function trick(trickFamiliar: Familiar, trickMacro: Macro) {
+function trick(trickMacro: Macro) {
   print(
     `Illusion, ${myName()}. A trick is something an adventurer does for meat. Or candy!`,
     "blue"
   );
-  prepareToTrick(trickFamiliar, trickMacro);
+  prepareToTrick(trickMacro);
   if (!block().includes("whichhouse=")) {
     if (myAdventures() < 5) {
       throw "Need a new block and I'm all out of turns, baby!";
@@ -103,9 +109,9 @@ function trick(trickFamiliar: Familiar, trickMacro: Macro) {
     throw "I thought I was out of dark houses, but I wasn't. Alas!";
 }
 
-function trickTreat(trickFamiliar: Familiar, trickMacro: Macro) {
+function trickTreat(trickMacro: Macro) {
   treat();
-  trick(trickFamiliar, trickMacro);
+  trick(trickMacro);
 }
 
 function fillPantsgivingFullness(): void {
@@ -120,9 +126,9 @@ function fillPantsgivingFullness(): void {
 
 export function runBlocks(blocks = -1): void {
   SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
-  const trickFamiliar = myFamiliar();
 
-  const trickMacro = stasisFamiliars.includes(trickFamiliar)
+  trickFamiliar();
+  const trickMacro = stasisFamiliars.includes(trickFamiliar())
     ? Macro.stasis().kill()
     : Macro.try([
         ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
@@ -133,14 +139,7 @@ export function runBlocks(blocks = -1): void {
 
   const n = 0;
   const condition = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
-  const nemesisStep = () =>
-    get("questG04Nemesis") === "unstarted"
-      ? -1
-      : get("questG04Nemesis") === "started"
-      ? 0
-      : get("questG04Nemesis") === "finished"
-      ? 69
-      : parseInt(get("questG04Nemesis").substring(4), 10);
+  const nemesisStep = () => questStep("questG04Nemesis");
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
   const nemesis = () => {
     return !doingNemesis || nemesisStep() < 25;
@@ -230,13 +229,13 @@ export function runBlocks(blocks = -1): void {
         const runSource = findRun();
         if (runSource.prepare) runSource.prepare();
         if (runSource.requirement) Requirement.maximize([runSource.requirement]);
-        advMacroAA($location`The Dire Warren`, runSource.macro);
+        advMacroAA($location`Noob Cave`, runSource.macro);
         fillPantsgivingFullness();
       }
-      trickTreat(trickFamiliar, trickMacro);
+      trickTreat(trickMacro);
 
       if (doingNemesis && getCounters("Nemesis Assassin window end", -11, 0) !== "") {
-        useFamiliar(trickFamiliar);
+        useFamiliar(trickFamiliar());
         fightOutfit("Digitize");
         advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
         fillPantsgivingFullness();
