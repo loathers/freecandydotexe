@@ -20343,7 +20343,7 @@ function advMacroAA(location, macro) {
     return typeof whileParameter === "number" ? n < whileParameter : whileParameter();
   };
 
-  if (typeof macro !== "function") macro.setAutoAttack();
+  if (macro instanceof libram__WEBPACK_IMPORTED_MODULE_3__.Macro) macro.setAutoAttack();
 
   while (condition()) {
     if (typeof macro === "function") macro().setAutoAttack();
