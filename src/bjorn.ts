@@ -168,7 +168,7 @@ const bjornFams: BjornedFamiliar[] = [
   },
   {
     familiar: $familiar`Golden Monkey`,
-    meatVal: () => 100,
+    meatVal: () => saleValue($item`gold nuggets`),
     probability: 0.5,
   },
   {
