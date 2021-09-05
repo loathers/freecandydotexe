@@ -232,7 +232,7 @@ export function advMacroAA(
     return typeof whileParameter === "number" ? n < whileParameter : whileParameter();
   };
 
-  if (typeof macro !== "function") macro.setAutoAttack();
+  if (macro instanceof Macro) macro.setAutoAttack();
   while (condition()) {
     if (typeof macro === "function") macro().setAutoAttack();
     adv1(location, -1, () => Macro.cachedAutoAttack ?? Macro.abort().toString());
