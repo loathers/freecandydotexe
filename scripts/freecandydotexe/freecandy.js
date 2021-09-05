@@ -19686,7 +19686,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! libram */ "./node_modules/libram/dist/index.js");
 /* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(libram__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81, _templateObject82, _templateObject83, _templateObject84, _templateObject85, _templateObject86, _templateObject87, _templateObject88, _templateObject89, _templateObject90;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81, _templateObject82, _templateObject83, _templateObject84, _templateObject85, _templateObject86, _templateObject87, _templateObject88, _templateObject89, _templateObject90, _templateObject91;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -19829,104 +19829,104 @@ var bjornFams = [{
   probability: 1
 }, {
   familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Golden Monkey"]))),
-  meatVal: () => 100,
+  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["gold nuggets"])))),
   probability: 0.5
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["Robot Reindeer"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["Robot Reindeer"]))),
+  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["Stocking Mimic"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Angry Farmer candy, Cold Hots candy, Rock Pops, Tasty Fun Good rice candy, Wint-O-Fresh mint"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Stocking Mimic"]))),
+  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Angry Farmer candy, Cold Hots candy, Rock Pops, Tasty Fun Good rice candy, Wint-O-Fresh mint"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["BRICKO chick"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["BRICKO brick"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["BRICKO chick"]))),
+  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["BRICKO brick"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["Cotton Candy Carnie"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["cotton candy pinch"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["Cotton Candy Carnie"]))),
+  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["cotton candy pinch"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["Untamed Turtle"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["snailmail bits, turtlemail bits, turtle wax"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Untamed Turtle"]))),
+  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["snailmail bits, turtlemail bits, turtle wax"]))))),
   probability: 0.35
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["Astral Badger"]))),
-  meatVal: () => 2 * _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["spooky mushroom, Knob mushroom, Knoll mushroom"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["Astral Badger"]))),
+  meatVal: () => 2 * _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["spooky mushroom, Knob mushroom, Knoll mushroom"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["Green Pixie"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["bottle of tequila"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["Green Pixie"]))),
+  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["bottle of tequila"])))),
   probability: 0.2
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["Angry Goat"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["goat cheese pizza"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Angry Goat"]))),
+  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["goat cheese pizza"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["Adorable Seal Larva"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["stench nuggets, spooky nuggets, hot nuggets, cold nuggets, sleaze nuggets"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Adorable Seal Larva"]))),
+  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["stench nuggets, spooky nuggets, hot nuggets, cold nuggets, sleaze nuggets"]))))),
   probability: 0.35
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["Ancient Yuletide Troll"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["Ancient Yuletide Troll"]))),
+  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["Sweet Nutcracker"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Sweet Nutcracker"]))),
+  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["Hand Turkey"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Hand Turkey"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Leprechaun"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Leprechaun"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Ghost of Crimbo Commerce"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Ghost of Crimbo Commerce"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Rockin' Robin"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["Rockin' Robin"]))),
   meatVal: () => 60,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["Feral Kobold"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Feral Kobold"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Oily Woim"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Oily Woim"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Misshapen Animal Skeleton"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["Misshapen Animal Skeleton"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["Frozen Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject77 || (_templateObject77 = _taggedTemplateLiteral(["Frozen Gravy Fairy"]))),
   // drops a cold nugget every combat, 5 of which can be used to make a cold wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject77 || (_templateObject77 = _taggedTemplateLiteral(["cold wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["cold nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["cold wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["cold nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["Stinky Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject80 || (_templateObject80 = _taggedTemplateLiteral(["Stinky Gravy Fairy"]))),
   // drops a stench nugget every combat, 5 of which can be used to make a stench wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject80 || (_templateObject80 = _taggedTemplateLiteral(["stench wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["stench nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["stench wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["stench nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["Sleazy Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["Sleazy Gravy Fairy"]))),
   // drops a sleaze nugget every combat, 5 of which can be used to make a sleaze wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["sleaze wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["sleaze nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["sleaze wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject85 || (_templateObject85 = _taggedTemplateLiteral(["sleaze nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject85 || (_templateObject85 = _taggedTemplateLiteral(["Spooky Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject86 || (_templateObject86 = _taggedTemplateLiteral(["Spooky Gravy Fairy"]))),
   // drops a spooky nugget every combat, 5 of which can be used to make a spooky wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject86 || (_templateObject86 = _taggedTemplateLiteral(["spooky wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject87 || (_templateObject87 = _taggedTemplateLiteral(["spooky nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject87 || (_templateObject87 = _taggedTemplateLiteral(["spooky wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject88 || (_templateObject88 = _taggedTemplateLiteral(["spooky nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject88 || (_templateObject88 = _taggedTemplateLiteral(["Flaming Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject89 || (_templateObject89 = _taggedTemplateLiteral(["Flaming Gravy Fairy"]))),
   // drops a hot nugget every combat, 5 of which can be used to make a hot wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject89 || (_templateObject89 = _taggedTemplateLiteral(["hot wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject90 || (_templateObject90 = _taggedTemplateLiteral(["hot nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject90 || (_templateObject90 = _taggedTemplateLiteral(["hot wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral(["hot nuggets"]))))),
   probability: 1
 }].filter(bjornFam => (0,libram__WEBPACK_IMPORTED_MODULE_2__.have)(bjornFam.familiar));
 var bjornList = [];
