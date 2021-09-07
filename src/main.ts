@@ -14,7 +14,7 @@ import {
   userConfirm,
   visitUrl,
 } from "kolmafia";
-import { $item, $stat, get, have } from "libram";
+import { $item, $stat, get, have, property, set, sinceKolmafiaRevision } from "libram";
 import { manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -49,6 +49,14 @@ export function main(args: string): void {
     if (questStep("questM25Armorer") === -1) {
       visitUrl("shop.php?whichshop=armory&action=talk");
       runChoice(1);
+    }
+
+    sinceKolmafiaRevision(20901);
+    const forbiddenStores = property.getString("forbiddenStores").split(",");
+    if (!forbiddenStores.includes("3408540")) {
+      //Van & Duffel's Baleet Shop
+      forbiddenStores.push("3408540");
+      set("forbiddenStores", forbiddenStores.join(","));
     }
 
     manager.set({
