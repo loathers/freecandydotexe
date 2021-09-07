@@ -20527,6 +20527,15 @@ function main(args) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.runChoice)(1);
     }
 
+    (0,libram__WEBPACK_IMPORTED_MODULE_3__.sinceKolmafiaRevision)(20901);
+    var forbiddenStores = libram__WEBPACK_IMPORTED_MODULE_3__.property.getString("forbiddenStores").split(",");
+
+    if (!forbiddenStores.includes("3408540")) {
+      //Van & Duffel's Baleet Shop
+      forbiddenStores.push("3408540");
+      (0,libram__WEBPACK_IMPORTED_MODULE_3__.set)("forbiddenStores", forbiddenStores.join(","));
+    }
+
     _lib__WEBPACK_IMPORTED_MODULE_1__.manager.set({
       battleAction: "custom combat script",
       dontStopForCounters: true,
