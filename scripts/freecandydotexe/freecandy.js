@@ -19447,9 +19447,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! kolmafia */ "kolmafia");
 /* harmony import */ var kolmafia__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(kolmafia__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! libram */ "./node_modules/libram/dist/index.js");
-/* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(libram__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib */ "./src/lib.ts");
+/* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! libram */ "./node_modules/libram/dist/index.js");
+/* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(libram__WEBPACK_IMPORTED_MODULE_1__);
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81, _templateObject82, _templateObject83, _templateObject84, _templateObject85, _templateObject86, _templateObject87, _templateObject88, _templateObject89, _templateObject90, _templateObject91;
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -19468,84 +19467,83 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-
 var bjornFams = [{
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puck Man"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["yellow pixel"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puck Man"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["yellow pixel"])))),
   probability: 0.25,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_yellowPixelDropsCrown") < 25
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_yellowPixelDropsCrown") < 25
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["Ms. Puck Man"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["yellow pixel"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["Ms. Puck Man"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["yellow pixel"])))),
   probability: 0.25,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_yellowPixelDropsCrown") < 25
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_yellowPixelDropsCrown") < 25
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["Grimstone Golem"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["grimstone mask"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["Grimstone Golem"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["grimstone mask"])))),
   probability: 0.5,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_grimstoneMaskDropsCrown") < 1
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_grimstoneMaskDropsCrown") < 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Knob Goblin Organ Grinder"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["Knob Goblin Organ Grinder"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["Happy Medium"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["Happy Medium"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["Garbage Fire"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["burning newspaper"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["Garbage Fire"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["burning newspaper"])))),
   probability: 0.5,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_garbageFireDropsCrown") < 3
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_garbageFireDropsCrown") < 3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["Machine Elf"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["abstraction: sensation, abstraction: thought, abstraction: action, abstraction: category, abstraction: perception, abstraction: purpose"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["Machine Elf"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["abstraction: sensation, abstraction: thought, abstraction: action, abstraction: category, abstraction: perception, abstraction: purpose"]))))),
   probability: 0.2,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_abstractionDropsCrown") < 25
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_abstractionDropsCrown") < 25
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Trick-or-Treating Tot"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["hoarded candy wad"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Trick-or-Treating Tot"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["hoarded candy wad"])))),
   probability: 0.5,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_hoardedCandyDropsCrown") < 3
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_hoardedCandyDropsCrown") < 3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Warbear Drone"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["warbear whosit"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Warbear Drone"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["warbear whosit"])))),
   probability: 1 / 4.5
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["Li'l Xenomorph"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["lunar isotope"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["Li'l Xenomorph"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["lunar isotope"])))),
   probability: 0.05
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Pottery Barn Owl"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["volcanic ash"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Pottery Barn Owl"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["volcanic ash"])))),
   probability: 0.1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Grim Brother"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["grim fairy tale"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Grim Brother"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["grim fairy tale"])))),
   probability: 1,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_grimFairyTaleDropsCrown") < 2
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_grimFairyTaleDropsCrown") < 2
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Optimistic Candle"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["glob of melted wax"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Optimistic Candle"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["glob of melted wax"])))),
   probability: 1,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_optimisticCandleDropsCrown") < 3
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_optimisticCandleDropsCrown") < 3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Adventurous Spelunker"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["teflon ore, velcro ore, vinyl ore, cardboard ore, styrofoam ore, bubblewrap ore"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Adventurous Spelunker"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["teflon ore, velcro ore, vinyl ore, cardboard ore, styrofoam ore, bubblewrap ore"]))))),
   probability: 1,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_oreDropsCrown") < 6
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_oreDropsCrown") < 6
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Twitching Space Critter"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["space beast fur"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Twitching Space Critter"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["space beast fur"])))),
   probability: 1,
-  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_2__.get)("_spaceFurDropsCrown") < 1
+  dropPredicate: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.get)("_spaceFurDropsCrown") < 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["Party Mouse"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["Party Mouse"]))),
   meatVal: () => 50,
 
   /*
   The below code is more accurate. However, party mouse is virtually never going to be worthwhile and this causes so many useless mall hits it isn't funny.
-     saleValue(
+     getSaleValue(
       ...Item.all().filter(
         (booze) =>
           ["decent", "good"].includes(booze.quality) &&
@@ -19560,139 +19558,139 @@ var bjornFams = [{
     */
   probability: 0.05
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["Yule Hound"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["candy cane"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["Yule Hound"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["candy cane"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["Gluttonous Green Ghost"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["bean burrito, enchanted bean burrito, jumping bean burrito"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["Gluttonous Green Ghost"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["bean burrito, enchanted bean burrito, jumping bean burrito"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Reassembled Blackbird"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["blackberry"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Reassembled Blackbird"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["blackberry"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["Reconstituted Crow"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["blackberry"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["Reconstituted Crow"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["blackberry"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Hunchbacked Minion"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["disembodied brain, skeleton bone, skeleton bone, skeleton bone, skeleton bone"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Hunchbacked Minion"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["disembodied brain, skeleton bone, skeleton bone, skeleton bone, skeleton bone"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Reanimated Reanimator"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["hot wing, broken skull"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["Reanimated Reanimator"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["hot wing, broken skull"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Attention-Deficit Demon"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["chorizo brownies, white chocolate and tomato pizza, carob chunk noodles"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Attention-Deficit Demon"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["chorizo brownies, white chocolate and tomato pizza, carob chunk noodles"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Piano Cat"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["beertini, papaya slung, salty slug, tomato daiquiri"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["Piano Cat"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["beertini, papaya slung, salty slug, tomato daiquiri"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Golden Monkey"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["gold nuggets"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Golden Monkey"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["gold nuggets"])))),
   probability: 0.5
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["Robot Reindeer"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["Robot Reindeer"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Stocking Mimic"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Angry Farmer candy, Cold Hots candy, Rock Pops, Tasty Fun Good rice candy, Wint-O-Fresh mint"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Stocking Mimic"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Angry Farmer candy, Cold Hots candy, Rock Pops, Tasty Fun Good rice candy, Wint-O-Fresh mint"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["BRICKO chick"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["BRICKO brick"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["BRICKO chick"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["BRICKO brick"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["Cotton Candy Carnie"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["cotton candy pinch"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["Cotton Candy Carnie"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["cotton candy pinch"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Untamed Turtle"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["snailmail bits, turtlemail bits, turtle wax"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Untamed Turtle"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["snailmail bits, turtlemail bits, turtle wax"]))))),
   probability: 0.35
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["Astral Badger"]))),
-  meatVal: () => 2 * _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["spooky mushroom, Knob mushroom, Knoll mushroom"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["Astral Badger"]))),
+  meatVal: () => 2 * libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["spooky mushroom, Knob mushroom, Knoll mushroom"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["Green Pixie"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["bottle of tequila"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["Green Pixie"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["bottle of tequila"])))),
   probability: 0.2
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Angry Goat"]))),
-  meatVal: () => (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["goat cheese pizza"])))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Angry Goat"]))),
+  meatVal: () => (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["goat cheese pizza"])))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Adorable Seal Larva"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["stench nuggets, spooky nuggets, hot nuggets, cold nuggets, sleaze nuggets"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Adorable Seal Larva"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject65 || (_templateObject65 = _taggedTemplateLiteral(["stench nuggets, spooky nuggets, hot nuggets, cold nuggets, sleaze nuggets"]))))),
   probability: 0.35
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["Ancient Yuletide Troll"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject66 || (_templateObject66 = _taggedTemplateLiteral(["Ancient Yuletide Troll"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Sweet Nutcracker"]))),
-  meatVal: () => _lib__WEBPACK_IMPORTED_MODULE_1__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_2__.$items)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["Sweet Nutcracker"]))),
+  meatVal: () => libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_1__.$items)(_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["candy cane, eggnog, fruitcake, gingerbread bugbear"]))))),
   probability: 0.3
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Hand Turkey"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["Hand Turkey"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Leprechaun"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["Leprechaun"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Ghost of Crimbo Commerce"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Ghost of Crimbo Commerce"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["Rockin' Robin"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["Rockin' Robin"]))),
   meatVal: () => 60,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Feral Kobold"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Feral Kobold"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Oily Woim"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Oily Woim"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["Misshapen Animal Skeleton"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["Misshapen Animal Skeleton"]))),
   meatVal: () => 30,
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject77 || (_templateObject77 = _taggedTemplateLiteral(["Frozen Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject77 || (_templateObject77 = _taggedTemplateLiteral(["Frozen Gravy Fairy"]))),
   // drops a cold nugget every combat, 5 of which can be used to make a cold wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["cold wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["cold nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["cold wad"])))), (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["cold nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject80 || (_templateObject80 = _taggedTemplateLiteral(["Stinky Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject80 || (_templateObject80 = _taggedTemplateLiteral(["Stinky Gravy Fairy"]))),
   // drops a stench nugget every combat, 5 of which can be used to make a stench wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["stench wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["stench nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["stench wad"])))), (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["stench nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["Sleazy Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["Sleazy Gravy Fairy"]))),
   // drops a sleaze nugget every combat, 5 of which can be used to make a sleaze wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["sleaze wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject85 || (_templateObject85 = _taggedTemplateLiteral(["sleaze nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["sleaze wad"])))), (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject85 || (_templateObject85 = _taggedTemplateLiteral(["sleaze nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject86 || (_templateObject86 = _taggedTemplateLiteral(["Spooky Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject86 || (_templateObject86 = _taggedTemplateLiteral(["Spooky Gravy Fairy"]))),
   // drops a spooky nugget every combat, 5 of which can be used to make a spooky wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject87 || (_templateObject87 = _taggedTemplateLiteral(["spooky wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject88 || (_templateObject88 = _taggedTemplateLiteral(["spooky nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject87 || (_templateObject87 = _taggedTemplateLiteral(["spooky wad"])))), (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject88 || (_templateObject88 = _taggedTemplateLiteral(["spooky nuggets"]))))),
   probability: 1
 }, {
-  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_2__.$familiar)(_templateObject89 || (_templateObject89 = _taggedTemplateLiteral(["Flaming Gravy Fairy"]))),
+  familiar: (0,libram__WEBPACK_IMPORTED_MODULE_1__.$familiar)(_templateObject89 || (_templateObject89 = _taggedTemplateLiteral(["Flaming Gravy Fairy"]))),
   // drops a hot nugget every combat, 5 of which can be used to make a hot wad
-  meatVal: () => Math.max(0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject90 || (_templateObject90 = _taggedTemplateLiteral(["hot wad"])))), (0,_lib__WEBPACK_IMPORTED_MODULE_1__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_2__.$item)(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral(["hot nuggets"]))))),
+  meatVal: () => Math.max(0.2 * (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject90 || (_templateObject90 = _taggedTemplateLiteral(["hot wad"])))), (0,libram__WEBPACK_IMPORTED_MODULE_1__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_1__.$item)(_templateObject91 || (_templateObject91 = _taggedTemplateLiteral(["hot nuggets"]))))),
   probability: 1
-}].filter(bjornFam => (0,libram__WEBPACK_IMPORTED_MODULE_2__.have)(bjornFam.familiar));
+}].filter(bjornFam => (0,libram__WEBPACK_IMPORTED_MODULE_1__.have)(bjornFam.familiar));
 var bjornList = [];
 
 function generateBjornList() {
@@ -19876,13 +19874,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "cache": () => (/* binding */ cache),
 /* harmony export */   "determineDraggableZoneAndEnsureAccess": () => (/* binding */ determineDraggableZoneAndEnsureAccess),
 /* harmony export */   "advMacroAA": () => (/* binding */ advMacroAA),
-/* harmony export */   "saleValue": () => (/* binding */ saleValue),
-/* harmony export */   "clamp": () => (/* binding */ clamp),
-/* harmony export */   "ensureEffect": () => (/* binding */ ensureEffect),
-/* harmony export */   "FreeRun": () => (/* binding */ FreeRun),
 /* harmony export */   "findRun": () => (/* binding */ findRun),
-/* harmony export */   "sum": () => (/* binding */ sum),
-/* harmony export */   "sumNumbers": () => (/* binding */ sumNumbers),
 /* harmony export */   "questStep": () => (/* binding */ questStep),
 /* harmony export */   "trickFamiliar": () => (/* binding */ trickFamiliar)
 /* harmony export */ });
@@ -19895,10 +19887,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! libram */ "./node_modules/libram/dist/index.js");
 /* harmony import */ var libram__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(libram__WEBPACK_IMPORTED_MODULE_3__);
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -20047,50 +20035,6 @@ function advMacroAA(location, macro) {
     n++;
   }
 }
-var valueMap = new Map();
-var MALL_VALUE_MODIFIER = 0.9;
-function saleValue() {
-  for (var _len = arguments.length, items = new Array(_len), _key = 0; _key < _len; _key++) {
-    items[_key] = arguments[_key];
-  }
-
-  return items.map(item => {
-    if (valueMap.has(item)) return valueMap.get(item) || 0;
-
-    if (item.discardable) {
-      valueMap.set(item, (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.mallPrice)(item) > Math.max(2 * (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.autosellPrice)(item), 100) ? MALL_VALUE_MODIFIER * (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.mallPrice)(item) : (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.autosellPrice)(item));
-    } else {
-      valueMap.set(item, (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.mallPrice)(item) > 100 ? MALL_VALUE_MODIFIER * (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.mallPrice)(item) : 0);
-    }
-
-    return valueMap.get(item) || 0;
-  }).reduce((s, price) => s + price, 0) / items.length;
-}
-function clamp(n, min, max) {
-  return Math.min(Math.max(n, min), max);
-}
-function ensureEffect(effect) {
-  if (!(0,libram__WEBPACK_IMPORTED_MODULE_3__.have)(effect)) (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.cliExecute)(effect.default);
-}
-var FreeRun = function FreeRun(name, available, macro, requirement, prepare) {
-  _classCallCheck(this, FreeRun);
-
-  _defineProperty(this, "name", void 0);
-
-  _defineProperty(this, "available", void 0);
-
-  _defineProperty(this, "macro", void 0);
-
-  _defineProperty(this, "requirement", void 0);
-
-  _defineProperty(this, "prepare", void 0);
-
-  this.name = name;
-  this.available = available;
-  this.macro = macro;
-  this.requirement = requirement;
-  this.prepare = prepare;
-};
 var freeRuns = [
 /*
 new freeRun(
@@ -20111,46 +20055,40 @@ new freeRun(
 ),
 code removed because of boss monsters
 */
-new FreeRun("Bander", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Frumious Bandersnatch"])))) && ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Ode to Booze"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_3__.getSongCount)() < (0,libram__WEBPACK_IMPORTED_MODULE_3__.getSongLimit)()) && libram__WEBPACK_IMPORTED_MODULE_3__.Bandersnatch.getRemainingRunaways() > 0, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement(["Familiar Weight"], {}), () => {
+new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Bander", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["Frumious Bandersnatch"])))) && ((0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Ode to Booze"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_3__.getSongCount)() < (0,libram__WEBPACK_IMPORTED_MODULE_3__.getSongLimit)()) && libram__WEBPACK_IMPORTED_MODULE_3__.Bandersnatch.getRemainingRunaways() > 0, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement(["Familiar Weight"], {}), () => {
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.useFamiliar)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Frumious Bandersnatch"]))));
-  ensureEffect((0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Ode to Booze"]))));
-}), new FreeRun("Boots", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["Pair of Stomping Boots"])))) && libram__WEBPACK_IMPORTED_MODULE_3__.Bandersnatch.getRemainingRunaways() > 0, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement(["Familiar Weight"], {}), () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.useFamiliar)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Pair of Stomping Boots"]))))), new FreeRun("Snokebomb", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_snokebombUsed") < 3 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Snokebomb"])))), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Snokebomb"])))), undefined, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.restoreMp)(50)), new FreeRun("Hatred", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_feelHatredUsed") < 3 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Emotionally Chipped"])))), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Feel Hatred"]))))), new FreeRun("KGB", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_kgbTranquilizerDartUses") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["KGB tranquilizer dart"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+  (0,libram__WEBPACK_IMPORTED_MODULE_3__.ensureEffect)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$effect)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Ode to Booze"]))));
+}), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Boots", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["Pair of Stomping Boots"])))) && libram__WEBPACK_IMPORTED_MODULE_3__.Bandersnatch.getRemainingRunaways() > 0, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement(["Familiar Weight"], {}), () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.useFamiliar)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$familiar)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Pair of Stomping Boots"]))))), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Snokebomb", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_snokebombUsed") < 3 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["Snokebomb"])))), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Snokebomb"])))), undefined, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.restoreMp)(50)), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Hatred", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_feelHatredUsed") < 3 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Emotionally Chipped"])))), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Feel Hatred"]))))), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("KGB", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_kgbTranquilizerDartUses") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["KGB tranquilizer dart"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"])))
-})), new FreeRun("Latte", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["latte lovers member's mug"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_latteBanishUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Throw Latte on Opponent"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Latte", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["latte lovers member's mug"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_latteBanishUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Throw Latte on Opponent"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["latte lovers member's mug"])))
-})), new FreeRun("Docbag", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_reflexHammerUsed") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Reflex Hammer"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Docbag", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_reflexHammerUsed") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Reflex Hammer"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))
-})), new FreeRun("Middle Finger", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["mafia middle finger ring"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_mafiaMiddleFingerRingUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["Show them your ring"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Middle Finger", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["mafia middle finger ring"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_mafiaMiddleFingerRingUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["Show them your ring"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject40 || (_templateObject40 = _taggedTemplateLiteral(["mafia middle finger ring"])))
-})), new FreeRun("VMask", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["V for Vivala mask"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_vmaskBanisherUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Creepy Grin"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("VMask", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject41 || (_templateObject41 = _taggedTemplateLiteral(["V for Vivala mask"])))) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_vmaskBanisherUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject42 || (_templateObject42 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject43 || (_templateObject43 = _taggedTemplateLiteral(["Creepy Grin"])))), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject44 || (_templateObject44 = _taggedTemplateLiteral(["V for Vivala mask"])))
-}), () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.restoreMp)(30)), new FreeRun("Stinkeye", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["stinky cheese diaper"])))).some(item => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)(item)) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_stinkyCheeseBanisherUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Give Your Opponent the Stinkeye"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}), () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.restoreMp)(30)), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Stinkeye", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.getFoldGroup)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["stinky cheese diaper"])))).some(item => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)(item)) && !(0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_stinkyCheeseBanisherUsed"), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Give Your Opponent the Stinkeye"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["stinky cheese eye"])))
 }), () => {
   if (!(0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["stinky cheese eye"]))))) (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.cliExecute)("fold stinky cheese eye");
-}), new FreeRun("Navel Ring", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["navel ring of navel gazing"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+}), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Navel Ring", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["navel ring of navel gazing"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["navel ring of navel gazing"])))
-})), new FreeRun("GAP", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["Greatest American Pants"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("GAP", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["Greatest American Pants"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).step("runaway"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["Greatest American Pants"])))
-})), new FreeRun("Scrapbook", () => {
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Scrapbook", () => {
   (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.visitUrl)("desc_item.php?whichitem=463063785");
   return (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["familiar scrapbook"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("scrapbookCharges") >= 100;
 }, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Show Your Boring Familiar Pictures"), new libram__WEBPACK_IMPORTED_MODULE_3__.Requirement([], {
   forceEquip: (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["familiar scrapbook"])))
-})), new FreeRun("Parasol", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["peppermint parasol"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("parasolUsed") < 9 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["peppermint parasol"])))))];
+})), new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Parasol", () => (0,libram__WEBPACK_IMPORTED_MODULE_3__.have)((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["peppermint parasol"])))) && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("parasolUsed") < 9 && (0,libram__WEBPACK_IMPORTED_MODULE_3__.get)("_navelRunaways") < 3, libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item((0,libram__WEBPACK_IMPORTED_MODULE_3__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["peppermint parasol"])))))];
 var cheapestRunSource = (0,libram__WEBPACK_IMPORTED_MODULE_3__.$items)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["Louder Than Bomb, divine champagne popper, tennis ball"]))).sort((a, b) => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.mallPrice)(a) - (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.mallPrice)(b))[0];
-var cheapestItemRun = new FreeRun("Cheap Combat Item", () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.retrieveItem)(cheapestRunSource), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item(cheapestRunSource), undefined, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.retrieveItem)(cheapestRunSource));
+var cheapestItemRun = new libram__WEBPACK_IMPORTED_MODULE_3__.FreeRun("Cheap Combat Item", () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.retrieveItem)(cheapestRunSource), libram__WEBPACK_IMPORTED_MODULE_3__.Macro.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_3__.$skill)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item(cheapestRunSource), undefined, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.retrieveItem)(cheapestRunSource));
 function findRun() {
   var _freeRuns$find;
 
   var useFamiliar = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return (_freeRuns$find = freeRuns.find(run => run.available() && (useFamiliar || !["Bander", "Boots"].includes(run.name)))) !== null && _freeRuns$find !== void 0 ? _freeRuns$find : cheapestItemRun;
-}
-function sum(addends, mappingFunction) {
-  return addends.reduce((subtotal, element) => subtotal + mappingFunction(element), 0);
-}
-function sumNumbers(addends) {
-  return sum(addends, x => x);
 }
 function questStep(questName) {
   var stringStep = libram__WEBPACK_IMPORTED_MODULE_3__.property.getString(questName);
@@ -20346,7 +20284,7 @@ function estimateOutfitWeight() {
     var viableItems = Item.all().filter(item => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(item) && (openSlots.includes((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item)) || (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["acc1"]))) && accessoriesFree));
     var nonAccessoryWeightEquips = openSlots.map(slot => viableItems.filter(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) === slot).sort((a, b) => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(b, "Familiar Weight") - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(a, "Familiar Weight"))[0]);
     var accessoryWeightEquips = accessoriesFree ? viableItems.filter(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) === (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["acc1"])))).sort((a, b) => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(b, "Familiar Weight") - (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(a, "Familiar Weight")).splice(0, accessoriesFree) : [];
-    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.outfightWeight = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)([].concat(_toConsumableArray(accessoryWeightEquips), _toConsumableArray(nonAccessoryWeightEquips)), item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(item, "Familiar Weight")) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Temporal Riftlet"])))) ? 10 : 0) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Amphibian Sympathy"])))) ? 5 : 0);
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.outfightWeight = (0,libram__WEBPACK_IMPORTED_MODULE_4__.sum)([].concat(_toConsumableArray(accessoryWeightEquips), _toConsumableArray(nonAccessoryWeightEquips)), item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.numericModifier)(item, "Familiar Weight")) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["Temporal Riftlet"])))) ? 10 : 0) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Amphibian Sympathy"])))) ? 5 : 0);
   }
 
   return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.outfightWeight;
@@ -20354,7 +20292,7 @@ function estimateOutfitWeight() {
 
 function getEffectWeight() {
   if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.effectWeight) {
-    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.effectWeight = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myEffects)()).map(_ref => {
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.effectWeight = (0,libram__WEBPACK_IMPORTED_MODULE_4__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myEffects)()).map(_ref => {
       var _ref2 = _slicedToArray(_ref, 2),
           name = _ref2[0],
           duration = _ref2[1];
@@ -20379,7 +20317,7 @@ function fightOutfit() {
   var trickHat = trickHats.find(hat => (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(hat)) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["beholed bedsheet"]))); //Just to stop it from being undefined
 
   var forceEquips = [];
-  var bonusEquips = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["bag of many confections"]))), _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet()), _toConsumableArray(pantsgiving())));
+  var bonusEquips = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["bag of many confections"]))), libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet()), _toConsumableArray(pantsgiving())));
 
   switch (type) {
     case "Kramco":
@@ -20419,7 +20357,7 @@ function fightOutfit() {
   }
 
   var weightValue = stasisData ? //action rate times weight per lb
-  (0,_lib__WEBPACK_IMPORTED_MODULE_3__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)()) ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
+  (0,libram__WEBPACK_IMPORTED_MODULE_4__.clamp)(stasisData.baseRate + actionRateBonus() + (forceEquips.includes((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.haveEquipped)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)()) ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
   1.1 * (1000 * baseAdventureValue()) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2) : 0;
   var bjornalikeToUse = (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["Buddy Bjorn"])))) && forceEquips.every(item => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toSlot)(item) !== (0,libram__WEBPACK_IMPORTED_MODULE_4__.$slot)(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["back"])))) ? (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["Buddy Bjorn"]))) : (0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["Crown of Thrones"])));
   if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, (0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.bjornValue)((0,_bjorn__WEBPACK_IMPORTED_MODULE_2__.pickBjorn)()));
@@ -20435,7 +20373,7 @@ function fightOutfit() {
 
 function snowSuit() {
   if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["Snow Suit"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_carrotNoseDrops") >= 3) return new Map([]);
-  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["Snow Suit"]))), (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["carrot nose"])))) / 10]]);
+  return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["Snow Suit"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["carrot nose"])))) / 10]]);
 }
 
 function mayflowerBouquet() {
@@ -20445,7 +20383,7 @@ function mayflowerBouquet() {
   // During testing I got 4 drops then the 5th took like 40 more adventures
   // so let's just assume rate drops by 11% with a min of 1% ¯\_(ツ)_/¯
   if (!(0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["Mayflower bouquet"])))) || (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") >= 10) return new Map([]);
-  var averageFlowerValue = _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["tin magnolia, upsy daisy, lesser grodulated violet, half-orchid, begpwnia"]))))) * Math.max(0.01, 0.5 - (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") * 0.11);
+  var averageFlowerValue = libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["tin magnolia, upsy daisy, lesser grodulated violet, half-orchid, begpwnia"]))))) * Math.max(0.01, 0.5 - (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_mayflowerDrops") * 0.11);
   return new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Mayflower bouquet"]))), averageFlowerValue]]);
 }
 
@@ -20464,8 +20402,8 @@ function pantsgiving() {
 }
 
 function overallAdventureValue() {
-  var bonuses = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["bag of many confections"]))), _lib__WEBPACK_IMPORTED_MODULE_3__.saleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet())));
-  var treatsAndBonusEquips = (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Slot.all().map(slot => {
+  var bonuses = new Map([[(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject60 || (_templateObject60 = _taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject61 || (_templateObject61 = _taggedTemplateLiteral(["pantogram pants"]))), (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject62 || (_templateObject62 = _taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject63 || (_templateObject63 = _taggedTemplateLiteral(["bag of many confections"]))), libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue.apply(void 0, _toConsumableArray((0,libram__WEBPACK_IMPORTED_MODULE_4__.$items)(_templateObject64 || (_templateObject64 = _taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(_toConsumableArray(snowSuit()), _toConsumableArray(mayflowerBouquet())));
+  var treatsAndBonusEquips = (0,libram__WEBPACK_IMPORTED_MODULE_4__.sum)(Slot.all().map(slot => {
     var equip = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.equippedItem)(slot);
     var bonus = bonuses.get(equip);
     return bonus === undefined ? 0 : bonus;
@@ -20473,7 +20411,7 @@ function overallAdventureValue() {
   var stasisData = stasisFamiliars.get((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)());
 
   if (stasisData) {
-    return treatsAndBonusEquips + (20 + estimateOutfitWeight() + getEffectWeight()) * (stasisData.meatPerLb * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.clamp)(stasisData.baseRate + actionRateBonus(), 0, 1));
+    return treatsAndBonusEquips + (20 + estimateOutfitWeight() + getEffectWeight()) * (stasisData.meatPerLb * (0,libram__WEBPACK_IMPORTED_MODULE_4__.clamp)(stasisData.baseRate + actionRateBonus(), 0, 1));
   } else if (adventureFamiliars.includes((0,_lib__WEBPACK_IMPORTED_MODULE_3__.trickFamiliar)())) {
     return treatsAndBonusEquips * 1000 / Math.pow(1000 - getEffectWeight() - estimateOutfitWeight() - 20, 2);
   } else return treatsAndBonusEquips;
@@ -20488,13 +20426,13 @@ function getPantsgivingFood() {
 }
 function baseAdventureValue() {
   if (_lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue === undefined) {
-    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue = 1 / 5 * (3 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sumNumbers)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(bestOutfit())).map(_ref3 => {
+    _lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue = 1 / 5 * (3 * (0,libram__WEBPACK_IMPORTED_MODULE_4__.sumNumbers)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(bestOutfit())).map(_ref3 => {
       var _ref4 = _slicedToArray(_ref3, 2),
           candyName = _ref4[0],
           probability = _ref4[1];
 
-      return (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
-    })) * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Prunets"])))) : 0));
+      return (0,libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
+    })) * ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * (0,libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$familiar)(_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * (0,libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["Prunets"])))) : 0));
   }
 
   return _lib__WEBPACK_IMPORTED_MODULE_3__.cache.baseAdventureValue;
@@ -20503,12 +20441,12 @@ function bestOutfit() {
   if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit) {
     var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_4__.property.getString("freecandy_treatOutfit");
     if (playerChosenOutfit) _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit = playerChosenOutfit;
-    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(fit => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)(fit))).map(outfitName => [outfitName, (0,_lib__WEBPACK_IMPORTED_MODULE_3__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
+    var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(fit => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)(fit))).map(outfitName => [outfitName, (0,libram__WEBPACK_IMPORTED_MODULE_4__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
       var _ref6 = _slicedToArray(_ref5, 2),
           candyName = _ref6[0],
           probability = _ref6[1];
 
-      return (0,_lib__WEBPACK_IMPORTED_MODULE_3__.saleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
+      return (0,libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
     }), number => number)]).sort((a, b) => b[1] - a[1])[0][0];
     if (!flyestFit) throw "You somehow have no outfits, dude!";
     _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit = flyestFit;
