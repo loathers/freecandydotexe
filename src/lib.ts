@@ -23,6 +23,8 @@ import {
   $locations,
   $skill,
   Bandersnatch,
+  ensureEffect,
+  FreeRun,
   get,
   getFoldGroup,
   getSongCount,
@@ -221,35 +223,6 @@ export function saleValue(...items: Item[]): number {
   );
 }
 
-export function clamp(n: number, min: number, max: number): number {
-  return Math.min(Math.max(n, min), max);
-}
-
-export function ensureEffect(effect: Effect): void {
-  if (!have(effect)) cliExecute(effect.default);
-}
-
-export class FreeRun {
-  name: string;
-  available: () => boolean;
-  macro: Macro;
-  requirement?: Requirement;
-  prepare?: () => void;
-
-  constructor(
-    name: string,
-    available: () => boolean,
-    macro: Macro,
-    requirement?: Requirement,
-    prepare?: () => void
-  ) {
-    this.name = name;
-    this.available = available;
-    this.macro = macro;
-    this.requirement = requirement;
-    this.prepare = prepare;
-  }
-}
 
 const freeRuns: FreeRun[] = [
   /*
@@ -417,15 +390,6 @@ export function findRun(useFamiliar = true): FreeRun {
     ) ?? cheapestItemRun
   );
 }
-
-export function sum<T>(addends: T[], mappingFunction: (element: T) => number): number {
-  return addends.reduce((subtotal, element) => subtotal + mappingFunction(element), 0);
-}
-
-export function sumNumbers(addends: number[]): number {
-  return sum(addends, (x: number) => x);
-}
-
 export function questStep(questName: string): number {
   const stringStep = property.getString(questName);
   if (stringStep === "unstarted" || stringStep === "") return -1;
