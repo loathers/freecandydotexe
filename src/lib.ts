@@ -2,7 +2,6 @@ import "core-js/modules/es.object.entries";
 import { canAdv } from "canadv.ash";
 import {
   adv1,
-  autosellPrice,
   buy,
   cliExecute,
   mallPrice,
@@ -197,32 +196,6 @@ export function advMacroAA(
     n++;
   }
 }
-
-const valueMap: Map<Item, number> = new Map();
-
-const MALL_VALUE_MODIFIER = 0.9;
-
-export function saleValue(...items: Item[]): number {
-  return (
-    items
-      .map((item) => {
-        if (valueMap.has(item)) return valueMap.get(item) || 0;
-        if (item.discardable) {
-          valueMap.set(
-            item,
-            mallPrice(item) > Math.max(2 * autosellPrice(item), 100)
-              ? MALL_VALUE_MODIFIER * mallPrice(item)
-              : autosellPrice(item)
-          );
-        } else {
-          valueMap.set(item, mallPrice(item) > 100 ? MALL_VALUE_MODIFIER * mallPrice(item) : 0);
-        }
-        return valueMap.get(item) || 0;
-      })
-      .reduce((s, price) => s + price, 0) / items.length
-  );
-}
-
 
 const freeRuns: FreeRun[] = [
   /*

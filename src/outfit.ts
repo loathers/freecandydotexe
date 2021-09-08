@@ -33,15 +33,19 @@ import {
   $skill,
   $slot,
   $slots,
+  clamp,
   get,
   getAverageAdventures,
   getFoldGroup,
+  getSaleValue,
   have,
   maximizeCached,
   property,
+  sum,
+  sumNumbers,
 } from "libram";
 import { bjornValue, pickBjorn } from "./bjorn";
-import { cache, clamp, saleValue, sum, sumNumbers, trickFamiliar } from "./lib";
+import { cache, trickFamiliar } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -152,7 +156,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
     [$item`Mr. Screege's spectacles`, 180],
     [
       $item`bag of many confections`,
-      saleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
+      getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
     ],
     ...snowSuit(),
     ...mayflowerBouquet(),
@@ -238,7 +242,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
 function snowSuit() {
   if (!have($item`Snow Suit`) || get("_carrotNoseDrops") >= 3) return new Map<Item, number>([]);
 
-  return new Map<Item, number>([[$item`Snow Suit`, saleValue($item`carrot nose`) / 10]]);
+  return new Map<Item, number>([[$item`Snow Suit`, getSaleValue($item`carrot nose`) / 10]]);
 }
 
 function mayflowerBouquet() {
@@ -252,7 +256,7 @@ function mayflowerBouquet() {
     return new Map<Item, number>([]);
 
   const averageFlowerValue =
-    saleValue(
+    getSaleValue(
       ...$items`tin magnolia, upsy daisy, lesser grodulated violet, half-orchid, begpwnia`
     ) * Math.max(0.01, 0.5 - get("_mayflowerDrops") * 0.11);
   return new Map<Item, number>([[$item`Mayflower bouquet`, averageFlowerValue]]);
@@ -292,7 +296,7 @@ function overallAdventureValue(): number {
     [$item`Mr. Screege's spectacles`, 180],
     [
       $item`bag of many confections`,
-      saleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
+      getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
     ],
     ...snowSuit(),
     ...mayflowerBouquet(),
@@ -345,12 +349,12 @@ export function baseAdventureValue(): number {
       (3 *
         sumNumbers(
           Object.entries(outfitTreats(bestOutfit())).map(
-            ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+            ([candyName, probability]) => getSaleValue(toItem(candyName)) * probability
           )
         ) *
         (have($familiar`Trick-or-Treating Tot`) ? 1.6 : 0) +
-        (1 / 5) * saleValue($item`huge bowl of candy`) +
-        (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * saleValue($item`Prunets`) : 0));
+        (1 / 5) * getSaleValue($item`huge bowl of candy`) +
+        (have($familiar`Trick-or-Treating Tot`) ? 4 * 0.2 * getSaleValue($item`Prunets`) : 0));
   }
   return cache.baseAdventureValue;
 }
@@ -368,7 +372,7 @@ export function bestOutfit(): string {
             outfitName,
             sum(
               Object.entries(outfitTreats(outfitName)).map(
-                ([candyName, probability]) => saleValue(toItem(candyName)) * probability
+                ([candyName, probability]) => getSaleValue(toItem(candyName)) * probability
               ),
               (number) => number
             ),
