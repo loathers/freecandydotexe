@@ -27,6 +27,7 @@ import {
   $skills,
   get,
   have,
+  Requirement,
   SourceTerminal,
 } from "libram";
 import {
@@ -34,7 +35,6 @@ import {
   determineDraggableZoneAndEnsureAccess,
   findRun,
   questStep,
-  Requirement,
   trickFamiliar,
 } from "./lib";
 import { bestOutfit, fightOutfit, getPantsgivingFood } from "./outfit";
