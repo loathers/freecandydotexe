@@ -4023,19 +4023,19 @@ __webpack_require__(/*! core-js/modules/es.array.find.js */ "./node_modules/libr
 
 __webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/libram/node_modules/core-js/modules/es.array.includes.js");
 
+var _kolmafia = __webpack_require__(/*! kolmafia */ "kolmafia");
+
+var _combat = __webpack_require__(/*! ./combat */ "./node_modules/libram/dist/combat.js");
+
 var _lib = __webpack_require__(/*! ./lib */ "./node_modules/libram/dist/lib.js");
 
 var _maximize = __webpack_require__(/*! ./maximize */ "./node_modules/libram/dist/maximize.js");
 
+var _property = __webpack_require__(/*! ./property */ "./node_modules/libram/dist/property.js");
+
 var _resources = __webpack_require__(/*! ./resources */ "./node_modules/libram/dist/resources/index.js");
 
 var _templateString = __webpack_require__(/*! ./template-string */ "./node_modules/libram/dist/template-string.js");
-
-var _combat = __webpack_require__(/*! ./combat */ "./node_modules/libram/dist/combat.js");
-
-var _kolmafia = __webpack_require__(/*! kolmafia */ "kolmafia");
-
-var _property = __webpack_require__(/*! ./property */ "./node_modules/libram/dist/property.js");
 
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51;
 
@@ -4120,15 +4120,22 @@ var freeRuns = [new FreeRun("Bander", () => (0, _lib.have)((0, _templateString.$
 }, _combat.Macro.trySkill((0, _templateString.$skill)(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).skill("Show Your Boring Familiar Pictures"), new _maximize.Requirement([], {
   forceEquip: (0, _templateString.$items)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["familiar scrapbook"])))
 })), new FreeRun("Parasol", () => (0, _lib.have)((0, _templateString.$item)(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["peppermint parasol"])))) && (0, _property.get)("parasolUsed") < 9 && (0, _property.get)("_navelRunaways") < 3, _combat.Macro.trySkill((0, _templateString.$skill)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item((0, _templateString.$item)(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["peppermint parasol"])))))];
-var cheapestRunSource = (0, _templateString.$items)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Louder Than Bomb, divine champagne popper, tennis ball"]))).sort((a, b) => (0, _kolmafia.mallPrice)(a) - (0, _kolmafia.mallPrice)(b))[0];
-var cheapestItemRun = new FreeRun("Cheap Combat Item", () => (0, _kolmafia.retrieveItem)(cheapestRunSource), _combat.Macro.trySkill((0, _templateString.$skill)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item(cheapestRunSource), undefined, () => (0, _kolmafia.retrieveItem)(cheapestRunSource));
+
+function cheapestRunSource() {
+  return (0, _templateString.$items)(_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["Louder Than Bomb, divine champagne popper, tennis ball"]))).sort((a, b) => (0, _kolmafia.mallPrice)(a) - (0, _kolmafia.mallPrice)(b))[0];
+}
+
+function cheapestItemRun() {
+  var cheapestRun = cheapestRunSource();
+  return new FreeRun("Cheap Combat Item", () => (0, _kolmafia.retrieveItem)(cheapestRun), _combat.Macro.trySkill((0, _templateString.$skill)(_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["Asdon Martin: Spring-Loaded Front Bumper"])))).item(cheapestRunSource()), undefined, () => (0, _kolmafia.retrieveItem)(cheapestRun));
+}
 
 function findFreeRun() {
   var _freeRuns$find;
 
   var useFamiliar = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   var buyStuff = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  return (_freeRuns$find = freeRuns.find(run => run.available() && (useFamiliar || !["Bander", "Boots"].includes(run.name)))) !== null && _freeRuns$find !== void 0 ? _freeRuns$find : buyStuff ? cheapestItemRun : undefined;
+  return (_freeRuns$find = freeRuns.find(run => run.available() && (useFamiliar || !["Bander", "Boots"].includes(run.name)))) !== null && _freeRuns$find !== void 0 ? _freeRuns$find : buyStuff ? cheapestItemRun() : undefined;
 }
 
 /***/ }),
@@ -4162,7 +4169,8 @@ var _exportNames = {
   withProperty: true,
   withChoices: true,
   withChoice: true,
-  property: true
+  property: true,
+  getModifier: true
 };
 Object.defineProperty(exports, "Kmail", ({
   enumerable: true,
@@ -4228,6 +4236,12 @@ Object.defineProperty(exports, "withChoice", ({
   enumerable: true,
   get: function get() {
     return _property.withChoice;
+  }
+}));
+Object.defineProperty(exports, "getModifier", ({
+  enumerable: true,
+  get: function get() {
+    return _modifier.get;
   }
 }));
 exports.property = exports.console = void 0;
@@ -4411,6 +4425,8 @@ Object.keys(_utils).forEach(function (key) {
     }
   });
 });
+
+var _modifier = __webpack_require__(/*! ./modifier */ "./node_modules/libram/dist/modifier.js");
 
 var _freerun = __webpack_require__(/*! ./freerun */ "./node_modules/libram/dist/freerun.js");
 
@@ -6416,6 +6432,95 @@ var Requirement = /*#__PURE__*/function () {
 }();
 
 exports.Requirement = Requirement;
+
+/***/ }),
+
+/***/ "./node_modules/libram/dist/modifier.js":
+/*!**********************************************!*\
+  !*** ./node_modules/libram/dist/modifier.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.get = get;
+
+var _kolmafia = __webpack_require__(/*! kolmafia */ "kolmafia");
+
+var _utils = __webpack_require__(/*! ./utils */ "./node_modules/libram/dist/utils.js");
+
+var _modifierTypes = __webpack_require__(/*! ./modifierTypes */ "./node_modules/libram/dist/modifierTypes.js");
+
+function get(name, subject) {
+  if ((0, _utils.arrayContains)(name, _modifierTypes.booleanModifiers)) {
+    return subject === undefined ? (0, _kolmafia.booleanModifier)(name) : (0, _kolmafia.booleanModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.classModifiers)) {
+    return (0, _kolmafia.classModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.effectModifiers)) {
+    return (0, _kolmafia.effectModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.monsterModifiers)) {
+    return (0, _kolmafia.monsterModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.numericModifiers)) {
+    return subject === undefined ? (0, _kolmafia.numericModifier)(name) : (0, _kolmafia.numericModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.skillModifiers)) {
+    return (0, _kolmafia.skillModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.stringModifiers)) {
+    return subject === undefined ? (0, _kolmafia.stringModifier)(name) : (0, _kolmafia.stringModifier)(subject, name);
+  }
+
+  if ((0, _utils.arrayContains)(name, _modifierTypes.statModifiers)) {
+    return (0, _kolmafia.statModifier)(subject, name);
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/libram/dist/modifierTypes.js":
+/*!***************************************************!*\
+  !*** ./node_modules/libram/dist/modifierTypes.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.stringModifiers = exports.statModifiers = exports.skillModifiers = exports.monsterModifiers = exports.effectModifiers = exports.numericModifiers = exports.classModifiers = exports.booleanModifiers = void 0; // THIS FILE IS AUTOMATICALLY GENERATED. See tools/parseModifiers.ts for more information
+
+var booleanModifiers = ["Softcore Only", "Single Equip", "Never Fumble", "Weakens Monster", "Free Pull", "Variable", "Nonstackable Watch", "Cold Immunity", "Hot Immunity", "Sleaze Immunity", "Spooky Immunity", "Stench Immunity", "Cold Vulnerability", "Hot Vulnerability", "Sleaze Vulnerability", "Spooky Vulnerability", "Stench Vulnerability", "Moxie Controls MP", "Moxie May Control MP", "Four Songs", "Adventure Underwater", "Underwater Familiar", "Generic", "Unarmed", "No Pull", "Lasts Until Rollover", "Attacks Can't Miss", "Pirate", "Breakable", "Drops Items", "Drops Meat"];
+exports.booleanModifiers = booleanModifiers;
+var classModifiers = ["Class"];
+exports.classModifiers = classModifiers;
+var numericModifiers = ["Familiar Weight", "Monster Level", "Combat Rate", "Initiative", "Experience", "Item Drop", "Meat Drop", "Damage Absorption", "Damage Reduction", "Cold Resistance", "Hot Resistance", "Sleaze Resistance", "Spooky Resistance", "Stench Resistance", "Mana Cost", "Moxie", "Moxie Percent", "Muscle", "Muscle Percent", "Mysticality", "Mysticality Percent", "Maximum HP", "Maximum HP Percent", "Maximum MP", "Maximum MP Percent", "Weapon Damage", "Ranged Damage", "Spell Damage", "Spell Damage Percent", "Cold Damage", "Hot Damage", "Sleaze Damage", "Spooky Damage", "Stench Damage", "Cold Spell Damage", "Hot Spell Damage", "Sleaze Spell Damage", "Spooky Spell Damage", "Stench Spell Damage", "Underwater Combat Rate", "Fumble", "HP Regen Min", "HP Regen Max", "MP Regen Min", "MP Regen Max", "Adventures", "Familiar Weight Percent", "Weapon Damage Percent", "Ranged Damage Percent", "Stackable Mana Cost", "Hobo Power", "Base Resting HP", "Resting HP Percent", "Bonus Resting HP", "Base Resting MP", "Resting MP Percent", "Bonus Resting MP", "Critical Hit Percent", "PvP Fights", "Volleyball", "Sombrero", "Leprechaun", "Fairy", "Meat Drop Penalty", "Hidden Familiar Weight", "Item Drop Penalty", "Initiative Penalty", "Food Drop", "Booze Drop", "Hat Drop", "Weapon Drop", "Offhand Drop", "Shirt Drop", "Pants Drop", "Accessory Drop", "Volleyball Effectiveness", "Sombrero Effectiveness", "Leprechaun Effectiveness", "Fairy Effectiveness", "Familiar Weight Cap", "Slime Resistance", "Slime Hates It", "Spell Critical Percent", "Muscle Experience", "Mysticality Experience", "Moxie Experience", "Effect Duration", "Candy Drop", "DB Combat Damage", "Sombrero Bonus", "Familiar Experience", "Sporadic Meat Drop", "Sporadic Item Drop", "Meat Bonus", "Pickpocket Chance", "Combat Mana Cost", "Muscle Experience Percent", "Mysticality Experience Percent", "Moxie Experience Percent", "Minstrel Level", "Muscle Limit", "Mysticality Limit", "Moxie Limit", "Song Duration", "Prismatic Damage", "Smithsness", "Supercold Resistance", "Reduce Enemy Defense", "Pool Skill", "Surgeonosity", "Familiar Damage", "Gear Drop", "Maximum Hooch", "Water Level", "Crimbot Outfit Power", "Familiar Tuning Muscle", "Familiar Tuning Mysticality", "Familiar Tuning Moxie", "Random Monster Modifiers", "Luck", "Othello Skill", "Disco Style", "Rollover Effect Duration", "Sixgun Damage", "Fishing Skill", "Additional Song", "Sprinkle Drop", "Absorb Adventures", "Absorb Stats", "Rubee Drop", "Kruegerand Drop", "WarBear Armor Penetration", "Clowniness", "Maximum PP", "Plumber Power", "Drippy Damage", "Drippy Resistance", "Energy", "Scrap", "Familiar Action Bonus", "Water"];
+exports.numericModifiers = numericModifiers;
+var effectModifiers = ["Effect", "Rollover Effect"];
+exports.effectModifiers = effectModifiers;
+var monsterModifiers = ["Avatar"];
+exports.monsterModifiers = monsterModifiers;
+var skillModifiers = ["Skill"];
+exports.skillModifiers = skillModifiers;
+var statModifiers = ["Plumber Stat"];
+exports.statModifiers = statModifiers;
+var stringModifiers = ["Intrinsic Effect", "Equalize", "Wiki Name", "Modifiers", "Outfit", "Stat Tuning", "Equips On", "Familiar Effect", "Jiggle", "Equalize Muscle", "Equalize Mysticality", "Equalize Moxie", "Floor Buffed Muscle", "Floor Buffed Mysticality", "Floor Buffed Moxie"];
+exports.stringModifiers = stringModifiers;
 
 /***/ }),
 
@@ -10580,6 +10685,7 @@ exports.countedMapToArray = countedMapToArray;
 exports.countedMapToString = countedMapToString;
 exports.sum = sum;
 exports.sumNumbers = sumNumbers;
+exports.arrayContains = arrayContains;
 
 __webpack_require__(/*! core-js/modules/es.number.parse-int.js */ "./node_modules/libram/node_modules/core-js/modules/es.number.parse-int.js");
 
@@ -10602,6 +10708,10 @@ __webpack_require__(/*! core-js/modules/es.array.fill.js */ "./node_modules/libr
 __webpack_require__(/*! core-js/modules/es.array.map.js */ "./node_modules/libram/node_modules/core-js/modules/es.array.map.js");
 
 __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/libram/node_modules/core-js/modules/es.array.concat.js");
+
+__webpack_require__(/*! core-js/modules/es.array.includes.js */ "./node_modules/libram/node_modules/core-js/modules/es.array.includes.js");
+
+__webpack_require__(/*! core-js/modules/es.string.includes.js */ "./node_modules/libram/node_modules/core-js/modules/es.string.includes.js");
 
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
@@ -10758,6 +10868,17 @@ function sum(addends, mappingFunction) {
 
 function sumNumbers(addends) {
   return sum(addends, x => x);
+}
+/**
+ * Checks if a given item is in a readonly array, acting as a typeguard.
+ * @param item Needle
+ * @param array Readonly array haystack
+ * @returns Whether the item is in the array, and narrows the type of the item.
+ */
+
+
+function arrayContains(item, array) {
+  return array.includes(item);
 }
 
 /***/ }),
@@ -20199,11 +20320,18 @@ function main(args) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("choice.php?whichchoice=1270&pwd&option=1&m=".concat(m, "&e=5&s1=5789,1&s2=-1,0&s3=24,1"));
     }
 
+    var aaBossFlag = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.xpath)((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("account.php?tab=combat"), "//*[@id=\"opt_flag_aabosses\"]/label/input[@type='checkbox']@checked")[0] === "checked" ? 1 : 0;
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update", true);
     var blocks = args ? parseInt(args) : undefined;
-    (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
-    _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
+
+    try {
+      (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
+    } finally {
+      _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("account.php?actions[]=flag_aabosses&flag_aabosses=".concat(aaBossFlag, "&action=Update"), true);
+    }
   }
-} //note: set properties
+}
 
 /***/ }),
 
