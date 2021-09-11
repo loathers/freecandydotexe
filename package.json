@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "core-js": "^3.16.4",
-    "kolmafia": "^1.2.1",
-    "libram": "^0.3.3"
+    "kolmafia": "^1.3.0",
+    "libram": "^0.4.0"
   },
   "author": "LASS",
   "license": "ISC",

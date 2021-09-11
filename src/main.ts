@@ -13,6 +13,7 @@ import {
   spleenLimit,
   userConfirm,
   visitUrl,
+  xpath,
 } from "kolmafia";
 import { $item, $stat, get, have, property, set, sinceKolmafiaRevision } from "libram";
 import { manager, questStep } from "./lib";
@@ -90,10 +91,24 @@ export function main(args: string): void {
       visitUrl(`choice.php?whichchoice=1270&pwd&option=1&m=${m}&e=5&s1=5789,1&s2=-1,0&s3=24,1`);
     }
 
+    const aaBossFlag =
+      xpath(
+        visitUrl("account.php?tab=combat"),
+        `//*[@id="opt_flag_aabosses"]/label/input[@type='checkbox']@checked`
+      )[0] === "checked"
+        ? 1
+        : 0;
+    visitUrl(`account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update`, true);
+
     const blocks = args ? parseInt(args) : undefined;
-    runBlocks(blocks);
-    manager.resetAll();
+    try {
+      runBlocks(blocks);
+    } finally {
+      manager.resetAll();
+      visitUrl(
+        `account.php?actions[]=flag_aabosses&flag_aabosses=${aaBossFlag}&action=Update`,
+        true
+      );
+    }
   }
 }
-
-//note: set properties
