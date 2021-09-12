@@ -20569,13 +20569,13 @@ function bestOutfit() {
   if (!_lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit) {
     var playerChosenOutfit = libram__WEBPACK_IMPORTED_MODULE_4__.property.getString("freecandy_treatOutfit");
     if (playerChosenOutfit) _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit = playerChosenOutfit;else {
-      var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(fit => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)(fit))).map(outfitName => [outfitName, (0,libram__WEBPACK_IMPORTED_MODULE_4__.sum)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
+      var flyestFit = (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.getOutfits)().filter(outfitName => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitPieces)(outfitName).every(piece => (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.canEquip)(piece))).map(outfitName => [outfitName, (0,libram__WEBPACK_IMPORTED_MODULE_4__.sumNumbers)(Object.entries((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.outfitTreats)(outfitName)).map(_ref5 => {
         var _ref6 = _slicedToArray(_ref5, 2),
             candyName = _ref6[0],
             probability = _ref6[1];
 
         return (0,libram__WEBPACK_IMPORTED_MODULE_4__.getSaleValue)((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.toItem)(candyName)) * probability;
-      }), number => number)]).sort((a, b) => b[1] - a[1])[0][0];
+      }))]).sort((a, b) => b[1] - a[1])[0][0];
       if (!flyestFit) throw "You somehow have no outfits, dude!";
       _lib__WEBPACK_IMPORTED_MODULE_3__.cache.bestOutfit = flyestFit;
     }
