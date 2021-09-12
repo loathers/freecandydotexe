@@ -20150,9 +20150,10 @@ function advMacroAA(location, macro) {
 
   while (condition()) {
     if (typeof macro === "function") macro().setAutoAttack();
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.adv1)(location, -1, () => {
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.adv1)(location, -1, (round, foe, pageText) => {
       var _Macro$cachedAutoAtta;
 
+      if (pageText.includes("Macro Aborted")) (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.abort)();
       return (_Macro$cachedAutoAtta = libram__WEBPACK_IMPORTED_MODULE_3__.Macro.cachedAutoAttack) !== null && _Macro$cachedAutoAtta !== void 0 ? _Macro$cachedAutoAtta : libram__WEBPACK_IMPORTED_MODULE_3__.Macro.abort().toString();
     });
     if (afterCombatAction) afterCombatAction();
