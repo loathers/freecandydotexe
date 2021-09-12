@@ -224,11 +224,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
       Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
     : 0;
 
-  const bjornalikeToUse =
-    have($item`Buddy Bjorn`) && forceEquips.every((item) => toSlot(item) !== $slot`back`)
-      ? $item`Buddy Bjorn`
-      : $item`Crown of Thrones`;
-  if (have(bjornalikeToUse)) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
+  const bjornalikeToUse = bestBjornalike(forceEquips);
+  if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
 
   maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`], {
     forceEquip: forceEquips,
