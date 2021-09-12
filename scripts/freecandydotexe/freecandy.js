@@ -20150,7 +20150,7 @@ function advMacroAA(location, macro) {
 
   while (condition()) {
     if (typeof macro === "function") macro().setAutoAttack();
-    (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.adv1)(location, -1, (round, foe, pageText) => {
+    (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.adv1)(location, -1, (_round, _foe, pageText) => {
       var _Macro$cachedAutoAtta;
 
       if (pageText.includes("Macro Aborted")) (0,kolmafia__WEBPACK_IMPORTED_MODULE_2__.abort)();
