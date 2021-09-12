@@ -6,6 +6,7 @@ import {
   cliExecute,
   mallPrice,
   myFamiliar,
+  numericModifier,
   print,
   restoreMp,
   retrieveItem,
@@ -45,6 +46,7 @@ export const cache: {
   pantsgivingFood?: Item;
   baseAdventureValue?: number;
   effectWeight?: number;
+  meatFamiliar?: Familiar;
 } = {};
 
 type ZonePotion = {
@@ -379,4 +381,31 @@ export function questStep(questName: string): number {
 export function trickFamiliar(): Familiar {
   if (!cache.trickFamiliar) cache.trickFamiliar = myFamiliar();
   return cache.trickFamiliar;
+}
+
+export function leprechaunMultiplier(familiar: Familiar): number {
+  if (familiar === $familiar`Mutant Cactus Bud`)
+    return numericModifier(familiar, "Leprechaun Effectiveness", 1, $item`none`);
+  const meatBonus = numericModifier(familiar, "Meat Drop", 1, $item`none`);
+  return Math.pow(Math.sqrt(meatBonus / 2 + 55 / 4 + 3) - Math.sqrt(55) / 2, 2);
+}
+
+export function fairyMultiplier(familiar: Familiar): number {
+  if (familiar === $familiar`Mutant Fire Ant`)
+    return numericModifier(familiar, "Fairy Effectiveness", 1, $item`none`);
+  const itemBonus = numericModifier(familiar, "Item Drop", 1, $item`none`);
+  return Math.pow(Math.sqrt(itemBonus + 55 / 4 + 3) - Math.sqrt(55) / 2, 2);
+}
+
+export function meatFamiliar(): Familiar {
+  if (!cache.meatFamiliar) {
+    const bestLeps = Familiar.all()
+      .filter(have)
+      .sort((a, b) => leprechaunMultiplier(b) - leprechaunMultiplier(a));
+    const bestLepMult = leprechaunMultiplier(bestLeps[0]);
+    cache.meatFamiliar = bestLeps
+      .filter((familiar) => leprechaunMultiplier(familiar) === bestLepMult)
+      .sort((a, b) => fairyMultiplier(b) - fairyMultiplier(a))[0];
+  }
+  return cache.meatFamiliar;
 }
