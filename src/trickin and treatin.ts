@@ -14,6 +14,7 @@ import {
   retrieveItem,
   runChoice,
   runCombat,
+  toInt,
   totalTurnsPlayed,
   useFamiliar,
   visitUrl,
@@ -23,6 +24,7 @@ import {
   $familiars,
   $item,
   $location,
+  $monster,
   $skill,
   $skills,
   get,
@@ -128,11 +130,14 @@ export function runBlocks(blocks = -1): void {
 
   trickFamiliar();
   const trickMacro = stasisFamiliars.includes(trickFamiliar())
-    ? Macro.stasis().kill()
-    : Macro.try([
-        ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
-        $item`porquoise-handled sixgun`,
-      ])
+    ? Macro.if_(`monsterid ${toInt($monster`All-Hallow's Steve`)}`, Macro.abort())
+        .stasis()
+        .kill()
+    : Macro.if_(`monsterid ${toInt($monster`All-Hallow's Steve`)}`, Macro.abort())
+        .try([
+          ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
+          $item`porquoise-handled sixgun`,
+        ])
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
         .kill();
 
