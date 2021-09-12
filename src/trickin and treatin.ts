@@ -35,10 +35,11 @@ import {
   advMacroAA,
   determineDraggableZoneAndEnsureAccess,
   findRun,
+  meatFamiliar,
   questStep,
   trickFamiliar,
 } from "./lib";
-import { bestOutfit, fightOutfit, getPantsgivingFood } from "./outfit";
+import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
 import Macro from "./combat";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
@@ -166,7 +167,10 @@ export function runBlocks(blocks = -1): void {
                 3),
           Macro.trySkill($skill`Digitize`)
         ).step(trickMacro);
-        fightOutfit("Digitize");
+        if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
+          meatFamiliar();
+          meatOutfit();
+        } else fightOutfit("Digitize");
         advMacroAA(
           determineDraggableZoneAndEnsureAccess(),
           digitizeMacro,
