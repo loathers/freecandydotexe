@@ -363,25 +363,26 @@ export function bestOutfit(): string {
   if (!cache.bestOutfit) {
     const playerChosenOutfit = property.getString("freecandy_treatOutfit");
     if (playerChosenOutfit) cache.bestOutfit = playerChosenOutfit;
-
-    const flyestFit = getOutfits()
-      .filter((outfitName) => outfitPieces(outfitName).every((fit) => canEquip(fit)))
-      .map(
-        (outfitName) =>
-          [
-            outfitName,
-            sum(
-              Object.entries(outfitTreats(outfitName)).map(
-                ([candyName, probability]) => getSaleValue(toItem(candyName)) * probability
+    else {
+      const flyestFit = getOutfits()
+        .filter((outfitName) => outfitPieces(outfitName).every((fit) => canEquip(fit)))
+        .map(
+          (outfitName) =>
+            [
+              outfitName,
+              sum(
+                Object.entries(outfitTreats(outfitName)).map(
+                  ([candyName, probability]) => getSaleValue(toItem(candyName)) * probability
+                ),
+                (number) => number
               ),
-              (number) => number
-            ),
-          ] as [string, number]
-      )
-      .sort((a, b) => b[1] - a[1])[0][0];
+            ] as [string, number]
+        )
+        .sort((a, b) => b[1] - a[1])[0][0];
 
-    if (!flyestFit) throw "You somehow have no outfits, dude!";
-    cache.bestOutfit = flyestFit;
+      if (!flyestFit) throw "You somehow have no outfits, dude!";
+      cache.bestOutfit = flyestFit;
+    }
   }
   return cache.bestOutfit;
 }
