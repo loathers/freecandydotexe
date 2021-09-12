@@ -365,16 +365,15 @@ export function bestOutfit(): string {
     if (playerChosenOutfit) cache.bestOutfit = playerChosenOutfit;
     else {
       const flyestFit = getOutfits()
-        .filter((outfitName) => outfitPieces(outfitName).every((fit) => canEquip(fit)))
+        .filter((outfitName) => outfitPieces(outfitName).every((piece) => canEquip(piece)))
         .map(
           (outfitName) =>
             [
               outfitName,
-              sum(
+              sumNumbers(
                 Object.entries(outfitTreats(outfitName)).map(
                   ([candyName, probability]) => getSaleValue(toItem(candyName)) * probability
-                ),
-                (number) => number
+                )
               ),
             ] as [string, number]
         )
