@@ -19722,7 +19722,7 @@ function runBlocks() {
   } finally {
     var endTime = (0,external_kolmafia_.gametimeToInt)();
     var duration = endTime - startTime;
-    (0,external_kolmafia_.print)("I spent ".concat(duration, " milliseconds!"), "blue");
+    (0,external_kolmafia_.print)("I spent ".concat(duration, " milliseconds running ").concat(n, " blocks!"), "blue");
   }
 }
 ;// CONCATENATED MODULE: ./src/main.ts
