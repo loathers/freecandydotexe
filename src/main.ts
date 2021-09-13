@@ -33,7 +33,7 @@ export function main(args: string): void {
     ) {
       const keepGoinCowboy = userConfirm(
         "Your organs are not full. Are you sure you wish to proceed?",
-        69,
+        69000,
         false
       );
       if (!keepGoinCowboy) abort();
