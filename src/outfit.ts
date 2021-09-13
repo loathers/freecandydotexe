@@ -234,7 +234,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
   const bjornalikeToUse = bestBjornalike(forceEquips);
   if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
 
-  maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`], {
+  maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`, "0.25 Meat Drop"], {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
     preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
