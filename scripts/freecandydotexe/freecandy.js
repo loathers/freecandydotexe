@@ -19532,7 +19532,7 @@ function trickin_and_treatin_taggedTemplateLiteral(strings, raw) { if (!raw) { r
 
 
 
-var trickin_and_treatin_stasisFamiliars = (0,dist.$familiars)(trickin_and_treatin_templateObject || (trickin_and_treatin_templateObject = trickin_and_treatin_taggedTemplateLiteral(["Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor"])));
+var trickin_and_treatin_stasisFamiliars = (0,dist.$familiars)(trickin_and_treatin_templateObject || (trickin_and_treatin_templateObject = trickin_and_treatin_taggedTemplateLiteral(["Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo"])));
 
 var prepareToTrick = trickMacro => {
   trickMacro.setAutoAttack();
