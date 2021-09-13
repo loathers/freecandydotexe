@@ -18627,7 +18627,9 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var manager = new dist.PropertiesManager();
-var cache = {};
+var cache = {
+  startingCandies: new Map()
+};
 var zonePotions = [{
   zone: "Spaaace",
   effect: (0,dist.$effect)(_templateObject || (_templateObject = _taggedTemplateLiteral(["Transpondent"]))),
@@ -19350,7 +19352,15 @@ function bestOutfit() {
       }))]).sort((a, b) => b[1] - a[1])[0][0];
       if (!flyestFit) throw "You somehow have no outfits, dude!";
       cache.bestOutfit = flyestFit;
-    }
+    } // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+    Object.entries((0,external_kolmafia_.outfitTreats)(cache.bestOutfit)).forEach(_ref7 => {
+      var _ref8 = _slicedToArray(_ref7, 2),
+          candy = _ref8[0],
+          _probability = _ref8[1];
+
+      return cache.startingCandies.set((0,external_kolmafia_.toItem)(candy), (0,external_kolmafia_.itemAmount)((0,external_kolmafia_.toItem)(candy)));
+    });
   }
 
   return cache.bestOutfit;
@@ -19511,7 +19521,15 @@ var Macro = /*#__PURE__*/function (_LibramMacro) {
 
 
 ;// CONCATENATED MODULE: ./src/trickin and treatin.ts
-var trickin_and_treatin_templateObject, trickin_and_treatin_templateObject2, trickin_and_treatin_templateObject3, trickin_and_treatin_templateObject4, trickin_and_treatin_templateObject5, trickin_and_treatin_templateObject6, trickin_and_treatin_templateObject7, trickin_and_treatin_templateObject8, trickin_and_treatin_templateObject9, trickin_and_treatin_templateObject10, trickin_and_treatin_templateObject11, trickin_and_treatin_templateObject12, trickin_and_treatin_templateObject13, trickin_and_treatin_templateObject14, trickin_and_treatin_templateObject15, trickin_and_treatin_templateObject16, trickin_and_treatin_templateObject17, trickin_and_treatin_templateObject18, trickin_and_treatin_templateObject19, trickin_and_treatin_templateObject20, trickin_and_treatin_templateObject21, trickin_and_treatin_templateObject22, trickin_and_treatin_templateObject23, trickin_and_treatin_templateObject24, trickin_and_treatin_templateObject25, trickin_and_treatin_templateObject26;
+var trickin_and_treatin_templateObject, trickin_and_treatin_templateObject2, trickin_and_treatin_templateObject3, trickin_and_treatin_templateObject4, trickin_and_treatin_templateObject5, trickin_and_treatin_templateObject6, trickin_and_treatin_templateObject7, trickin_and_treatin_templateObject8, trickin_and_treatin_templateObject9, trickin_and_treatin_templateObject10, trickin_and_treatin_templateObject11, trickin_and_treatin_templateObject12, trickin_and_treatin_templateObject13, trickin_and_treatin_templateObject14, trickin_and_treatin_templateObject15, trickin_and_treatin_templateObject16, trickin_and_treatin_templateObject17, trickin_and_treatin_templateObject18, trickin_and_treatin_templateObject19, trickin_and_treatin_templateObject20, trickin_and_treatin_templateObject21, trickin_and_treatin_templateObject22, trickin_and_treatin_templateObject23, trickin_and_treatin_templateObject24, trickin_and_treatin_templateObject25, trickin_and_treatin_templateObject26, trickin_and_treatin_templateObject27;
+
+function trickin_and_treatin_slicedToArray(arr, i) { return trickin_and_treatin_arrayWithHoles(arr) || trickin_and_treatin_iterableToArrayLimit(arr, i) || trickin_and_treatin_unsupportedIterableToArray(arr, i) || trickin_and_treatin_nonIterableRest(); }
+
+function trickin_and_treatin_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function trickin_and_treatin_iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function trickin_and_treatin_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function trickin_and_treatin_toConsumableArray(arr) { return trickin_and_treatin_arrayWithoutHoles(arr) || trickin_and_treatin_iterableToArray(arr) || trickin_and_treatin_unsupportedIterableToArray(arr) || trickin_and_treatin_nonIterableSpread(); }
 
@@ -19720,13 +19738,22 @@ function runBlocks() {
       }
     }
   } finally {
+    var _cache$startingBowls;
+
     var endTime = (0,external_kolmafia_.gametimeToInt)();
     var duration = endTime - startTime;
     (0,external_kolmafia_.print)("I spent ".concat(duration, " milliseconds running ").concat(n, " blocks!"), "blue");
+    (0,external_kolmafia_.print)("I gathered ".concat((0,external_kolmafia_.itemAmount)((0,dist.$item)(trickin_and_treatin_templateObject27 || (trickin_and_treatin_templateObject27 = trickin_and_treatin_taggedTemplateLiteral(["huge bowl of candy"])))) - ((_cache$startingBowls = cache.startingBowls) !== null && _cache$startingBowls !== void 0 ? _cache$startingBowls : 0), ", as well as ").concat(Array.from(cache.startingCandies.entries()).map(_ref => {
+      var _ref2 = trickin_and_treatin_slicedToArray(_ref, 2),
+          candy = _ref2[0],
+          quantity = _ref2[1];
+
+      return "".concat((0,external_kolmafia_.itemAmount)(candy) - quantity, " ").concat(candy.plural);
+    }).join(", "), "!"), "blue");
   }
 }
 ;// CONCATENATED MODULE: ./src/main.ts
-var main_templateObject, main_templateObject2, main_templateObject3, main_templateObject4, main_templateObject5, main_templateObject6, main_templateObject7;
+var main_templateObject, main_templateObject2, main_templateObject3, main_templateObject4, main_templateObject5, main_templateObject6, main_templateObject7, main_templateObject8;
 
 function main_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -19801,6 +19828,7 @@ function main(args) {
       (0,external_kolmafia_.visitUrl)("choice.php?whichchoice=1270&pwd&option=1&m=".concat(m, "&e=5&s1=5789,1&s2=-1,0&s3=24,1"));
     }
 
+    cache.startingBowls = (0,external_kolmafia_.itemAmount)((0,dist.$item)(main_templateObject8 || (main_templateObject8 = main_taggedTemplateLiteral(["huge bowl of candy"]))));
     var aaBossFlag = (0,external_kolmafia_.xpath)((0,external_kolmafia_.visitUrl)("account.php?tab=combat"), "//*[@id=\"opt_flag_aabosses\"]/label/input[@type='checkbox']@checked")[0] === "checked" ? 1 : 0;
     (0,external_kolmafia_.visitUrl)("account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update", true);
     var blocks = args ? parseInt(args) : undefined;
