@@ -1,4 +1,3 @@
-
 import { $item, $items, $skill, have, Macro as LibramMacro, SourceTerminal } from "libram";
 
 export default class Macro extends LibramMacro {
