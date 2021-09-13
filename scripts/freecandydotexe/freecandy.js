@@ -20725,7 +20725,7 @@ function treat() {
     } else if (thisBlock.match(RegExp("whichhouse=".concat(i, ">[^>]*?starhouse")))) {
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("choice.php?whichchoice=804&option=3&whichhouse=".concat(i, "&pwd"));
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.runChoice)(2);
-      /value="l+/;
+      block();
     }
   }
 
