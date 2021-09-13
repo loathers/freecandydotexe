@@ -171,7 +171,6 @@ export function fightOutfit(type: fightType = "Trick"): void {
   switch (type) {
     case "Kramco":
       forceEquips.push($item`Kramco Sausage-o-Matic™`);
-      if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
       break;
     case "Voter":
       forceEquips.push($item`"I Voted!" sticker`);
@@ -182,6 +181,9 @@ export function fightOutfit(type: fightType = "Trick"): void {
       break;
     case "Trick":
       forceEquips.push(trickHat);
+      break;
+    case "Digitize":
+      if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
       break;
   }
 
