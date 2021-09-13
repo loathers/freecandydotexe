@@ -20349,6 +20349,8 @@ function main(args) {
 
     try {
       (0,_trickin_and_treatin__WEBPACK_IMPORTED_MODULE_2__.runBlocks)(blocks);
+    } catch (_unused) {
+      (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Looks like we've aborted! That's bad. Contact phreddrickkv2 in the freecandydotexe thread on Discord, and let him know what's going on. Unless you're fighting Steve. Then it's fine.", "red");
     } finally {
       _lib__WEBPACK_IMPORTED_MODULE_1__.manager.resetAll();
       (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.visitUrl)("account.php?actions[]=flag_aabosses&flag_aabosses=".concat(aaBossFlag, "&action=Update"), true);
