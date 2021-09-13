@@ -20277,7 +20277,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 function main(args) {
-  if (args.includes("help")) {
+  if (args && args.includes("help")) {
     (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.", "blue");
   } else {
     if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myFullness)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.fullnessLimit)() || (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)() || (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.mySpleenUse)() < (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.spleenLimit)()) {
