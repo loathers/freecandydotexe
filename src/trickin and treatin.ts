@@ -213,6 +213,7 @@ export function runBlocks(blocks = -1): void {
           );
         }
       }
+
       const ghosting = get("questPAGhost") !== "unstarted";
       if (have($item`protonic accelerator pack`) && ghosting && myInebriety() <= inebrietyLimit()) {
         const ghostLocation = get("ghostLocation") || $location`none`;
