@@ -17,7 +17,7 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { $item, $stat, get, have, property, set, sinceKolmafiaRevision } from "libram";
+import { $familiar, $item, $stat, get, have, property, set, sinceKolmafiaRevision } from "libram";
 import { cache, manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -94,6 +94,8 @@ export function main(args: string): void {
     }
 
     cache.startingBowls = itemAmount($item`huge bowl of candy`);
+    if (have($familiar`Trick-or-Treating Tot`))
+      cache.startingCandies.set($item`Prunets`, itemAmount($item`Prunets`));
 
     const aaBossFlag =
       xpath(
