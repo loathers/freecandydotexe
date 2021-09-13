@@ -103,6 +103,11 @@ export function main(args: string): void {
     const blocks = args ? parseInt(args) : undefined;
     try {
       runBlocks(blocks);
+    } catch {
+      print(
+        "Looks like we've aborted! That's bad. Contact phreddrickkv2 in the freecandydotexe thread on Discord, and let him know what's going on. Unless you're fighting Steve. Then it's fine.",
+        "red"
+      );
     } finally {
       manager.resetAll();
       visitUrl(
