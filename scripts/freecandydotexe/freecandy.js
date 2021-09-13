@@ -20833,9 +20833,8 @@ function runBlocks() {
       }
 
       if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\"I Voted!\" sticker"])))) && canFightWanderers) {
-        (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
-
         if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Vote", 0, 0) !== "" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights") < 3) {
+          (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
           (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Voter");
           (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), trickMacro, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Vote", 0, 0) !== "" && (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights") < 3, fillPantsgivingFullness);
         }
@@ -20851,6 +20850,7 @@ function runBlocks() {
         }
 
         (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.print)("Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.", "blue");
+        (0,_outfit__WEBPACK_IMPORTED_MODULE_2__.fightOutfit)("Ghost");
         (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)(ghostLocation, _combat__WEBPACK_IMPORTED_MODULE_3__.default.trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Shoot Ghost"])))).trySkill((0,libram__WEBPACK_IMPORTED_MODULE_4__.$skill)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Trap Ghost"])))), () => (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("questPAGhost") !== "unstarted", fillPantsgivingFullness);
       }
 
