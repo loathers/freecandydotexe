@@ -156,7 +156,10 @@ export function runBlocks(blocks = -1): void {
       const sausages = get("_sausageFights");
       const votes = get("_voteFreeFights");
 
-      if (getCounters("Digitize", -11, 0) !== "") {
+      const canFightWanderers =
+        myInebriety() <= inebrietyLimit() || have($item`Drunkula's wineglass`);
+
+      if (getCounters("Digitize", -11, 0) !== "" && canFightWanderers) {
         print(`It's digitize time!`, "blue");
         const digitizeMacro = Macro.externalIf(
           myAdventures() * 1.1 <
@@ -179,7 +182,7 @@ export function runBlocks(blocks = -1): void {
         );
       }
 
-      if (have($item`Kramco Sausage-o-Matic™`)) {
+      if (have($item`Kramco Sausage-o-Matic™`) && canFightWanderers) {
         const kramcoNumber =
           5 + 3 * get("_sausageFights") + Math.pow(Math.max(0, get("_sausageFights") - 5), 3);
         if (totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber) {
@@ -193,7 +196,7 @@ export function runBlocks(blocks = -1): void {
         }
       }
 
-      if (have($item`"I Voted!" sticker`)) {
+      if (have($item`"I Voted!" sticker`) && canFightWanderers) {
         print(
           "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
           "blue"
@@ -227,7 +230,8 @@ export function runBlocks(blocks = -1): void {
       }
       if (
         digitizes !== get("_sourceTerminalDigitizeUses") &&
-        !(votes !== get("_voteFreeFights") || sausages !== get("_sausageFights"))
+        !(votes !== get("_voteFreeFights") || sausages !== get("_sausageFights")) &&
+        myInebriety() <= inebrietyLimit()
       ) {
         print(
           `Sorry, we encountered a digitized monster but haven't initialized the counter yet!`,
