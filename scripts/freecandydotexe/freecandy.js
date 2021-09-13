@@ -19261,7 +19261,7 @@ function fightOutfit() {
   1.1 * (1000 * baseAdventureValue()) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2) : 0;
   var bjornalikeToUse = bestBjornalike(forceEquips);
   if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
-  (0,dist.maximizeCached)(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight")], {
+  (0,dist.maximizeCached)(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight"), "0.25 Meat Drop"], {
     forceEquip: forceEquips,
     bonusEquip: bonusEquips,
     preventSlot: (0,dist.$slots)(outfit_templateObject39 || (outfit_templateObject39 = outfit_taggedTemplateLiteral(["buddy-bjorn, crown-of-thrones"]))),
