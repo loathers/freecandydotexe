@@ -209,7 +209,7 @@ export function runBlocks(blocks = -1): void {
         }
       }
       const ghosting = get("questPAGhost") !== "unstarted";
-      if (have($item`protonic accelerator pack`) && ghosting && myInebriety() < inebrietyLimit()) {
+      if (have($item`protonic accelerator pack`) && ghosting && myInebriety() <= inebrietyLimit()) {
         const ghostLocation = get("ghostLocation") || $location`none`;
         if (ghostLocation === $location`none`) {
           throw `Something went wrong with my ghosts. Dammit, Walter Peck!`;

@@ -9,12 +9,14 @@ import {
   fullnessLimit,
   getOutfits,
   haveEquipped,
+  inebrietyLimit,
   mallPrice,
   myAdventures,
   myClass,
   myEffects,
   myFamiliar,
   myFullness,
+  myInebriety,
   myLevel,
   numericModifier,
   outfitPieces,
@@ -169,9 +171,11 @@ export function fightOutfit(type: fightType = "Trick"): void {
   switch (type) {
     case "Kramco":
       forceEquips.push($item`Kramco Sausage-o-Matic™`);
+      if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
       break;
     case "Voter":
       forceEquips.push($item`"I Voted!" sticker`);
+      if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
       break;
     case "Ghost":
       forceEquips.push($item`protonic accelerator pack`);
