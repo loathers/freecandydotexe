@@ -220,6 +220,7 @@ export function runBlocks(blocks = -1): void {
           throw `Something went wrong with my ghosts. Dammit, Walter Peck!`;
         }
         print(`Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.`, "blue");
+        fightOutfit("Ghost");
         advMacroAA(
           ghostLocation,
           Macro.trySkill($skill`Shoot Ghost`)
