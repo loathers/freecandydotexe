@@ -42,7 +42,7 @@ import {
 import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
 import Macro from "./combat";
 
-const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor`;
+const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`;
 
 const prepareToTrick = (trickMacro: Macro) => {
   trickMacro.setAutoAttack();
