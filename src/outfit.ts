@@ -412,7 +412,7 @@ export function meatOutfit(): void {
       ...(bjornalike ? new Map([[bjornalike, bjornValue(bjornFam)]]) : []),
     ]),
     preventEquip: $items`Buddy Bjorn, Crown of Thrones`.filter((bjorn) => bjorn !== bjornalike),
-    forceEquip: myInebriety() > inebrietyLimit() ? $items`Drunkula's wineglass` : undefined,
+    forceEquip: myInebriety() > inebrietyLimit() ? $items`Drunkula's wineglass` : [],
   }).maximize();
   if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(bjornFam.familiar);
   else if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(bjornFam.familiar);
