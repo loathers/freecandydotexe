@@ -1,4 +1,4 @@
-import { retrieveItem } from "kolmafia";
+
 import { $item, $items, $skill, have, Macro as LibramMacro, SourceTerminal } from "libram";
 
 export default class Macro extends LibramMacro {
@@ -35,11 +35,10 @@ export default class Macro extends LibramMacro {
   }
 
   stasisItem(): Macro {
-    const spammableItem = $items`dictionary, facsimile dictionary, spices`.find((item) =>
-      have(item)
+    const spammableItem = $items`dictionary, facsimile dictionary, spices, seal tooth`.find(
+      (item) => have(item)
     );
     if (spammableItem) return Macro.item(spammableItem);
-    retrieveItem($item`seal tooth`);
     return Macro.item($item`seal tooth`);
   }
 

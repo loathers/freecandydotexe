@@ -130,6 +130,7 @@ export function runBlocks(blocks = -1): void {
   SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
 
   trickFamiliar();
+  retrieveItem($item`seal tooth`);
   const trickMacro = stasisFamiliars.includes(trickFamiliar())
     ? Macro.if_(`monsterid ${toInt($monster`All-Hallow's Steve`)}`, Macro.abort())
         .stasis()
