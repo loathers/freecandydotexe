@@ -19812,6 +19812,7 @@ function main(args) {
     } finally {
       manager.resetAll();
       (0,external_kolmafia_.visitUrl)("account.php?actions[]=flag_aabosses&flag_aabosses=".concat(aaBossFlag, "&action=Update"), true);
+      (0,external_kolmafia_.setAutoAttack)(0);
     }
   }
 }
