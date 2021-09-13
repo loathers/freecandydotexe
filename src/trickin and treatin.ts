@@ -261,6 +261,6 @@ export function runBlocks(blocks = -1): void {
   } finally {
     const endTime = gametimeToInt();
     const duration = endTime - startTime;
-    print(`I spent ${duration} milliseconds!`, "blue");
+    print(`I spent ${duration} milliseconds running ${n} blocks!`, "blue");
   }
 }
