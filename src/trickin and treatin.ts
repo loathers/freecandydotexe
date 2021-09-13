@@ -174,7 +174,7 @@ export function runBlocks(blocks = -1): void {
           Macro.trySkill($skill`Digitize`)
         ).step(trickMacro);
         if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
-          meatFamiliar();
+          useFamiliar(meatFamiliar());
           meatOutfit();
         } else fightOutfit("Digitize");
         advMacroAA(
