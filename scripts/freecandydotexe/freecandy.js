@@ -20803,6 +20803,7 @@ function runBlocks() {
       var digitizes = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sourceTerminalDigitizeUses");
       var sausages = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights");
       var votes = (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_voteFreeFights");
+      n++;
       var canFightWanderers = (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() <= (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)() || (0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
 
       if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "" && canFightWanderers) {
