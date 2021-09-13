@@ -199,11 +199,11 @@ export function runBlocks(blocks = -1): void {
       }
 
       if (have($item`"I Voted!" sticker`) && canFightWanderers) {
-        print(
-          "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
-          "blue"
-        );
         if (getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3) {
+          print(
+            "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
+            "blue"
+          );
           fightOutfit("Voter");
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
