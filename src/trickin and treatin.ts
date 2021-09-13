@@ -5,6 +5,7 @@ import {
   getCounters,
   inebrietyLimit,
   inMultiFight,
+  itemAmount,
   myAdventures,
   myFullness,
   myInebriety,
@@ -33,6 +34,7 @@ import {
 } from "libram";
 import {
   advMacroAA,
+  cache,
   determineDraggableZoneAndEnsureAccess,
   findRun,
   meatFamiliar,
@@ -262,5 +264,13 @@ export function runBlocks(blocks = -1): void {
     const endTime = gametimeToInt();
     const duration = endTime - startTime;
     print(`I spent ${duration} milliseconds running ${n} blocks!`, "blue");
+    print(
+      `I gathered ${
+        itemAmount($item`huge bowl of candy`) - (cache.startingBowls ?? 0)
+      }, as well as ${Array.from(cache.startingCandies.entries())
+        .map(([candy, quantity]) => `${itemAmount(candy) - quantity} ${candy.plural}`)
+        .join(", ")}!`,
+      "blue"
+    );
   }
 }

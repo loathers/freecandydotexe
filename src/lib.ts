@@ -48,7 +48,11 @@ export const cache: {
   baseAdventureValue?: number;
   effectWeight?: number;
   meatFamiliar?: Familiar;
-} = {};
+  startingBowls?: number;
+  startingCandies: Map<Item, number>;
+} = {
+  startingCandies: new Map<Item, number>(),
+};
 
 type ZonePotion = {
   zone: string;

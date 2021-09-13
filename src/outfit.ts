@@ -10,6 +10,7 @@ import {
   getOutfits,
   haveEquipped,
   inebrietyLimit,
+  itemAmount,
   mallPrice,
   myAdventures,
   myClass,
@@ -389,6 +390,10 @@ export function bestOutfit(): string {
       if (!flyestFit) throw "You somehow have no outfits, dude!";
       cache.bestOutfit = flyestFit;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(outfitTreats(cache.bestOutfit)).forEach(([candy, _probability]) =>
+      cache.startingCandies.set(toItem(candy), itemAmount(toItem(candy)))
+    );
   }
   return cache.bestOutfit;
 }

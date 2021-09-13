@@ -2,6 +2,7 @@ import {
   abort,
   fullnessLimit,
   inebrietyLimit,
+  itemAmount,
   myFullness,
   myInebriety,
   myLevel,
@@ -17,7 +18,7 @@ import {
   xpath,
 } from "kolmafia";
 import { $item, $stat, get, have, property, set, sinceKolmafiaRevision } from "libram";
-import { manager, questStep } from "./lib";
+import { cache, manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
 export function main(args: string): void {
@@ -91,6 +92,8 @@ export function main(args: string): void {
       visitUrl("inv_use.php?pwd&whichitem=9573");
       visitUrl(`choice.php?whichchoice=1270&pwd&option=1&m=${m}&e=5&s1=5789,1&s2=-1,0&s3=24,1`);
     }
+
+    cache.startingBowls = itemAmount($item`huge bowl of candy`);
 
     const aaBossFlag =
       xpath(
