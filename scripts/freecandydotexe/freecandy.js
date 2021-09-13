@@ -19753,7 +19753,7 @@ function runBlocks() {
   }
 }
 ;// CONCATENATED MODULE: ./src/main.ts
-var main_templateObject, main_templateObject2, main_templateObject3, main_templateObject4, main_templateObject5, main_templateObject6, main_templateObject7, main_templateObject8;
+var main_templateObject, main_templateObject2, main_templateObject3, main_templateObject4, main_templateObject5, main_templateObject6, main_templateObject7, main_templateObject8, main_templateObject9, main_templateObject10, main_templateObject11;
 
 function main_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -19829,6 +19829,7 @@ function main(args) {
     }
 
     cache.startingBowls = (0,external_kolmafia_.itemAmount)((0,dist.$item)(main_templateObject8 || (main_templateObject8 = main_taggedTemplateLiteral(["huge bowl of candy"]))));
+    if ((0,dist.have)((0,dist.$familiar)(main_templateObject9 || (main_templateObject9 = main_taggedTemplateLiteral(["Trick-or-Treating Tot"]))))) cache.startingCandies.set((0,dist.$item)(main_templateObject10 || (main_templateObject10 = main_taggedTemplateLiteral(["Prunets"]))), (0,external_kolmafia_.itemAmount)((0,dist.$item)(main_templateObject11 || (main_templateObject11 = main_taggedTemplateLiteral(["Prunets"])))));
     var aaBossFlag = (0,external_kolmafia_.xpath)((0,external_kolmafia_.visitUrl)("account.php?tab=combat"), "//*[@id=\"opt_flag_aabosses\"]/label/input[@type='checkbox']@checked")[0] === "checked" ? 1 : 0;
     (0,external_kolmafia_.visitUrl)("account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update", true);
     var blocks = args ? parseInt(args) : undefined;
