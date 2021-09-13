@@ -267,7 +267,7 @@ export function runBlocks(blocks = -1): void {
     print(
       `I gathered ${
         itemAmount($item`huge bowl of candy`) - (cache.startingBowls ?? 0)
-      }, as well as ${Array.from(cache.startingCandies.entries())
+      } huge bowls of candy, as well as ${Array.from(cache.startingCandies.entries())
         .map(([candy, quantity]) => `${itemAmount(candy) - quantity} ${candy.plural}`)
         .join(", ")}!`,
       "blue"
