@@ -19660,7 +19660,7 @@ function runBlocks() {
         var digitizeMacro = Macro.externalIf((0,external_kolmafia_.myAdventures)() * 1.1 < (3 - digitizes) * (5 * ((0,dist.get)("_sourceTerminalDigitizeMonsterCount") * (1 + (0,dist.get)("_sourceTerminalDigitizeMonsterCount"))) - 3), Macro.trySkill((0,dist.$skill)(trickin_and_treatin_templateObject15 || (trickin_and_treatin_templateObject15 = trickin_and_treatin_taggedTemplateLiteral(["Digitize"]))))).step(trickMacro);
 
         if ((0,dist.get)("_sourceTerminalDigitizeMonster") === (0,dist.$monster)(trickin_and_treatin_templateObject16 || (trickin_and_treatin_templateObject16 = trickin_and_treatin_taggedTemplateLiteral(["Knob Goblin Embezzler"])))) {
-          meatFamiliar();
+          (0,external_kolmafia_.useFamiliar)(meatFamiliar());
           meatOutfit();
         } else fightOutfit("Digitize");
 
