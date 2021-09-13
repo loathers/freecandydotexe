@@ -20476,20 +20476,23 @@ function fightOutfit() {
   switch (type) {
     case "Kramco":
       forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"]))));
-      if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myInebriety)() > (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.inebrietyLimit)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
       break;
 
     case "Voter":
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\"I Voted!\" sticker"]))));
-      if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myInebriety)() > (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.inebrietyLimit)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\"I Voted!\" sticker"]))));
+      if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myInebriety)() > (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.inebrietyLimit)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
       break;
 
     case "Ghost":
-      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
+      forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["protonic accelerator pack"]))));
       break;
 
     case "Trick":
       forceEquips.push(trickHat);
+      break;
+
+    case "Digitize":
+      if ((0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.myInebriety)() > (0,kolmafia__WEBPACK_IMPORTED_MODULE_1__.inebrietyLimit)()) forceEquips.push((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
       break;
   }
 
@@ -20818,7 +20821,7 @@ function runBlocks() {
         (0,_lib__WEBPACK_IMPORTED_MODULE_1__.advMacroAA)((0,_lib__WEBPACK_IMPORTED_MODULE_1__.determineDraggableZoneAndEnsureAccess)(), digitizeMacro, () => (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.getCounters)("Digitize", -11, 0) !== "", fillPantsgivingFullness);
       }
 
-      if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))) && canFightWanderers) {
+      if ((0,libram__WEBPACK_IMPORTED_MODULE_4__.have)((0,libram__WEBPACK_IMPORTED_MODULE_4__.$item)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))) && (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.myInebriety)() <= (0,kolmafia__WEBPACK_IMPORTED_MODULE_0__.inebrietyLimit)()) {
         (function () {
           var kramcoNumber = 5 + 3 * (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights") + Math.pow(Math.max(0, (0,libram__WEBPACK_IMPORTED_MODULE_4__.get)("_sausageFights") - 5), 3);
 
