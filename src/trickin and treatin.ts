@@ -142,7 +142,7 @@ export function runBlocks(blocks = -1): void {
         .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
         .kill();
 
-  const n = 0;
+  let n = 0;
   const hasBlocksRemaining = () => (blocks >= 0 ? n < blocks : myAdventures() >= 5);
   const nemesisStep = () => questStep("questG04Nemesis");
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
@@ -155,6 +155,8 @@ export function runBlocks(blocks = -1): void {
       const digitizes = get("_sourceTerminalDigitizeUses");
       const sausages = get("_sausageFights");
       const votes = get("_voteFreeFights");
+
+      n++;
 
       const canFightWanderers =
         myInebriety() <= inebrietyLimit() || have($item`Drunkula's wineglass`);
