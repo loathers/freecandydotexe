@@ -78,7 +78,7 @@ function treat() {
     } else if (thisBlock.match(RegExp(`whichhouse=${i}>[^>]*?starhouse`))) {
       visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${i}&pwd`);
       runChoice(2);
-      /value="l+/;
+      block();
     }
   }
   if (block().match(/whichhouse=\d*>[^>]*?house_l/))
