@@ -10,6 +10,7 @@ import {
   print,
   retrieveItem,
   runChoice,
+  setAutoAttack,
   spleenLimit,
   userConfirm,
   visitUrl,
@@ -114,6 +115,7 @@ export function main(args: string): void {
         `account.php?actions[]=flag_aabosses&flag_aabosses=${aaBossFlag}&action=Update`,
         true
       );
+      setAutoAttack(0);
     }
   }
 }
