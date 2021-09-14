@@ -421,7 +421,7 @@ export function bestOutfit(): string {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Object.entries(outfitTreats(cache.bestOutfit)).forEach(([candy, _probability]) => {
-    if (cache.startingCandies.has(toItem(candy)))
+    if (!cache.startingCandies.has(toItem(candy)))
       cache.startingCandies.set(toItem(candy), itemAmount(toItem(candy)));
   });
   return cache.bestOutfit;
