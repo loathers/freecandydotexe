@@ -255,13 +255,20 @@ export function fightOutfit(type: fightType = "Trick"): void {
     const bjornalikeToUse = bestBjornalike(forceEquips);
     if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
 
-    maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`, "0.25 Meat Drop"], {
-      forceEquip: forceEquips,
-      bonusEquip: bonusEquips,
-      preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
-      preventEquip:
-        bjornalikeToUse === $item`Buddy Bjorn` ? $items`Crown of Thrones` : $items`Buddy Bjorn`,
-    });
+    maximizeCached(
+      [
+        `${Math.round(weightValue * 100) / 100} Familiar Weight`,
+        ...(have($item`SongBoom™ BoomBox`) ? ["0.25 Meat Drop"] : []),
+        "0.01 Item Drop",
+      ],
+      {
+        forceEquip: forceEquips,
+        bonusEquip: bonusEquips,
+        preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
+        preventEquip:
+          bjornalikeToUse === $item`Buddy Bjorn` ? $items`Crown of Thrones` : $items`Buddy Bjorn`,
+      }
+    );
 
     if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
     if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(pickBjorn().familiar);
