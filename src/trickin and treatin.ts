@@ -16,7 +16,6 @@ import {
   runChoice,
   runCombat,
   toInt,
-  totalTurnsPlayed,
   useFamiliar,
   visitUrl,
 } from "kolmafia";
@@ -29,6 +28,7 @@ import {
   $skill,
   $skills,
   get,
+  getKramcoWandererChance,
   have,
   SourceTerminal,
 } from "libram";
@@ -188,14 +188,12 @@ export function runBlocks(blocks = -1): void {
       }
 
       if (have($item`Kramco Sausage-o-Matic™`) && myInebriety() <= inebrietyLimit()) {
-        const kramcoNumber =
-          5 + 3 * get("_sausageFights") + Math.pow(Math.max(0, get("_sausageFights") - 5), 3);
-        if (totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber) {
+        if (getKramcoWandererChance() >= 1) {
           fightOutfit("Kramco");
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
             trickMacro,
-            () => totalTurnsPlayed() - get("_lastSausageMonsterTurn") + 1 >= kramcoNumber,
+            () => getKramcoWandererChance() >= 1,
             fillPantsgivingFullness
           );
         }
