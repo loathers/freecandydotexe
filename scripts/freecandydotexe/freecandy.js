@@ -19375,17 +19375,17 @@ function bestOutfit() {
       }))]).sort((a, b) => b[1] - a[1])[0][0];
       if (!flyestFit) throw "You somehow have no outfits, dude!";
       cache.bestOutfit = flyestFit;
-    } // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    }
+  } // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-    Object.entries((0,external_kolmafia_.outfitTreats)(cache.bestOutfit)).forEach(_ref7 => {
-      var _ref8 = _slicedToArray(_ref7, 2),
-          candy = _ref8[0],
-          _probability = _ref8[1];
 
-      return cache.startingCandies.set((0,external_kolmafia_.toItem)(candy), (0,external_kolmafia_.itemAmount)((0,external_kolmafia_.toItem)(candy)));
-    });
-  }
+  Object.entries((0,external_kolmafia_.outfitTreats)(cache.bestOutfit)).forEach(_ref7 => {
+    var _ref8 = _slicedToArray(_ref7, 2),
+        candy = _ref8[0],
+        _probability = _ref8[1];
 
+    if (cache.startingCandies.has((0,external_kolmafia_.toItem)(candy))) cache.startingCandies.set((0,external_kolmafia_.toItem)(candy), (0,external_kolmafia_.itemAmount)((0,external_kolmafia_.toItem)(candy)));
+  });
   return cache.bestOutfit;
 }
 function meatOutfit() {
