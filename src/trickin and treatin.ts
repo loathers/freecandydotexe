@@ -211,7 +211,7 @@ export function runBlocks(blocks = -1): void {
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
             trickMacro,
-            () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3,
+            1,
             fillPantsgivingFullness
           );
         }
