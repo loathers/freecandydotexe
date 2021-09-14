@@ -264,11 +264,11 @@ export function runBlocks(blocks = -1): void {
     const duration = endTime - startTime;
     print(`I spent ${duration} milliseconds running ${n} blocks!`, "blue");
     print(
-      `I gathered ${
-        itemAmount($item`huge bowl of candy`) - (cache.startingBowls ?? 0)
-      } huge bowls of candy, as well as ${Array.from(cache.startingCandies.entries())
+      `I gathered ${Array.from(cache.startingCandies.entries())
         .map(([candy, quantity]) => `${itemAmount(candy) - quantity} ${candy.plural}`)
-        .join(", ")}!`,
+        .join(", ")}, and ${
+        itemAmount($item`huge bowl of candy`) - (cache.startingBowls ?? 0)
+      } huge bowls of candy!`,
       "blue"
     );
   }
