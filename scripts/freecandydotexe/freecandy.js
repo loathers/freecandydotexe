@@ -19717,10 +19717,10 @@ function runBlocks() {
       }
 
       if ((0,dist.have)((0,dist.$item)(trickin_and_treatin_templateObject18 || (trickin_and_treatin_templateObject18 = trickin_and_treatin_taggedTemplateLiteral(["\"I Voted!\" sticker"])))) && canFightWanderers) {
-        if ((0,external_kolmafia_.getCounters)("Vote", 0, 0) !== "" && (0,dist.get)("_voteFreeFights") < 3) {
+        if ((0,external_kolmafia_.totalTurnsPlayed)() % 11 === 1 && (0,dist.get)("_voteFreeFights") < 3) {
           (0,external_kolmafia_.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
           fightOutfit("Voter");
-          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,external_kolmafia_.getCounters)("Vote", 0, 0) !== "" && (0,dist.get)("_voteFreeFights") < 3, fillPantsgivingFullness);
+          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,external_kolmafia_.totalTurnsPlayed)() % 11 === 1 && (0,dist.get)("_voteFreeFights") < 3, fillPantsgivingFullness);
         }
       }
 
