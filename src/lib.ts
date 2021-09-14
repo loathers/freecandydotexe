@@ -6,6 +6,7 @@ import {
   buy,
   cliExecute,
   mallPrice,
+  myAdventures,
   myFamiliar,
   numericModifier,
   print,
@@ -192,7 +193,10 @@ export function advMacroAA(
 ): void {
   let n = 0;
   const condition = () => {
-    return typeof whileParameter === "number" ? n < whileParameter : whileParameter();
+    return (
+      (typeof whileParameter === "number" ? n < whileParameter : whileParameter()) &&
+      myAdventures() > 0
+    );
   };
 
   if (macro instanceof Macro) macro.setAutoAttack();
