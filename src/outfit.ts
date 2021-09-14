@@ -5,6 +5,7 @@ import {
   canEquip,
   effectModifier,
   enthroneFamiliar,
+  equip,
   equippedItem,
   fullnessLimit,
   getOutfits,
@@ -20,6 +21,7 @@ import {
   myInebriety,
   myLevel,
   numericModifier,
+  outfit,
   outfitPieces,
   outfitTreats,
   runChoice,
@@ -148,103 +150,122 @@ function getEffectWeight(): number {
 
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 export function fightOutfit(type: fightType = "Trick"): void {
-  if (!trickHats.some((hat) => have(hat))) {
-    buy(1, trickHats.sort((a, b) => mallPrice(b) - mallPrice(a))[0]);
-  }
-  const trickHat = trickHats.find((hat) => have(hat)) || $item`beholed bedsheet`; //Just to stop it from being undefined
-
-  const forceEquips: Item[] = [];
-
-  const bonusEquips = new Map<Item, number>([
-    [$item`lucky gold ring`, 400],
-    [$item`Mr. Cheeng's spectacles`, 250],
-    [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
-    [$item`Mr. Screege's spectacles`, 180],
-    [
-      $item`bag of many confections`,
-      getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
-    ],
-    ...snowSuit(),
-    ...mayflowerBouquet(),
-    ...pantsgiving(),
-  ]);
-
-  switch (type) {
-    case "Kramco":
-      forceEquips.push($item`Kramco Sausage-o-Matic™`);
-      break;
-    case "Voter":
-      forceEquips.push($item`"I Voted!" sticker`);
-      if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
-      break;
-    case "Ghost":
-      forceEquips.push($item`protonic accelerator pack`);
-      break;
-    case "Trick":
-      forceEquips.push(trickHat);
-      break;
-    case "Digitize":
-      if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
-      break;
-  }
-
-  if (
-    have($item`protonic accelerator pack`) &&
-    forceEquips.every((item) => toSlot(item) !== $slot`back`) &&
-    get("questPAGhost") === "unstarted" &&
-    get("nextParanormalActivity") <= totalTurnsPlayed()
-  )
-    forceEquips.push($item`protonic accelerator pack`);
-
-  if (trickFamiliar() === $familiar`Reagnimated Gnome`) {
-    forceEquips.push($item`gnomish housemaid's kgnee`);
-    if (!have($item`gnomish housemaid's kgnee`)) {
-      visitUrl("arena.php");
-      runChoice(4);
+  if (property.getString("freecandy_trickOutfit")) {
+    outfit(property.getString("freecandy_trickOutfit"));
+    switch (type) {
+      case "Kramco":
+        equip($slot`off-hand`, $item`Kramco Sausage-o-Matic™`);
+        break;
+      case "Voter":
+        equip($slot`acc1`, $item`"I Voted!" sticker`);
+        if (myInebriety() > inebrietyLimit()) equip($slot`off-hand`, $item`Drunkula's wineglass`);
+        break;
+      case "Ghost":
+        equip($slot`back`, $item`protonic accelerator pack`);
+        break;
+      case "Digitize":
+        if (myInebriety() > inebrietyLimit()) equip($slot`off-hand`, $item`Drunkula's wineglass`);
+        break;
     }
-  }
+  } else {
+    if (!trickHats.some((hat) => have(hat))) {
+      buy(1, trickHats.sort((a, b) => mallPrice(b) - mallPrice(a))[0]);
+    }
+    const trickHat = trickHats.find((hat) => have(hat)) || $item`beholed bedsheet`; //Just to stop it from being undefined
 
-  const stasisData = stasisFamiliars.get(myFamiliar());
-  if (stasisData) {
+    const forceEquips: Item[] = [];
+
+    const bonusEquips = new Map<Item, number>([
+      [$item`lucky gold ring`, 400],
+      [$item`Mr. Cheeng's spectacles`, 250],
+      [$item`pantogram pants`, get("_pantogramModifier").includes("Drops Items") ? 100 : 0],
+      [$item`Mr. Screege's spectacles`, 180],
+      [
+        $item`bag of many confections`,
+        getSaleValue(...$items`Polka Pop, BitterSweetTarts, Piddles`) / 6,
+      ],
+      ...snowSuit(),
+      ...mayflowerBouquet(),
+      ...pantsgiving(),
+    ]);
+
+    switch (type) {
+      case "Kramco":
+        forceEquips.push($item`Kramco Sausage-o-Matic™`);
+        break;
+      case "Voter":
+        forceEquips.push($item`"I Voted!" sticker`);
+        if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
+        break;
+      case "Ghost":
+        forceEquips.push($item`protonic accelerator pack`);
+        break;
+      case "Trick":
+        forceEquips.push(trickHat);
+        break;
+      case "Digitize":
+        if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
+        break;
+    }
+
     if (
-      stasisData.baseRate + actionRateBonus() < 1 &&
-      getFoldGroup($item`Loathing Legion helicopter`).some((foldable) => have(foldable))
-    ) {
-      forceEquips.push($item`Loathing Legion helicopter`);
+      have($item`protonic accelerator pack`) &&
+      forceEquips.every((item) => toSlot(item) !== $slot`back`) &&
+      get("questPAGhost") === "unstarted" &&
+      get("nextParanormalActivity") <= totalTurnsPlayed()
+    )
+      forceEquips.push($item`protonic accelerator pack`);
+
+    if (trickFamiliar() === $familiar`Reagnimated Gnome`) {
+      forceEquips.push($item`gnomish housemaid's kgnee`);
+      if (!have($item`gnomish housemaid's kgnee`)) {
+        visitUrl("arena.php");
+        runChoice(4);
+      }
     }
+
+    const stasisData = stasisFamiliars.get(myFamiliar());
+    if (stasisData) {
+      if (
+        stasisData.baseRate + actionRateBonus() < 1 &&
+        getFoldGroup($item`Loathing Legion helicopter`).some((foldable) => have(foldable))
+      ) {
+        forceEquips.push($item`Loathing Legion helicopter`);
+      }
+    }
+
+    const weightValue = stasisData
+      ? //action rate times weight per lb
+        clamp(
+          stasisData.baseRate +
+            actionRateBonus() +
+            (forceEquips.includes($item`Loathing Legion helicopter`) &&
+            !haveEquipped($item`Loathing Legion helicopter`)
+              ? 0.25
+              : 0),
+          0,
+          1
+        ) * stasisData.meatPerLb
+      : adventureFamiliars.includes(trickFamiliar())
+      ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
+        (1.1 * (1000 * baseAdventureValue())) /
+        Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
+      : 0;
+
+    const bjornalikeToUse = bestBjornalike(forceEquips);
+    if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
+
+    maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`, "0.25 Meat Drop"], {
+      forceEquip: forceEquips,
+      bonusEquip: bonusEquips,
+      preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
+      preventEquip:
+        bjornalikeToUse === $item`Buddy Bjorn` ? $items`Crown of Thrones` : $items`Buddy Bjorn`,
+    });
+
+    if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
+    if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(pickBjorn().familiar);
   }
-
-  const weightValue = stasisData
-    ? //action rate times weight per lb
-      clamp(
-        stasisData.baseRate +
-          actionRateBonus() +
-          (forceEquips.includes($item`Loathing Legion helicopter`) &&
-          !haveEquipped($item`Loathing Legion helicopter`)
-            ? 0.25
-            : 0),
-        0,
-        1
-      ) * stasisData.meatPerLb
-    : adventureFamiliars.includes(trickFamiliar())
-    ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
-      (1.1 * (1000 * baseAdventureValue())) /
-      Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
-    : 0;
-
-  const bjornalikeToUse = bestBjornalike(forceEquips);
-  if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
-
-  maximizeCached([`${Math.round(weightValue * 100) / 100} Familiar Weight`, "0.25 Meat Drop"], {
-    forceEquip: forceEquips,
-    bonusEquip: bonusEquips,
-    preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
-    preventEquip:
-      bjornalikeToUse === $item`Buddy Bjorn` ? $items`Crown of Thrones` : $items`Buddy Bjorn`,
-  });
-
-  if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
-  if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(pickBjorn().familiar);
 }
 
 function snowSuit() {
