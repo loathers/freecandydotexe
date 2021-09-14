@@ -72,7 +72,6 @@ export function main(args: string): void {
       autoSatisfyWithMall: true,
       autoSatisfyWithNPCs: true,
       autoSatisfyWithStorage: true,
-      currentMood: "apathetic",
     });
     manager.setChoices({ 806: 1 });
 
