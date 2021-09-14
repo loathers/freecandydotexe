@@ -185,6 +185,7 @@ export function runBlocks(blocks = -1): void {
           () => getCounters("Digitize", -11, 0) !== "",
           fillPantsgivingFullness
         );
+        useFamiliar(trickFamiliar());
       }
 
       if (have($item`Kramco Sausage-o-Matic™`) && myInebriety() <= inebrietyLimit()) {
