@@ -18753,7 +18753,7 @@ function advMacroAA(location, macro) {
   var n = 0;
 
   var condition = () => {
-    return typeof whileParameter === "number" ? n < whileParameter : whileParameter();
+    return (typeof whileParameter === "number" ? n < whileParameter : whileParameter()) && (0,external_kolmafia_.myAdventures)() > 0;
   };
 
   if (macro instanceof dist.Macro) macro.setAutoAttack();
@@ -19686,14 +19686,10 @@ function runBlocks() {
       }
 
       if ((0,dist.have)((0,dist.$item)(trickin_and_treatin_templateObject17 || (trickin_and_treatin_templateObject17 = trickin_and_treatin_taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))) && (0,external_kolmafia_.myInebriety)() <= (0,external_kolmafia_.inebrietyLimit)()) {
-        (function () {
-          var kramcoNumber = 5 + 3 * (0,dist.get)("_sausageFights") + Math.pow(Math.max(0, (0,dist.get)("_sausageFights") - 5), 3);
-
-          if ((0,external_kolmafia_.totalTurnsPlayed)() - (0,dist.get)("_lastSausageMonsterTurn") + 1 >= kramcoNumber) {
-            fightOutfit("Kramco");
-            advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,external_kolmafia_.totalTurnsPlayed)() - (0,dist.get)("_lastSausageMonsterTurn") + 1 >= kramcoNumber, fillPantsgivingFullness);
-          }
-        })();
+        if ((0,dist.getKramcoWandererChance)() >= 1) {
+          fightOutfit("Kramco");
+          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,dist.getKramcoWandererChance)() >= 1, fillPantsgivingFullness);
+        }
       }
 
       if ((0,dist.have)((0,dist.$item)(trickin_and_treatin_templateObject18 || (trickin_and_treatin_templateObject18 = trickin_and_treatin_taggedTemplateLiteral(["\"I Voted!\" sticker"])))) && canFightWanderers) {
