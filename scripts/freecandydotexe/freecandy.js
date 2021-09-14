@@ -19763,13 +19763,13 @@ function runBlocks() {
     var endTime = (0,external_kolmafia_.gametimeToInt)();
     var duration = endTime - startTime;
     (0,external_kolmafia_.print)("I spent ".concat(duration, " milliseconds running ").concat(n, " blocks!"), "blue");
-    (0,external_kolmafia_.print)("I gathered ".concat((0,external_kolmafia_.itemAmount)((0,dist.$item)(trickin_and_treatin_templateObject27 || (trickin_and_treatin_templateObject27 = trickin_and_treatin_taggedTemplateLiteral(["huge bowl of candy"])))) - ((_cache$startingBowls = cache.startingBowls) !== null && _cache$startingBowls !== void 0 ? _cache$startingBowls : 0), " huge bowls of candy, as well as ").concat(Array.from(cache.startingCandies.entries()).map(_ref => {
+    (0,external_kolmafia_.print)("I gathered ".concat(Array.from(cache.startingCandies.entries()).map(_ref => {
       var _ref2 = trickin_and_treatin_slicedToArray(_ref, 2),
           candy = _ref2[0],
           quantity = _ref2[1];
 
       return "".concat((0,external_kolmafia_.itemAmount)(candy) - quantity, " ").concat(candy.plural);
-    }).join(", "), "!"), "blue");
+    }).join(", "), ", and ").concat((0,external_kolmafia_.itemAmount)((0,dist.$item)(trickin_and_treatin_templateObject27 || (trickin_and_treatin_templateObject27 = trickin_and_treatin_taggedTemplateLiteral(["huge bowl of candy"])))) - ((_cache$startingBowls = cache.startingBowls) !== null && _cache$startingBowls !== void 0 ? _cache$startingBowls : 0), " huge bowls of candy!"), "blue");
   }
 }
 ;// CONCATENATED MODULE: ./src/main.ts
