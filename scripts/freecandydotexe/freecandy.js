@@ -19720,7 +19720,7 @@ function runBlocks() {
         if ((0,external_kolmafia_.totalTurnsPlayed)() % 11 === 1 && (0,dist.get)("_voteFreeFights") < 3) {
           (0,external_kolmafia_.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
           fightOutfit("Voter");
-          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,external_kolmafia_.totalTurnsPlayed)() % 11 === 1 && (0,dist.get)("_voteFreeFights") < 3, fillPantsgivingFullness);
+          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, 1, fillPantsgivingFullness);
         }
       }
 
