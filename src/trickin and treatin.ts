@@ -16,6 +16,7 @@ import {
   runChoice,
   runCombat,
   toInt,
+  totalTurnsPlayed,
   useFamiliar,
   visitUrl,
 } from "kolmafia";
@@ -201,7 +202,7 @@ export function runBlocks(blocks = -1): void {
       }
 
       if (have($item`"I Voted!" sticker`) && canFightWanderers) {
-        if (getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3) {
+        if (totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3) {
           print(
             "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
             "blue"
@@ -210,7 +211,7 @@ export function runBlocks(blocks = -1): void {
           advMacroAA(
             determineDraggableZoneAndEnsureAccess(),
             trickMacro,
-            () => getCounters("Vote", 0, 0) !== "" && get("_voteFreeFights") < 3,
+            () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3,
             fillPantsgivingFullness
           );
         }
