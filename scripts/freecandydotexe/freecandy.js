@@ -19384,7 +19384,7 @@ function bestOutfit() {
         candy = _ref8[0],
         _probability = _ref8[1];
 
-    if (cache.startingCandies.has((0,external_kolmafia_.toItem)(candy))) cache.startingCandies.set((0,external_kolmafia_.toItem)(candy), (0,external_kolmafia_.itemAmount)((0,external_kolmafia_.toItem)(candy)));
+    if (!cache.startingCandies.has((0,external_kolmafia_.toItem)(candy))) cache.startingCandies.set((0,external_kolmafia_.toItem)(candy), (0,external_kolmafia_.itemAmount)((0,external_kolmafia_.toItem)(candy)));
   });
   return cache.bestOutfit;
 }
@@ -19826,8 +19826,7 @@ function main(args) {
       customCombatScript: "twiddle",
       autoSatisfyWithMall: true,
       autoSatisfyWithNPCs: true,
-      autoSatisfyWithStorage: true,
-      currentMood: "apathetic"
+      autoSatisfyWithStorage: true
     });
     manager.setChoices({
       806: 1
