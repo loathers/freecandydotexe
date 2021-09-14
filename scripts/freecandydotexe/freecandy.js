@@ -19706,6 +19706,7 @@ function runBlocks() {
         } else fightOutfit("Digitize");
 
         advMacroAA(determineDraggableZoneAndEnsureAccess(), digitizeMacro, () => (0,external_kolmafia_.getCounters)("Digitize", -11, 0) !== "", fillPantsgivingFullness);
+        (0,external_kolmafia_.useFamiliar)(trickFamiliar());
       }
 
       if ((0,dist.have)((0,dist.$item)(trickin_and_treatin_templateObject17 || (trickin_and_treatin_templateObject17 = trickin_and_treatin_taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))) && (0,external_kolmafia_.myInebriety)() <= (0,external_kolmafia_.inebrietyLimit)()) {
