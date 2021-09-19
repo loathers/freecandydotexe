@@ -34,7 +34,8 @@
   "dependencies": {
     "core-js": "^3.16.4",
     "kolmafia": "^1.3.0",
-    "libram": "^0.4.0"
+    "libram": "^0.4.0",
+    "set-value": "^4.1.0"
   },
   "author": "LASS",
   "license": "ISC",
