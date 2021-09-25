@@ -202,7 +202,7 @@ export function runBlocks(blocks = -1): void {
       }
 
       if (have($item`"I Voted!" sticker`) && canFightWanderers) {
-        if (totalTurnsPlayed() % 11 === 0 && get("_voteFreeFights") < 3) {
+        if (totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3) {
           print(
             "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
             "blue"
