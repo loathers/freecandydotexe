@@ -262,9 +262,14 @@ export function runBlocks(blocks = -1): void {
       }
     }
   } finally {
-    const endTime = gametimeToInt();
-    const duration = endTime - startTime;
-    print(`I spent ${duration} milliseconds running ${n} blocks!`, "blue");
+    const totalMS = gametimeToInt() - startTime;
+    const ms = Math.floor(totalMS % 1000);
+    const sec = Math.floor(totalMS / 1000 % 60);
+    const min = Math.floor(totalMS / 1000 / 60 % 60);
+    const hours = Math.floor(totalMS / 1000 / 60 / 60);
+
+    print(`Total milliseconds for sanity check: ${totalMS}`);
+    print(`I spent ${hours.toFixed(2)}:${min.toFixed(2)}:${sec.toFixed(2)}.${ms} running ${n} blocks!`, 'blue');
     print(
       `I gathered ${Array.from(cache.startingCandies.entries())
         .map(([candy, quantity]) => `${itemAmount(candy) - quantity} ${candy.plural}`)
