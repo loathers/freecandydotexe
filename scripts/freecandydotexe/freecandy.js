@@ -19763,9 +19763,13 @@ function runBlocks() {
   } finally {
     var _cache$startingBowls;
 
-    var endTime = (0,external_kolmafia_.gametimeToInt)();
-    var duration = endTime - startTime;
-    (0,external_kolmafia_.print)("I spent ".concat(duration, " milliseconds running ").concat(n, " blocks!"), "blue");
+    var totalMS = (0,external_kolmafia_.gametimeToInt)() - startTime;
+    var ms = Math.floor(totalMS % 1000);
+    var sec = Math.floor(totalMS / 1000 % 60);
+    var min = Math.floor(totalMS / 1000 / 60 % 60);
+    var hours = Math.floor(totalMS / 1000 / 60 / 60);
+    (0,external_kolmafia_.print)("Total milliseconds for sanity check: ".concat(totalMS));
+    (0,external_kolmafia_.print)("I spent ".concat(hours.toFixed(2), ":").concat(min.toFixed(2), ":").concat(sec.toFixed(2), ".").concat(ms, " running ").concat(n, " blocks!"), "blue");
     (0,external_kolmafia_.print)("I gathered ".concat(Array.from(cache.startingCandies.entries()).map(_ref => {
       var _ref2 = trickin_and_treatin_slicedToArray(_ref, 2),
           candy = _ref2[0],
