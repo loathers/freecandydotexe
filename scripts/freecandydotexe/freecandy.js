@@ -19442,6 +19442,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -19470,6 +19474,50 @@ var Macro = /*#__PURE__*/function (_LibramMacro) {
   }
 
   _createClass(Macro, [{
+    key: "skill",
+    value: function skill() {
+      var _get2;
+
+      for (var _len = arguments.length, skills = new Array(_len), _key = 0; _key < _len; _key++) {
+        skills[_key] = arguments[_key];
+      }
+
+      return (_get2 = _get(_getPrototypeOf(Macro.prototype), "skill", this)).call.apply(_get2, [this].concat(skills));
+    }
+  }, {
+    key: "item",
+    value: function item() {
+      var _get3;
+
+      for (var _len2 = arguments.length, items = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        items[_key2] = arguments[_key2];
+      }
+
+      return (_get3 = _get(_getPrototypeOf(Macro.prototype), "item", this)).call.apply(_get3, [this].concat(items));
+    }
+  }, {
+    key: "trySkill",
+    value: function trySkill() {
+      var _get4;
+
+      for (var _len3 = arguments.length, skills = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        skills[_key3] = arguments[_key3];
+      }
+
+      return (_get4 = _get(_getPrototypeOf(Macro.prototype), "trySkill", this)).call.apply(_get4, [this].concat(skills));
+    }
+  }, {
+    key: "tryItem",
+    value: function tryItem() {
+      var _get5;
+
+      for (var _len4 = arguments.length, items = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        items[_key4] = arguments[_key4];
+      }
+
+      return (_get5 = _get(_getPrototypeOf(Macro.prototype), "tryItem", this)).call.apply(_get5, [this].concat(items));
+    }
+  }, {
     key: "tryHaveSkill",
     value: function tryHaveSkill(skill) {
       if (!skill) return this;
@@ -19508,6 +19556,34 @@ var Macro = /*#__PURE__*/function (_LibramMacro) {
       return this.try([(0,dist.$skill)(combat_templateObject6 || (combat_templateObject6 = combat_taggedTemplateLiteral(["Curse of Weaksauce"]))), (0,dist.$skill)(combat_templateObject7 || (combat_templateObject7 = combat_taggedTemplateLiteral(["Micrometeorite"]))), (0,dist.$skill)(combat_templateObject8 || (combat_templateObject8 = combat_taggedTemplateLiteral(["Shadow Noodles"]))), (0,dist.$skill)(combat_templateObject9 || (combat_templateObject9 = combat_taggedTemplateLiteral(["Shell Up"]))), (0,dist.$item)(combat_templateObject10 || (combat_templateObject10 = combat_taggedTemplateLiteral(["Time-Spinner"]))), (0,dist.$item)(combat_templateObject11 || (combat_templateObject11 = combat_taggedTemplateLiteral(["little red book"]))), (0,dist.$item)(combat_templateObject12 || (combat_templateObject12 = combat_taggedTemplateLiteral(["nasty-smelling moss"]))), (0,dist.$item)(combat_templateObject13 || (combat_templateObject13 = combat_taggedTemplateLiteral(["HOA citation pad"]))), (0,dist.$item)(combat_templateObject14 || (combat_templateObject14 = combat_taggedTemplateLiteral(["Great Wolf's lice"]))), (0,dist.$item)(combat_templateObject15 || (combat_templateObject15 = combat_taggedTemplateLiteral(["Mayor Ghost's scissors"]))), (0,dist.$item)(combat_templateObject16 || (combat_templateObject16 = combat_taggedTemplateLiteral(["Rain-Doh indigo cup"]))), (0,dist.$skill)(combat_templateObject17 || (combat_templateObject17 = combat_taggedTemplateLiteral(["Summon Love Gnats"]))), (0,dist.$skill)(combat_templateObject18 || (combat_templateObject18 = combat_taggedTemplateLiteral(["Sing Along"])))]).externalIf(dist.SourceTerminal.isCurrentSkill((0,dist.$skill)(combat_templateObject19 || (combat_templateObject19 = combat_taggedTemplateLiteral(["Extract"])))), Macro.skill((0,dist.$skill)(combat_templateObject20 || (combat_templateObject20 = combat_taggedTemplateLiteral(["Extract"]))))).while_("!pastround 11", Macro.stasisItem());
     }
   }], [{
+    key: "skill",
+    value: function skill() {
+      var _this;
+
+      return (_this = new this()).skill.apply(_this, arguments);
+    }
+  }, {
+    key: "item",
+    value: function item() {
+      var _this2;
+
+      return (_this2 = new this()).item.apply(_this2, arguments);
+    }
+  }, {
+    key: "trySkill",
+    value: function trySkill() {
+      var _this3;
+
+      return (_this3 = new this()).trySkill.apply(_this3, arguments);
+    }
+  }, {
+    key: "tryItem",
+    value: function tryItem() {
+      var _this4;
+
+      return (_this4 = new this()).tryItem.apply(_this4, arguments);
+    }
+  }, {
     key: "tryHaveSkill",
     value: function tryHaveSkill(skill) {
       return new Macro().tryHaveSkill(skill);
