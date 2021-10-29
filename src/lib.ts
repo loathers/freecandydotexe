@@ -45,7 +45,7 @@ export const cache: {
   trickFamiliar?: Familiar;
   outfightWeight?: number;
   bestOutfit?: string;
-  pantsgivingFood?: Item;
+  pantsgivingFood?: PantsgivingFood;
   baseAdventureValue?: number;
   effectWeight?: number;
   meatFamiliar?: Familiar;
@@ -53,6 +53,12 @@ export const cache: {
   startingCandies: Map<Item, number>;
 } = {
   startingCandies: new Map<Item, number>(),
+};
+
+export type PantsgivingFood = {
+  food: Item;
+  costOverride?: () => number;
+  canGet: () => boolean;
 };
 
 type ZonePotion = {
