@@ -19126,7 +19126,7 @@ function pickBjorn() {
 }
 var bjornValue = choice => !choice.dropPredicate || choice.dropPredicate() ? choice.meatVal() * choice.probability : 0;
 ;// CONCATENATED MODULE: ./src/outfit.ts
-var outfit_templateObject, outfit_templateObject2, outfit_templateObject3, outfit_templateObject4, outfit_templateObject5, outfit_templateObject6, outfit_templateObject7, outfit_templateObject8, outfit_templateObject9, outfit_templateObject10, outfit_templateObject11, outfit_templateObject12, outfit_templateObject13, outfit_templateObject14, outfit_templateObject15, outfit_templateObject16, outfit_templateObject17, outfit_templateObject18, outfit_templateObject19, outfit_templateObject20, outfit_templateObject21, outfit_templateObject22, outfit_templateObject23, outfit_templateObject24, outfit_templateObject25, outfit_templateObject26, outfit_templateObject27, outfit_templateObject28, outfit_templateObject29, outfit_templateObject30, outfit_templateObject31, outfit_templateObject32, outfit_templateObject33, outfit_templateObject34, outfit_templateObject35, outfit_templateObject36, outfit_templateObject37, outfit_templateObject38, outfit_templateObject39, outfit_templateObject40, outfit_templateObject41, outfit_templateObject42, outfit_templateObject43, outfit_templateObject44, outfit_templateObject45, outfit_templateObject46, outfit_templateObject47, outfit_templateObject48, outfit_templateObject49, outfit_templateObject50, outfit_templateObject51, outfit_templateObject52, outfit_templateObject53, outfit_templateObject54, outfit_templateObject55, outfit_templateObject56, outfit_templateObject57, outfit_templateObject58, outfit_templateObject59, outfit_templateObject60, outfit_templateObject61, outfit_templateObject62, outfit_templateObject63, outfit_templateObject64, outfit_templateObject65, outfit_templateObject66, outfit_templateObject67, outfit_templateObject68, outfit_templateObject69, outfit_templateObject70, outfit_templateObject71, outfit_templateObject72, outfit_templateObject73, outfit_templateObject74, outfit_templateObject75, outfit_templateObject76, outfit_templateObject77, outfit_templateObject78, outfit_templateObject79, outfit_templateObject80, outfit_templateObject81, outfit_templateObject82, outfit_templateObject83, outfit_templateObject84, outfit_templateObject85, outfit_templateObject86, outfit_templateObject87, outfit_templateObject88, outfit_templateObject89, outfit_templateObject90, outfit_templateObject91, outfit_templateObject92, _templateObject93, _templateObject94, _templateObject95, _templateObject96, _templateObject97, _templateObject98, _templateObject99, _templateObject100, _templateObject101, _templateObject102, _templateObject103, _templateObject104, _templateObject105;
+var outfit_templateObject, outfit_templateObject2, outfit_templateObject3, outfit_templateObject4, outfit_templateObject5, outfit_templateObject6, outfit_templateObject7, outfit_templateObject8, outfit_templateObject9, outfit_templateObject10, outfit_templateObject11, outfit_templateObject12, outfit_templateObject13, outfit_templateObject14, outfit_templateObject15, outfit_templateObject16, outfit_templateObject17, outfit_templateObject18, outfit_templateObject19, outfit_templateObject20, outfit_templateObject21, outfit_templateObject22, outfit_templateObject23, outfit_templateObject24, outfit_templateObject25, outfit_templateObject26, outfit_templateObject27, outfit_templateObject28, outfit_templateObject29, outfit_templateObject30, outfit_templateObject31, outfit_templateObject32, outfit_templateObject33, outfit_templateObject34, outfit_templateObject35, outfit_templateObject36, outfit_templateObject37, outfit_templateObject38, outfit_templateObject39, outfit_templateObject40, outfit_templateObject41, outfit_templateObject42, outfit_templateObject43, outfit_templateObject44, outfit_templateObject45, outfit_templateObject46, outfit_templateObject47, outfit_templateObject48, outfit_templateObject49, outfit_templateObject50, outfit_templateObject51, outfit_templateObject52, outfit_templateObject53, outfit_templateObject54, outfit_templateObject55, outfit_templateObject56, outfit_templateObject57, outfit_templateObject58, outfit_templateObject59, outfit_templateObject60, outfit_templateObject61, outfit_templateObject62, outfit_templateObject63, outfit_templateObject64, outfit_templateObject65, outfit_templateObject66, outfit_templateObject67, outfit_templateObject68, outfit_templateObject69, outfit_templateObject70, outfit_templateObject71, outfit_templateObject72, outfit_templateObject73, outfit_templateObject74, outfit_templateObject75, outfit_templateObject76, outfit_templateObject77, outfit_templateObject78, outfit_templateObject79, outfit_templateObject80, outfit_templateObject81, outfit_templateObject82, outfit_templateObject83, outfit_templateObject84, outfit_templateObject85, outfit_templateObject86, outfit_templateObject87, outfit_templateObject88, outfit_templateObject89, outfit_templateObject90, outfit_templateObject91, outfit_templateObject92, _templateObject93, _templateObject94, _templateObject95, _templateObject96, _templateObject97, _templateObject98, _templateObject99, _templateObject100, _templateObject101, _templateObject102, _templateObject103, _templateObject104, _templateObject105, _templateObject106, _templateObject107, _templateObject108, _templateObject109, _templateObject110, _templateObject111, _templateObject112;
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || outfit_unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -19319,20 +19319,19 @@ function pantsgiving() {
   var index = (0,external_kolmafia_.myFullness)() === (0,external_kolmafia_.fullnessLimit)() ? (0,dist.get)("_pantsgivingFullness") : turnArray.findIndex(x => count < x);
   var turns = turnArray[index] || 50000;
   if (turns - count > (0,external_kolmafia_.myAdventures)()) return new Map();
-  var food = getPantsgivingFood();
-  var value = food === (0,dist.$item)(outfit_templateObject63 || (outfit_templateObject63 = outfit_taggedTemplateLiteral(["Dreadsylvanian stew"]))) ? 1 / 20 * Math.max((0,external_kolmafia_.mallPrice)((0,dist.$item)(outfit_templateObject64 || (outfit_templateObject64 = outfit_taggedTemplateLiteral(["electric Kool-Aid"])))), (0,external_kolmafia_.mallPrice)((0,dist.$item)(outfit_templateObject65 || (outfit_templateObject65 = outfit_taggedTemplateLiteral(["bottle of Bloodweiser"]))))) : (0,external_kolmafia_.mallPrice)(food);
-  var fullnessValue = overallAdventureValue() * ((0,dist.getAverageAdventures)(food) + 1 + ((0,dist.get)("_fudgeSporkUsed") ? 3 : 0)) - value - (0,external_kolmafia_.mallPrice)((0,dist.$item)(outfit_templateObject66 || (outfit_templateObject66 = outfit_taggedTemplateLiteral(["Special Seasoning"])))) - ((0,dist.get)("_fudgeSporkUsed") ? (0,external_kolmafia_.mallPrice)((0,dist.$item)(outfit_templateObject67 || (outfit_templateObject67 = outfit_taggedTemplateLiteral(["fudge spork"])))) : 0);
+  var foodPick = getPantsgivingFood();
+  var fullnessValue = overallAdventureValue() * ((0,dist.getAverageAdventures)(foodPick.food) + 1 + ((0,dist.get)("_fudgeSporkUsed") ? 3 : 0)) - (foodPick.costOverride ? foodPick.costOverride() : (0,external_kolmafia_.mallPrice)(foodPick.food)) - (0,external_kolmafia_.mallPrice)((0,dist.$item)(outfit_templateObject63 || (outfit_templateObject63 = outfit_taggedTemplateLiteral(["Special Seasoning"])))) - ((0,dist.get)("_fudgeSporkUsed") ? (0,external_kolmafia_.mallPrice)((0,dist.$item)(outfit_templateObject64 || (outfit_templateObject64 = outfit_taggedTemplateLiteral(["fudge spork"])))) : 0);
   var pantsgivingBonus = fullnessValue / (turns * 0.9);
-  return new Map([[(0,dist.$item)(outfit_templateObject68 || (outfit_templateObject68 = outfit_taggedTemplateLiteral(["Pantsgiving"]))), pantsgivingBonus]]);
+  return new Map([[(0,dist.$item)(outfit_templateObject65 || (outfit_templateObject65 = outfit_taggedTemplateLiteral(["Pantsgiving"]))), pantsgivingBonus]]);
 }
 
 function overallAdventureValue() {
-  var bonuses = new Map([[(0,dist.$item)(outfit_templateObject69 || (outfit_templateObject69 = outfit_taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,dist.$item)(outfit_templateObject70 || (outfit_templateObject70 = outfit_taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,dist.$item)(outfit_templateObject71 || (outfit_templateObject71 = outfit_taggedTemplateLiteral(["pantogram pants"]))), (0,dist.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,dist.$item)(outfit_templateObject72 || (outfit_templateObject72 = outfit_taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,dist.$item)(outfit_templateObject73 || (outfit_templateObject73 = outfit_taggedTemplateLiteral(["bag of many confections"]))), dist.getSaleValue.apply(void 0, outfit_toConsumableArray((0,dist.$items)(outfit_templateObject74 || (outfit_templateObject74 = outfit_taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(outfit_toConsumableArray(snowSuit()), outfit_toConsumableArray(mayflowerBouquet())));
+  var bonuses = new Map([[(0,dist.$item)(outfit_templateObject66 || (outfit_templateObject66 = outfit_taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,dist.$item)(outfit_templateObject67 || (outfit_templateObject67 = outfit_taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,dist.$item)(outfit_templateObject68 || (outfit_templateObject68 = outfit_taggedTemplateLiteral(["pantogram pants"]))), (0,dist.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,dist.$item)(outfit_templateObject69 || (outfit_templateObject69 = outfit_taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,dist.$item)(outfit_templateObject70 || (outfit_templateObject70 = outfit_taggedTemplateLiteral(["bag of many confections"]))), dist.getSaleValue.apply(void 0, outfit_toConsumableArray((0,dist.$items)(outfit_templateObject71 || (outfit_templateObject71 = outfit_taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(outfit_toConsumableArray(snowSuit()), outfit_toConsumableArray(mayflowerBouquet())));
   var treatsAndBonusEquips = (0,dist.sum)(Slot.all().map(slot => {
     var equip = (0,external_kolmafia_.equippedItem)(slot);
     var bonus = bonuses.get(equip);
     return bonus === undefined ? 0 : bonus;
-  }), number => number) + baseAdventureValue() + ((0,external_kolmafia_.haveEquipped)((0,dist.$item)(outfit_templateObject75 || (outfit_templateObject75 = outfit_taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,external_kolmafia_.haveEquipped)((0,dist.$item)(outfit_templateObject76 || (outfit_templateObject76 = outfit_taggedTemplateLiteral(["Crown of Thrones"])))) ? bjornValue(pickBjorn()) : 0);
+  }), number => number) + baseAdventureValue() + ((0,external_kolmafia_.haveEquipped)((0,dist.$item)(outfit_templateObject72 || (outfit_templateObject72 = outfit_taggedTemplateLiteral(["Buddy Bjorn"])))) || (0,external_kolmafia_.haveEquipped)((0,dist.$item)(outfit_templateObject73 || (outfit_templateObject73 = outfit_taggedTemplateLiteral(["Crown of Thrones"])))) ? bjornValue(pickBjorn()) : 0);
   var stasisData = stasisFamiliars.get(trickFamiliar());
 
   if (stasisData) {
@@ -19342,9 +19341,50 @@ function overallAdventureValue() {
   } else return treatsAndBonusEquips;
 }
 
+var pantsgivingFoods = [{
+  food: (0,dist.$item)(outfit_templateObject74 || (outfit_templateObject74 = outfit_taggedTemplateLiteral(["glass of raw eggs"]))),
+  costOverride: () => 0,
+  canGet: () => (0,dist.have)((0,dist.$item)(outfit_templateObject75 || (outfit_templateObject75 = outfit_taggedTemplateLiteral(["glass of raw eggs"]))))
+}, {
+  food: (0,dist.$item)(outfit_templateObject76 || (outfit_templateObject76 = outfit_taggedTemplateLiteral(["Affirmation Cookie"]))),
+  canGet: () => true
+}, {
+  food: (0,dist.$item)(outfit_templateObject77 || (outfit_templateObject77 = outfit_taggedTemplateLiteral(["disco biscuit"]))),
+  canGet: () => true
+}, {
+  food: (0,dist.$item)(outfit_templateObject78 || (outfit_templateObject78 = outfit_taggedTemplateLiteral(["ice rice"]))),
+  canGet: () => true
+}, {
+  food: (0,dist.$item)(outfit_templateObject79 || (outfit_templateObject79 = outfit_taggedTemplateLiteral(["Tea, Earl Grey, Hot"]))),
+  canGet: () => true
+}, {
+  food: (0,dist.$item)(outfit_templateObject80 || (outfit_templateObject80 = outfit_taggedTemplateLiteral(["Dreadsylvanian stew"]))),
+  costOverride: () => 10 / 20 * Math.max((0,dist.getSaleValue)((0,dist.$item)(outfit_templateObject81 || (outfit_templateObject81 = outfit_taggedTemplateLiteral(["electric Kool-Aid"])))), (0,dist.getSaleValue)((0,dist.$item)(outfit_templateObject82 || (outfit_templateObject82 = outfit_taggedTemplateLiteral(["bottle of Bloodweiser"]))))),
+  canGet: () => (0,dist.have)((0,dist.$item)(outfit_templateObject83 || (outfit_templateObject83 = outfit_taggedTemplateLiteral(["Freddy Kruegerand"]))), 10) && (0,external_kolmafia_.isAccessible)((0,dist.$coinmaster)(outfit_templateObject84 || (outfit_templateObject84 = outfit_taggedTemplateLiteral(["The Terrified Eagle Inn"])))) && (0,external_kolmafia_.myLevel)() >= 20
+}, {
+  food: (0,dist.$item)(outfit_templateObject85 || (outfit_templateObject85 = outfit_taggedTemplateLiteral(["FantasyRealm turkey leg"]))),
+  costOverride: () => 0,
+  canGet: () => {
+    if (!(0,dist.have)((0,dist.$item)(outfit_templateObject86 || (outfit_templateObject86 = outfit_taggedTemplateLiteral(["Rubee\u2122"]))), 100)) return false;
+    if (!(0,dist.get)("_frToday") && !(0,dist.get)("frAlways")) return false;
+    if ((0,dist.have)((0,dist.$item)(outfit_templateObject87 || (outfit_templateObject87 = outfit_taggedTemplateLiteral(["FantasyRealm G. E. M."]))))) return true;
+    (0,external_kolmafia_.visitUrl)("place.php?whichplace=realm_fantasy&action=fr_initcenter");
+    (0,external_kolmafia_.runChoice)(1);
+    return (0,dist.have)((0,dist.$item)(outfit_templateObject88 || (outfit_templateObject88 = outfit_taggedTemplateLiteral(["FantasyRealm G. E. M."]))));
+  }
+}];
+
+var valuePantsgivingFood = foodChoice => (0,dist.getAverageAdventures)(foodChoice.food) * overallAdventureValue() - (foodChoice.costOverride ? foodChoice.costOverride() : (0,external_kolmafia_.mallPrice)(foodChoice.food));
+
 function getPantsgivingFood() {
+  if (cache.pantsgivingFood) {
+    if (!(0,dist.have)(cache.pantsgivingFood.food) && !cache.pantsgivingFood.canGet()) {
+      cache.pantsgivingFood = undefined;
+    }
+  }
+
   if (!cache.pantsgivingFood) {
-    if ((0,dist.get)("affirmationCookiesEaten") >= 4) cache.pantsgivingFood = (0,dist.$item)(outfit_templateObject77 || (outfit_templateObject77 = outfit_taggedTemplateLiteral(["Affirmation Cookie"])));else if ((0,external_kolmafia_.myLevel)() >= 20 && ((0,dist.have)((0,dist.$item)(outfit_templateObject78 || (outfit_templateObject78 = outfit_taggedTemplateLiteral(["Dreadsylvanian stew"])))) || (0,dist.have)((0,dist.$item)(outfit_templateObject79 || (outfit_templateObject79 = outfit_taggedTemplateLiteral(["Freddy Kruegerand"]))), 20))) cache.pantsgivingFood = (0,dist.$item)(outfit_templateObject80 || (outfit_templateObject80 = outfit_taggedTemplateLiteral(["Dreadsylvanian stew"])));else cache.pantsgivingFood = (0,dist.$item)(outfit_templateObject81 || (outfit_templateObject81 = outfit_taggedTemplateLiteral(["meteoreo"])));
+    cache.pantsgivingFood = pantsgivingFoods.filter(x => (0,dist.have)(x.food) || x.canGet()).reduce((a, b) => valuePantsgivingFood(b) < valuePantsgivingFood(a) ? a : b);
   }
 
   return cache.pantsgivingFood;
@@ -19357,7 +19397,7 @@ function baseAdventureValue() {
           probability = _ref4[1];
 
       return (0,dist.getSaleValue)((0,external_kolmafia_.toItem)(candyName)) * probability;
-    })) * ((0,dist.have)((0,dist.$familiar)(outfit_templateObject82 || (outfit_templateObject82 = outfit_taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * (0,dist.getSaleValue)((0,dist.$item)(outfit_templateObject83 || (outfit_templateObject83 = outfit_taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,dist.have)((0,dist.$familiar)(outfit_templateObject84 || (outfit_templateObject84 = outfit_taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * (0,dist.getSaleValue)((0,dist.$item)(outfit_templateObject85 || (outfit_templateObject85 = outfit_taggedTemplateLiteral(["Prunets"])))) : 0));
+    })) * ((0,dist.have)((0,dist.$familiar)(outfit_templateObject89 || (outfit_templateObject89 = outfit_taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 1.6 : 0) + 1 / 5 * (0,dist.getSaleValue)((0,dist.$item)(outfit_templateObject90 || (outfit_templateObject90 = outfit_taggedTemplateLiteral(["huge bowl of candy"])))) + ((0,dist.have)((0,dist.$familiar)(outfit_templateObject91 || (outfit_templateObject91 = outfit_taggedTemplateLiteral(["Trick-or-Treating Tot"])))) ? 4 * 0.2 * (0,dist.getSaleValue)((0,dist.$item)(outfit_templateObject92 || (outfit_templateObject92 = outfit_taggedTemplateLiteral(["Prunets"])))) : 0));
   }
 
   return cache.baseAdventureValue;
@@ -19392,15 +19432,15 @@ function meatOutfit() {
   var bjornFam = pickBjorn();
   var bjornalike = bestBjornalike([]);
   new dist.Requirement(["1000 Meat Drop"], {
-    bonusEquip: new Map([[(0,dist.$item)(outfit_templateObject86 || (outfit_templateObject86 = outfit_taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,dist.$item)(outfit_templateObject87 || (outfit_templateObject87 = outfit_taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,dist.$item)(outfit_templateObject88 || (outfit_templateObject88 = outfit_taggedTemplateLiteral(["pantogram pants"]))), (0,dist.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,dist.$item)(outfit_templateObject89 || (outfit_templateObject89 = outfit_taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,dist.$item)(outfit_templateObject90 || (outfit_templateObject90 = outfit_taggedTemplateLiteral(["bag of many confections"]))), dist.getSaleValue.apply(void 0, outfit_toConsumableArray((0,dist.$items)(outfit_templateObject91 || (outfit_templateObject91 = outfit_taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(outfit_toConsumableArray(snowSuit()), outfit_toConsumableArray(mayflowerBouquet()), [[(0,dist.$item)(outfit_templateObject92 || (outfit_templateObject92 = outfit_taggedTemplateLiteral(["mafia thumb ring"]))), 0.04 * overallAdventureValue()]], outfit_toConsumableArray(bjornalike ? new Map([[bjornalike, bjornValue(bjornFam)]]) : []))),
-    preventEquip: (0,dist.$items)(_templateObject93 || (_templateObject93 = outfit_taggedTemplateLiteral(["Buddy Bjorn, Crown of Thrones"]))).filter(bjorn => bjorn !== bjornalike),
-    forceEquip: (0,external_kolmafia_.myInebriety)() > (0,external_kolmafia_.inebrietyLimit)() ? (0,dist.$items)(_templateObject94 || (_templateObject94 = outfit_taggedTemplateLiteral(["Drunkula's wineglass"]))) : []
+    bonusEquip: new Map([[(0,dist.$item)(_templateObject93 || (_templateObject93 = outfit_taggedTemplateLiteral(["lucky gold ring"]))), 400], [(0,dist.$item)(_templateObject94 || (_templateObject94 = outfit_taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [(0,dist.$item)(_templateObject95 || (_templateObject95 = outfit_taggedTemplateLiteral(["pantogram pants"]))), (0,dist.get)("_pantogramModifier").includes("Drops Items") ? 100 : 0], [(0,dist.$item)(_templateObject96 || (_templateObject96 = outfit_taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [(0,dist.$item)(_templateObject97 || (_templateObject97 = outfit_taggedTemplateLiteral(["bag of many confections"]))), dist.getSaleValue.apply(void 0, outfit_toConsumableArray((0,dist.$items)(_templateObject98 || (_templateObject98 = outfit_taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(outfit_toConsumableArray(snowSuit()), outfit_toConsumableArray(mayflowerBouquet()), [[(0,dist.$item)(_templateObject99 || (_templateObject99 = outfit_taggedTemplateLiteral(["mafia thumb ring"]))), 0.04 * overallAdventureValue()]], outfit_toConsumableArray(bjornalike ? new Map([[bjornalike, bjornValue(bjornFam)]]) : []))),
+    preventEquip: (0,dist.$items)(_templateObject100 || (_templateObject100 = outfit_taggedTemplateLiteral(["Buddy Bjorn, Crown of Thrones"]))).filter(bjorn => bjorn !== bjornalike),
+    forceEquip: (0,external_kolmafia_.myInebriety)() > (0,external_kolmafia_.inebrietyLimit)() ? (0,dist.$items)(_templateObject101 || (_templateObject101 = outfit_taggedTemplateLiteral(["Drunkula's wineglass"]))) : []
   }).maximize();
-  if ((0,external_kolmafia_.haveEquipped)((0,dist.$item)(_templateObject95 || (_templateObject95 = outfit_taggedTemplateLiteral(["Buddy Bjorn"]))))) (0,external_kolmafia_.bjornifyFamiliar)(bjornFam.familiar);else if ((0,external_kolmafia_.haveEquipped)((0,dist.$item)(_templateObject96 || (_templateObject96 = outfit_taggedTemplateLiteral(["Crown of Thrones"]))))) (0,external_kolmafia_.enthroneFamiliar)(bjornFam.familiar);
+  if ((0,external_kolmafia_.haveEquipped)((0,dist.$item)(_templateObject102 || (_templateObject102 = outfit_taggedTemplateLiteral(["Buddy Bjorn"]))))) (0,external_kolmafia_.bjornifyFamiliar)(bjornFam.familiar);else if ((0,external_kolmafia_.haveEquipped)((0,dist.$item)(_templateObject103 || (_templateObject103 = outfit_taggedTemplateLiteral(["Crown of Thrones"]))))) (0,external_kolmafia_.enthroneFamiliar)(bjornFam.familiar);
 }
 
 function bestBjornalike(existingForceEquips) {
-  var bjornalikes = (0,dist.$items)(_templateObject97 || (_templateObject97 = outfit_taggedTemplateLiteral(["Buddy Bjorn, Crown of Thrones"])));
+  var bjornalikes = (0,dist.$items)(_templateObject104 || (_templateObject104 = outfit_taggedTemplateLiteral(["Buddy Bjorn, Crown of Thrones"])));
   var slots = bjornalikes.map(bjornalike => (0,external_kolmafia_.toSlot)(bjornalike)).filter(slot => !existingForceEquips.some(equipment => (0,external_kolmafia_.toSlot)(equipment) === slot));
   if (!slots.length) return undefined;
 
@@ -19409,15 +19449,15 @@ function bestBjornalike(existingForceEquips) {
   }
 
   var hasStrongLep = leprechaunMultiplier(meatFamiliar()) >= 2;
-  var goodRobortHats = (0,dist.$items)(_templateObject98 || (_templateObject98 = outfit_taggedTemplateLiteral(["crumpled felt fedora"])));
-  if ((0,external_kolmafia_.myClass)() === (0,dist.$class)(_templateObject99 || (_templateObject99 = outfit_taggedTemplateLiteral(["Turtle Tamer"])))) goodRobortHats.push((0,dist.$item)(_templateObject100 || (_templateObject100 = outfit_taggedTemplateLiteral(["warbear foil hat"]))));
-  if ((0,external_kolmafia_.numericModifier)((0,dist.$item)(_templateObject101 || (_templateObject101 = outfit_taggedTemplateLiteral(["shining star cap"]))), "Familiar Weight") === 10) goodRobortHats.push((0,dist.$item)(_templateObject102 || (_templateObject102 = outfit_taggedTemplateLiteral(["shining star cap"]))));
+  var goodRobortHats = (0,dist.$items)(_templateObject105 || (_templateObject105 = outfit_taggedTemplateLiteral(["crumpled felt fedora"])));
+  if ((0,external_kolmafia_.myClass)() === (0,dist.$class)(_templateObject106 || (_templateObject106 = outfit_taggedTemplateLiteral(["Turtle Tamer"])))) goodRobortHats.push((0,dist.$item)(_templateObject107 || (_templateObject107 = outfit_taggedTemplateLiteral(["warbear foil hat"]))));
+  if ((0,external_kolmafia_.numericModifier)((0,dist.$item)(_templateObject108 || (_templateObject108 = outfit_taggedTemplateLiteral(["shining star cap"]))), "Familiar Weight") === 10) goodRobortHats.push((0,dist.$item)(_templateObject109 || (_templateObject109 = outfit_taggedTemplateLiteral(["shining star cap"]))));
 
-  if ((0,dist.have)((0,dist.$item)(_templateObject103 || (_templateObject103 = outfit_taggedTemplateLiteral(["carpe"])))) && (!hasStrongLep || !goodRobortHats.some(hat => (0,dist.have)(hat)))) {
-    return (0,dist.$item)(_templateObject104 || (_templateObject104 = outfit_taggedTemplateLiteral(["Crown of Thrones"])));
+  if ((0,dist.have)((0,dist.$item)(_templateObject110 || (_templateObject110 = outfit_taggedTemplateLiteral(["carpe"])))) && (!hasStrongLep || !goodRobortHats.some(hat => (0,dist.have)(hat)))) {
+    return (0,dist.$item)(_templateObject111 || (_templateObject111 = outfit_taggedTemplateLiteral(["Crown of Thrones"])));
   }
 
-  return (0,dist.$item)(_templateObject105 || (_templateObject105 = outfit_taggedTemplateLiteral(["Buddy Bjorn"])));
+  return (0,dist.$item)(_templateObject112 || (_templateObject112 = outfit_taggedTemplateLiteral(["Buddy Bjorn"])));
 }
 ;// CONCATENATED MODULE: ./src/combat.ts
 var combat_templateObject, combat_templateObject2, combat_templateObject3, combat_templateObject4, combat_templateObject5, combat_templateObject6, combat_templateObject7, combat_templateObject8, combat_templateObject9, combat_templateObject10, combat_templateObject11, combat_templateObject12, combat_templateObject13, combat_templateObject14, combat_templateObject15, combat_templateObject16, combat_templateObject17, combat_templateObject18, combat_templateObject19, combat_templateObject20;
@@ -19740,8 +19780,8 @@ function fillPantsgivingFullness() {
     (0,external_kolmafia_.eat)((0,dist.$item)(trickin_and_treatin_templateObject4 || (trickin_and_treatin_templateObject4 = trickin_and_treatin_taggedTemplateLiteral(["fudge spork"]))));
   }
 
-  (0,external_kolmafia_.retrieveItem)(getPantsgivingFood());
-  (0,external_kolmafia_.eat)(getPantsgivingFood());
+  (0,external_kolmafia_.retrieveItem)(getPantsgivingFood().food);
+  (0,external_kolmafia_.eat)(getPantsgivingFood().food);
 }
 
 function runBlocks() {
