@@ -19753,6 +19753,8 @@ function trick(trickMacro) {
 
   for (var i = 0; i <= 11; i++) {
     if (block().match(RegExp("whichhouse=".concat(i, ">[^>]*?house_d")))) {
+      (0,external_kolmafia_.restoreMp)(Math.max((0,external_kolmafia_.myMaxmp)() * (0,dist.get)("mpAutoRecoveryTarget")));
+      (0,external_kolmafia_.restoreHp)(Math.max((0,external_kolmafia_.myMaxhp)() * (0,dist.get)("hpAutoRecoveryTarget")));
       (0,external_kolmafia_.visitUrl)("choice.php?whichchoice=804&option=3&whichhouse=".concat(i, "&pwd"));
       (0,external_kolmafia_.runCombat)(trickMacro.toString());
 
