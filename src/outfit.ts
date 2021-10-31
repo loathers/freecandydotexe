@@ -11,6 +11,7 @@ import {
   getOutfits,
   haveEquipped,
   inebrietyLimit,
+  isAccessible,
   itemAmount,
   mallPrice,
   myAdventures,
@@ -33,6 +34,7 @@ import {
 } from "kolmafia";
 import {
   $class,
+  $coinmaster,
   $familiar,
   $familiars,
   $item,
@@ -53,7 +55,7 @@ import {
   sumNumbers,
 } from "libram";
 import { bjornValue, pickBjorn } from "./bjorn";
-import { cache, leprechaunMultiplier, meatFamiliar, trickFamiliar } from "./lib";
+import { cache, leprechaunMultiplier, meatFamiliar, PantsgivingFood, trickFamiliar } from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -309,15 +311,11 @@ function pantsgiving(): Map<Item, number> {
   const turns = turnArray[index] || 50000;
 
   if (turns - count > myAdventures()) return new Map<Item, number>();
-  const food = getPantsgivingFood();
-  const value =
-    food === $item`Dreadsylvanian stew`
-      ? (1 / 20) *
-        Math.max(mallPrice($item`electric Kool-Aid`), mallPrice($item`bottle of Bloodweiser`))
-      : mallPrice(food);
+  const foodPick = getPantsgivingFood();
   const fullnessValue =
-    overallAdventureValue() * (getAverageAdventures(food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
-    value -
+    overallAdventureValue() *
+      (getAverageAdventures(foodPick.food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
+    (foodPick.costOverride ? foodPick.costOverride() : mallPrice(foodPick.food)) -
     mallPrice($item`Special Seasoning`) -
     (get("_fudgeSporkUsed") ? mallPrice($item`fudge spork`) : 0);
   const pantsgivingBonus = fullnessValue / (turns * 0.9);
@@ -365,15 +363,66 @@ function overallAdventureValue(): number {
   } else return treatsAndBonusEquips;
 }
 
-export function getPantsgivingFood(): Item {
+const pantsgivingFoods: PantsgivingFood[] = [
+  {
+    food: $item`glass of raw eggs`,
+    costOverride: () => 0,
+    canGet: () => have($item`glass of raw eggs`),
+  },
+  {
+    food: $item`Affirmation Cookie`,
+    canGet: () => true,
+  },
+  {
+    food: $item`disco biscuit`,
+    canGet: () => true,
+  },
+  {
+    food: $item`ice rice`,
+    canGet: () => true,
+  },
+  {
+    food: $item`Tea, Earl Grey, Hot`,
+    canGet: () => true,
+  },
+  {
+    food: $item`Dreadsylvanian stew`,
+    costOverride: () =>
+      (10 / 20) *
+      Math.max(getSaleValue($item`electric Kool-Aid`), getSaleValue($item`bottle of Bloodweiser`)),
+    canGet: () =>
+      have($item`Freddy Kruegerand`, 10) &&
+      isAccessible($coinmaster`The Terrified Eagle Inn`) &&
+      myLevel() >= 20,
+  },
+  {
+    food: $item`FantasyRealm turkey leg`,
+    costOverride: () => 0,
+    canGet: () => {
+      if (!have($item`Rubee™`, 100)) return false;
+      if (!get("_frToday") && !get("frAlways")) return false;
+      if (have($item`FantasyRealm G. E. M.`)) return true;
+      visitUrl("place.php?whichplace=realm_fantasy&action=fr_initcenter");
+      runChoice(1);
+      return have($item`FantasyRealm G. E. M.`);
+    },
+  },
+];
+
+const valuePantsgivingFood = (foodChoice: PantsgivingFood) =>
+  getAverageAdventures(foodChoice.food) * overallAdventureValue() -
+  (foodChoice.costOverride ? foodChoice.costOverride() : mallPrice(foodChoice.food));
+
+export function getPantsgivingFood(): PantsgivingFood {
+  if (cache.pantsgivingFood) {
+    if (!have(cache.pantsgivingFood.food) && !cache.pantsgivingFood.canGet()) {
+      cache.pantsgivingFood = undefined;
+    }
+  }
   if (!cache.pantsgivingFood) {
-    if (get("affirmationCookiesEaten") >= 4) cache.pantsgivingFood = $item`Affirmation Cookie`;
-    else if (
-      myLevel() >= 20 &&
-      (have($item`Dreadsylvanian stew`) || have($item`Freddy Kruegerand`, 20))
-    )
-      cache.pantsgivingFood = $item`Dreadsylvanian stew`;
-    else cache.pantsgivingFood = $item`meteoreo`;
+    cache.pantsgivingFood = pantsgivingFoods
+      .filter((x) => have(x.food) || x.canGet())
+      .reduce((a, b) => (valuePantsgivingFood(b) < valuePantsgivingFood(a) ? a : b));
   }
   return cache.pantsgivingFood;
 }

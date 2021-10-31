@@ -125,8 +125,8 @@ function fillPantsgivingFullness(): void {
     retrieveItem($item`fudge spork`);
     eat($item`fudge spork`);
   }
-  retrieveItem(getPantsgivingFood());
-  eat(getPantsgivingFood());
+  retrieveItem(getPantsgivingFood().food);
+  eat(getPantsgivingFood().food);
 }
 
 export function runBlocks(blocks = -1): void {
