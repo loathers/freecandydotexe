@@ -9,9 +9,13 @@ import {
   myAdventures,
   myFullness,
   myInebriety,
+  myMaxhp,
+  myMaxmp,
   myName,
   outfit,
   print,
+  restoreHp,
+  restoreMp,
   retrieveItem,
   runChoice,
   runCombat,
@@ -104,6 +108,8 @@ function trick(trickMacro: Macro) {
   }
   for (let i = 0; i <= 11; i++) {
     if (block().match(RegExp(`whichhouse=${i}>[^>]*?house_d`))) {
+      restoreMp(Math.max(myMaxmp() * get("mpAutoRecoveryTarget")));
+      restoreHp(Math.max(myMaxhp() * get("hpAutoRecoveryTarget")));
       visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${i}&pwd`);
       runCombat(trickMacro.toString());
       while (inMultiFight()) runCombat(trickMacro.toString());
