@@ -272,6 +272,9 @@ export function fightOutfit(type: fightType = "Trick"): void {
       }
     );
 
+    if (bjornalikeToUse && equippedItem(toSlot(bjornalikeToUse)) === $item`none`)
+      equip(toSlot(bjornalikeToUse), bjornalikeToUse);
+
     if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
     if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(pickBjorn().familiar);
   }
