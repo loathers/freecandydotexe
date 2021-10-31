@@ -1,4 +1,5 @@
 import {
+  cliExecute,
   eat,
   fullnessLimit,
   gametimeToInt,
@@ -110,6 +111,7 @@ function trick(trickMacro: Macro) {
     if (block().match(RegExp(`whichhouse=${i}>[^>]*?house_d`))) {
       restoreMp(Math.max(myMaxmp() * get("mpAutoRecoveryTarget")));
       restoreHp(Math.max(myMaxhp() * get("hpAutoRecoveryTarget")));
+      cliExecute("mood execute");
       visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${i}&pwd`);
       runCombat(trickMacro.toString());
       while (inMultiFight()) runCombat(trickMacro.toString());
