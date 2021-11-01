@@ -1,18 +1,14 @@
 import {
   abort,
   fullnessLimit,
-  inebrietyLimit,
   itemAmount,
   myFullness,
-  myInebriety,
   myLevel,
   myPrimestat,
-  mySpleenUse,
   print,
   retrieveItem,
   runChoice,
   setAutoAttack,
-  spleenLimit,
   userConfirm,
   visitUrl,
   xpath,
@@ -28,13 +24,9 @@ export function main(args: string): void {
       "blue"
     );
   } else {
-    if (
-      myFullness() < fullnessLimit() ||
-      myInebriety() < inebrietyLimit() ||
-      mySpleenUse() < spleenLimit()
-    ) {
+    if (myFullness() < fullnessLimit()) {
       const keepGoinCowboy = userConfirm(
-        "Your organs are not full. Are you sure you wish to proceed?",
+        "Your stomach is not currently full. My pantsgiving support will slowly fill your stomach with 1-fullness items, which is likely suboptimal. Are you sure you wish to proceed?",
         69000,
         false
       );
