@@ -19912,8 +19912,8 @@ function main(args) {
   if (args && args.includes("help")) {
     (0,external_kolmafia_.print)("Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.", "blue");
   } else {
-    if ((0,external_kolmafia_.myFullness)() < (0,external_kolmafia_.fullnessLimit)() || (0,external_kolmafia_.myInebriety)() < (0,external_kolmafia_.inebrietyLimit)() || (0,external_kolmafia_.mySpleenUse)() < (0,external_kolmafia_.spleenLimit)()) {
-      var keepGoinCowboy = (0,external_kolmafia_.userConfirm)("Your organs are not full. Are you sure you wish to proceed?", 69000, false);
+    if ((0,external_kolmafia_.myFullness)() < (0,external_kolmafia_.fullnessLimit)()) {
+      var keepGoinCowboy = (0,external_kolmafia_.userConfirm)("Your stomach is not currently full. My pantsgiving support will slowly fill your stomach with 1-fullness items, which is likely suboptimal. Are you sure you wish to proceed?", 69000, false);
       if (!keepGoinCowboy) (0,external_kolmafia_.abort)();
     }
 
