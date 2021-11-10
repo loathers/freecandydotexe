@@ -255,8 +255,10 @@ export function runBlocks(blocks = -1): void {
         );
         print("Sorry if that red message freaked you out, everything is cool and good.", "grey");
         const runSource = findRun();
-        if (runSource.prepare) runSource.prepare();
-        if (runSource.requirement) runSource.requirement.maximize();
+        if (runSource.options?.preparation) runSource.options.preparation();
+        if (runSource.options?.familiar) useFamiliar(runSource.options.familiar());
+        if (runSource.options?.equipmentRequirements)
+          runSource.options.equipmentRequirements().maximize();
         advMacroAA($location`Noob Cave`, runSource.macro);
         fillPantsgivingFullness();
       }
