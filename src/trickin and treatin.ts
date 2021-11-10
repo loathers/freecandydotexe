@@ -33,6 +33,7 @@ import {
   $monster,
   $skill,
   $skills,
+  findFreeRun,
   get,
   getKramcoWandererChance,
   have,
@@ -41,8 +42,8 @@ import {
 import {
   advMacroAA,
   cache,
+  cheapestItemRun,
   determineDraggableZoneAndEnsureAccess,
-  findRun,
   meatFamiliar,
   questStep,
   trickFamiliar,
@@ -254,7 +255,7 @@ export function runBlocks(blocks = -1): void {
           "red"
         );
         print("Sorry if that red message freaked you out, everything is cool and good.", "grey");
-        const runSource = findRun();
+        const runSource = findFreeRun() ?? cheapestItemRun;
         if (runSource.options?.preparation) runSource.options.preparation();
         if (runSource.options?.familiar) useFamiliar(runSource.options.familiar());
         if (runSource.options?.equipmentRequirements)
