@@ -67,6 +67,7 @@ jobs:
           rm -r scripts/
           rm -r ccs/
           mv mafiafiles/ccs ./ccs
+          mv mafiafiles/dependencies.txt dependencies.txt
           mv KoLmafia/scripts scripts
       - run: |
           git add scripts/
