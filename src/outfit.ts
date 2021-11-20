@@ -56,7 +56,7 @@ import {
   sum,
   sumNumbers,
 } from "libram";
-import { bjornValue, pickBjorn } from "./bjorn";
+import { pickBjorn, riderValue } from "./bjorn";
 import { cache, leprechaunMultiplier, meatFamiliar, PantsgivingFood, trickFamiliar } from "./lib";
 
 const actionRateBonus = () =>
@@ -261,7 +261,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
       : 0;
 
     const bjornalikeToUse = bestBjornalike(forceEquips);
-    if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, bjornValue(pickBjorn()));
+    if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, riderValue(pickBjorn()));
 
     maximizeCached(
       [
@@ -355,7 +355,7 @@ function overallAdventureValue(): number {
     ) +
     baseAdventureValue() +
     (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`)
-      ? bjornValue(pickBjorn())
+      ? riderValue(pickBjorn())
       : 0);
   const stasisData = stasisFamiliars.get(trickFamiliar());
   if (stasisData) {
@@ -501,7 +501,7 @@ export function meatOutfit(): void {
       ...snowSuit(),
       ...mayflowerBouquet(),
       [$item`mafia thumb ring`, 0.04 * overallAdventureValue()],
-      ...(bjornalike ? new Map([[bjornalike, bjornValue(bjornFam)]]) : []),
+      ...(bjornalike ? new Map([[bjornalike, riderValue(bjornFam)]]) : []),
     ]),
     preventEquip: $items`Buddy Bjorn, Crown of Thrones`.filter((bjorn) => bjorn !== bjornalike),
     forceEquip: myInebriety() > inebrietyLimit() ? $items`Drunkula's wineglass` : [],
