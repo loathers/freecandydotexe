@@ -1,5 +1,6 @@
 import "core-js/modules/es.object.entries";
 import {
+  abort,
   bjornifyFamiliar,
   buy,
   canEquip,
@@ -25,6 +26,7 @@ import {
   outfit,
   outfitPieces,
   outfitTreats,
+  print,
   runChoice,
   toEffect,
   toItem,
@@ -171,9 +173,13 @@ export function fightOutfit(type: fightType = "Trick"): void {
     }
   } else {
     if (!trickHats.some((hat) => have(hat))) {
-      buy(1, trickHats.sort((a, b) => mallPrice(b) - mallPrice(a))[0]);
+      buy(1, trickHats.sort((a, b) => mallPrice(a) - mallPrice(b))[0]);
     }
-    const trickHat = trickHats.find((hat) => have(hat)) || $item`beholed bedsheet`; //Just to stop it from being undefined
+    const trickHat = trickHats.find((hat) => have(hat));
+    if (!trickHat) {
+      print("We don't have a 1-item outfit, and were unable to find one.", "red");
+      abort();
+    }
 
     const forceEquips: Item[] = [];
 
