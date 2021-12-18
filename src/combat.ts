@@ -37,6 +37,7 @@ export default class Macro extends StrictMacro {
     const spammableItem = $items`dictionary, facsimile dictionary, spices, seal tooth`.find(
       (item) => have(item)
     );
+    if (itemAmount(spammableItem) === 0) retrieveItem(spammableItem);
     if (spammableItem) return Macro.item(spammableItem);
     return Macro.item($item`seal tooth`);
   }
