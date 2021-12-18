@@ -139,7 +139,7 @@ function fillPantsgivingFullness(): void {
 }
 
 export function runBlocks(blocks = -1): void {
-  SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
+  if (SourceTerminal.have()) SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]);
 
   trickFamiliar();
   retrieveItem($item`seal tooth`);
