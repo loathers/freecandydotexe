@@ -15703,8 +15703,8 @@ function have(thing) {
  * @param item The item mafia uses to represent the campground item
  */
 
-function lib_haveInCampground(item) {
-  return Object.keys(getCampground()).map(i => Item.get(i)).includes(item);
+function haveInCampground(item) {
+  return Object.keys((0,external_kolmafia_namespaceObject.getCampground)()).map(i => Item.get(i)).includes(item);
 }
 var Wanderer;
 
@@ -19617,7 +19617,7 @@ function fillPantsgivingFullness() {
 
 function runBlocks() {
   var blocks = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
-  educate([$skill(trickin_and_treatin_templateObject5 || (trickin_and_treatin_templateObject5 = trickin_and_treatin_taggedTemplateLiteral(["Digitize"]))), $skill(trickin_and_treatin_templateObject6 || (trickin_and_treatin_templateObject6 = trickin_and_treatin_taggedTemplateLiteral(["Extract"])))]);
+  if (SourceTerminal_have()) educate([$skill(trickin_and_treatin_templateObject5 || (trickin_and_treatin_templateObject5 = trickin_and_treatin_taggedTemplateLiteral(["Digitize"]))), $skill(trickin_and_treatin_templateObject6 || (trickin_and_treatin_templateObject6 = trickin_and_treatin_taggedTemplateLiteral(["Extract"])))]);
   trickFamiliar();
   (0,external_kolmafia_namespaceObject.retrieveItem)(template_string_$item(trickin_and_treatin_templateObject7 || (trickin_and_treatin_templateObject7 = trickin_and_treatin_taggedTemplateLiteral(["seal tooth"]))));
   var trickMacro = trickin_and_treatin_stasisFamiliars.includes(trickFamiliar()) ? combat_Macro.if_("monsterid ".concat((0,external_kolmafia_namespaceObject.toInt)($monster(trickin_and_treatin_templateObject8 || (trickin_and_treatin_templateObject8 = trickin_and_treatin_taggedTemplateLiteral(["All-Hallow's Steve"]))))), combat_Macro.abort()).stasis().kill() : combat_Macro.if_("monsterid ".concat((0,external_kolmafia_namespaceObject.toInt)($monster(trickin_and_treatin_templateObject9 || (trickin_and_treatin_templateObject9 = trickin_and_treatin_taggedTemplateLiteral(["All-Hallow's Steve"]))))), combat_Macro.abort()).try([].concat(trickin_and_treatin_toConsumableArray($skills(trickin_and_treatin_templateObject10 || (trickin_and_treatin_templateObject10 = trickin_and_treatin_taggedTemplateLiteral(["Curse of Weaksauce, Micrometeorite, Sing Along"])))), [template_string_$item(trickin_and_treatin_templateObject11 || (trickin_and_treatin_templateObject11 = trickin_and_treatin_taggedTemplateLiteral(["porquoise-handled sixgun"])))])).externalIf(isCurrentSkill($skill(trickin_and_treatin_templateObject12 || (trickin_and_treatin_templateObject12 = trickin_and_treatin_taggedTemplateLiteral(["Extract"])))), combat_Macro.skill($skill(trickin_and_treatin_templateObject13 || (trickin_and_treatin_templateObject13 = trickin_and_treatin_taggedTemplateLiteral(["Extract"]))))).kill();
