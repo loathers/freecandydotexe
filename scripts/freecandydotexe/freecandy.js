@@ -15044,221 +15044,6 @@ function sinceKolmafiaVersion(majorVersion, minorVersion) {
 }
 // EXTERNAL MODULE: ./node_modules/libram/node_modules/core-js/modules/es.object.entries.js
 var es_object_entries = __webpack_require__(4875);
-// EXTERNAL MODULE: ./node_modules/libram/node_modules/core-js/modules/es.object.from-entries.js
-var es_object_from_entries = __webpack_require__(8819);
-;// CONCATENATED MODULE: ./node_modules/libram/dist/propertyTyping.js
-function isNumericProperty(property, value) {
-  return !isNaN(Number(value)) && !isNaN(parseFloat(value));
-}
-var numericOrStringProperties = (/* unused pure expression or super */ null && (["statusEngineering", "statusGalley", "statusMedbay", "statusMorgue", "statusNavigation", "statusScienceLab", "statusSonar", "statusSpecialOps", "statusWasteProcessing"]));
-var choiceAdventurePattern = /^choiceAdventure\d+$/;
-function isNumericOrStringProperty(property) {
-  if (numericOrStringProperties.includes(property)) return true;
-  return choiceAdventurePattern.test(property);
-}
-var fakeBooleans = ["trackVoteMonster", "_jickJarAvailable"];
-function isBooleanProperty(property, value) {
-  if (fakeBooleans.includes(property)) return false;
-  return ["true", "false"].includes(value);
-}
-var otherLocations = ["nextSpookyravenElizabethRoom", "nextSpookyravenStephenRoom", "sourceOracleTarget"];
-function isLocationProperty(property) {
-  return otherLocations.includes(property) || property.endsWith("Location");
-}
-var otherMonsters = ["romanticTarget", "yearbookCameraTarget"];
-var fakeMonsters = ["trackVoteMonster"];
-function isMonsterProperty(property) {
-  if (otherMonsters.includes(property)) return true;
-  return property.endsWith("Monster") && !fakeMonsters.includes(property);
-}
-function isFamiliarProperty(property) {
-  return property.endsWith("Familiar");
-}
-var statProps = (/* unused pure expression or super */ null && (["nsChallenge1", "shrugTopper", "snojoSetting"]));
-function isStatProperty(property) {
-  return statProps.includes(property);
-}
-;// CONCATENATED MODULE: ./node_modules/libram/dist/property.js
-function property_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-var createPropertyGetter = transform => (property, default_) => {
-  var value = (0,external_kolmafia_namespaceObject.getProperty)(property);
-
-  if (default_ !== undefined && value === "") {
-    return default_;
-  }
-
-  return transform(value, property);
-};
-
-var createMafiaClassPropertyGetter = Type => createPropertyGetter(value => {
-  if (value === "") return null;
-  var v = Type.get(value);
-  return v === Type.get("none") ? null : v;
-});
-
-var getString = createPropertyGetter(value => value);
-var getCommaSeparated = createPropertyGetter(value => value.split(/, ?/));
-var getBoolean = createPropertyGetter(value => value === "true");
-var getNumber = createPropertyGetter(value => Number(value));
-var getBounty = createMafiaClassPropertyGetter(Bounty);
-var getClass = createMafiaClassPropertyGetter(Class);
-var getCoinmaster = createMafiaClassPropertyGetter(Coinmaster);
-var getEffect = createMafiaClassPropertyGetter(Effect);
-var getElement = createMafiaClassPropertyGetter(Element);
-var getFamiliar = createMafiaClassPropertyGetter(Familiar);
-var getItem = createMafiaClassPropertyGetter(Item);
-var getLocation = createMafiaClassPropertyGetter(Location);
-var getMonster = createMafiaClassPropertyGetter(Monster);
-var getPhylum = createMafiaClassPropertyGetter(Phylum);
-var getServant = createMafiaClassPropertyGetter(Servant);
-var getSkill = createMafiaClassPropertyGetter(Skill);
-var getSlot = createMafiaClassPropertyGetter(Slot);
-var getStat = createMafiaClassPropertyGetter(Stat);
-var getThrall = createMafiaClassPropertyGetter(Thrall);
-function property_get(property, _default) {
-  var value = getString(property);
-
-  if (isMonsterProperty(property)) {
-    return getMonster(property, _default);
-  }
-
-  if (isLocationProperty(property)) {
-    return getLocation(property, _default);
-  }
-
-  if (value === "") {
-    return _default === undefined ? "" : _default;
-  }
-
-  if (isBooleanProperty(property, value)) {
-    return getBoolean(property, _default);
-  }
-
-  if (isNumericProperty(property, value)) {
-    return getNumber(property, _default);
-  }
-
-  return value;
-}
-
-function _set(property, value) {
-  var stringValue = value === null ? "" : value.toString();
-  (0,external_kolmafia_namespaceObject.setProperty)(property, stringValue);
-}
-
-
-function setProperties(properties) {
-  for (var _i = 0, _Object$entries = Object.entries(properties); _i < _Object$entries.length; _i++) {
-    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-        prop = _Object$entries$_i[0],
-        value = _Object$entries$_i[1];
-
-    _set(prop, value);
-  }
-}
-function withProperties(properties, callback) {
-  var propertiesBackup = Object.fromEntries(Object.entries(properties).map(_ref => {
-    var _ref2 = _slicedToArray(_ref, 1),
-        prop = _ref2[0];
-
-    return [prop, property_get(prop)];
-  }));
-  setProperties(properties);
-
-  try {
-    callback();
-  } finally {
-    setProperties(propertiesBackup);
-  }
-}
-function withProperty(property, value, callback) {
-  withProperties(_defineProperty({}, property, value), callback);
-}
-function withChoices(choices, callback) {
-  var properties = Object.fromEntries(Object.entries(choices).map(_ref3 => {
-    var _ref4 = _slicedToArray(_ref3, 2),
-        choice = _ref4[0],
-        option = _ref4[1];
-
-    return ["choiceAdventure".concat(choice), option];
-  }));
-  withProperties(properties, callback);
-}
-function withChoice(choice, value, callback) {
-  withChoices(_defineProperty({}, choice, value), callback);
-}
-var PropertiesManager = /*#__PURE__*/function () {
-  function PropertiesManager() {
-    property_classCallCheck(this, PropertiesManager);
-
-    this.properties = {};
-  }
-
-  _createClass(PropertiesManager, [{
-    key: "set",
-    value: function set(propertiesToSet) {
-      for (var _i2 = 0, _Object$entries2 = Object.entries(propertiesToSet); _i2 < _Object$entries2.length; _i2++) {
-        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
-            propertyName = _Object$entries2$_i[0],
-            propertyValue = _Object$entries2$_i[1];
-
-        if (this.properties[propertyName] === undefined) {
-          this.properties[propertyName] = property_get(propertyName);
-        }
-
-        _set(propertyName, propertyValue);
-      }
-    }
-  }, {
-    key: "setChoices",
-    value: function setChoices(choicesToSet) {
-      this.set(Object.fromEntries(Object.entries(choicesToSet).map(_ref5 => {
-        var _ref6 = _slicedToArray(_ref5, 2),
-            choiceNumber = _ref6[0],
-            choiceValue = _ref6[1];
-
-        return ["choiceAdventure".concat(choiceNumber), choiceValue];
-      })));
-    }
-  }, {
-    key: "resetAll",
-    value: function resetAll() {
-      Object.entries(this.properties).forEach(_ref7 => {
-        var _ref8 = _slicedToArray(_ref7, 2),
-            propertyName = _ref8[0],
-            propertyValue = _ref8[1];
-
-        return _set(propertyName, propertyValue);
-      });
-    }
-  }]);
-
-  return PropertiesManager;
-}();
 ;// CONCATENATED MODULE: ./node_modules/libram/dist/template-string.js
 var concatTemplateString = function concatTemplateString(literals) {
   for (var _len = arguments.length, placeholders = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -15516,6 +15301,221 @@ var $thrall = createSingleConstant(Thrall);
  */
 
 var $thralls = createPluralConstant(Thrall);
+// EXTERNAL MODULE: ./node_modules/libram/node_modules/core-js/modules/es.object.from-entries.js
+var es_object_from_entries = __webpack_require__(8819);
+;// CONCATENATED MODULE: ./node_modules/libram/dist/propertyTyping.js
+function isNumericProperty(property, value) {
+  return !isNaN(Number(value)) && !isNaN(parseFloat(value));
+}
+var numericOrStringProperties = (/* unused pure expression or super */ null && (["statusEngineering", "statusGalley", "statusMedbay", "statusMorgue", "statusNavigation", "statusScienceLab", "statusSonar", "statusSpecialOps", "statusWasteProcessing"]));
+var choiceAdventurePattern = /^choiceAdventure\d+$/;
+function isNumericOrStringProperty(property) {
+  if (numericOrStringProperties.includes(property)) return true;
+  return choiceAdventurePattern.test(property);
+}
+var fakeBooleans = ["trackVoteMonster", "_jickJarAvailable"];
+function isBooleanProperty(property, value) {
+  if (fakeBooleans.includes(property)) return false;
+  return ["true", "false"].includes(value);
+}
+var otherLocations = ["nextSpookyravenElizabethRoom", "nextSpookyravenStephenRoom", "sourceOracleTarget"];
+function isLocationProperty(property) {
+  return otherLocations.includes(property) || property.endsWith("Location");
+}
+var otherMonsters = ["romanticTarget", "yearbookCameraTarget"];
+var fakeMonsters = ["trackVoteMonster"];
+function isMonsterProperty(property) {
+  if (otherMonsters.includes(property)) return true;
+  return property.endsWith("Monster") && !fakeMonsters.includes(property);
+}
+function isFamiliarProperty(property) {
+  return property.endsWith("Familiar");
+}
+var statProps = (/* unused pure expression or super */ null && (["nsChallenge1", "shrugTopper", "snojoSetting"]));
+function isStatProperty(property) {
+  return statProps.includes(property);
+}
+;// CONCATENATED MODULE: ./node_modules/libram/dist/property.js
+function property_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var createPropertyGetter = transform => (property, default_) => {
+  var value = (0,external_kolmafia_namespaceObject.getProperty)(property);
+
+  if (default_ !== undefined && value === "") {
+    return default_;
+  }
+
+  return transform(value, property);
+};
+
+var createMafiaClassPropertyGetter = Type => createPropertyGetter(value => {
+  if (value === "") return null;
+  var v = Type.get(value);
+  return v === Type.get("none") ? null : v;
+});
+
+var getString = createPropertyGetter(value => value);
+var getCommaSeparated = createPropertyGetter(value => value.split(/, ?/));
+var getBoolean = createPropertyGetter(value => value === "true");
+var getNumber = createPropertyGetter(value => Number(value));
+var getBounty = createMafiaClassPropertyGetter(Bounty);
+var getClass = createMafiaClassPropertyGetter(Class);
+var getCoinmaster = createMafiaClassPropertyGetter(Coinmaster);
+var getEffect = createMafiaClassPropertyGetter(Effect);
+var getElement = createMafiaClassPropertyGetter(Element);
+var getFamiliar = createMafiaClassPropertyGetter(Familiar);
+var getItem = createMafiaClassPropertyGetter(Item);
+var getLocation = createMafiaClassPropertyGetter(Location);
+var getMonster = createMafiaClassPropertyGetter(Monster);
+var getPhylum = createMafiaClassPropertyGetter(Phylum);
+var getServant = createMafiaClassPropertyGetter(Servant);
+var getSkill = createMafiaClassPropertyGetter(Skill);
+var getSlot = createMafiaClassPropertyGetter(Slot);
+var getStat = createMafiaClassPropertyGetter(Stat);
+var getThrall = createMafiaClassPropertyGetter(Thrall);
+function property_get(property, _default) {
+  var value = getString(property);
+
+  if (isMonsterProperty(property)) {
+    return getMonster(property, _default);
+  }
+
+  if (isLocationProperty(property)) {
+    return getLocation(property, _default);
+  }
+
+  if (value === "") {
+    return _default === undefined ? "" : _default;
+  }
+
+  if (isBooleanProperty(property, value)) {
+    return getBoolean(property, _default);
+  }
+
+  if (isNumericProperty(property, value)) {
+    return getNumber(property, _default);
+  }
+
+  return value;
+}
+
+function _set(property, value) {
+  var stringValue = value === null ? "" : value.toString();
+  (0,external_kolmafia_namespaceObject.setProperty)(property, stringValue);
+}
+
+
+function setProperties(properties) {
+  for (var _i = 0, _Object$entries = Object.entries(properties); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        prop = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+
+    _set(prop, value);
+  }
+}
+function withProperties(properties, callback) {
+  var propertiesBackup = Object.fromEntries(Object.entries(properties).map(_ref => {
+    var _ref2 = _slicedToArray(_ref, 1),
+        prop = _ref2[0];
+
+    return [prop, property_get(prop)];
+  }));
+  setProperties(properties);
+
+  try {
+    callback();
+  } finally {
+    setProperties(propertiesBackup);
+  }
+}
+function withProperty(property, value, callback) {
+  withProperties(_defineProperty({}, property, value), callback);
+}
+function withChoices(choices, callback) {
+  var properties = Object.fromEntries(Object.entries(choices).map(_ref3 => {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        choice = _ref4[0],
+        option = _ref4[1];
+
+    return ["choiceAdventure".concat(choice), option];
+  }));
+  withProperties(properties, callback);
+}
+function withChoice(choice, value, callback) {
+  withChoices(_defineProperty({}, choice, value), callback);
+}
+var PropertiesManager = /*#__PURE__*/function () {
+  function PropertiesManager() {
+    property_classCallCheck(this, PropertiesManager);
+
+    this.properties = {};
+  }
+
+  _createClass(PropertiesManager, [{
+    key: "set",
+    value: function set(propertiesToSet) {
+      for (var _i2 = 0, _Object$entries2 = Object.entries(propertiesToSet); _i2 < _Object$entries2.length; _i2++) {
+        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2),
+            propertyName = _Object$entries2$_i[0],
+            propertyValue = _Object$entries2$_i[1];
+
+        if (this.properties[propertyName] === undefined) {
+          this.properties[propertyName] = property_get(propertyName);
+        }
+
+        _set(propertyName, propertyValue);
+      }
+    }
+  }, {
+    key: "setChoices",
+    value: function setChoices(choicesToSet) {
+      this.set(Object.fromEntries(Object.entries(choicesToSet).map(_ref5 => {
+        var _ref6 = _slicedToArray(_ref5, 2),
+            choiceNumber = _ref6[0],
+            choiceValue = _ref6[1];
+
+        return ["choiceAdventure".concat(choiceNumber), choiceValue];
+      })));
+    }
+  }, {
+    key: "resetAll",
+    value: function resetAll() {
+      Object.entries(this.properties).forEach(_ref7 => {
+        var _ref8 = _slicedToArray(_ref7, 2),
+            propertyName = _ref8[0],
+            propertyValue = _ref8[1];
+
+        return _set(propertyName, propertyValue);
+      });
+    }
+  }]);
+
+  return PropertiesManager;
+}();
 ;// CONCATENATED MODULE: ./node_modules/libram/dist/lib.js
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8;
 
@@ -18166,7 +18166,7 @@ function findFreeRun() {
   })) !== null && _freeRuns$find !== void 0 ? _freeRuns$find : buyStuff ? cheapestItemRun() : undefined;
 }
 ;// CONCATENATED MODULE: ./src/lib.ts
-var lib_templateObject, lib_templateObject2, lib_templateObject3, lib_templateObject4, lib_templateObject5, lib_templateObject6, lib_templateObject7, lib_templateObject8, lib_templateObject9, lib_templateObject10, lib_templateObject11, lib_templateObject12, lib_templateObject13, lib_templateObject14, lib_templateObject15, lib_templateObject16, lib_templateObject17, lib_templateObject18, lib_templateObject19;
+var lib_templateObject, lib_templateObject2, lib_templateObject3, lib_templateObject4, lib_templateObject5, lib_templateObject6, lib_templateObject7, lib_templateObject8, lib_templateObject9, lib_templateObject10, lib_templateObject11, lib_templateObject12, lib_templateObject13, lib_templateObject14, lib_templateObject15, lib_templateObject16, lib_templateObject17, lib_templateObject18, lib_templateObject19, lib_templateObject20, lib_templateObject21, lib_templateObject22;
 
 function lib_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -18352,6 +18352,19 @@ function meatFamiliar() {
   }
 
   return cache.meatFamiliar;
+}
+function safeRestore() {
+  if ((0,external_kolmafia_namespaceObject.myHp)() < (0,external_kolmafia_namespaceObject.myMaxhp)() * 0.5) {
+    (0,external_kolmafia_namespaceObject.restoreHp)((0,external_kolmafia_namespaceObject.myMaxhp)() * 0.9);
+  }
+
+  var mpTarget = Math.min((0,external_kolmafia_namespaceObject.myMaxmp)(), 200);
+
+  if ((0,external_kolmafia_namespaceObject.myMp)() < mpTarget) {
+    if ((have(template_string_$item(lib_templateObject20 || (lib_templateObject20 = lib_taggedTemplateLiteral(["magical sausage"])))) || have(template_string_$item(lib_templateObject21 || (lib_templateObject21 = lib_taggedTemplateLiteral(["magical sausage casing"]))))) && property_get("_sausagesEaten") < 23) {
+      (0,external_kolmafia_namespaceObject.eat)(template_string_$item(lib_templateObject22 || (lib_templateObject22 = lib_taggedTemplateLiteral(["magical sausage"]))));
+    } else (0,external_kolmafia_namespaceObject.restoreMp)(mpTarget);
+  }
 }
 // EXTERNAL MODULE: ./node_modules/libram/node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__(2231);
@@ -19592,6 +19605,7 @@ function trick(trickMacro) {
       }
 
       fillPantsgivingFullness();
+      safeRestore();
     }
   }
 
@@ -19652,14 +19666,20 @@ function runBlocks() {
           meatOutfit();
         } else fightOutfit("Digitize");
 
-        advMacroAA(determineDraggableZoneAndEnsureAccess(), digitizeMacro, () => (0,external_kolmafia_namespaceObject.getCounters)("Digitize", -11, 0) !== "", fillPantsgivingFullness);
+        advMacroAA(determineDraggableZoneAndEnsureAccess(), digitizeMacro, () => (0,external_kolmafia_namespaceObject.getCounters)("Digitize", -11, 0) !== "", () => {
+          fillPantsgivingFullness();
+          safeRestore();
+        });
         (0,external_kolmafia_namespaceObject.useFamiliar)(trickFamiliar());
       }
 
       if (have(template_string_$item(trickin_and_treatin_templateObject17 || (trickin_and_treatin_templateObject17 = trickin_and_treatin_taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))) && (0,external_kolmafia_namespaceObject.myInebriety)() <= (0,external_kolmafia_namespaceObject.inebrietyLimit)()) {
         if (getKramcoWandererChance() >= 1) {
           fightOutfit("Kramco");
-          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => getKramcoWandererChance() >= 1, fillPantsgivingFullness);
+          advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => getKramcoWandererChance() >= 1, () => {
+            fillPantsgivingFullness();
+            safeRestore();
+          });
         }
       }
 
@@ -19669,7 +19689,10 @@ function runBlocks() {
             (0,external_kolmafia_namespaceObject.print)("The first Tuesday in November approaches, which makes perfect sense given that it's October.", "blue");
             fightOutfit("Voter");
             var currentVotes = property_get("_voteFreeFights");
-            advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,external_kolmafia_namespaceObject.totalTurnsPlayed)() % 11 === 1 && property_get("_voteFreeFights") === currentVotes, fillPantsgivingFullness);
+            advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro, () => (0,external_kolmafia_namespaceObject.totalTurnsPlayed)() % 11 === 1 && property_get("_voteFreeFights") === currentVotes, () => {
+              fillPantsgivingFullness();
+              safeRestore();
+            });
           })();
         }
       }
@@ -19685,7 +19708,10 @@ function runBlocks() {
 
         (0,external_kolmafia_namespaceObject.print)("Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.", "blue");
         fightOutfit("Ghost");
-        advMacroAA(ghostLocation, combat_Macro.trySkill($skill(trickin_and_treatin_templateObject22 || (trickin_and_treatin_templateObject22 = trickin_and_treatin_taggedTemplateLiteral(["Shoot Ghost"])))).trySkill($skill(trickin_and_treatin_templateObject23 || (trickin_and_treatin_templateObject23 = trickin_and_treatin_taggedTemplateLiteral(["Shoot Ghost"])))).trySkill($skill(trickin_and_treatin_templateObject24 || (trickin_and_treatin_templateObject24 = trickin_and_treatin_taggedTemplateLiteral(["Shoot Ghost"])))).trySkill($skill(trickin_and_treatin_templateObject25 || (trickin_and_treatin_templateObject25 = trickin_and_treatin_taggedTemplateLiteral(["Trap Ghost"])))), () => property_get("questPAGhost") !== "unstarted", fillPantsgivingFullness);
+        advMacroAA(ghostLocation, combat_Macro.trySkill($skill(trickin_and_treatin_templateObject22 || (trickin_and_treatin_templateObject22 = trickin_and_treatin_taggedTemplateLiteral(["Shoot Ghost"])))).trySkill($skill(trickin_and_treatin_templateObject23 || (trickin_and_treatin_templateObject23 = trickin_and_treatin_taggedTemplateLiteral(["Shoot Ghost"])))).trySkill($skill(trickin_and_treatin_templateObject24 || (trickin_and_treatin_templateObject24 = trickin_and_treatin_taggedTemplateLiteral(["Shoot Ghost"])))).trySkill($skill(trickin_and_treatin_templateObject25 || (trickin_and_treatin_templateObject25 = trickin_and_treatin_taggedTemplateLiteral(["Trap Ghost"])))), () => property_get("questPAGhost") !== "unstarted", () => {
+          fillPantsgivingFullness();
+          safeRestore();
+        });
       }
 
       if (digitizes !== property_get("_sourceTerminalDigitizeUses") && !(votes !== property_get("_voteFreeFights") || sausages !== property_get("_sausageFights")) && (0,external_kolmafia_namespaceObject.myInebriety)() <= (0,external_kolmafia_namespaceObject.inebrietyLimit)()) {
@@ -19699,6 +19725,7 @@ function runBlocks() {
         if ((_runSource$options3 = runSource.options) !== null && _runSource$options3 !== void 0 && _runSource$options3.equipmentRequirements) runSource.options.equipmentRequirements().maximize();
         advMacroAA($location(trickin_and_treatin_templateObject26 || (trickin_and_treatin_templateObject26 = trickin_and_treatin_taggedTemplateLiteral(["Noob Cave"]))), runSource.macro);
         fillPantsgivingFullness();
+        safeRestore();
       }
 
       trickTreat(trickMacro);
@@ -19707,7 +19734,15 @@ function runBlocks() {
         (0,external_kolmafia_namespaceObject.useFamiliar)(trickFamiliar());
         fightOutfit("Digitize");
         advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
-        fillPantsgivingFullness();
+
+        () => {
+          fillPantsgivingFullness();
+          safeRestore();
+        };
+      }
+
+      if (property_get("_universeCalculated") < property_get("skillLevel144") && Object.keys((0,external_kolmafia_namespaceObject.reverseNumberology)()).includes("69")) {
+        (0,external_kolmafia_namespaceObject.cliExecute)("numberology 69");
       }
     }
   } finally {
@@ -19763,14 +19798,6 @@ function main(args) {
     }
 
     sinceKolmafiaRevision(20901);
-    var forbiddenStores = getString("forbiddenStores").split(",");
-
-    if (!forbiddenStores.includes("3408540")) {
-      //Van & Duffel's Baleet Shop
-      forbiddenStores.push("3408540");
-      _set("forbiddenStores", forbiddenStores.join(","));
-    }
-
     manager.set({
       battleAction: "custom combat script",
       dontStopForCounters: true,
@@ -19784,16 +19811,6 @@ function main(args) {
     });
     manager.setChoices({
       806: 1
-    });
-    if (property_get("hpAutoRecovery") < 0.35) manager.set({
-      hpAutoRecovery: 0.35
-    });
-    if (property_get("mpAutoRecovery") < 0.25) manager.set({
-      mpAutoRecovery: 0.25
-    });
-    var mpTarget = (0,external_kolmafia_namespaceObject.myLevel)() < 18 ? 0.5 : 0.3;
-    if (property_get("mpAutoRecoveryTarget") < mpTarget) manager.set({
-      mpAutoRecoveryTarget: mpTarget
     });
 
     if (have(template_string_$item(main_templateObject || (main_templateObject = main_taggedTemplateLiteral(["portable pantogram"])))) && !have(template_string_$item(main_templateObject2 || (main_templateObject2 = main_taggedTemplateLiteral(["pantogram pants"]))))) {
