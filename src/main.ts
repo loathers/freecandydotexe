@@ -13,7 +13,7 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { $familiar, $item, $stat, get, have, property, set, sinceKolmafiaRevision } from "libram";
+import { $familiar, $item, $stat, get, have, sinceKolmafiaRevision } from "libram";
 import { cache, manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -47,12 +47,6 @@ export function main(args: string): void {
     }
 
     sinceKolmafiaRevision(20901);
-    const forbiddenStores = property.getString("forbiddenStores").split(",");
-    if (!forbiddenStores.includes("3408540")) {
-      //Van & Duffel's Baleet Shop
-      forbiddenStores.push("3408540");
-      set("forbiddenStores", forbiddenStores.join(","));
-    }
 
     manager.set({
       battleAction: "custom combat script",
