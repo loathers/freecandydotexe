@@ -18,6 +18,7 @@ import {
   restoreHp,
   restoreMp,
   retrieveItem,
+  reverseNumberology,
   runChoice,
   runCombat,
   toInt,
@@ -270,6 +271,13 @@ export function runBlocks(blocks = -1): void {
         fightOutfit("Digitize");
         advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
         fillPantsgivingFullness();
+      }
+
+      if (
+        get("_universeCalculated") < get("skillLevel144") &&
+        Object.keys(reverseNumberology()).includes("69")
+      ) {
+        cliExecute("numberology 69");
       }
     }
   } finally {
