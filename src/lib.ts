@@ -5,11 +5,18 @@ import {
   adv1,
   buy,
   cliExecute,
+  eat,
   mallPrice,
   myAdventures,
   myFamiliar,
+  myHp,
+  myMaxhp,
+  myMaxmp,
+  myMp,
   numericModifier,
   print,
+  restoreHp,
+  restoreMp,
   retrieveItem,
   use,
 } from "kolmafia";
@@ -261,4 +268,19 @@ export function meatFamiliar(): Familiar {
       .sort((a, b) => fairyMultiplier(b) - fairyMultiplier(a))[0];
   }
   return cache.meatFamiliar;
+}
+
+export function safeRestore(): void {
+  if (myHp() < myMaxhp() * 0.5) {
+    restoreHp(myMaxhp() * 0.9);
+  }
+  const mpTarget = Math.min(myMaxmp(), 200);
+  if (myMp() < mpTarget) {
+    if (
+      (have($item`magical sausage`) || have($item`magical sausage casing`)) &&
+      get("_sausagesEaten") < 23
+    ) {
+      eat($item`magical sausage`);
+    } else restoreMp(mpTarget);
+  }
 }

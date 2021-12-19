@@ -3,7 +3,6 @@ import {
   fullnessLimit,
   itemAmount,
   myFullness,
-  myLevel,
   myPrimestat,
   print,
   retrieveItem,
@@ -13,7 +12,7 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { $familiar, $item, $stat, get, have, sinceKolmafiaRevision } from "libram";
+import { $familiar, $item, $stat, have, sinceKolmafiaRevision } from "libram";
 import { cache, manager, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
@@ -60,11 +59,6 @@ export function main(args: string): void {
       autoSatisfyWithStorage: true,
     });
     manager.setChoices({ 806: 1 });
-
-    if (get("hpAutoRecovery") < 0.35) manager.set({ hpAutoRecovery: 0.35 });
-    if (get("mpAutoRecovery") < 0.25) manager.set({ mpAutoRecovery: 0.25 });
-    const mpTarget = myLevel() < 18 ? 0.5 : 0.3;
-    if (get("mpAutoRecoveryTarget") < mpTarget) manager.set({ mpAutoRecoveryTarget: mpTarget });
 
     if (have($item`portable pantogram`) && !have($item`pantogram pants`)) {
       retrieveItem($item`ten-leaf clover`);

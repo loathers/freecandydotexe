@@ -47,6 +47,7 @@ import {
   determineDraggableZoneAndEnsureAccess,
   meatFamiliar,
   questStep,
+  safeRestore,
   trickFamiliar,
 } from "./lib";
 import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
@@ -118,6 +119,7 @@ function trick(trickMacro: Macro) {
       runCombat(trickMacro.toString());
       while (inMultiFight()) runCombat(trickMacro.toString());
       fillPantsgivingFullness();
+      safeRestore();
     }
   }
   if (block().match(/whichhouse=\d*>[^>]*?house_d/))
@@ -194,7 +196,10 @@ export function runBlocks(blocks = -1): void {
           determineDraggableZoneAndEnsureAccess(),
           digitizeMacro,
           () => getCounters("Digitize", -11, 0) !== "",
-          fillPantsgivingFullness
+          () => {
+            fillPantsgivingFullness();
+            safeRestore();
+          }
         );
         useFamiliar(trickFamiliar());
       }
@@ -206,7 +211,10 @@ export function runBlocks(blocks = -1): void {
             determineDraggableZoneAndEnsureAccess(),
             trickMacro,
             () => getKramcoWandererChance() >= 1,
-            fillPantsgivingFullness
+            () => {
+              fillPantsgivingFullness();
+              safeRestore();
+            }
           );
         }
       }
@@ -223,7 +231,10 @@ export function runBlocks(blocks = -1): void {
             determineDraggableZoneAndEnsureAccess(),
             trickMacro,
             () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") === currentVotes,
-            fillPantsgivingFullness
+            () => {
+              fillPantsgivingFullness();
+              safeRestore();
+            }
           );
         }
       }
@@ -243,7 +254,10 @@ export function runBlocks(blocks = -1): void {
             .trySkill($skill`Shoot Ghost`)
             .trySkill($skill`Trap Ghost`),
           () => get("questPAGhost") !== "unstarted",
-          fillPantsgivingFullness
+          () => {
+            fillPantsgivingFullness();
+            safeRestore();
+          }
         );
       }
       if (
@@ -263,6 +277,7 @@ export function runBlocks(blocks = -1): void {
           runSource.options.equipmentRequirements().maximize();
         advMacroAA($location`Noob Cave`, runSource.macro);
         fillPantsgivingFullness();
+        safeRestore();
       }
       trickTreat(trickMacro);
 
@@ -270,7 +285,10 @@ export function runBlocks(blocks = -1): void {
         useFamiliar(trickFamiliar());
         fightOutfit("Digitize");
         advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
-        fillPantsgivingFullness();
+        () => {
+          fillPantsgivingFullness();
+          safeRestore();
+        };
       }
 
       if (
