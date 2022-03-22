@@ -1,4 +1,5 @@
 import { $item, $items, $skill, have, SourceTerminal, StrictMacro } from "libram";
+import { Item, Skill } from "kolmafia";
 
 export default class Macro extends StrictMacro {
   tryHaveSkill(skill: Skill | null): Macro {

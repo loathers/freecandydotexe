@@ -8,11 +8,13 @@ import {
   enthroneFamiliar,
   equip,
   equippedItem,
+  Familiar,
   fullnessLimit,
   getOutfits,
   haveEquipped,
   inebrietyLimit,
   isAccessible,
+  Item,
   itemAmount,
   mallPrice,
   myAdventures,
@@ -477,8 +479,8 @@ export function bestOutfit(): string {
       cache.bestOutfit = flyestFit;
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Object.entries(outfitTreats(cache.bestOutfit)).forEach(([candy, _probability]) => {
+
+  Object.entries(outfitTreats(cache.bestOutfit)).forEach(([candy]) => {
     if (!cache.startingCandies.has(toItem(candy)))
       cache.startingCandies.set(toItem(candy), itemAmount(toItem(candy)));
   });
