@@ -893,12 +893,12 @@
     "@babel/helper-validator-option" "^7.14.5"
     "@babel/plugin-transform-typescript" "^7.15.0"
 
-"@babel/runtime-corejs3@^7.14.9":
-  version "7.15.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.15.3.tgz#28754263988198f2a928c09733ade2fb4d28089d"
-  integrity sha512-30A3lP+sRL6ml8uhoJSs+8jwpKzbw8CqBvDc1laeptxPm5FahumJxirigcbD2qTs71Sonvj1cyZB0OKGAmxQ+A==
+"@babel/runtime-corejs3@^7.17.2":
+  version "7.17.8"
+  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.17.8.tgz#d7dd49fb812f29c61c59126da3792d8740d4e284"
+  integrity sha512-ZbYSUvoSF6dXZmMl/CYTMOvzIFnbGfv4W3SEHYgMvNsFTeLaF2gkGAF4K2ddmtSK4Emej+0aYcnSC6N5dPCXUQ==
   dependencies:
-    core-js-pure "^3.16.0"
+    core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.8.4":
@@ -1694,20 +1694,20 @@ core-js-compat@^3.14.0, core-js-compat@^3.16.0:
     browserslist "^4.16.8"
     semver "7.0.0"
 
-core-js-pure@^3.16.0:
-  version "3.16.3"
-  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.16.3.tgz#41ccb9b6027535f8dd51a0af004c1c7f0a8c9ca7"
-  integrity sha512-6In+2RwN0FT5yK0ZnhDP5rco/NnuuFZhHauQizZiHo5lDnqAvq8Phxcpy3f+prJOqtKodt/cftBl/GTOW0kiqQ==
-
-core-js@3.15.2:
-  version "3.15.2"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.15.2.tgz#740660d2ff55ef34ce664d7e2455119c5bdd3d61"
-  integrity sha512-tKs41J7NJVuaya8DxIOCnl8QuPHx5/ZVbFo1oKgVl1qHFBBrDctzQGtuLjPpRdNTWmKPH6oEvgN/MUID+l485Q==
+core-js-pure@^3.20.2:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.21.1.tgz#8c4d1e78839f5f46208de7230cebfb72bc3bdb51"
+  integrity sha512-12VZfFIu+wyVbBebyHmRTuEE/tZrB4tJToWcwAMcsp3h4+sHR+fMJWbKpYiCRWlhFBq+KNyO8rIV9rTkeVmznQ==
 
 core-js@^3.16.4:
   version "3.16.4"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.16.4.tgz#0fb1029a554fc2688c0963d7c900e188188a78e0"
   integrity sha512-Tq4GVE6XCjE+hcyW6hPy0ofN3hwtLudz5ZRdrlCnsnD/xkm/PWQRudzYHiKgZKUcefV6Q57fhDHjZHJP5dpfSg==
+
+core-js@^3.21.0:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
+  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -2606,15 +2606,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kolmafia@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-1.3.0.tgz#9c597913698fdea573386407cb39f85a5830250e"
-  integrity sha512-s7GKyhz7WIByzlAtp0j5z6vrbE2gODDlG2GiBjp+ThWSsBVgf5a9TKLT18yVvI8c4+m9pAEVDUtfpAffkEAZaQ==
-
-kolmafia@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-1.4.0.tgz#25af4482f68abeb2705953cf00a558042ec92464"
-  integrity sha512-tnVzCqxnO/y46/rNMdSWi+K3XiypY+HQxdxzbUtoEguniIAFsuzUClhCUjyiH/kiJniKhZq0dyH3+cH4Mn0rvQ==
+kolmafia@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-2.1.1.tgz#be5696fbc11a6caedbc9a6dc69b46b0ee73ea8e2"
+  integrity sha512-vYI3KwDhA1NbhYq9+4kptf5P0TRA/USJJkEScRLRIieU/2Y7lyoC4Mwj4bQEAaScztFtj4K2t2ig2STfjuWbAA==
 
 levn@^0.4.1:
   version "0.4.1"
@@ -2624,14 +2619,14 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libram@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/libram/-/libram-0.4.3.tgz#b84a6c15eec42c7af46996fe7a2bfde66b9ca363"
-  integrity sha512-WR13YbgAmMN4VZJr6MmA3JLwQW0YTE9hqgUQa7lSBod5QkXF6vUwG2IWQ26fdJgbaklTMvSS0uWS7g9L/gsoyA==
+libram@^0.6.8:
+  version "0.6.8"
+  resolved "https://registry.yarnpkg.com/libram/-/libram-0.6.8.tgz#5e5cc77396446667a22dfbf258bbe1d50e5b571f"
+  integrity sha512-PzbC+T8kG0opzJ2/kxGQ1rAo+o8MTDu/mSHkSSkMi+ruTAnH1MhJXEfimmB8dTJs28ojj8b5jGS1PU1u7q/v6A==
   dependencies:
-    "@babel/runtime-corejs3" "^7.14.9"
-    core-js "3.15.2"
-    kolmafia "^1.4.0"
+    "@babel/runtime-corejs3" "^7.17.2"
+    core-js "^3.21.0"
+    kolmafia "^2.1.1"
     lodash "^4.17.21"
 
 loader-runner@^4.2.0:
