@@ -42,6 +42,7 @@ import {
 import {
   advMacroAA,
   cache,
+  coldMedicineCabinet,
   determineDraggableZoneAndEnsureAccess,
   findFreeRun,
   meatFamiliar,
@@ -295,6 +296,7 @@ export function runBlocks(blocks = -1): void {
       ) {
         cliExecute("numberology 69");
       }
+      coldMedicineCabinet();
     }
   } finally {
     const totalMS = gametimeToInt() - startTime;

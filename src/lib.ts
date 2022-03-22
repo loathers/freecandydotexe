@@ -5,7 +5,9 @@ import {
   adv1,
   buy,
   cliExecute,
+  descToItem,
   eat,
+  getWorkshed,
   Location,
   myAdventures,
   myFamiliar,
@@ -18,7 +20,10 @@ import {
   restoreHp,
   restoreMp,
   retrieveItem,
+  runChoice,
+  totalTurnsPlayed,
   use,
+  visitUrl,
 } from "kolmafia";
 import {
   $effect,
@@ -29,6 +34,7 @@ import {
   ActionSource,
   ensureFreeRun,
   get,
+  getSaleValue,
   Guzzlr,
   have,
   Macro,
@@ -285,4 +291,35 @@ export function findFreeRun(): ActionSource {
       maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
     })
   );
+}
+
+export function coldMedicineCabinet(): void {
+  if (getWorkshed() !== $item`cold medicine cabinet`) return;
+
+  if (
+    property.getNumber("_coldMedicineConsults") >= 5 ||
+    property.getNumber("_nextColdMedicineConsult") > totalTurnsPlayed()
+  ) {
+    return;
+  }
+  const options = visitUrl("campground.php?action=workshed");
+  let i = 0;
+  let match;
+  const regexp = /descitem\((\d+)\)/g;
+  const itemChoices = new Map<Item, number>();
+
+  while ((match = regexp.exec(options)) !== null) {
+    i++;
+    const item = descToItem(match[1]);
+    itemChoices.set(item, i);
+  }
+
+  const bestItem = Array.from(itemChoices.keys())
+    .map((i) => [i, getSaleValue(i)] as [Item, number])
+    .sort((a, b) => b[1] - a[1])[0][0];
+  const bestChoice = itemChoices.get(bestItem);
+  if (bestChoice && bestChoice > 0) {
+    visitUrl("campground.php?action=workshed");
+    runChoice(bestChoice);
+  }
 }
