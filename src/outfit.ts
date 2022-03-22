@@ -30,6 +30,7 @@ import {
   outfitTreats,
   print,
   runChoice,
+  Slot,
   toEffect,
   toItem,
   toSlot,
