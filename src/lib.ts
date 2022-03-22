@@ -6,7 +6,7 @@ import {
   buy,
   cliExecute,
   eat,
-  mallPrice,
+  Location,
   myAdventures,
   myFamiliar,
   myHp,
@@ -24,17 +24,17 @@ import {
   $effect,
   $familiar,
   $item,
-  $items,
   $location,
   $locations,
-  $skill,
-  FreeRun,
+  ActionSource,
+  ensureFreeRun,
   get,
   Guzzlr,
   have,
   Macro,
   PropertiesManager,
   property,
+  tryFindFreeRun,
 } from "libram";
 
 export const manager = new PropertiesManager();
@@ -208,22 +208,12 @@ export function advMacroAA(
     if (typeof macro === "function") macro().setAutoAttack();
     adv1(location, -1, (_round: number, _foe: Monster, pageText: string) => {
       if (pageText.includes("Macro Aborted")) abort();
-      return Macro.cachedAutoAttack ?? Macro.abort().toString();
+      return Macro.cachedAutoAttacks.get(macro.name) ?? Macro.abort().toString();
     });
     if (afterCombatAction) afterCombatAction();
     n++;
   }
 }
-
-const cheapestRunSource = $items`Louder Than Bomb, divine champagne popper, tennis ball`.sort(
-  (a, b) => mallPrice(a) - mallPrice(b)
-)[0];
-
-export const cheapestItemRun = new FreeRun(
-  "Cheap Combat Item",
-  () => retrieveItem(cheapestRunSource),
-  Macro.trySkill($skill`Asdon Martin: Spring-Loaded Front Bumper`).item(cheapestRunSource)
-);
 
 export function questStep(questName: string): number {
   const stringStep = property.getString(questName);
@@ -283,4 +273,16 @@ export function safeRestore(): void {
       eat($item`magical sausage`);
     } else restoreMp(mpTarget);
   }
+}
+
+export function findFreeRun(): ActionSource {
+  return (
+    tryFindFreeRun() ??
+    ensureFreeRun({
+      requireUnlimited: () => true,
+      noFamiliar: () => true,
+      noRequirements: () => true,
+      maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
+    })
+  );
 }

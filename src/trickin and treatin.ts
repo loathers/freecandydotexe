@@ -34,7 +34,6 @@ import {
   $monster,
   $skill,
   $skills,
-  findFreeRun,
   get,
   getKramcoWandererChance,
   have,
@@ -43,8 +42,8 @@ import {
 import {
   advMacroAA,
   cache,
-  cheapestItemRun,
   determineDraggableZoneAndEnsureAccess,
+  findFreeRun,
   meatFamiliar,
   questStep,
   safeRestore,
@@ -270,11 +269,10 @@ export function runBlocks(blocks = -1): void {
           "red"
         );
         print("Sorry if that red message freaked you out, everything is cool and good.", "grey");
-        const runSource = findFreeRun() ?? cheapestItemRun;
-        if (runSource.options?.preparation) runSource.options.preparation();
-        if (runSource.options?.familiar) useFamiliar(runSource.options.familiar());
-        if (runSource.options?.equipmentRequirements)
-          runSource.options.equipmentRequirements().maximize();
+        const runSource = findFreeRun();
+        runSource.constraints.preparation?.();
+        if (runSource.constraints?.familiar) useFamiliar(runSource.constraints.familiar());
+        runSource.constraints.equipmentRequirements?.().maximize?.();
         advMacroAA($location`Noob Cave`, runSource.macro);
         fillPantsgivingFullness();
         safeRestore();
