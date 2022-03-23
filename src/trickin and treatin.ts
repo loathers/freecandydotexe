@@ -6,7 +6,6 @@ import {
   getCounters,
   inebrietyLimit,
   inMultiFight,
-  itemAmount,
   myAdventures,
   myFullness,
   myInebriety,
@@ -14,7 +13,6 @@ import {
   myMaxmp,
   myName,
   outfit,
-  print,
   restoreHp,
   restoreMp,
   retrieveItem,
@@ -41,11 +39,12 @@ import {
 } from "libram";
 import {
   advMacroAA,
-  cache,
   coldMedicineCabinet,
   determineDraggableZoneAndEnsureAccess,
   findFreeRun,
   meatFamiliar,
+  printError,
+  printHighlight,
   questStep,
   safeRestore,
   trickFamiliar,
@@ -72,7 +71,7 @@ const prepareToTreat = () => {
 const block = () => visitUrl("place.php?whichplace=town&action=town_trickortreat");
 
 function treat() {
-  print("It's time to treat yourself (to the downfall of capitalism, ideally)", "blue");
+  printHighlight("It's time to treat yourself (to the downfall of capitalism, ideally)");
   prepareToTreat();
   if (!block().includes("whichhouse=")) {
     if (myAdventures() < 5) {
@@ -97,9 +96,8 @@ function treat() {
 }
 
 function trick(trickMacro: Macro) {
-  print(
-    `Illusion, ${myName()}. A trick is something an adventurer does for meat. Or candy!`,
-    "blue"
+  printHighlight(
+    `Illusion, ${myName()}. A trick is something an adventurer does for meat. Or candy!`
   );
   prepareToTrick(trickMacro);
   if (!block().includes("whichhouse=")) {
@@ -178,7 +176,7 @@ export function runBlocks(blocks = -1): void {
         myInebriety() <= inebrietyLimit() || have($item`Drunkula's wineglass`);
 
       if (getCounters("Digitize", -11, 0) !== "" && canFightWanderers) {
-        print(`It's digitize time!`, "blue");
+        printHighlight(`It's digitize time!`);
         const digitizeMacro = Macro.externalIf(
           myAdventures() * 1.1 <
             (3 - digitizes) *
@@ -221,9 +219,8 @@ export function runBlocks(blocks = -1): void {
 
       if (have($item`"I Voted!" sticker`) && canFightWanderers) {
         if (totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3) {
-          print(
-            "The first Tuesday in November approaches, which makes perfect sense given that it's October.",
-            "blue"
+          printHighlight(
+            "The first Tuesday in November approaches, which makes perfect sense given that it's October."
           );
           fightOutfit("Voter");
           const currentVotes = get("_voteFreeFights");
@@ -245,7 +242,7 @@ export function runBlocks(blocks = -1): void {
         if (ghostLocation === $location`none`) {
           throw `Something went wrong with my ghosts. Dammit, Walter Peck!`;
         }
-        print(`Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.`, "blue");
+        printHighlight(`Lonely rivers flow to the sea, to the sea. Time to wrastle a ghost.`);
         fightOutfit("Ghost");
         advMacroAA(
           ghostLocation,
@@ -265,11 +262,10 @@ export function runBlocks(blocks = -1): void {
         !(votes !== get("_voteFreeFights") || sausages !== get("_sausageFights")) &&
         myInebriety() <= inebrietyLimit()
       ) {
-        print(
-          `Sorry, we encountered a digitized monster but haven't initialized the counter yet!`,
-          "red"
+        printError(
+          `Sorry, we encountered a digitized monster but haven't initialized the counter yet!`
         );
-        print("Sorry if that red message freaked you out, everything is cool and good.", "grey");
+        printHighlight("Sorry if that red message freaked you out, everything is cool and good.");
         const runSource = findFreeRun();
         runSource.constraints.preparation?.();
         if (runSource.constraints?.familiar) useFamiliar(runSource.constraints.familiar());
@@ -305,18 +301,9 @@ export function runBlocks(blocks = -1): void {
     const min = Math.floor((totalMS / 1000 / 60) % 60);
     const hours = Math.floor(totalMS / 1000 / 60 / 60);
 
-    print(`Total milliseconds for sanity check: ${totalMS}`);
-    print(
-      `I spent ${hours.toFixed(2)}:${min.toFixed(2)}:${sec.toFixed(2)}.${ms} running ${n} blocks!`,
-      "blue"
-    );
-    print(
-      `I gathered ${Array.from(cache.startingCandies.entries())
-        .map(([candy, quantity]) => `${itemAmount(candy) - quantity} ${candy.plural}`)
-        .join(", ")}, and ${
-        itemAmount($item`huge bowl of candy`) - (cache.startingBowls ?? 0)
-      } huge bowls of candy!`,
-      "blue"
+    printHighlight(`Total milliseconds for sanity check: ${totalMS}`);
+    printHighlight(
+      `I spent ${hours.toFixed(2)}:${min.toFixed(2)}:${sec.toFixed(2)}.${ms} running ${n} blocks!`
     );
   }
 }

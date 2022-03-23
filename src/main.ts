@@ -4,7 +4,6 @@ import {
   itemAmount,
   myFullness,
   myPrimestat,
-  print,
   retrieveItem,
   runChoice,
   setAutoAttack,
@@ -12,15 +11,14 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { $familiar, $item, $stat, have, sinceKolmafiaRevision } from "libram";
-import { cache, manager, questStep } from "./lib";
+import { $familiar, $item, $stat, have, Session, sinceKolmafiaRevision } from "libram";
+import { cache, manager, printError, printHighlight, questStep } from "./lib";
 import { runBlocks } from "./trickin and treatin";
 
 export function main(args: string): void {
   if (args && args.includes("help")) {
-    print(
-      "Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.",
-      "blue"
+    printHighlight(
+      "Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy."
     );
   } else {
     if (myFullness() < fullnessLimit()) {
@@ -86,14 +84,19 @@ export function main(args: string): void {
     visitUrl(`account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update`, true);
 
     const blocks = args ? parseInt(args) : undefined;
+    const starting = Session.current();
     try {
       runBlocks(blocks);
     } catch {
-      print(
-        "Looks like we've aborted! That's bad. Contact phreddrickkv2 in the freecandydotexe thread on Discord, and let him know what's going on. Unless you're fighting Steve. Then it's fine.",
-        "red"
+      printError(
+        "Looks like we've aborted! That's bad. Contact phreddrickkv2 in the freecandydotexe thread on Discord, and let him know what's going on. Unless you're fighting Steve. Then it's fine."
       );
     } finally {
+      const results = Session.current().diff(starting);
+      printHighlight("Session Results:");
+      for (const [item, quantity] of results.items) {
+        printHighlight(` ${item}: ${quantity}`);
+      }
       manager.resetAll();
       visitUrl(
         `account.php?actions[]=flag_aabosses&flag_aabosses=${aaBossFlag}&action=Update`,

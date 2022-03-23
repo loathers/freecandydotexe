@@ -46,6 +46,7 @@ import {
   property,
   tryFindFreeRun,
 } from "libram";
+import { isDarkMode } from "kolmafia";
 
 export const manager = new PropertiesManager();
 
@@ -146,7 +147,7 @@ export function determineDraggableZoneAndEnsureAccess(): Location {
     if (!guzzlrBooze) {
       return defaultLocation;
     } else if (!have(guzzlrBooze)) {
-      print("just picking up some booze before we roll", "blue");
+      printHighlight("just picking up some booze before we roll");
       retrieveItem(guzzlrBooze);
     }
   }
@@ -326,4 +327,14 @@ export function coldMedicineCabinet(): void {
     visitUrl("campground.php?action=workshed");
     runChoice(bestChoice);
   }
+}
+
+export function printHighlight(message: string): void {
+  const color = isDarkMode() ? "yellow" : "blue";
+  print(message, color);
+}
+
+export function printError(message: string): void {
+  const color = "red";
+  print(message, color);
 }
