@@ -264,9 +264,9 @@ export function fightOutfit(type: fightType = "Trick"): void {
           1
         ) * stasisData.meatPerLb
       : adventureFamiliars.includes(trickFamiliar())
-      ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
-        (1.1 * (1000 * baseAdventureValue())) /
-        Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2)
+      ? // https://www.desmos.com/calculator/y8iszw6rfk
+        // Very basic linear approximation of the value of additional weight
+        0.00123839009288 * baseAdventureValue()
       : 0;
 
     const bjornalikeToUse = bestBjornalike(forceEquips);
