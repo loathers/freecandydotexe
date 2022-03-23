@@ -21353,8 +21353,9 @@ function fightOutfit() {
     }
 
     var weightValue = stasisData ? //action rate times weight per lb
-    utils_clamp(stasisData.baseRate + actionRateBonus() + (forceEquips.includes(template_string_$item(outfit_templateObject46 || (outfit_templateObject46 = outfit_taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,external_kolmafia_namespaceObject.haveEquipped)(template_string_$item(outfit_templateObject47 || (outfit_templateObject47 = outfit_taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes(trickFamiliar()) ? //1.1 multiplier meant to account for linearization and weight estimates undervaluing gnome lbs
-    1.1 * (1000 * baseAdventureValue()) / Math.pow(1000 - (estimateOutfitWeight() + getEffectWeight() + 20), 2) : 0;
+    utils_clamp(stasisData.baseRate + actionRateBonus() + (forceEquips.includes(template_string_$item(outfit_templateObject46 || (outfit_templateObject46 = outfit_taggedTemplateLiteral(["Loathing Legion helicopter"])))) && !(0,external_kolmafia_namespaceObject.haveEquipped)(template_string_$item(outfit_templateObject47 || (outfit_templateObject47 = outfit_taggedTemplateLiteral(["Loathing Legion helicopter"])))) ? 0.25 : 0), 0, 1) * stasisData.meatPerLb : adventureFamiliars.includes(trickFamiliar()) ? // https://www.desmos.com/calculator/y8iszw6rfk
+    // Very basic linear approximation of the value of additional weight
+    0.00123839009288 * baseAdventureValue() : 0;
     var bjornalikeToUse = bestBjornalike(forceEquips);
     if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, riderValue(pickBjorn()));
     maximizeCached(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight")].concat(outfit_toConsumableArray(have(template_string_$item(outfit_templateObject48 || (outfit_templateObject48 = outfit_taggedTemplateLiteral(["SongBoom\u2122 BoomBox"])))) ? ["0.25 Meat Drop"] : []), ["0.01 Item Drop"]), {
