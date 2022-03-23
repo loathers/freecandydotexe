@@ -28,7 +28,6 @@ import {
   outfit,
   outfitPieces,
   outfitTreats,
-  print,
   runChoice,
   Slot,
   toEffect,
@@ -60,7 +59,14 @@ import {
   sumNumbers,
 } from "libram";
 import { pickBjorn, riderValue } from "./bjorn";
-import { cache, leprechaunMultiplier, meatFamiliar, PantsgivingFood, trickFamiliar } from "./lib";
+import {
+  cache,
+  leprechaunMultiplier,
+  meatFamiliar,
+  PantsgivingFood,
+  printError,
+  trickFamiliar,
+} from "./lib";
 
 const actionRateBonus = () =>
   numericModifier("Familiar Action Bonus") / 100 +
@@ -180,7 +186,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
     }
     const trickHat = trickHats.find((hat) => have(hat));
     if (!trickHat) {
-      print("We don't have a 1-item outfit, and were unable to find one.", "red");
+      printError("We don't have a 1-item outfit, and were unable to find one.");
       abort();
     }
 
