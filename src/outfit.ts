@@ -230,7 +230,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
       have($item`protonic accelerator pack`) &&
       forceEquips.every((item) => toSlot(item) !== $slot`back`) &&
       get("questPAGhost") === "unstarted" &&
-      get("nextParanormalActivity") <= totalTurnsPlayed()
+      get("nextParanormalActivity") <= totalTurnsPlayed() &&
+      myInebriety() <= inebrietyLimit()
     )
       forceEquips.push($item`protonic accelerator pack`);
 
