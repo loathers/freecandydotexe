@@ -21275,7 +21275,8 @@ function fightOutfit() {
   var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Trick";
 
   if (getString("freecandy_trickOutfit")) {
-    (0,external_kolmafia_namespaceObject.outfit)(getString("freecandy_trickOutfit"));
+    var success = (0,external_kolmafia_namespaceObject.outfit)(getString("freecandy_trickOutfit"));
+    if (!success) throw new Error("Unable to properly equip trickOutfit!");
 
     switch (type) {
       case "Kramco":
