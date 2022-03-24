@@ -164,7 +164,8 @@ function getEffectWeight(): number {
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 export function fightOutfit(type: fightType = "Trick"): void {
   if (property.getString("freecandy_trickOutfit")) {
-    outfit(property.getString("freecandy_trickOutfit"));
+    const success = outfit(property.getString("freecandy_trickOutfit"));
+    if (!success) throw new Error("Unable to properly equip trickOutfit!");
     switch (type) {
       case "Kramco":
         equip($slot`off-hand`, $item`Kramco Sausage-o-Matic™`);
