@@ -8,6 +8,7 @@ import {
   descToItem,
   eat,
   Effect,
+  equip,
   Familiar,
   getWorkshed,
   Item,
@@ -35,16 +36,21 @@ import {
   $item,
   $location,
   $locations,
+  $slot,
   ActionSource,
+  adventureMacro,
   ensureFreeRun,
   get,
   getSaleValue,
   Guzzlr,
   have,
+  JuneCleaver,
   Macro,
   PropertiesManager,
   property,
   tryFindFreeRun,
+  uneffect,
+  withProperty,
 } from "libram";
 import { isDarkMode } from "kolmafia";
 
@@ -337,4 +343,87 @@ export function printHighlight(message: string): void {
 export function printError(message: string): void {
   const color = "red";
   print(message, color);
+}
+
+export const juneCleaverChoiceValues = {
+  1467: {
+    1: 0,
+    2: 0,
+    3: 5 * get("valueOfAdventure"),
+  },
+  1468: { 1: 0, 2: 5, 3: 0 },
+  1469: { 1: 0, 2: $item`Dad's brandy`, 3: 1500 },
+  1470: { 1: 0, 2: $item`teacher's pen`, 3: 0 },
+  1471: { 1: $item`savings bond`, 2: 250, 3: 0 },
+  1472: {
+    1: $item`trampled ticket stub`,
+    2: $item`fire-roasted lake trout`,
+    3: 0,
+  },
+  1473: { 1: $item`gob of wet hair`, 2: 0, 3: 0 },
+  1474: { 1: 0, 2: $item`guilty sprout`, 3: 0 },
+  1475: { 1: $item`mother's necklace`, 2: 0, 3: 0 },
+} as const;
+
+export function valueJuneCleaverOption(result: Item | number): number {
+  return result instanceof Item ? getSaleValue(result) : result;
+}
+
+export function bestJuneCleaverOption(id: typeof JuneCleaver.choices[number]): 1 | 2 | 3 {
+  const options = [1, 2, 3] as const;
+  return options
+    .map((option) => ({
+      option,
+      value: valueJuneCleaverOption(juneCleaverChoiceValues[id][option]),
+    }))
+    .sort((a, b) => b.value - a.value)[0].option;
+}
+let juneCleaverSkipChoices: typeof JuneCleaver.choices[number][] | null;
+function skipJuneCleaverChoices(): void {
+  if (!juneCleaverSkipChoices) {
+    juneCleaverSkipChoices = [...JuneCleaver.choices]
+      .sort(
+        (a, b) =>
+          valueJuneCleaverOption(juneCleaverChoiceValues[a][bestJuneCleaverOption(a)]) -
+          valueJuneCleaverOption(juneCleaverChoiceValues[b][bestJuneCleaverOption(b)])
+      )
+      .splice(0, 3);
+  }
+
+  if (JuneCleaver.skipsRemaining() > 0) {
+    for (const choice of juneCleaverSkipChoices) {
+      manager.setChoice(choice, 4);
+    }
+  } else {
+    for (const choice of juneCleaverSkipChoices) {
+      manager.setChoice(choice, bestJuneCleaverOption(choice));
+    }
+  }
+}
+export function juneCleave(): boolean {
+  if (get("_juneCleaverFightsLeft") <= 0) {
+    cliExecute("checkpoint");
+    equip($slot`weapon`, $item`June cleaver`);
+    skipJuneCleaverChoices();
+    withProperty("recoveryScript", "", () => {
+      adventureMacro($location`Noob Cave`, Macro.abort());
+      if (["Poetic Justice", "Lost and Found"].includes(get("lastEncounter"))) {
+        uneffect($effect`Beaten Up`);
+      }
+    });
+
+    cliExecute("outfit checkpoint");
+
+    return [
+      "Aunts not Ants",
+      "Bath Time",
+      "Beware of Aligator",
+      "Delicious Sprouts",
+      "Lost and Found",
+      "Poetic Justice",
+      "Summer Days",
+      "Teacher's Pet",
+    ].includes(get("lastEncounter"));
+  }
+  return false;
 }

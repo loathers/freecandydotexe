@@ -42,6 +42,7 @@ import {
   coldMedicineCabinet,
   determineDraggableZoneAndEnsureAccess,
   findFreeRun,
+  juneCleave,
   meatFamiliar,
   printError,
   printHighlight,
@@ -118,6 +119,7 @@ function trick(trickMacro: Macro) {
       while (inMultiFight()) runCombat(trickMacro.toString());
       fillPantsgivingFullness();
       safeRestore();
+      if (juneCleave()) block();
     }
   }
   if (block().match(/whichhouse=\d*>[^>]*?house_d/))
@@ -197,6 +199,7 @@ export function runBlocks(blocks = -1): void {
           () => {
             fillPantsgivingFullness();
             safeRestore();
+            juneCleave();
           }
         );
         useFamiliar(trickFamiliar());
@@ -212,6 +215,7 @@ export function runBlocks(blocks = -1): void {
             () => {
               fillPantsgivingFullness();
               safeRestore();
+              juneCleave();
             }
           );
         }
@@ -231,6 +235,7 @@ export function runBlocks(blocks = -1): void {
             () => {
               fillPantsgivingFullness();
               safeRestore();
+              juneCleave();
             }
           );
         }
@@ -254,6 +259,7 @@ export function runBlocks(blocks = -1): void {
           () => {
             fillPantsgivingFullness();
             safeRestore();
+            juneCleave();
           }
         );
       }
@@ -273,6 +279,7 @@ export function runBlocks(blocks = -1): void {
         advMacroAA($location`Noob Cave`, runSource.macro);
         fillPantsgivingFullness();
         safeRestore();
+        juneCleave();
       }
       trickTreat(trickMacro);
 
@@ -283,6 +290,7 @@ export function runBlocks(blocks = -1): void {
         () => {
           fillPantsgivingFullness();
           safeRestore();
+          juneCleave();
         };
       }
 
