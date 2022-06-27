@@ -52,6 +52,7 @@ import {
   getFoldGroup,
   getSaleValue,
   have,
+  JuneCleaver,
   maximizeCached,
   property,
   Requirement,
@@ -60,12 +61,15 @@ import {
 } from "libram";
 import { pickBjorn, riderValue } from "./bjorn";
 import {
+  bestJuneCleaverOption,
   cache,
+  juneCleaverChoiceValues,
   leprechaunMultiplier,
   meatFamiliar,
   PantsgivingFood,
   printError,
   trickFamiliar,
+  valueJuneCleaverOption,
 } from "./lib";
 
 const actionRateBonus = () =>
@@ -354,6 +358,7 @@ function overallAdventureValue(): number {
     ],
     ...snowSuit(),
     ...mayflowerBouquet(),
+    ...juneCleaver(),
   ]);
   const treatsAndBonusEquips =
     sum(
@@ -511,6 +516,7 @@ export function meatOutfit(): void {
       ],
       ...snowSuit(),
       ...mayflowerBouquet(),
+      ...juneCleaver(),
       [$item`mafia thumb ring`, 0.04 * overallAdventureValue()],
       ...(bjornalike ? new Map([[bjornalike, riderValue(bjornFam)]]) : []),
     ]),
@@ -540,4 +546,22 @@ function bestBjornalike(existingForceEquips: Item[]): Item | undefined {
     return $item`Crown of Thrones`;
   }
   return $item`Buddy Bjorn`;
+}
+
+let juneCleaverEV: number | null = null;
+function juneCleaver(): Map<Item, number> {
+  if (!have($item`June cleaver`) || get("_juneCleaverFightsLeft") > myAdventures()) {
+    return new Map();
+  }
+  if (!juneCleaverEV) {
+    juneCleaverEV =
+      JuneCleaver.choices.reduce(
+        (total, choice) =>
+          total +
+          valueJuneCleaverOption(juneCleaverChoiceValues[choice][bestJuneCleaverOption(choice)]),
+        0
+      ) / JuneCleaver.choices.length;
+  }
+
+  return new Map<Item, number>([[$item`June cleaver`, juneCleaverEV / JuneCleaver.getInterval()]]);
 }
