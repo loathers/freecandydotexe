@@ -20467,17 +20467,17 @@ function choicesAvailable() {
 ;// CONCATENATED MODULE: ./src/lib.ts
 var lib_templateObject, lib_templateObject2, lib_templateObject3, lib_templateObject4, lib_templateObject5, lib_templateObject6, lib_templateObject7, lib_templateObject8, lib_templateObject9, lib_templateObject10, lib_templateObject11, lib_templateObject12, lib_templateObject13, lib_templateObject14, lib_templateObject15, lib_templateObject16, lib_templateObject17, lib_templateObject18, lib_templateObject19, lib_templateObject20, lib_templateObject21, lib_templateObject22, lib_templateObject23, lib_templateObject24, lib_templateObject25, lib_templateObject26, lib_templateObject27, lib_templateObject28, lib_templateObject29, lib_templateObject30, lib_templateObject31, lib_templateObject32, lib_templateObject33;
 
-function lib_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = src_lib_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-
 function lib_toConsumableArray(arr) { return lib_arrayWithoutHoles(arr) || lib_iterableToArray(arr) || src_lib_unsupportedIterableToArray(arr) || lib_nonIterableSpread(); }
 
 function lib_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function src_lib_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return src_lib_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return src_lib_arrayLikeToArray(o, minLen); }
-
 function lib_iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function lib_arrayWithoutHoles(arr) { if (Array.isArray(arr)) return src_lib_arrayLikeToArray(arr); }
+
+function lib_createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = src_lib_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function src_lib_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return src_lib_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return src_lib_arrayLikeToArray(o, minLen); }
 
 function src_lib_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -20787,32 +20787,32 @@ function bestJuneCleaverOption(id) {
 var juneCleaverSkipChoices;
 
 function skipJuneCleaverChoices() {
-  if (!juneCleaverSkipChoices) {
-    juneCleaverSkipChoices = lib_toConsumableArray(choices).sort((a, b) => valueJuneCleaverOption(juneCleaverChoiceValues[a][bestJuneCleaverOption(a)]) - valueJuneCleaverOption(juneCleaverChoiceValues[b][bestJuneCleaverOption(b)])).splice(0, 3);
+  var _iterator = lib_createForOfIteratorHelper(choices),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _choice = _step.value;
+      manager.setChoice(_choice, bestJuneCleaverOption(_choice));
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
   }
 
   if (skipsRemaining() > 0) {
-    var _iterator = lib_createForOfIteratorHelper(juneCleaverSkipChoices),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var choice = _step.value;
-        manager.setChoice(choice, 4);
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
+    if (!juneCleaverSkipChoices) {
+      juneCleaverSkipChoices = lib_toConsumableArray(choices).sort((a, b) => valueJuneCleaverOption(juneCleaverChoiceValues[a][bestJuneCleaverOption(a)]) - valueJuneCleaverOption(juneCleaverChoiceValues[b][bestJuneCleaverOption(b)])).splice(0, 3);
     }
-  } else {
+
     var _iterator2 = lib_createForOfIteratorHelper(juneCleaverSkipChoices),
         _step2;
 
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var _choice = _step2.value;
-        manager.setChoice(_choice, bestJuneCleaverOption(_choice));
+        var choice = _step2.value;
+        manager.setChoice(choice, 4);
       }
     } catch (err) {
       _iterator2.e(err);
@@ -21679,6 +21679,7 @@ function fightOutfit() {
     }
 
     var forceEquips = [];
+    var maximizeTargets = [];
     var bonusEquips = new Map([[template_string_$item(outfit_templateObject27 || (outfit_templateObject27 = outfit_taggedTemplateLiteral(["lucky gold ring"]))), 400], [template_string_$item(outfit_templateObject28 || (outfit_templateObject28 = outfit_taggedTemplateLiteral(["Mr. Cheeng's spectacles"]))), 250], [template_string_$item(outfit_templateObject29 || (outfit_templateObject29 = outfit_taggedTemplateLiteral(["pantogram pants"]))), property_get("_pantogramModifier").includes("Drops Items") ? 100 : 0], [template_string_$item(outfit_templateObject30 || (outfit_templateObject30 = outfit_taggedTemplateLiteral(["Mr. Screege's spectacles"]))), 180], [template_string_$item(outfit_templateObject31 || (outfit_templateObject31 = outfit_taggedTemplateLiteral(["bag of many confections"]))), getSaleValue.apply(void 0, outfit_toConsumableArray(template_string_$items(outfit_templateObject32 || (outfit_templateObject32 = outfit_taggedTemplateLiteral(["Polka Pop, BitterSweetTarts, Piddles"]))))) / 6]].concat(outfit_toConsumableArray(snowSuit()), outfit_toConsumableArray(mayflowerBouquet()), outfit_toConsumableArray(pantsgiving())));
 
     switch (type) {
@@ -21693,6 +21694,8 @@ function fightOutfit() {
 
       case "Ghost":
         forceEquips.push(template_string_$item(outfit_templateObject36 || (outfit_templateObject36 = outfit_taggedTemplateLiteral(["protonic accelerator pack"]))));
+        maximizeTargets.push("DA");
+        maximizeTargets.push("DR");
         break;
 
       case "Trick":
@@ -21729,7 +21732,7 @@ function fightOutfit() {
     0.00123839009288 * baseAdventureValue() : 0;
     var bjornalikeToUse = bestBjornalike(forceEquips);
     if (bjornalikeToUse) bonusEquips.set(bjornalikeToUse, riderValue(pickBjorn()));
-    maximizeCached(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight")].concat(outfit_toConsumableArray(have(template_string_$item(outfit_templateObject48 || (outfit_templateObject48 = outfit_taggedTemplateLiteral(["SongBoom\u2122 BoomBox"])))) ? ["0.25 Meat Drop"] : []), ["0.01 Item Drop"]), {
+    maximizeCached(["".concat(Math.round(weightValue * 100) / 100, " Familiar Weight")].concat(outfit_toConsumableArray(have(template_string_$item(outfit_templateObject48 || (outfit_templateObject48 = outfit_taggedTemplateLiteral(["SongBoom\u2122 BoomBox"])))) ? ["0.25 Meat Drop"] : []), ["0.01 Item Drop"], maximizeTargets), {
       forceEquip: forceEquips,
       bonusEquip: bonusEquips,
       preventSlot: $slots(outfit_templateObject49 || (outfit_templateObject49 = outfit_taggedTemplateLiteral(["buddy-bjorn, crown-of-thrones"]))),
@@ -22151,8 +22154,15 @@ function trickTreat(trickMacro) {
   trick(trickMacro);
 }
 
+function canGorge() {
+  var noFoodPaths = [35, // Dark Gyffte
+  44 // Grey You
+  ];
+  return (0,external_kolmafia_namespaceObject.myFullness)() < (0,external_kolmafia_namespaceObject.fullnessLimit)() && !noFoodPaths.includes((0,external_kolmafia_namespaceObject.myPathId)());
+}
+
 function fillPantsgivingFullness() {
-  if ((0,external_kolmafia_namespaceObject.myFullness)() >= (0,external_kolmafia_namespaceObject.fullnessLimit)()) return;
+  if (!canGorge()) return;
 
   if (!property_get("_fudgeSporkUsed")) {
     (0,external_kolmafia_namespaceObject.retrieveItem)(template_string_$item(trickin_and_treatin_templateObject3 || (trickin_and_treatin_templateObject3 = trickin_and_treatin_taggedTemplateLiteral(["fudge spork"]))));
@@ -22324,7 +22334,7 @@ function main(args) {
   if (args && args.includes("help")) {
     printHighlight("Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy.");
   } else {
-    if ((0,external_kolmafia_namespaceObject.myFullness)() < (0,external_kolmafia_namespaceObject.fullnessLimit)()) {
+    if (canGorge()) {
       var keepGoinCowboy = (0,external_kolmafia_namespaceObject.userConfirm)("Your stomach is not currently full. My pantsgiving support will slowly fill your stomach with 1-fullness items, which is likely suboptimal. Are you sure you wish to proceed?", 69000, false);
       if (!keepGoinCowboy) (0,external_kolmafia_namespaceObject.abort)();
     }
