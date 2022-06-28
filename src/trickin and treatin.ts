@@ -12,6 +12,7 @@ import {
   myMaxhp,
   myMaxmp,
   myName,
+  myPathId,
   outfit,
   restoreHp,
   restoreMp,
@@ -131,8 +132,17 @@ function trickTreat(trickMacro: Macro) {
   trick(trickMacro);
 }
 
+export function canGorge(): boolean {
+  const noFoodPaths = [
+    35, // Dark Gyffte
+    44, // Grey You
+  ];
+
+  return myFullness() < fullnessLimit() && !noFoodPaths.includes(myPathId());
+}
+
 function fillPantsgivingFullness(): void {
-  if (myFullness() >= fullnessLimit()) return;
+  if (!canGorge()) return;
   if (!get("_fudgeSporkUsed")) {
     retrieveItem($item`fudge spork`);
     eat($item`fudge spork`);

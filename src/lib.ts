@@ -378,28 +378,30 @@ export function bestJuneCleaverOption(id: typeof JuneCleaver.choices[number]): 1
     }))
     .sort((a, b) => b.value - a.value)[0].option;
 }
+
 let juneCleaverSkipChoices: typeof JuneCleaver.choices[number][] | null;
+
 function skipJuneCleaverChoices(): void {
-  if (!juneCleaverSkipChoices) {
-    juneCleaverSkipChoices = [...JuneCleaver.choices]
-      .sort(
-        (a, b) =>
-          valueJuneCleaverOption(juneCleaverChoiceValues[a][bestJuneCleaverOption(a)]) -
-          valueJuneCleaverOption(juneCleaverChoiceValues[b][bestJuneCleaverOption(b)])
-      )
-      .splice(0, 3);
+  for (const choice of JuneCleaver.choices) {
+    manager.setChoice(choice, bestJuneCleaverOption(choice));
   }
 
   if (JuneCleaver.skipsRemaining() > 0) {
+    if (!juneCleaverSkipChoices) {
+      juneCleaverSkipChoices = [...JuneCleaver.choices]
+        .sort(
+          (a, b) =>
+            valueJuneCleaverOption(juneCleaverChoiceValues[a][bestJuneCleaverOption(a)]) -
+            valueJuneCleaverOption(juneCleaverChoiceValues[b][bestJuneCleaverOption(b)])
+        )
+        .splice(0, 3);
+    }
     for (const choice of juneCleaverSkipChoices) {
       manager.setChoice(choice, 4);
     }
-  } else {
-    for (const choice of juneCleaverSkipChoices) {
-      manager.setChoice(choice, bestJuneCleaverOption(choice));
-    }
   }
 }
+
 export function juneCleave(): boolean {
   if (get("_juneCleaverFightsLeft") <= 0) {
     cliExecute("checkpoint");
