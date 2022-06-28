@@ -1,8 +1,6 @@
 import {
   abort,
-  fullnessLimit,
   itemAmount,
-  myFullness,
   myPrimestat,
   retrieveItem,
   runChoice,
@@ -13,7 +11,7 @@ import {
 } from "kolmafia";
 import { $familiar, $item, $stat, have, Session, sinceKolmafiaRevision } from "libram";
 import { cache, manager, printError, printHighlight, questStep } from "./lib";
-import { runBlocks } from "./trickin and treatin";
+import { canGorge, runBlocks } from "./trickin and treatin";
 
 export function main(args: string): void {
   if (args && args.includes("help")) {
@@ -21,7 +19,7 @@ export function main(args: string): void {
       "Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy."
     );
   } else {
-    if (myFullness() < fullnessLimit()) {
+    if (canGorge()) {
       const keepGoinCowboy = userConfirm(
         "Your stomach is not currently full. My pantsgiving support will slowly fill your stomach with 1-fullness items, which is likely suboptimal. Are you sure you wish to proceed?",
         69000,

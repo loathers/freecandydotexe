@@ -196,6 +196,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
     }
 
     const forceEquips: Item[] = [];
+    const maximizeTargets: string[] = [];
 
     const bonusEquips = new Map<Item, number>([
       [$item`lucky gold ring`, 400],
@@ -221,6 +222,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
         break;
       case "Ghost":
         forceEquips.push($item`protonic accelerator pack`);
+        maximizeTargets.push("DA");
+        maximizeTargets.push("DR");
         break;
       case "Trick":
         forceEquips.push(trickHat);
@@ -283,6 +286,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
         `${Math.round(weightValue * 100) / 100} Familiar Weight`,
         ...(have($item`SongBoom™ BoomBox`) ? ["0.25 Meat Drop"] : []),
         "0.01 Item Drop",
+        ...maximizeTargets,
       ],
       {
         forceEquip: forceEquips,
