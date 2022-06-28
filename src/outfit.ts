@@ -166,6 +166,7 @@ function getEffectWeight(): number {
   return cache.effectWeight;
 }
 
+let askedAboutTwoPiece = false;
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 export function fightOutfit(type: fightType = "Trick"): void {
   if (property.getString("freecandy_trickOutfit")) {
@@ -197,12 +198,15 @@ export function fightOutfit(type: fightType = "Trick"): void {
     if (!trickHat) {
       if (twoPieces) {
         if (
+          !askedAboutTwoPiece &&
           !userConfirm(
             "We don't have access to a one-piece outfit, but we did find a two-piece outfit. Is that alright?"
           )
         ) {
           printError("We cannot create a good trick outfit, and must give up.");
           abort();
+        } else {
+          askedAboutTwoPiece = true;
         }
       } else {
         printError("We couldn't find any one- or two-piece outfits!");
