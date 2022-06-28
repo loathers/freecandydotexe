@@ -210,6 +210,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
       ...snowSuit(),
       ...mayflowerBouquet(),
       ...pantsgiving(),
+      ...juneCleaver(),
     ]);
 
     switch (type) {
