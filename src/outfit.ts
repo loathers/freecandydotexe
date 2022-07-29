@@ -34,6 +34,7 @@ import {
   toItem,
   toSlot,
   totalTurnsPlayed,
+  userConfirm,
   visitUrl,
 } from "kolmafia";
 import {
@@ -165,6 +166,7 @@ function getEffectWeight(): number {
   return cache.effectWeight;
 }
 
+let askedAboutTwoPiece = false;
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
 export function fightOutfit(type: fightType = "Trick"): void {
   if (property.getString("freecandy_trickOutfit")) {
@@ -190,9 +192,26 @@ export function fightOutfit(type: fightType = "Trick"): void {
       buy(1, trickHats.sort((a, b) => mallPrice(a) - mallPrice(b))[0]);
     }
     const trickHat = trickHats.find((hat) => have(hat));
+    const twoPieces = ["Bugbear Costume", "Filthy Hippy Disguise"]
+      .map((name) => outfitPieces(name))
+      .find((fit) => fit.every((it) => have(it) && canEquip(it)));
     if (!trickHat) {
-      printError("We don't have a 1-item outfit, and were unable to find one.");
-      abort();
+      if (twoPieces) {
+        if (
+          !askedAboutTwoPiece &&
+          !userConfirm(
+            "We don't have access to a one-piece outfit, but we did find a two-piece outfit. Is that alright?"
+          )
+        ) {
+          printError("We cannot create a good trick outfit, and must give up.");
+          abort();
+        } else {
+          askedAboutTwoPiece = true;
+        }
+      } else {
+        printError("We couldn't find any one- or two-piece outfits!");
+        abort();
+      }
     }
 
     const forceEquips: Item[] = [];
@@ -227,7 +246,9 @@ export function fightOutfit(type: fightType = "Trick"): void {
         maximizeTargets.push("DR");
         break;
       case "Trick":
-        forceEquips.push(trickHat);
+        if (trickHat) forceEquips.push(trickHat);
+        else if (twoPieces) forceEquips.push(...twoPieces);
+        else abort("Cannot wear a sensible outfit");
         break;
       case "Digitize":
         if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
