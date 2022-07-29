@@ -10,6 +10,16 @@ freecandy.exe will not set up digitized monsters for you. It will not progress t
 ## How do I use freecandy.exe
 First, install it. Give your gCLI the ol' 
 ```
-svn checkout https://github.com/Loathing-Associates-Scripting-Society/freecandydotexe/branches/release/
+git checkout https://github.com/Loathing-Associates-Scripting-Society/freecandydotexe.git release
 ```
 Then, if you want to use a specific outfit for treats, set `freecandy_treatOutfit` to the name of your outfit as a string. After that, take out the familiar you want to use for fights, and run `freecandy`. Running it with no arguments, like that, will make it run until it's either out of adventures or hits the right nemesis wanderer. If you want to run a particular number of blocks, just do `freecandy n`, where `n` is the number of blocks you want it to run
+
+### Migrating from SVN to Git
+
+With Mafia support now implemented for git you can now remove the old SVN repo and convert to git.
+
+```
+svn delete Loathing-Associates-Scripting-Society-freecandydotexe-branches-release
+```
+
+Then install freecandy.exe as normal.
