@@ -21641,6 +21641,7 @@ function getEffectWeight() {
   return cache.effectWeight;
 }
 
+var askedAboutTwoPiece = false;
 function fightOutfit() {
   var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "Trick";
 
@@ -21672,10 +21673,20 @@ function fightOutfit() {
     }
 
     var trickHat = trickHats.find(hat => have(hat));
+    var twoPieces = ["Bugbear Costume", "Filthy Hippy Disguise"].map(name => (0,external_kolmafia_namespaceObject.outfitPieces)(name)).find(fit => fit.every(it => have(it) && (0,external_kolmafia_namespaceObject.canEquip)(it)));
 
     if (!trickHat) {
-      printError("We don't have a 1-item outfit, and were unable to find one.");
-      (0,external_kolmafia_namespaceObject.abort)();
+      if (twoPieces) {
+        if (!askedAboutTwoPiece && !(0,external_kolmafia_namespaceObject.userConfirm)("We don't have access to a one-piece outfit, but we did find a two-piece outfit. Is that alright?")) {
+          printError("We cannot create a good trick outfit, and must give up.");
+          (0,external_kolmafia_namespaceObject.abort)();
+        } else {
+          askedAboutTwoPiece = true;
+        }
+      } else {
+        printError("We couldn't find any one- or two-piece outfits!");
+        (0,external_kolmafia_namespaceObject.abort)();
+      }
     }
 
     var forceEquips = [];
@@ -21699,7 +21710,7 @@ function fightOutfit() {
         break;
 
       case "Trick":
-        forceEquips.push(trickHat);
+        if (trickHat) forceEquips.push(trickHat);else if (twoPieces) forceEquips.push.apply(forceEquips, outfit_toConsumableArray(twoPieces));else (0,external_kolmafia_namespaceObject.abort)("Cannot wear a sensible outfit");
         break;
 
       case "Digitize":
