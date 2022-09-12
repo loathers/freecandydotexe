@@ -1,6 +1,9 @@
 import {
   abort,
+  equip,
+  Familiar,
   itemAmount,
+  myFamiliar,
   myPrimestat,
   retrieveItem,
   runChoice,
@@ -9,7 +12,15 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { $familiar, $item, $stat, have, Session, sinceKolmafiaRevision } from "libram";
+import {
+  $familiar,
+  $familiars,
+  $item,
+  have,
+  Pantogram,
+  Session,
+  sinceKolmafiaRevision,
+} from "libram";
 import { cache, manager, printError, printHighlight, questStep } from "./lib";
 import { canGorge, runBlocks } from "./trickin and treatin";
 
@@ -56,16 +67,29 @@ export function main(args: string): void {
     });
     manager.setChoices({ 806: 1 });
 
-    if (have($item`portable pantogram`) && !have($item`pantogram pants`)) {
+    if (Pantogram.have() && !Pantogram.havePants()) {
       retrieveItem($item`ten-leaf clover`);
       retrieveItem($item`bubblin' crude`);
-      const m = new Map([
-        [$stat`Muscle`, 1],
-        [$stat`Mysticality`, 2],
-        [$stat`Moxie`, 3],
-      ]).get(myPrimestat());
-      visitUrl("inv_use.php?pwd&whichitem=9573");
-      visitUrl(`choice.php?whichchoice=1270&pwd&option=1&m=${m}&e=5&s1=5789,1&s2=-1,0&s3=24,1`);
+      Pantogram.makePants(
+        myPrimestat().toString(),
+        "Spooky Resistance: 2",
+        "MP Regen Max: 15",
+        "Drops Items: true",
+        "Weapon Damage: 20"
+      );
+    }
+
+    if (itemAmount($item`tiny stillsuit`)) {
+      const familiarChoice = Familiar.all().filter(
+        (f) =>
+          have(f) &&
+          ![
+            ...$familiars`Trick-or-Treating Tot, Mad Hatrack, Fancypants Scarecrow, Left-Hand Man, Disembodied Hand`,
+            myFamiliar(),
+          ].includes(f)
+      )[0];
+
+      if (familiarChoice) equip(familiarChoice, $item`tiny stillsuit`);
     }
 
     cache.startingBowls = itemAmount($item`huge bowl of candy`);
