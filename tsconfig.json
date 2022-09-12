@@ -14,9 +14,6 @@
     "pretty": true,
     "strict": true,
     "target": "es2018",
-    "paths": {
-      "canadv.ash": ["./contrib/canadv.ash.d.ts"]
-    }
   },
   "include": ["src/**/*.ts", "test/**/*.ts"],
   "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */

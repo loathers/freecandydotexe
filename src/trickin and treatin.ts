@@ -41,7 +41,6 @@ import {
 import {
   advMacroAA,
   coldMedicineCabinet,
-  determineDraggableZoneAndEnsureAccess,
   findFreeRun,
   juneCleave,
   meatFamiliar,
@@ -53,6 +52,7 @@ import {
 } from "./lib";
 import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
 import Macro from "./combat";
+import { determineDraggableZoneAndEnsureAccess } from "./wanderer";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`;
 

@@ -40,6 +40,5 @@ module.exports = {
   externals: {
     // Add any ASH scripts you would like to use here.
     kolmafia: "commonjs kolmafia",
-    "canadv.ash": "commonjs canadv.ash",
   },
 };
