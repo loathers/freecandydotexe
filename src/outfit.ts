@@ -385,6 +385,7 @@ function overallAdventureValue(): number {
     ...snowSuit(),
     ...mayflowerBouquet(),
     ...juneCleaver(),
+    ...sweatpants(),
   ]);
   const treatsAndBonusEquips =
     sum(
@@ -590,4 +591,25 @@ function juneCleaver(): Map<Item, number> {
   }
 
   return new Map<Item, number>([[$item`June cleaver`, juneCleaverEV / JuneCleaver.getInterval()]]);
+}
+
+function sweatpants() {
+  if (!have($item`designer sweatpants`)) return new Map();
+
+  const needSweat = get("sweat", 0) < 25 * (3 - get("_sweatOutSomeBoozeUsed", 0));
+
+  if (!needSweat) return new Map();
+
+  const VOA = get("valueOfAdventure");
+
+  const bestPerfectDrink =
+    $items`perfect cosmopolitan, perfect negroni, perfect dark and stormy, perfect mimosa, perfect old-fashioned, perfect paloma`
+      .map((item) => ({ item, price: mallPrice(item) }))
+      .reduce((a, b) => (a.price < b.price ? a : b)).item;
+  const perfectDrinkValuePerDrunk =
+    ((getAverageAdventures(bestPerfectDrink) + 3) * VOA - mallPrice(bestPerfectDrink)) / 3;
+  const splendidMartiniValuePerDrunk = (getAverageAdventures($item`splendid martini`) + 2) * VOA;
+
+  const bonus = (Math.max(perfectDrinkValuePerDrunk, splendidMartiniValuePerDrunk) * 2) / 25;
+  return new Map([[$item`designer sweatpants`, bonus]]);
 }
