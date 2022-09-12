@@ -1,10 +1,10 @@
-# freecandy.exe
+<img src="https://user-images.githubusercontent.com/8014761/189776285-15b3468e-6ae9-46f2-8394-f1dc6a86b658.png" alt="greenbox logo" style="width: 50%;">
 
-**freecandy.exe** is a script meant to farm the recurring [Halloween](https://kol.coldfront.net/thekolwiki/index.php/Halloween) holiday within the [Kingdom of Loathing](https://www.kingdomofloathing.com/). On Halloween, players can derive high profits by visiting the infinitely recurring trick-or-treating blocks, and derive considerably higher value than normal farming methods; this script aims to run your treat-filled Halloween turns in the quickest way possible. 
+**freecandy.exe** is a script meant to farm the recurring [Halloween](https://kol.coldfront.net/thekolwiki/index.php/Halloween) holiday within the [Kingdom of Loathing](https://www.kingdomofloathing.com/). On Halloween, players can derive high profits by visiting the infinitely recurring trick-or-treating blockss; this script aims to run your treat-filled Halloween turns in the quickest way possible. 
 
 To install, run the following command on an up-to-date KolMafia version:
 
-``` git checkout loathers/freecandydotexe release```
+> `git checkout loathers/freecandydotexe release`
 
 ## Running freecandy
 
@@ -16,16 +16,13 @@ Where "10" would be replaced by an integer telling the script how many blocks yo
 
 ## Documentation
 
-One important blazing-red alert for all interested users:
+One important alert for all interested users:
 
-**FREECANDY.EXE WILL NOT DIET FOR YOU; IT WILL JUST USE ADVENTURES. AS A USER, YOU MUST FILL YOUR OWN ORGANS.**
+:warning: **<span style="color:red">FREECANDY.EXE WILL NOT DIET FOR YOU; IT WILL JUST USE ADVENTURES. FILL YOUR ORGANS!</span>** :warning:
 
-For more details beyond this blazing-red extremely-important note:
+For more details beyond this blisteringly important note:
 
 - For more information about what freecandy.exe does and does not do, [click here](documentation/scope.md).
 - To peruse frequently asked questions about freecandy, [click here](documentation/faq.md).
 
 To report bugs, please post issues on this GitHub repository or send messages and report bugs in the Ascension Speed Society [discord](https://discord.gg/tbUCRT5), within the **#mafia-and-scripting** channel.
-
-## How do I use freecandy.exe
-Then, if you want to use a specific outfit for treats, set `freecandy_treatOutfit` to the name of your outfit as a string. After that, take out the familiar you want to use for fights, and run `freecandy`. Running it with no arguments, like that, will make it run until it's either out of adventures or hits the right nemesis wanderer. If you want to run a particular number of blocks, just do `freecandy n`, where `n` is the number of blocks you want it to run
