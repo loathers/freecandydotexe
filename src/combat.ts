@@ -80,6 +80,7 @@ export default class Macro extends StrictMacro {
       $item`Mayor Ghost's scissors`,
       $item`Rain-Doh indigo cup`,
       $skill`Summon Love Gnats`,
+      $skill`Bowl Straight Up`,
       $skill`Sing Along`,
     ])
       .externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
