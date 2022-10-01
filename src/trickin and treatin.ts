@@ -1,11 +1,14 @@
 import {
   cliExecute,
   eat,
+  equip,
+  equippedItem,
   fullnessLimit,
   gametimeToInt,
   getCounters,
   inebrietyLimit,
   inMultiFight,
+  itemAmount,
   myAdventures,
   myFullness,
   myInebriety,
@@ -33,6 +36,7 @@ import {
   $monster,
   $skill,
   $skills,
+  $slots,
   get,
   getKramcoWandererChance,
   have,
@@ -68,6 +72,11 @@ const prepareToTreat = () => {
   if (have(tot)) useFamiliar(tot);
   outfit("birthday suit");
   outfit(treatOutfit);
+  for (const slot of $slots`acc1, acc2, acc3`) {
+    if (equippedItem(slot) === $item.none && itemAmount($item`lucky Crimbo tiki necklace`) > 0) {
+      equip(slot, $item`lucky Crimbo tiki necklace`);
+    }
+  }
 };
 
 const block = () => visitUrl("place.php?whichplace=town&action=town_trickortreat");
