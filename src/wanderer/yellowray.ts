@@ -2,13 +2,12 @@ import {
   appearanceRates,
   canAdventure,
   getLocationMonsters,
+  historicalPrice,
   itemDropsArray,
   Location,
   toMonster,
 } from "kolmafia";
 import { sum } from "libram";
-import { freeFightFamiliarData } from "../familiar/freeFightFamiliar";
-import { garboValue } from "../session";
 import {
   canWander,
   DraggableFight,
@@ -31,7 +30,7 @@ function averageYrValue(location: Location) {
     return (
       sum(monsters, (m) => {
         const items = itemDropsArray(m).filter((drop) => ["", "n"].includes(drop.type));
-        return sum(items, (drop) => garboValue(drop.drop, true));
+        return sum(items, (drop) => 0.9 * historicalPrice(drop.drop));
       }) / monsters.length
     );
   }
@@ -40,10 +39,7 @@ function averageYrValue(location: Location) {
 function yrValues(): Map<Location, number> {
   const values = new Map<Location, number>();
   for (const location of Location.all().filter((l) => canAdventure(l) && !underwater(l))) {
-    values.set(
-      location,
-      averageYrValue(location) + freeFightFamiliarData({ location }).expectedValue
-    );
+    values.set(location, averageYrValue(location));
   }
   return values;
 }
