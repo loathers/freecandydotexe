@@ -56,7 +56,7 @@ import {
 } from "./lib";
 import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
 import Macro from "./combat";
-import { determineDraggableZoneAndEnsureAccess } from "./wanderer";
+import { drunkSafeWander } from "./wanderer";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`;
 const sober = () => myInebriety() <= inebrietyLimit();
@@ -194,71 +194,6 @@ export function runBlocks(blocks = -1): void {
 
       n++;
 
-      if (getCounters("Digitize", -11, 0) !== "") {
-        printHighlight(`It's digitize time!`);
-        const digitizeMacro = Macro.externalIf(
-          myAdventures() * 1.1 <
-            (3 - digitizes) *
-              (5 *
-                (get("_sourceTerminalDigitizeMonsterCount") *
-                  (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
-                3),
-          Macro.trySkill($skill`Digitize`)
-        ).step(trickMacro);
-        const targetZone = sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`;
-        if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
-          useFamiliar(meatFamiliar());
-          meatOutfit();
-        } else fightOutfit("Digitize");
-        advMacroAA(
-          targetZone,
-          digitizeMacro,
-          () => getCounters("Digitize", -11, 0) !== "",
-          () => {
-            fillPantsgivingFullness();
-            safeRestore();
-            juneCleave();
-          }
-        );
-        useFamiliar(trickFamiliar());
-      }
-
-      if (have($item`Kramco Sausage-o-Matic™`)) {
-        if (getKramcoWandererChance() >= 1) {
-          fightOutfit("Kramco");
-          advMacroAA(
-            sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`,
-            trickMacro,
-            () => getKramcoWandererChance() >= 1,
-            () => {
-              fillPantsgivingFullness();
-              safeRestore();
-              juneCleave();
-            }
-          );
-        }
-      }
-
-      if (have($item`"I Voted!" sticker`)) {
-        if (totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3) {
-          printHighlight(
-            "The first Tuesday in November approaches, which makes perfect sense given that it's October."
-          );
-          fightOutfit("Voter");
-          const currentVotes = get("_voteFreeFights");
-          advMacroAA(
-            sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`,
-            trickMacro,
-            () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") === currentVotes,
-            () => {
-              fillPantsgivingFullness();
-              safeRestore();
-              juneCleave();
-            }
-          );
-        }
-      }
-
       const ghosting = get("questPAGhost") !== "unstarted";
       if (have($item`protonic accelerator pack`) && ghosting && myInebriety() <= inebrietyLimit()) {
         const ghostLocation = get("ghostLocation") || $location`none`;
@@ -281,6 +216,71 @@ export function runBlocks(blocks = -1): void {
           }
         );
       }
+
+      if (getCounters("Digitize", -11, 0) !== "") {
+        printHighlight(`It's digitize time!`);
+        const digitizeMacro = Macro.externalIf(
+          myAdventures() * 1.1 <
+            (3 - digitizes) *
+              (5 *
+                (get("_sourceTerminalDigitizeMonsterCount") *
+                  (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
+                3),
+          Macro.trySkill($skill`Digitize`)
+        ).step(trickMacro);
+        if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
+          useFamiliar(meatFamiliar());
+          meatOutfit();
+        } else fightOutfit("Digitize");
+        advMacroAA(
+          drunkSafeWander("wanderer"),
+          digitizeMacro,
+          () => getCounters("Digitize", -11, 0) !== "",
+          () => {
+            fillPantsgivingFullness();
+            safeRestore();
+            juneCleave();
+          }
+        );
+        useFamiliar(trickFamiliar());
+      }
+
+      if (have($item`Kramco Sausage-o-Matic™`)) {
+        if (getKramcoWandererChance() >= 1) {
+          fightOutfit("Kramco");
+          advMacroAA(
+            drunkSafeWander("wanderer"),
+            trickMacro,
+            () => getKramcoWandererChance() >= 1,
+            () => {
+              fillPantsgivingFullness();
+              safeRestore();
+              juneCleave();
+            }
+          );
+        }
+      }
+
+      if (have($item`"I Voted!" sticker`)) {
+        if (totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3) {
+          printHighlight(
+            "The first Tuesday in November approaches, which makes perfect sense given that it's October."
+          );
+          fightOutfit("Voter");
+          const currentVotes = get("_voteFreeFights");
+          advMacroAA(
+            drunkSafeWander("wanderer"),
+            trickMacro,
+            () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") === currentVotes,
+            () => {
+              fillPantsgivingFullness();
+              safeRestore();
+              juneCleave();
+            }
+          );
+        }
+      }
+
       if (
         digitizes !== get("_sourceTerminalDigitizeUses") &&
         !(votes !== get("_voteFreeFights") || sausages !== get("_sausageFights")) &&
@@ -304,7 +304,7 @@ export function runBlocks(blocks = -1): void {
       if (doingNemesis && getCounters("Nemesis Assassin window end", -11, 0) !== "") {
         useFamiliar(trickFamiliar());
         fightOutfit("Digitize");
-        advMacroAA(sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`, trickMacro);
+        advMacroAA(drunkSafeWander("wanderer"), trickMacro);
         () => {
           fillPantsgivingFullness();
           safeRestore();
