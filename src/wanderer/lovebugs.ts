@@ -1,10 +1,8 @@
 import { Item, Location } from "kolmafia";
 import { $item, $location, get, getSaleValue } from "libram";
-import { WandererTarget } from "./lib";
+import { realmAvailable, WandererTarget } from "./lib";
 
 type LovebugTarget = { element: string; location: Location; target: Item; cost: number };
-const realmAvailable = (element: string): boolean =>
-  get(`_${element}AirportToday`, false) || get(`${element}AirportAlways`, false);
 const LovebugTargets: LovebugTarget[] = [
   {
     element: "cold",

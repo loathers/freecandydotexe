@@ -1,9 +1,9 @@
-import { buy, canAdventure, Item, Location, use } from "kolmafia";
-import { $effect, $item, $location, $locations, clamp, get, have, sum } from "libram";
+import { buy, canAdventure, Item, Location, myAdventures, use } from "kolmafia";
+import { $effect, $item, $location, $locations, clamp, Counter, get, have, SourceTerminal, sum } from "libram";
 import { NumericProperty } from "libram/dist/propertyTypes";
-import { realmAvailable } from "../lib";
-import { digitizedMonstersRemaining, estimatedTurns } from "../turns";
 
+export const realmAvailable = (element: string): boolean =>
+  get(`_${element}AirportToday`, false) || get(`${element}AirportAlways`, false);
 export type DraggableFight = "backup" | "wanderer" | "yellow ray";
 
 interface UnlockableZone {
@@ -229,6 +229,35 @@ const WanderingSources: WanderingSource[] = [
   },
 ];
 
+function untangleDigitizes(turnCount: number, chunks: number): number {
+  const turnsPerChunk = turnCount / chunks;
+  const monstersPerChunk = Math.sqrt((turnsPerChunk + 3) / 5 + 1 / 4) - 1 / 2;
+  return Math.round(chunks * monstersPerChunk);
+}
+
+/**
+ *
+ * @returns The number of digitized monsters that we expect to fight today
+ */
+function digitizedMonstersRemaining(): number {
+  if (!SourceTerminal.have()) return 0;
+
+  const digitizesLeft = SourceTerminal.getDigitizeUsesRemaining();
+  if (digitizesLeft === SourceTerminal.getMaximumDigitizeUses()) {
+    return untangleDigitizes(myAdventures(), SourceTerminal.getMaximumDigitizeUses());
+  }
+
+  const monsterCount = SourceTerminal.getDigitizeMonsterCount() + 1;
+
+  const turnsLeftAtNextMonster = myAdventures() - Counter.get("Digitize Monster");
+  if (turnsLeftAtNextMonster <= 0) return 0;
+  const turnsAtLastDigitize = turnsLeftAtNextMonster + ((monsterCount + 1) * monsterCount * 5 - 3);
+  return (
+    untangleDigitizes(turnsAtLastDigitize, digitizesLeft + 1) -
+    SourceTerminal.getDigitizeMonsterCount()
+  );
+}
+
 export function wandererTurnsAvailableToday(location: Location): number {
   const canWanderCache: Record<DraggableFight, boolean> = {
     backup: canWander(location, "backup"),
@@ -237,7 +266,7 @@ export function wandererTurnsAvailableToday(location: Location): number {
   };
 
   const digitize = canWanderCache["backup"] ? digitizedMonstersRemaining() : 0;
-  const yellowRay = canWanderCache["yellow ray"] ? Math.floor(estimatedTurns() / 100) : 0;
+  const yellowRay = canWanderCache["yellow ray"] ? Math.floor(myAdventures() / 100) : 0;
   const wanderers = sum(WanderingSources, (source) =>
     canWanderCache[source.type] && have(source.item)
       ? clamp(get(source.property), 0, source.max)
