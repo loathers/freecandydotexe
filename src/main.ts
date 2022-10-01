@@ -16,9 +16,11 @@ import {
   $familiar,
   $familiars,
   $item,
+  $items,
   have,
   Pantogram,
   Session,
+  setDefaultMaximizeOptions,
   sinceKolmafiaRevision,
 } from "libram";
 import { cache, manager, printError, printHighlight, questStep } from "./lib";
@@ -78,6 +80,10 @@ export function main(args: string): void {
         "Weapon Damage: 20"
       );
     }
+
+    setDefaultMaximizeOptions({
+      preventEquip: $items`dice ring, dice belt buckle, dice-print pajama pants, dice-shaped backpack, dice-print do-rag, dice sunglasses`,
+    });
 
     if (itemAmount($item`tiny stillsuit`)) {
       const familiarChoice = Familiar.all().filter(
