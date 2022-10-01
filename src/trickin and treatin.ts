@@ -59,6 +59,7 @@ import Macro from "./combat";
 import { determineDraggableZoneAndEnsureAccess } from "./wanderer";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`;
+const sober = () => myInebriety() <= inebrietyLimit();
 
 const prepareToTrick = (trickMacro: Macro) => {
   trickMacro.setAutoAttack();
@@ -193,10 +194,7 @@ export function runBlocks(blocks = -1): void {
 
       n++;
 
-      const canFightWanderers =
-        myInebriety() <= inebrietyLimit() || have($item`Drunkula's wineglass`);
-
-      if (getCounters("Digitize", -11, 0) !== "" && canFightWanderers) {
+      if (getCounters("Digitize", -11, 0) !== "") {
         printHighlight(`It's digitize time!`);
         const digitizeMacro = Macro.externalIf(
           myAdventures() * 1.1 <
@@ -207,12 +205,13 @@ export function runBlocks(blocks = -1): void {
                 3),
           Macro.trySkill($skill`Digitize`)
         ).step(trickMacro);
+        const targetZone = sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`;
         if (get("_sourceTerminalDigitizeMonster") === $monster`Knob Goblin Embezzler`) {
           useFamiliar(meatFamiliar());
           meatOutfit();
         } else fightOutfit("Digitize");
         advMacroAA(
-          determineDraggableZoneAndEnsureAccess(),
+          targetZone,
           digitizeMacro,
           () => getCounters("Digitize", -11, 0) !== "",
           () => {
@@ -224,11 +223,11 @@ export function runBlocks(blocks = -1): void {
         useFamiliar(trickFamiliar());
       }
 
-      if (have($item`Kramco Sausage-o-Matic™`) && myInebriety() <= inebrietyLimit()) {
+      if (have($item`Kramco Sausage-o-Matic™`)) {
         if (getKramcoWandererChance() >= 1) {
           fightOutfit("Kramco");
           advMacroAA(
-            determineDraggableZoneAndEnsureAccess(),
+            sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`,
             trickMacro,
             () => getKramcoWandererChance() >= 1,
             () => {
@@ -240,7 +239,7 @@ export function runBlocks(blocks = -1): void {
         }
       }
 
-      if (have($item`"I Voted!" sticker`) && canFightWanderers) {
+      if (have($item`"I Voted!" sticker`)) {
         if (totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") < 3) {
           printHighlight(
             "The first Tuesday in November approaches, which makes perfect sense given that it's October."
@@ -248,7 +247,7 @@ export function runBlocks(blocks = -1): void {
           fightOutfit("Voter");
           const currentVotes = get("_voteFreeFights");
           advMacroAA(
-            determineDraggableZoneAndEnsureAccess(),
+            sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`,
             trickMacro,
             () => totalTurnsPlayed() % 11 === 1 && get("_voteFreeFights") === currentVotes,
             () => {
@@ -285,7 +284,7 @@ export function runBlocks(blocks = -1): void {
       if (
         digitizes !== get("_sourceTerminalDigitizeUses") &&
         !(votes !== get("_voteFreeFights") || sausages !== get("_sausageFights")) &&
-        myInebriety() <= inebrietyLimit()
+        sober()
       ) {
         printError(
           `Sorry, we encountered a digitized monster but haven't initialized the counter yet!`
@@ -305,7 +304,7 @@ export function runBlocks(blocks = -1): void {
       if (doingNemesis && getCounters("Nemesis Assassin window end", -11, 0) !== "") {
         useFamiliar(trickFamiliar());
         fightOutfit("Digitize");
-        advMacroAA(determineDraggableZoneAndEnsureAccess(), trickMacro);
+        advMacroAA(sober() ? determineDraggableZoneAndEnsureAccess() : $location`Drunken Stupor`, trickMacro);
         () => {
           fillPantsgivingFullness();
           safeRestore();

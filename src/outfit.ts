@@ -4,6 +4,7 @@ import {
   bjornifyFamiliar,
   buy,
   canEquip,
+  cliExecute,
   effectModifier,
   enthroneFamiliar,
   equip,
@@ -167,7 +168,7 @@ function getEffectWeight(): number {
 }
 
 let askedAboutTwoPiece = false;
-export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost";
+export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost" | "Spit Acid";
 export function fightOutfit(type: fightType = "Trick"): void {
   if (property.getString("freecandy_trickOutfit")) {
     const success = outfit(property.getString("freecandy_trickOutfit"));
@@ -178,13 +179,13 @@ export function fightOutfit(type: fightType = "Trick"): void {
         break;
       case "Voter":
         equip($slot`acc1`, $item`"I Voted!" sticker`);
-        if (myInebriety() > inebrietyLimit()) equip($slot`off-hand`, $item`Drunkula's wineglass`);
         break;
       case "Ghost":
         equip($slot`back`, $item`protonic accelerator pack`);
         break;
-      case "Digitize":
-        if (myInebriety() > inebrietyLimit()) equip($slot`off-hand`, $item`Drunkula's wineglass`);
+      case "Spit Acid":
+        equip($item`Jurassic Parka`);
+        cliExecute("parka dilophosaur");
         break;
     }
   } else {
@@ -238,7 +239,6 @@ export function fightOutfit(type: fightType = "Trick"): void {
         break;
       case "Voter":
         forceEquips.push($item`"I Voted!" sticker`);
-        if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
         break;
       case "Ghost":
         forceEquips.push($item`protonic accelerator pack`);
@@ -250,8 +250,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
         else if (twoPieces) forceEquips.push(...twoPieces);
         else abort("Cannot wear a sensible outfit");
         break;
-      case "Digitize":
-        if (myInebriety() > inebrietyLimit()) forceEquips.push($item`Drunkula's wineglass`);
+      case "Spit Acid":
+        forceEquips.push($item`Jurassic Parka`);
         break;
     }
 
