@@ -5,7 +5,6 @@ import { guzzlrFactory } from "./guzzlr";
 import {
   canAdventureOrUnlock,
   defaultFactory,
-  DraggableFight,
   maxBy,
   unlock,
   unsupportedChoices,
@@ -15,7 +14,7 @@ import {
 import { lovebugsFactory } from "./lovebugs";
 import { yellowRayFactory } from "./yellowray";
 
-export { DraggableFight };
+export type DraggableFight = "backup" | "wanderer" | "yellow ray";
 
 const wanderFactories: WandererFactory[] = [
   defaultFactory,

@@ -39,6 +39,7 @@ import {
   $skills,
   $slot,
   $slots,
+  Counter,
   get,
   getKramcoWandererChance,
   have,
@@ -220,7 +221,7 @@ export function runBlocks(blocks = -1): void {
         );
       }
 
-      if (getCounters("Digitize", -11, 0) !== "") {
+      if (Counter.get("Digitize") <= 0) {
         printHighlight(`It's digitize time!`);
         const digitizeMacro = Macro.externalIf(
           myAdventures() * 1.1 <
@@ -248,8 +249,7 @@ export function runBlocks(blocks = -1): void {
         useFamiliar(trickFamiliar());
       }
 
-      if (have($item`Kramco Sausage-o-Matic™`)) {
-        if (getKramcoWandererChance() >= 1) {
+      if (have($item`Kramco Sausage-o-Matic™`) && getKramcoWandererChance() >= 1) {
           fightOutfit("Kramco");
           advMacroAA(
             drunkSafeWander("wanderer"),
@@ -261,7 +261,6 @@ export function runBlocks(blocks = -1): void {
               juneCleave();
             }
           );
-        }
       }
 
       if (have($item`"I Voted!" sticker`)) {
