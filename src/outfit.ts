@@ -316,6 +316,7 @@ export function fightOutfit(type: fightType = "Trick"): void {
         preventSlot: $slots`buddy-bjorn, crown-of-thrones`,
         preventEquip:
           bjornalikeToUse === $item`Buddy Bjorn` ? $items`Crown of Thrones` : $items`Buddy Bjorn`,
+        useOutfitCaching: true,
       }
     );
 
@@ -324,6 +325,8 @@ export function fightOutfit(type: fightType = "Trick"): void {
 
     if (haveEquipped($item`Buddy Bjorn`)) bjornifyFamiliar(pickBjorn().familiar);
     if (haveEquipped($item`Crown of Thrones`)) enthroneFamiliar(pickBjorn().familiar);
+    if (type === "Spit Acid" && haveEquipped($item`Jurassic Parka`))
+      cliExecute("parka dilophosaur");
   }
 }
 
