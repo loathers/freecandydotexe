@@ -8,12 +8,14 @@ import {
   equip,
   Familiar,
   getWorkshed,
+  inebrietyLimit,
   Item,
   Location,
   Monster,
   myAdventures,
   myFamiliar,
   myHp,
+  myInebriety,
   myMaxhp,
   myMaxmp,
   myMp,
@@ -271,7 +273,10 @@ export function juneCleave(): boolean {
     equip($slot`weapon`, $item`June cleaver`);
     skipJuneCleaverChoices();
     withProperty("recoveryScript", "", () => {
-      adventureMacro($location`Noob Cave`, Macro.abort());
+      adventureMacro(
+        myInebriety() <= inebrietyLimit() ? $location`Noob Cave` : $location`Drunken Stupor`,
+        Macro.abort()
+      );
       if (["Poetic Justice", "Lost and Found"].includes(get("lastEncounter"))) {
         uneffect($effect`Beaten Up`);
       }
