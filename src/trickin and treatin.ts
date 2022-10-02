@@ -37,6 +37,7 @@ import {
   $monster,
   $skill,
   $skills,
+  $slot,
   $slots,
   get,
   getKramcoWandererChance,
@@ -72,7 +73,8 @@ const treatOutfit = bestOutfit();
 const tot = $familiar`Trick-or-Treating Tot`;
 const prepareToTreat = () => {
   if (have(tot)) useFamiliar(tot);
-  outfit("birthday suit");
+  equip($slot`weapon`, $item.none);
+  equip($slot`off-hand`, $item.none);
   outfit(treatOutfit);
   for (const slot of $slots`acc1, acc2, acc3`) {
     if (equippedItem(slot) === $item.none && itemAmount($item`lucky Crimbo tiki necklace`) > 0) {
