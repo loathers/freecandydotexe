@@ -8,6 +8,7 @@ With this addressed, let's outline things that this script does and does not do,
 ## Out-of-Scope
 
 - **freecandy.exe will not fill your organs (stomach/liver/spleen).** 
+  - At least, it won't do it well.
   - There is one small and minor exception to this rule -- if you have pantsgiving, freecandy will wear it as part of its outfit optimizer and consume the new incremental fullness as it gets added to your stomach.
 - **freecandy.exe will not set up digitized monsters for you.**
   - As noted below, the script -will- fight them, if you've already digitized. But it isn't going to set them up for you.
@@ -16,10 +17,10 @@ With this addressed, let's outline things that this script does and does not do,
 - **freecandy.exe will not take items from the clan stash for you.**
 - **freecandy.exe will not do beginning-of-the-day free fights, like garbage-collector does.**
 - **freecandy.com will not use a KoL Con 13 snowglobe.**
+  - If you can think of a reasonable value to assign to it or the Can of Mixed Everything, please let us know!
 - **freecandy.exe will not cast or recast buffs.**
   - We would recommend you utilize mafia's [mood architecture](https://wiki.kolmafia.us/index.php/Mood) if you would like mafia to recast buffs while using freecandy.
 - **freecandy.exe will not work at all if you leave your items in Hagnks.**
-- **freecandy.exe will not do wanderers while you are overdrunk, unless you have Drunkula's Wineglass**
 
 
 ## In-Scope
