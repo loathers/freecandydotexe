@@ -12614,6 +12614,45 @@ function enhanceBuffDuration() {
 function enquiryBuffDuration() {
   return 50 + 10 * get("sourceTerminalGram") + (getChips().includes("DIAGRAM") ? 50 : 0);
 }
+;// CONCATENATED MODULE: ./node_modules/libram/dist/counter.js
+
+/**
+ * Returns Infinity for counters that do not exist, and otherwise returns the duration of the counter
+ * @param counter The name of the counter in question
+ * @returns Infinity if the counter does not exist; otherwise returns the duration of the counter
+ */
+
+function counter_get(counter) {
+  var value = (0,external_kolmafia_namespaceObject.getCounter)(counter); // getCounter returns -1 for counters that don't exist, but it also returns -1 for counters whose value is -1
+
+  if (value === -1) {
+    // if we have a counter with value -1, we check to see if that counter exists via getCounters()
+    // We return null if it doesn't exist
+    return (0,external_kolmafia_namespaceObject.getCounters)(counter, -1, -1).trim() === "" ? Infinity : -1;
+  }
+
+  return value;
+}
+/**
+ * The world is everything that is the case. This determines which counters are the case.
+ * @param counter The name of the counter in question
+ * @returns True for counters which currently exist; false for those which do not
+ */
+
+function exists(counter) {
+  return getCounter(counter) !== -1 || getCounters(counter, -1, -1).trim() !== "";
+}
+/**
+ * Creates a manual counter with specified name and duration
+ * @param counter Name of the counter to manually create
+ * @param duration Duration of counter to manually set
+ * @returns Whether the counter was successfully set
+ */
+
+function set(counter, duration) {
+  cliExecute("counters add ".concat(duration, " ").concat(counter));
+  return counter_get(counter) !== null;
+}
 ;// CONCATENATED MODULE: ./node_modules/libram/dist/resources/2010/CrownOfThrones.js
 var CrownOfThrones_templateObject, CrownOfThrones_templateObject2, _modifier, CrownOfThrones_templateObject3, CrownOfThrones_templateObject4, _modifier2, CrownOfThrones_templateObject5, CrownOfThrones_templateObject6, CrownOfThrones_templateObject7, CrownOfThrones_templateObject8, CrownOfThrones_templateObject9, CrownOfThrones_templateObject10, CrownOfThrones_templateObject11, CrownOfThrones_templateObject12, _modifier7, CrownOfThrones_templateObject13, CrownOfThrones_templateObject14, _modifier8, CrownOfThrones_templateObject15, CrownOfThrones_templateObject16, _modifier9, CrownOfThrones_templateObject17, CrownOfThrones_templateObject18, CrownOfThrones_templateObject19, CrownOfThrones_templateObject20, CrownOfThrones_templateObject21, CrownOfThrones_templateObject22, CrownOfThrones_templateObject23, CrownOfThrones_templateObject24, CrownOfThrones_templateObject25, CrownOfThrones_templateObject26, CrownOfThrones_templateObject27, CrownOfThrones_templateObject28, _modifier15, CrownOfThrones_templateObject29, CrownOfThrones_templateObject30, CrownOfThrones_templateObject31, CrownOfThrones_templateObject32, CrownOfThrones_templateObject33, CrownOfThrones_templateObject34, CrownOfThrones_templateObject35, CrownOfThrones_templateObject36, CrownOfThrones_templateObject37, CrownOfThrones_templateObject38, CrownOfThrones_templateObject39, CrownOfThrones_templateObject40, CrownOfThrones_templateObject41, CrownOfThrones_templateObject42, CrownOfThrones_templateObject43, CrownOfThrones_templateObject44, CrownOfThrones_templateObject45, CrownOfThrones_templateObject46, CrownOfThrones_templateObject47, CrownOfThrones_templateObject48, CrownOfThrones_templateObject49, CrownOfThrones_templateObject50, _modifier26, CrownOfThrones_templateObject51, CrownOfThrones_templateObject52, _modifier27, CrownOfThrones_templateObject53, CrownOfThrones_templateObject54, _modifier28, CrownOfThrones_templateObject55, CrownOfThrones_templateObject56, CrownOfThrones_templateObject57, CrownOfThrones_templateObject58, _templateObject59, _templateObject60, _modifier31, _templateObject61, _templateObject62, _modifier32, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _modifier34, _templateObject67, _templateObject68, _modifier35, _templateObject69, _templateObject70, _modifier36, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81, _templateObject82, _templateObject83, _templateObject84, _templateObject85, _templateObject86, _templateObject87, _templateObject88, _templateObject89, _templateObject90, _templateObject91, _templateObject92, _templateObject93, _templateObject94, _templateObject95, _templateObject96, _templateObject97, _templateObject98, _templateObject99, _templateObject100, _templateObject101, _templateObject102, _templateObject103, _templateObject104;
 
@@ -13400,7 +13439,7 @@ function sweatpants() {
   return new Map([[template_string_$item(_templateObject115 || (_templateObject115 = outfit_taggedTemplateLiteral(["designer sweatpants"]))), bonus]]);
 }
 ;// CONCATENATED MODULE: ./src/combat.ts
-var src_combat_templateObject, src_combat_templateObject2, combat_templateObject3, combat_templateObject4, combat_templateObject5, combat_templateObject6, combat_templateObject7, combat_templateObject8, combat_templateObject9, combat_templateObject10, combat_templateObject11, combat_templateObject12, combat_templateObject13, combat_templateObject14, combat_templateObject15, combat_templateObject16, combat_templateObject17, combat_templateObject18, combat_templateObject19, combat_templateObject20;
+var src_combat_templateObject, src_combat_templateObject2, combat_templateObject3, combat_templateObject4, combat_templateObject5, combat_templateObject6, combat_templateObject7, combat_templateObject8, combat_templateObject9, combat_templateObject10, combat_templateObject11, combat_templateObject12, combat_templateObject13, combat_templateObject14, combat_templateObject15, combat_templateObject16, combat_templateObject17, combat_templateObject18, combat_templateObject19, combat_templateObject20, combat_templateObject21;
 
 function src_combat_taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -13486,7 +13525,7 @@ var combat_Macro = /*#__PURE__*/function (_StrictMacro) {
   }, {
     key: "stasis",
     value: function stasis() {
-      return this.try([template_string_$skill(combat_templateObject6 || (combat_templateObject6 = src_combat_taggedTemplateLiteral(["Curse of Weaksauce"]))), template_string_$skill(combat_templateObject7 || (combat_templateObject7 = src_combat_taggedTemplateLiteral(["Micrometeorite"]))), template_string_$skill(combat_templateObject8 || (combat_templateObject8 = src_combat_taggedTemplateLiteral(["Shadow Noodles"]))), template_string_$skill(combat_templateObject9 || (combat_templateObject9 = src_combat_taggedTemplateLiteral(["Shell Up"]))), template_string_$item(combat_templateObject10 || (combat_templateObject10 = src_combat_taggedTemplateLiteral(["Time-Spinner"]))), template_string_$item(combat_templateObject11 || (combat_templateObject11 = src_combat_taggedTemplateLiteral(["little red book"]))), template_string_$item(combat_templateObject12 || (combat_templateObject12 = src_combat_taggedTemplateLiteral(["nasty-smelling moss"]))), template_string_$item(combat_templateObject13 || (combat_templateObject13 = src_combat_taggedTemplateLiteral(["HOA citation pad"]))), template_string_$item(combat_templateObject14 || (combat_templateObject14 = src_combat_taggedTemplateLiteral(["Great Wolf's lice"]))), template_string_$item(combat_templateObject15 || (combat_templateObject15 = src_combat_taggedTemplateLiteral(["Mayor Ghost's scissors"]))), template_string_$item(combat_templateObject16 || (combat_templateObject16 = src_combat_taggedTemplateLiteral(["Rain-Doh indigo cup"]))), template_string_$skill(combat_templateObject17 || (combat_templateObject17 = src_combat_taggedTemplateLiteral(["Summon Love Gnats"]))), template_string_$skill(combat_templateObject18 || (combat_templateObject18 = src_combat_taggedTemplateLiteral(["Sing Along"])))]).externalIf(isCurrentSkill(template_string_$skill(combat_templateObject19 || (combat_templateObject19 = src_combat_taggedTemplateLiteral(["Extract"])))), Macro.skill(template_string_$skill(combat_templateObject20 || (combat_templateObject20 = src_combat_taggedTemplateLiteral(["Extract"]))))).while_("!pastround 11", Macro.stasisItem());
+      return this.try([template_string_$skill(combat_templateObject6 || (combat_templateObject6 = src_combat_taggedTemplateLiteral(["Curse of Weaksauce"]))), template_string_$skill(combat_templateObject7 || (combat_templateObject7 = src_combat_taggedTemplateLiteral(["Micrometeorite"]))), template_string_$skill(combat_templateObject8 || (combat_templateObject8 = src_combat_taggedTemplateLiteral(["Shadow Noodles"]))), template_string_$skill(combat_templateObject9 || (combat_templateObject9 = src_combat_taggedTemplateLiteral(["Shell Up"]))), template_string_$item(combat_templateObject10 || (combat_templateObject10 = src_combat_taggedTemplateLiteral(["Time-Spinner"]))), template_string_$item(combat_templateObject11 || (combat_templateObject11 = src_combat_taggedTemplateLiteral(["little red book"]))), template_string_$item(combat_templateObject12 || (combat_templateObject12 = src_combat_taggedTemplateLiteral(["nasty-smelling moss"]))), template_string_$item(combat_templateObject13 || (combat_templateObject13 = src_combat_taggedTemplateLiteral(["HOA citation pad"]))), template_string_$item(combat_templateObject14 || (combat_templateObject14 = src_combat_taggedTemplateLiteral(["Great Wolf's lice"]))), template_string_$item(combat_templateObject15 || (combat_templateObject15 = src_combat_taggedTemplateLiteral(["Mayor Ghost's scissors"]))), template_string_$item(combat_templateObject16 || (combat_templateObject16 = src_combat_taggedTemplateLiteral(["Rain-Doh indigo cup"]))), template_string_$skill(combat_templateObject17 || (combat_templateObject17 = src_combat_taggedTemplateLiteral(["Summon Love Gnats"]))), template_string_$skill(combat_templateObject18 || (combat_templateObject18 = src_combat_taggedTemplateLiteral(["Bowl Straight Up"]))), template_string_$skill(combat_templateObject19 || (combat_templateObject19 = src_combat_taggedTemplateLiteral(["Sing Along"])))]).externalIf(isCurrentSkill(template_string_$skill(combat_templateObject20 || (combat_templateObject20 = src_combat_taggedTemplateLiteral(["Extract"])))), Macro.skill(template_string_$skill(combat_templateObject21 || (combat_templateObject21 = src_combat_taggedTemplateLiteral(["Extract"]))))).while_("!pastround 11", Macro.stasisItem());
     }
   }], [{
     key: "tryHaveSkill",
@@ -13773,45 +13812,6 @@ function expectedReward() {
     default:
       return 0;
   }
-}
-;// CONCATENATED MODULE: ./node_modules/libram/dist/counter.js
-
-/**
- * Returns Infinity for counters that do not exist, and otherwise returns the duration of the counter
- * @param counter The name of the counter in question
- * @returns Infinity if the counter does not exist; otherwise returns the duration of the counter
- */
-
-function counter_get(counter) {
-  var value = (0,external_kolmafia_namespaceObject.getCounter)(counter); // getCounter returns -1 for counters that don't exist, but it also returns -1 for counters whose value is -1
-
-  if (value === -1) {
-    // if we have a counter with value -1, we check to see if that counter exists via getCounters()
-    // We return null if it doesn't exist
-    return (0,external_kolmafia_namespaceObject.getCounters)(counter, -1, -1).trim() === "" ? Infinity : -1;
-  }
-
-  return value;
-}
-/**
- * The world is everything that is the case. This determines which counters are the case.
- * @param counter The name of the counter in question
- * @returns True for counters which currently exist; false for those which do not
- */
-
-function exists(counter) {
-  return getCounter(counter) !== -1 || getCounters(counter, -1, -1).trim() !== "";
-}
-/**
- * Creates a manual counter with specified name and duration
- * @param counter Name of the counter to manually create
- * @param duration Duration of counter to manually set
- * @returns Whether the counter was successfully set
- */
-
-function set(counter, duration) {
-  cliExecute("counters add ".concat(duration, " ").concat(counter));
-  return counter_get(counter) !== null;
 }
 ;// CONCATENATED MODULE: ./src/wanderer/lib.ts
 var wanderer_lib_templateObject, wanderer_lib_templateObject2, wanderer_lib_templateObject3, wanderer_lib_templateObject4, wanderer_lib_templateObject5, wanderer_lib_templateObject6, wanderer_lib_templateObject7, wanderer_lib_templateObject8, wanderer_lib_templateObject9, wanderer_lib_templateObject10, wanderer_lib_templateObject11, wanderer_lib_templateObject12, wanderer_lib_templateObject13, wanderer_lib_templateObject14, wanderer_lib_templateObject15, wanderer_lib_templateObject16, wanderer_lib_templateObject17, wanderer_lib_templateObject18, _ref, wanderer_lib_templateObject19, wanderer_lib_templateObject20, _ref3, wanderer_lib_templateObject21, _ref4, wanderer_lib_templateObject22, lib_templateObject23, lib_templateObject24, lib_templateObject25, lib_templateObject26, lib_templateObject27, _ref10, lib_templateObject28, lib_templateObject29, lib_templateObject30, lib_templateObject31, _ref14, lib_templateObject32, _ref15, lib_templateObject33, lib_templateObject34, _ref17, lib_templateObject35, lib_templateObject36, lib_templateObject37, lib_templateObject38, lib_templateObject39, lib_templateObject40;
@@ -14279,7 +14279,6 @@ function wanderer_arrayLikeToArray(arr, len) { if (len == null || len > arr.leng
 
 
 
-
 var wanderFactories = [defaultFactory, yellowRayFactory, lovebugsFactory, guzzlrFactory];
 function bestWander(type, locationSkiplist, nameSkiplist) {
   var possibleLocations = new Map();
@@ -14559,7 +14558,7 @@ function runBlocks() {
         });
       }
 
-      if ((0,external_kolmafia_namespaceObject.getCounters)("Digitize", -11, 0) !== "") {
+      if (counter_get("Digitize") <= 0) {
         printHighlight("It's digitize time!");
         var digitizeMacro = combat_Macro.externalIf((0,external_kolmafia_namespaceObject.myAdventures)() * 1.1 < (3 - digitizes) * (5 * (property_get("_sourceTerminalDigitizeMonsterCount") * (1 + property_get("_sourceTerminalDigitizeMonsterCount"))) - 3), combat_Macro.trySkill(template_string_$skill(trickin_and_treatin_templateObject26 || (trickin_and_treatin_templateObject26 = trickin_and_treatin_taggedTemplateLiteral(["Digitize"]))))).step(trickMacro);
 
@@ -14576,15 +14575,13 @@ function runBlocks() {
         (0,external_kolmafia_namespaceObject.useFamiliar)(trickFamiliar());
       }
 
-      if (have(template_string_$item(trickin_and_treatin_templateObject28 || (trickin_and_treatin_templateObject28 = trickin_and_treatin_taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"]))))) {
-        if (getKramcoWandererChance() >= 1) {
-          fightOutfit("Kramco");
-          advMacroAA(drunkSafeWander("wanderer"), trickMacro, () => getKramcoWandererChance() >= 1, () => {
-            fillPantsgivingFullness();
-            safeRestore();
-            juneCleave();
-          });
-        }
+      if (have(template_string_$item(trickin_and_treatin_templateObject28 || (trickin_and_treatin_templateObject28 = trickin_and_treatin_taggedTemplateLiteral(["Kramco Sausage-o-Matic\u2122"])))) && getKramcoWandererChance() >= 1) {
+        fightOutfit("Kramco");
+        advMacroAA(drunkSafeWander("wanderer"), trickMacro, () => getKramcoWandererChance() >= 1, () => {
+          fillPantsgivingFullness();
+          safeRestore();
+          juneCleave();
+        });
       }
 
       if (have(template_string_$item(trickin_and_treatin_templateObject29 || (trickin_and_treatin_templateObject29 = trickin_and_treatin_taggedTemplateLiteral(["\"I Voted!\" sticker"]))))) {
