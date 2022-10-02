@@ -14362,7 +14362,7 @@ function drunkSafeWander(type) {
   return sober() ? wanderWhere(type) : $location(wanderer_templateObject || (wanderer_templateObject = wanderer_taggedTemplateLiteral(["Drunken Stupor"])));
 }
 ;// CONCATENATED MODULE: ./src/trickin and treatin.ts
-var trickin_and_treatin_templateObject, trickin_and_treatin_templateObject2, trickin_and_treatin_templateObject3, trickin_and_treatin_templateObject4, trickin_and_treatin_templateObject5, trickin_and_treatin_templateObject6, trickin_and_treatin_templateObject7, trickin_and_treatin_templateObject8, trickin_and_treatin_templateObject9, trickin_and_treatin_templateObject10, trickin_and_treatin_templateObject11, trickin_and_treatin_templateObject12, trickin_and_treatin_templateObject13, trickin_and_treatin_templateObject14, trickin_and_treatin_templateObject15, trickin_and_treatin_templateObject16, trickin_and_treatin_templateObject17, trickin_and_treatin_templateObject18, trickin_and_treatin_templateObject19, trickin_and_treatin_templateObject20, trickin_and_treatin_templateObject21, trickin_and_treatin_templateObject22, trickin_and_treatin_templateObject23, trickin_and_treatin_templateObject24, trickin_and_treatin_templateObject25, trickin_and_treatin_templateObject26, trickin_and_treatin_templateObject27, trickin_and_treatin_templateObject28;
+var trickin_and_treatin_templateObject, trickin_and_treatin_templateObject2, trickin_and_treatin_templateObject3, trickin_and_treatin_templateObject4, trickin_and_treatin_templateObject5, trickin_and_treatin_templateObject6, trickin_and_treatin_templateObject7, trickin_and_treatin_templateObject8, trickin_and_treatin_templateObject9, trickin_and_treatin_templateObject10, trickin_and_treatin_templateObject11, trickin_and_treatin_templateObject12, trickin_and_treatin_templateObject13, trickin_and_treatin_templateObject14, trickin_and_treatin_templateObject15, trickin_and_treatin_templateObject16, trickin_and_treatin_templateObject17, trickin_and_treatin_templateObject18, trickin_and_treatin_templateObject19, trickin_and_treatin_templateObject20, trickin_and_treatin_templateObject21, trickin_and_treatin_templateObject22, trickin_and_treatin_templateObject23, trickin_and_treatin_templateObject24, trickin_and_treatin_templateObject25, trickin_and_treatin_templateObject26, trickin_and_treatin_templateObject27, trickin_and_treatin_templateObject28, trickin_and_treatin_templateObject29, trickin_and_treatin_templateObject30, trickin_and_treatin_templateObject31, trickin_and_treatin_templateObject32;
 
 function trickin_and_treatin_toConsumableArray(arr) { return trickin_and_treatin_arrayWithoutHoles(arr) || trickin_and_treatin_iterableToArray(arr) || trickin_and_treatin_unsupportedIterableToArray(arr) || trickin_and_treatin_nonIterableSpread(); }
 
@@ -14497,7 +14497,7 @@ function canGorge() {
   var noFoodPaths = [35, // Dark Gyffte
   44 // Grey You
   ];
-  return (0,external_kolmafia_namespaceObject.myFullness)() < (0,external_kolmafia_namespaceObject.fullnessLimit)() && !noFoodPaths.includes((0,external_kolmafia_namespaceObject.myPathId)());
+  return (0,external_kolmafia_namespaceObject.myFullness)() < (0,external_kolmafia_namespaceObject.fullnessLimit)() && !noFoodPaths.includes((0,external_kolmafia_namespaceObject.myPath)().id);
 }
 
 function fillPantsgivingFullness() {
@@ -14599,6 +14599,12 @@ function runBlocks() {
         }
       }
 
+      if (have(template_string_$item(trickin_and_treatin_templateObject28 || (trickin_and_treatin_templateObject28 = trickin_and_treatin_taggedTemplateLiteral(["Jurassic Parka"])))) && !have($effect(trickin_and_treatin_templateObject29 || (trickin_and_treatin_templateObject29 = trickin_and_treatin_taggedTemplateLiteral(["Everything Looks Yellow"])))) && trickin_and_treatin_sober()) {
+        printHighlight("Time to spit acid.");
+        fightOutfit("Spit Acid");
+        advMacroAA(wanderWhere("yellow ray"), combat_Macro.skill(template_string_$skill(trickin_and_treatin_templateObject30 || (trickin_and_treatin_templateObject30 = trickin_and_treatin_taggedTemplateLiteral(["Spit jurassic acid"])))).abort(), () => !have($effect(trickin_and_treatin_templateObject31 || (trickin_and_treatin_templateObject31 = trickin_and_treatin_taggedTemplateLiteral(["Everything Looks Yellow"])))));
+      }
+
       if (digitizes !== property_get("_sourceTerminalDigitizeUses") && !(votes !== property_get("_voteFreeFights") || sausages !== property_get("_sausageFights")) && trickin_and_treatin_sober()) {
         var _runSource$constraint, _runSource$constraint2, _runSource$constraint3, _runSource$constraint4, _runSource$constraint5, _runSource$constraint6, _runSource$constraint7;
 
@@ -14608,7 +14614,7 @@ function runBlocks() {
         (_runSource$constraint = (_runSource$constraint2 = runSource.constraints).preparation) === null || _runSource$constraint === void 0 ? void 0 : _runSource$constraint.call(_runSource$constraint2);
         if ((_runSource$constraint3 = runSource.constraints) !== null && _runSource$constraint3 !== void 0 && _runSource$constraint3.familiar) (0,external_kolmafia_namespaceObject.useFamiliar)(runSource.constraints.familiar());
         (_runSource$constraint4 = (_runSource$constraint5 = runSource.constraints).equipmentRequirements) === null || _runSource$constraint4 === void 0 ? void 0 : (_runSource$constraint6 = (_runSource$constraint7 = _runSource$constraint4.call(_runSource$constraint5)).maximize) === null || _runSource$constraint6 === void 0 ? void 0 : _runSource$constraint6.call(_runSource$constraint7);
-        advMacroAA($location(trickin_and_treatin_templateObject28 || (trickin_and_treatin_templateObject28 = trickin_and_treatin_taggedTemplateLiteral(["Noob Cave"]))), runSource.macro);
+        advMacroAA($location(trickin_and_treatin_templateObject32 || (trickin_and_treatin_templateObject32 = trickin_and_treatin_taggedTemplateLiteral(["Noob Cave"]))), runSource.macro);
         fillPantsgivingFullness();
         safeRestore();
         juneCleave();
