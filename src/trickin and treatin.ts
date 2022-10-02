@@ -250,17 +250,17 @@ export function runBlocks(blocks = -1): void {
       }
 
       if (have($item`Kramco Sausage-o-Matic™`) && getKramcoWandererChance() >= 1) {
-          fightOutfit("Kramco");
-          advMacroAA(
-            drunkSafeWander("wanderer"),
-            trickMacro,
-            () => getKramcoWandererChance() >= 1,
-            () => {
-              fillPantsgivingFullness();
-              safeRestore();
-              juneCleave();
-            }
-          );
+        fightOutfit("Kramco");
+        advMacroAA(
+          drunkSafeWander("wanderer"),
+          trickMacro,
+          () => getKramcoWandererChance() >= 1,
+          () => {
+            fillPantsgivingFullness();
+            safeRestore();
+            juneCleave();
+          }
+        );
       }
 
       if (have($item`"I Voted!" sticker`)) {
