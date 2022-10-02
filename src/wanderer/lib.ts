@@ -1,5 +1,16 @@
 import { buy, canAdventure, Item, Location, myAdventures, use } from "kolmafia";
-import { $effect, $item, $location, $locations, clamp, Counter, get, have, SourceTerminal, sum } from "libram";
+import {
+  $effect,
+  $item,
+  $location,
+  $locations,
+  clamp,
+  Counter,
+  get,
+  have,
+  SourceTerminal,
+  sum,
+} from "libram";
 import { NumericProperty } from "libram/dist/propertyTypes";
 
 export const realmAvailable = (element: string): boolean =>
