@@ -79,6 +79,7 @@ export default class Macro extends StrictMacro {
       $item`Great Wolf's lice`,
       $item`Mayor Ghost's scissors`,
       $item`Rain-Doh indigo cup`,
+      $item`porquoise-handled sixgun`,
       $skill`Summon Love Gnats`,
       $skill`Bowl Straight Up`,
       $skill`Sing Along`,
