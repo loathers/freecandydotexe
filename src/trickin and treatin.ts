@@ -152,7 +152,7 @@ export function canGorge(): boolean {
     44, // Grey You
   ];
 
-  return myFullness() < fullnessLimit() && !noFoodPaths.includes(myPath().id);
+  return fullnessLimit() - myFullness() === 1 && !noFoodPaths.includes(myPath().id);
 }
 
 function fillPantsgivingFullness(): void {
