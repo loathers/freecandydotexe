@@ -37,11 +37,11 @@
     "kolmafia": "4.0.1",
     "libram": "^0.7.1"
   },
-  "author": "LASS",
+  "author": "loathers",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Loathing-Associates-Scripting-Society/freecandydotexe.git"
+    "url": "git+https://github.com/loathers/freecandydotexe.git"
   },
   "keywords": [
     "KoLMafia",
@@ -49,7 +49,7 @@
     "TS"
   ],
   "bugs": {
-    "url": "https://github.com/Loathing-Associates-Scripting-Society/freecandydotexe/issues"
+    "url": "https://github.com/loathers/freecandydotexe/issues"
   },
-  "homepage": "https://github.com/Loathing-Associates-Scripting-Society/freecandydotexe#readme"
+  "homepage": "https://github.com/loathers/freecandydotexe#readme"
 }
