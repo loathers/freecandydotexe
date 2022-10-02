@@ -14516,7 +14516,7 @@ function canGorge() {
   var noFoodPaths = [35, // Dark Gyffte
   44 // Grey You
   ];
-  return (0,external_kolmafia_namespaceObject.myFullness)() < (0,external_kolmafia_namespaceObject.fullnessLimit)() && !noFoodPaths.includes((0,external_kolmafia_namespaceObject.myPath)().id);
+  return (0,external_kolmafia_namespaceObject.fullnessLimit)() - (0,external_kolmafia_namespaceObject.myFullness)() === 1 && !noFoodPaths.includes((0,external_kolmafia_namespaceObject.myPath)().id);
 }
 
 function fillPantsgivingFullness() {
