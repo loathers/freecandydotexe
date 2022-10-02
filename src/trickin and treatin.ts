@@ -15,7 +15,7 @@ import {
   myMaxhp,
   myMaxmp,
   myName,
-  myPathId,
+  myPath,
   outfit,
   restoreHp,
   restoreMp,
@@ -29,6 +29,7 @@ import {
   visitUrl,
 } from "kolmafia";
 import {
+  $effect,
   $familiar,
   $familiars,
   $item,
@@ -56,7 +57,7 @@ import {
 } from "./lib";
 import { bestOutfit, fightOutfit, getPantsgivingFood, meatOutfit } from "./outfit";
 import Macro from "./combat";
-import { drunkSafeWander } from "./wanderer";
+import { drunkSafeWander, wanderWhere } from "./wanderer";
 
 const stasisFamiliars = $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`;
 const sober = () => myInebriety() <= inebrietyLimit();
@@ -148,7 +149,7 @@ export function canGorge(): boolean {
     44, // Grey You
   ];
 
-  return myFullness() < fullnessLimit() && !noFoodPaths.includes(myPathId());
+  return myFullness() < fullnessLimit() && !noFoodPaths.includes(myPath().id);
 }
 
 function fillPantsgivingFullness(): void {
@@ -279,6 +280,16 @@ export function runBlocks(blocks = -1): void {
             }
           );
         }
+      }
+
+      if (have($item`Jurassic Parka`) && !have($effect`Everything Looks Yellow`) && sober()) {
+        printHighlight("Time to spit acid.");
+        fightOutfit("Spit Acid");
+        advMacroAA(
+          wanderWhere("yellow ray"),
+          Macro.skill($skill`Spit jurassic acid`).abort(),
+          () => !have($effect`Everything Looks Yellow`)
+        );
       }
 
       if (
