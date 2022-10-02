@@ -156,12 +156,10 @@ function getEffectWeight(): number {
           };
         })
         .filter(
-          (effectAndDuration) =>
-            numericModifier(effectAndDuration.effect, "Familiar Weight") &&
-            effectAndDuration.duration >= myAdventures()
-        )
-        .map((effectAndDuration) => effectAndDuration.effect),
-      (effect) => numericModifier(effect, "Familiar Weight")
+          ({ effect, duration }) =>
+            numericModifier(effect, "Familiar Weight") && duration >= myAdventures()
+        ),
+      ({ effect }) => numericModifier(effect, "Familiar Weight")
     );
   }
   return cache.effectWeight;
@@ -368,7 +366,7 @@ function pantsgiving(): Map<Item, number> {
   const fullnessValue =
     overallAdventureValue() *
       (getAverageAdventures(foodPick.food) + 1 + (get("_fudgeSporkUsed") ? 3 : 0)) -
-    (foodPick.costOverride ? foodPick.costOverride() : mallPrice(foodPick.food)) -
+    (foodPick.costOverride?.() ?? mallPrice(foodPick.food)) -
     mallPrice($item`Special Seasoning`) -
     (get("_fudgeSporkUsed") ? mallPrice($item`fudge spork`) : 0);
   const pantsgivingBonus = fullnessValue / (turns * 0.9);
@@ -411,10 +409,7 @@ function overallAdventureValue(): number {
         (stasisData.meatPerLb * clamp(stasisData.baseRate + actionRateBonus(), 0, 1))
     );
   } else if (adventureFamiliars.includes(trickFamiliar())) {
-    return (
-      (treatsAndBonusEquips * 1000) /
-      Math.pow(1000 - getEffectWeight() - estimateOutfitWeight() - 20, 2)
-    );
+    return (treatsAndBonusEquips * 1000) / (1000 - getEffectWeight() - estimateOutfitWeight() - 20);
   } else return treatsAndBonusEquips;
 }
 
@@ -466,7 +461,7 @@ const pantsgivingFoods: PantsgivingFood[] = [
 
 const valuePantsgivingFood = (foodChoice: PantsgivingFood) =>
   getAverageAdventures(foodChoice.food) * overallAdventureValue() -
-  (foodChoice.costOverride ? foodChoice.costOverride() : mallPrice(foodChoice.food));
+  (foodChoice.costOverride?.() ?? mallPrice(foodChoice.food));
 
 export function getPantsgivingFood(): PantsgivingFood {
   if (cache.pantsgivingFood) {
@@ -477,7 +472,7 @@ export function getPantsgivingFood(): PantsgivingFood {
   if (!cache.pantsgivingFood) {
     cache.pantsgivingFood = pantsgivingFoods
       .filter((x) => have(x.food) || x.canGet())
-      .reduce((a, b) => (valuePantsgivingFood(b) < valuePantsgivingFood(a) ? a : b));
+      .reduce((a, b) => (valuePantsgivingFood(a) > valuePantsgivingFood(b) ? a : b));
   }
   return cache.pantsgivingFood;
 }
