@@ -1,6 +1,5 @@
 import {
   appearanceRates,
-  canAdventure,
   getLocationMonsters,
   historicalPrice,
   itemDropsArray,
@@ -9,6 +8,7 @@ import {
 } from "kolmafia";
 import { sum } from "libram";
 import {
+  canAdventureOrUnlock,
   canWander,
   DraggableFight,
   maxBy,
@@ -38,7 +38,7 @@ function averageYrValue(location: Location) {
 
 function yrValues(): Map<Location, number> {
   const values = new Map<Location, number>();
-  for (const location of Location.all().filter((l) => canAdventure(l) && !underwater(l))) {
+  for (const location of Location.all().filter((l) => canAdventureOrUnlock(l) && !underwater(l))) {
     values.set(location, averageYrValue(location));
   }
   return values;
@@ -51,18 +51,18 @@ export function yellowRayFactory(
 ): WandererTarget[] {
   if (type === "yellow ray") {
     const validLocations = Location.all().filter(
-      (location) => canWander(location, "yellow ray") && canAdventure(location)
+      (location) => canWander(location, "yellow ray") && canAdventureOrUnlock(location)
     );
     const locationValues = yrValues();
 
-    const bestZones = new Set<Location>();
+    const bestZones = new Set<Location>([
+      maxBy(validLocations, (l: Location) => locationValues.get(l) ?? 0),
+    ]);
     for (const unlockableZone of UnlockableZones) {
       const extraLocations = Location.all().filter(
         (l) => l.zone === unlockableZone.zone && !locationSkiplist.includes(l)
       );
-      bestZones.add(
-        maxBy([...validLocations, ...extraLocations], (l: Location) => locationValues.get(l) ?? 0)
-      );
+      bestZones.add(maxBy([...extraLocations], (l: Location) => locationValues.get(l) ?? 0));
     }
     if (bestZones.size > 0) {
       return [...bestZones].map(
