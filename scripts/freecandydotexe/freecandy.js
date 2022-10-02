@@ -14202,7 +14202,7 @@ function averageYrValue(location) {
 function yrValues() {
   var values = new Map();
 
-  var _iterator = yellowray_createForOfIteratorHelper(external_kolmafia_namespaceObject.Location.all().filter(l => (0,external_kolmafia_namespaceObject.canAdventure)(l) && !underwater(l))),
+  var _iterator = yellowray_createForOfIteratorHelper(external_kolmafia_namespaceObject.Location.all().filter(l => canAdventureOrUnlock(l) && !underwater(l))),
       _step;
 
   try {
@@ -14223,9 +14223,13 @@ function yrValues() {
 function yellowRayFactory(type, locationSkiplist) {
   if (type === "yellow ray") {
     var _ret = function () {
-      var validLocations = external_kolmafia_namespaceObject.Location.all().filter(location => canWander(location, "yellow ray") && (0,external_kolmafia_namespaceObject.canAdventure)(location));
+      var validLocations = external_kolmafia_namespaceObject.Location.all().filter(location => canWander(location, "yellow ray") && canAdventureOrUnlock(location));
       var locationValues = yrValues();
-      var bestZones = new Set();
+      var bestZones = new Set([lib_maxBy(validLocations, l => {
+        var _locationValues$get;
+
+        return (_locationValues$get = locationValues.get(l)) !== null && _locationValues$get !== void 0 ? _locationValues$get : 0;
+      })]);
 
       var _iterator2 = yellowray_createForOfIteratorHelper(UnlockableZones),
           _step2;
@@ -14234,10 +14238,10 @@ function yellowRayFactory(type, locationSkiplist) {
         var _loop = function _loop() {
           var unlockableZone = _step2.value;
           var extraLocations = external_kolmafia_namespaceObject.Location.all().filter(l => l.zone === unlockableZone.zone && !locationSkiplist.includes(l));
-          bestZones.add(lib_maxBy([].concat(yellowray_toConsumableArray(validLocations), yellowray_toConsumableArray(extraLocations)), l => {
-            var _locationValues$get2;
+          bestZones.add(lib_maxBy(yellowray_toConsumableArray(extraLocations), l => {
+            var _locationValues$get3;
 
-            return (_locationValues$get2 = locationValues.get(l)) !== null && _locationValues$get2 !== void 0 ? _locationValues$get2 : 0;
+            return (_locationValues$get3 = locationValues.get(l)) !== null && _locationValues$get3 !== void 0 ? _locationValues$get3 : 0;
           }));
         };
 
@@ -14253,9 +14257,9 @@ function yellowRayFactory(type, locationSkiplist) {
       if (bestZones.size > 0) {
         return {
           v: yellowray_toConsumableArray(bestZones).map(l => {
-            var _locationValues$get;
+            var _locationValues$get2;
 
-            return new WandererTarget("Yellow Ray ".concat(l), l, (_locationValues$get = locationValues.get(l)) !== null && _locationValues$get !== void 0 ? _locationValues$get : 0);
+            return new WandererTarget("Yellow Ray ".concat(l), l, (_locationValues$get2 = locationValues.get(l)) !== null && _locationValues$get2 !== void 0 ? _locationValues$get2 : 0);
           })
         };
       }
