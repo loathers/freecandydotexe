@@ -4,13 +4,17 @@
 
 To install, run the following command on an up-to-date KolMafia version:
 
-> `git checkout loathers/freecandydotexe release`
+```
+git checkout loathers/freecandydotexe release
+```
 
 ## Running freecandy
 
 In its simplest form, running freecandy just requires running the following command in the mafia GCLI:
 
-```freecandy 10```
+```
+freecandy 10
+```
 
 Where "10" would be replaced by an integer telling the script how many blocks you would like to run while trick-or-treating. If you do not include a number after `freecandy`, the script will just run until you're out of adventures. This script will use the familiar you have equipped as your primary fight familiar; pick the familiar you want freecandy to use prior to the invocation of the script.
 
