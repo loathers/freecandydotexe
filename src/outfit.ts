@@ -269,7 +269,11 @@ export function fightOutfit(type: fightType = "Trick"): void {
         runChoice(4);
       }
     }
-    if (!adventureFamiliars.includes(trickFamiliar()) && !stasisFamiliars.has(trickFamiliar()) && have($item`tiny stillsuit`)) {
+    if (
+      !adventureFamiliars.includes(trickFamiliar()) &&
+      !stasisFamiliars.has(trickFamiliar()) &&
+      have($item`tiny stillsuit`)
+    ) {
       forceEquips.push($item`tiny stillsuit`);
     }
 
