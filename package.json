@@ -34,8 +34,8 @@
   },
   "dependencies": {
     "core-js": "^3.16.4",
-    "kolmafia": "4.0.1",
-    "libram": "^0.7.1"
+    "kolmafia": "^5.26887.0",
+    "libram": "^0.7.4"
   },
   "author": "loathers",
   "license": "ISC",

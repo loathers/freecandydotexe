@@ -34,11 +34,13 @@ import {
   $familiars,
   $item,
   $location,
+  $locations,
   $monster,
   $skill,
   $skills,
   $slot,
   $slots,
+  AutumnAton,
   Counter,
   get,
   getKramcoWandererChance,
@@ -331,6 +333,11 @@ export function runBlocks(blocks = -1): void {
         cliExecute("numberology 69");
       }
       coldMedicineCabinet();
+      if (AutumnAton.available()) {
+        AutumnAton.sendTo(
+          $locations`The Toxic Teacups, The Oasis, The Deep Dark Jungle, The Bubblin' Caldera, The Sleazy Back Alley`
+        );
+      }
     }
   } finally {
     const totalMS = gametimeToInt() - startTime;
