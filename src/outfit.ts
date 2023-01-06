@@ -56,11 +56,11 @@ import {
   have,
   JuneCleaver,
   maximizeCached,
-  property,
   Requirement,
   sum,
   sumNumbers,
 } from "libram";
+import { args } from "./args";
 import { pickBjorn, riderValue } from "./bjorn";
 import {
   bestJuneCleaverOption,
@@ -168,8 +168,8 @@ function getEffectWeight(): number {
 let askedAboutTwoPiece = false;
 export type fightType = "Kramco" | "Digitize" | "Voter" | "Trick" | "Ghost" | "Spit Acid";
 export function fightOutfit(type: fightType = "Trick"): void {
-  if (property.getString("freecandy_trickOutfit")) {
-    const success = outfit(property.getString("freecandy_trickOutfit"));
+  if (args.trickOutfit) {
+    const success = outfit(args.trickOutfit);
     if (!success) throw new Error("Unable to properly equip trickOutfit!");
     switch (type) {
       case "Kramco":
@@ -503,7 +503,7 @@ export function baseAdventureValue(): number {
 
 export function bestOutfit(): string {
   if (!cache.bestOutfit) {
-    const playerChosenOutfit = property.getString("freecandy_treatOutfit");
+    const playerChosenOutfit = args.treatOutfit;
     if (playerChosenOutfit) cache.bestOutfit = playerChosenOutfit;
     else {
       const flyestFit = getOutfits()

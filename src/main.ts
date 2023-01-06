@@ -1,3 +1,4 @@
+import { Args } from "grimoire-kolmafia";
 import {
   abort,
   equip,
@@ -5,6 +6,7 @@ import {
   itemAmount,
   myFamiliar,
   myPrimestat,
+  printHtml,
   retrieveItem,
   runChoice,
   setAutoAttack,
@@ -23,14 +25,18 @@ import {
   setDefaultMaximizeOptions,
   sinceKolmafiaRevision,
 } from "libram";
+import { args } from "./args";
 import { cache, manager, printError, printHighlight, questStep } from "./lib";
 import { canGorge, runBlocks } from "./trickin and treatin";
 
-export function main(args: string): void {
-  if (args && args.includes("help")) {
+export function main(command: string): void {
+  Args.fill(args, command);
+
+  if (args.help) {
     printHighlight(
       "Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy."
     );
+    printHtml("Control settings in <a href='relay_freecandy.js?relay=true'><u>relay page</u></a>");
   } else {
     if (canGorge()) {
       const keepGoinCowboy = userConfirm(
@@ -111,7 +117,7 @@ export function main(args: string): void {
         : 0;
     visitUrl(`account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update`, true);
 
-    const blocks = args ? parseInt(args) : undefined;
+    const blocks = args ? parseInt(command) : undefined;
     const starting = Session.current();
     try {
       runBlocks(blocks);

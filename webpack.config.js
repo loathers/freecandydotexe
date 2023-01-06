@@ -1,17 +1,19 @@
-var path = require("path");
-var webpack = require("webpack");
-var packageData = require("./package.json");
+/* eslint-env node */
 
-module.exports = {
-  entry: {
-    // Point "entry" to scripts you want to be CLI-eligible.
-    freecandy: "./src/main.ts",
-  },
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require("path");
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const webpack = require("webpack"); // does this have a purpose? or can it just get deleted?
+const packageData = require("./package.json");
+const { merge } = require("webpack-merge");
+/* eslint-enable @typescript-eslint/no-var-requires */
+
+const shared = {
+  // Turns on tree-shaking and minification in the default Terser minifier
+  // https://webpack.js.org/plugins/terser-webpack-plugin/
   mode: "production",
   devtool: false,
   output: {
-    // Change the final string here to the name you want your script to use in mafia.
-    path: path.resolve(__dirname, "KoLmafia", "scripts", packageData.name),
     filename: "[name].js",
     libraryTarget: "commonjs",
   },
@@ -38,7 +40,39 @@ module.exports = {
   },
   plugins: [],
   externals: {
-    // Add any ASH scripts you would like to use here.
+    // Necessary to allow kolmafia imports.
     kolmafia: "commonjs kolmafia",
+    // Add any ASH scripts you would like to use here to allow importing. E.g.:
+    // "canadv.ash": "commonjs canadv.ash",
   },
 };
+
+const entry = merge(
+  {
+    entry: {
+      // Define files webpack will emit, does not need to correspond 1:1 with every typescript file
+      // You need an emitted file for each entrypoint into your code, e.g. the main script and the ccs or ccs consult script it calls
+      freecandy: "./src/main.ts",
+    },
+    output: {
+      path: path.resolve(__dirname, "KoLmafia", "scripts", packageData.name),
+    },
+  },
+  shared
+);
+
+const relay = merge(
+  {
+    entry: {
+      // Define files webpack will emit, does not need to correspond 1:1 with every typescript file
+      // You need an emitted file for each entrypoint into your code, e.g. the main script and the ccs or ccs consult script it calls
+      relay_freecandy: "./src/relay.ts",
+    },
+    output: {
+      path: path.resolve(__dirname, "KoLmafia", "relay"),
+    },
+  },
+  shared
+);
+
+module.exports = [entry, relay];

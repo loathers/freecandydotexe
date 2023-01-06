@@ -24,18 +24,20 @@
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "babel-loader": "^8.2.2",
-    "eslint": "^7.28.0",
+    "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-libram": "^0.2.17",
-    "prettier": "^2.3.1",
+    "eslint-plugin-libram": "^0.2.25",
+    "prettier": "^2.8.1",
     "typescript": "^4.0.3",
-    "webpack": "^5.8.0",
-    "webpack-cli": "^4.2.0"
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "core-js": "^3.16.4",
+    "grimoire-kolmafia": "^0.3.11",
     "kolmafia": "^5.26887.0",
-    "libram": "^0.7.4"
+    "libram": "^0.7.4",
+    "mafia-shared-relay": "^0.0.7"
   },
   "author": "loathers",
   "license": "ISC",
