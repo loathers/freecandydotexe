@@ -33,6 +33,7 @@ export function main(command: string): void {
   Args.fill(args, command);
 
   if (args.help) {
+    Args.showHelp(args);
     printHighlight(
       "Set the property freecandy_treatOutfit with the name of the outfit you'd like to get candies from. Or don't! We'll pick an outfit for you. Take out the familiar you want to use for trick-or-treat combats. Enjoy."
     );
