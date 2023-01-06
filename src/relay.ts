@@ -55,7 +55,7 @@ function convertArgsToHtml(): RelayPage[] {
   return pages.filter((page) => page.components.length > 0);
 }
 
-export function main() {
+export function main(): void {
   if (handleApiRequest()) return;
 
   write(generateHTML(convertArgsToHtml()));
