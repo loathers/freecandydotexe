@@ -1,5 +1,5 @@
 import { Args } from "grimoire-kolmafia";
-import { getCustomOutfits, getOutfits, haveOutfit } from "kolmafia";
+import { getCustomOutfits, getOutfits, haveOutfit, toInt } from "kolmafia";
 
 export const args = Args.create(
   "freecandy",
@@ -28,5 +28,12 @@ export const args = Args.create(
           .map((outfit) => [outfit, outfit] as [string, string]),
       ],
     }),
+    blocks: Args.custom(
+      {
+        help: "Blocks to run",
+      },
+      (v) => (v ? toInt(v) : undefined),
+      "BLOCKS"
+    ),
   }
 );

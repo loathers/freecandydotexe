@@ -117,9 +117,10 @@ export function main(command: string): void {
         : 0;
     visitUrl(`account.php?actions[]=flag_aabosses&flag_aabosses=1&action=Update`, true);
 
-    const blocks = args ? parseInt(command) : undefined;
     const starting = Session.current();
     try {
+      const blocks = args.blocks;
+
       runBlocks(blocks);
     } catch {
       printError(
