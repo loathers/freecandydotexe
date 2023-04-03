@@ -35,9 +35,9 @@ export default class Macro extends StrictMacro {
   }
 
   stasisItem(): Macro {
-    const spammableItem = $items`dictionary, facsimile dictionary, spices`.find(
-      (item) => have(item)
-    ) ?? $item`seal tooth`;
+    const spammableItem =
+      $items`dictionary, facsimile dictionary, spices`.find((item) => have(item)) ??
+      $item`seal tooth`;
     return Macro.item(spammableItem);
   }
 

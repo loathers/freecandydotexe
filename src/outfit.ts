@@ -326,7 +326,9 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
   );
   outfit.equip(args.familiar);
 
-  if (outfit.familiar === $familiar`Reagnimated Gnome`) outfit.equip($item`gnomish housemaid's kgnee`)
+  if (outfit.familiar === $familiar`Reagnimated Gnome`) {
+    outfit.equip($item`gnomish housemaid's kgnee`);
+  }
 
   if (
     get("questPAGhost") === "unstarted" &&
