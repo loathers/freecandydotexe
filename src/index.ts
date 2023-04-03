@@ -9,6 +9,10 @@ import { myAdventures } from "kolmafia";
 
 export default function main(argstring = ""): void {
   Args.fill(args, argstring);
+  if (args.help) {
+    Args.showHelp(args);
+    return;
+  }
 
   const nemesisStep = () => questStep("questG04Nemesis");
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
