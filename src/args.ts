@@ -24,7 +24,8 @@ const args = Args.create(
       setting: "freecandy_familiar",
       default: myFamiliar(),
     }),
-  }
+  },
+  { positionalArgs: ["blocks"] }
 );
 
 export default args;
