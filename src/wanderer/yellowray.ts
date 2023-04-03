@@ -1,21 +1,20 @@
 import {
   appearanceRates,
   getLocationMonsters,
-  historicalPrice,
   itemDropsArray,
   Location,
   toMonster,
 } from "kolmafia";
-import { sum } from "libram";
+import { maxBy, sum } from "libram";
 import {
   canAdventureOrUnlock,
   canWander,
   DraggableFight,
-  maxBy,
   underwater,
   UnlockableZones,
   WandererTarget,
 } from "./lib";
+import { getHistoricalSaleValue } from "../lib";
 
 function averageYrValue(location: Location) {
   const badAttributes = ["LUCKY", "ULTRARARE", "BOSS"];
@@ -30,7 +29,7 @@ function averageYrValue(location: Location) {
     return (
       sum(monsters, (m) => {
         const items = itemDropsArray(m).filter((drop) => ["", "n"].includes(drop.type));
-        return sum(items, (drop) => 0.9 * historicalPrice(drop.drop));
+        return sum(items, ({ drop }) => 0.9 * getHistoricalSaleValue(drop));
       }) / monsters.length
     );
   }

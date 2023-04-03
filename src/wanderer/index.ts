@@ -1,11 +1,10 @@
 import { inebrietyLimit, Location, myInebriety } from "kolmafia";
-import { $location } from "libram";
-import { manager, printHighlight } from "../lib";
+import { $location, maxBy } from "libram";
+import { printHighlight } from "../lib";
 import { guzzlrFactory } from "./guzzlr";
 import {
   canAdventureOrUnlock,
   defaultFactory,
-  maxBy,
   unlock,
   unsupportedChoices,
   WandererFactory,
@@ -13,6 +12,7 @@ import {
 } from "./lib";
 import { lovebugsFactory } from "./lovebugs";
 import { yellowRayFactory } from "./yellowray";
+import CandyEngine from "../engine";
 
 export type DraggableFight = "backup" | "wanderer" | "yellow ray";
 
@@ -83,7 +83,7 @@ export function wanderWhere(
       [...locationSkiplist, ...badLocation]
     );
   } else {
-    manager.setChoices(unsupportedChoices.get(candidate.location) ?? {});
+    CandyEngine.propertyManager.setChoices(unsupportedChoices.get(candidate.location) ?? {});
     const targets = candidate.targets.map((t) => t.name).join("; ");
     const value = candidate.value.toFixed(2);
     printHighlight(`Wandering at ${candidate.location} for expected value ${value} (${targets})`);
