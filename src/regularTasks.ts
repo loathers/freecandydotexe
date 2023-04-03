@@ -149,7 +149,6 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => get("questPAGhost") === "unstarted",
     ready: () =>
       have($item`protonic accelerator pack`) &&
-      get("questPAGhost") !== "unstarted" &&
       !!get("ghostLocation"),
     do: () => get("ghostLocation") ?? abort("Failed to find proper ghost location"),
     outfit: () => combatOutfit({ back: $item`protonic accelerator pack` }),
@@ -159,7 +158,6 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () =>
       have($item`"I Voted!" sticker`) &&
       totalTurnsPlayed() % 11 === 1 &&
-      get("lastVoteMonsterTurn") < totalTurnsPlayed() &&
       get("_voteFreeFights") < 3,
     do: () => drunkSafeWander("wanderer"),
     completed: () => get("lastVoteMonsterTurn") === totalTurnsPlayed(),
@@ -183,7 +181,7 @@ const GLOBAL_TASKS: CandyTask[] = [
   },
   {
     name: "Kramco",
-    ready: () => have($item`Kramco Sausage-o-Matic™`) && getKramcoWandererChance() >= 1,
+    ready: () => have($item`Kramco Sausage-o-Matic™`),
     completed: () => getKramcoWandererChance() < 1,
     do: () => wanderWhere("wanderer"),
     sobriety: "sober",
