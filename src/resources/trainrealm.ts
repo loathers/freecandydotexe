@@ -134,13 +134,10 @@ function getRotatedCycle(): TrainSet.Cycle {
   return newPieces as TrainSet.Cycle;
 }
 
-function rotateTrainToOptimalCycle(): boolean {
+export function rotateTrainToOptimalCycle(): boolean {
   return TrainSet.setConfiguration(getRotatedCycle());
 }
 
-export function trainset(): void {
-  const bestStations = getPrioritizedStations();
-  if (get("trainsetConfiguration") && bestStations.includes(TrainSet.next())) return;
-
-  rotateTrainToOptimalCycle();
+export function willRotateTrainset(): boolean {
+  return !get("trainsetConfiguration") || !getPrioritizedStations().includes(TrainSet.next());
 }

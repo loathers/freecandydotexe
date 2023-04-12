@@ -44,7 +44,8 @@ import {
   coldMedicineCabinet,
   getBestPantsgivingFood,
   juneCleaverChoices,
-  trainset,
+  rotateTrainToOptimalCycle,
+  willRotateTrainset,
 } from "./resources";
 import CandyEngine from "./engine";
 import { combatOutfit, digitizeOutfit } from "./outfit";
@@ -135,9 +136,9 @@ const GLOBAL_TASKS: CandyTask[] = [
   },
   {
     name: "Trainset",
-    ready: () => getWorkshed() === $item`model train set`,
-    completed: () => !TrainSet.canConfigure(),
-    do: trainset,
+    ready: () => TrainSet.installed(),
+    completed: () => !willRotateTrainset(),
+    do: rotateTrainToOptimalCycle,
   },
   {
     name: "June Cleaver",
