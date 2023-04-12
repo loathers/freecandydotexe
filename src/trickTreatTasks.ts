@@ -9,9 +9,8 @@ import {
   visitUrl,
 } from "kolmafia";
 import { treatOutfit, trickOutfit } from "./outfit";
-import { CandyTask } from "./lib";
+import { CandyTask, State } from "./lib";
 import { CandyStrategy } from "./combat";
-import CandyState from "./state";
 const HOUSE_NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 let blockHtml = "";
@@ -31,7 +30,7 @@ function resetBlock(): void {
   refreshBlock();
   treated = false;
   tricked = [];
-  CandyState.blocks++;
+  State.blocks++;
 }
 
 function ensureInHalloween(): void {

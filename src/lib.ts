@@ -59,6 +59,10 @@ export function getHistoricalSaleValue(...items: Item[]): number {
   );
 }
 
+export const State = {
+  blocks: 0,
+};
+
 export const today = Date.now() - gametimeToInt() - 1000 * 60 * 3.5;
 
 export function shouldRedigitize(): boolean {

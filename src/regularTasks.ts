@@ -72,7 +72,7 @@ function initializeRunSource(): void {
       maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
     });
   if (!run) abort("Unable to find free run with which to initialize digitize!");
-  this.runSource = run;
+  runSource = run;
 }
 
 const GLOBAL_TASKS: CandyTask[] = [

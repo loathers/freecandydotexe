@@ -8,10 +8,9 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { CandyTask, printHighlight } from "./lib";
+import { CandyTask, printHighlight, State } from "./lib";
 import { $familiar, $item, PropertiesManager, Session, undelay } from "libram";
 import args from "./args";
-import CandyState from "./state";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   static propertyManager = new PropertiesManager();
@@ -40,9 +39,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     );
     useFamiliar(args.familiar);
 
-    printHighlight(
-      `freecandy has run ${CandyState.blocks} blocks, and produced the following items:`
-    );
+    printHighlight(`freecandy has run ${State.blocks} blocks, and produced the following items:`);
     for (const [item, quantity] of Session.current().diff(this.session).items) {
       printHighlight(` ${item}: ${quantity}`);
     }
