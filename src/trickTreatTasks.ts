@@ -62,7 +62,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     name: "Trick",
     ready: () => tricked.length < HOUSE_NUMBERS.length,
     completed: () => !getBlockHtml().match(/whichhouse=\d*>[^>]*?house_d/),
-    prepare: () => ensureInHalloween(),
+    prepare: ensureInHalloween,
     do: (): void => {
       for (const house of HOUSE_NUMBERS) {
         if (tricked.includes(house)) continue;
@@ -86,7 +86,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       refreshBlock();
       return getBlockHtml().includes("whichhouse=");
     },
-    prepare: () => ensureInHalloween(),
+    prepare: ensureInHalloween,
     do: (): void => {
       visitUrl("choice.php?whichchoice=804&pwd&option=1");
       resetBlock();
