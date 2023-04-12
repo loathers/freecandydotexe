@@ -88,6 +88,11 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => abort("Beaten up!"),
   },
   {
+    name: "Lick wounds",
+    completed: () => !have($effect`Beaten Up`),
+    do: () => useSkill($skill`Tongue of the Walrus`),
+  },
+  {
     name: "Sweat Out some Booze",
     completed: () => get("_sweatOutSomeBoozeUsed") >= 3,
     ready: () => myInebriety() > 0 && get("sweat") >= 25,
