@@ -45,8 +45,6 @@ export function printError(message: string): void {
 
 export type CandyTask = Task & {
   sobriety?: "sober" | "drunk";
-  tricktreat?: boolean;
-  canInitializeDigitize?: boolean;
 };
 
 export function getHistoricalSaleValue(...items: Item[]): number {
@@ -60,6 +58,10 @@ export function getHistoricalSaleValue(...items: Item[]): number {
     }) / items.length
   );
 }
+
+export const State = {
+  blocks: 0,
+};
 
 export const today = Date.now() - gametimeToInt() - 1000 * 60 * 3.5;
 

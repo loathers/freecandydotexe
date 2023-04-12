@@ -1,12 +1,11 @@
 import { Args, getTasks, Quest } from "grimoire-kolmafia";
 import args from "./args";
 import { questStep } from "libram";
-import { CandyTask } from "./lib";
+import { CandyTask, State } from "./lib";
 import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
 import TRICK_TREAT_TASKS from "./trickTreatTasks";
 import { myAdventures, print } from "kolmafia";
-import CandyState from "./state";
 
 export default function main(argstring = ""): void {
   Args.fill(args, argstring);
@@ -35,7 +34,7 @@ export default function main(argstring = ""): void {
   };
 
   const doneWithBlocks = () => {
-    if (CandyState.blocks >= args.blocks) {
+    if (State.blocks >= args.blocks) {
       print(`Finished ${args.blocks} blocks!`, "red");
       return true;
     }

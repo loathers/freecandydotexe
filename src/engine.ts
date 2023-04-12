@@ -1,19 +1,16 @@
 import { Engine, Outfit } from "grimoire-kolmafia";
 import {
   equip,
-  handlingChoice,
   inebrietyLimit,
   itemAmount,
-  lastChoice,
   myInebriety,
   useFamiliar,
   visitUrl,
   xpath,
 } from "kolmafia";
-import { CandyTask, printHighlight } from "./lib";
+import { CandyTask, printHighlight, State } from "./lib";
 import { $familiar, $item, PropertiesManager, Session, undelay } from "libram";
 import args from "./args";
-import CandyState from "./state";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   static propertyManager = new PropertiesManager();
@@ -42,9 +39,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     );
     useFamiliar(args.familiar);
 
-    printHighlight(
-      `freecandy has run ${CandyState.blocks} blocks, and produced the following items:`
-    );
+    printHighlight(`freecandy has run ${State.blocks} blocks, and produced the following items:`);
     for (const [item, quantity] of Session.current().diff(this.session).items) {
       printHighlight(` ${item}: ${quantity}`);
     }
@@ -56,15 +51,6 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     if (isDrunk && sobriety === "sober") return false;
     if (!isDrunk && sobriety === "drunk") return false;
     return super.available(task);
-  }
-
-  do(task: CandyTask): void {
-    if (task.tricktreat) {
-      const onPage = handlingChoice() && lastChoice() === 804;
-      if (!onPage) CandyState.refreshBlock();
-    }
-    super.do(task);
-    if (task.canInitializeDigitize) CandyState.digitizeInitialized = true;
   }
 
   dress(task: CandyTask, outfit: Outfit): void {

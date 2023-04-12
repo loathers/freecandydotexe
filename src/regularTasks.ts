@@ -24,8 +24,10 @@ import {
   $item,
   $location,
   $skill,
+  ActionSource,
   AutumnAton,
   Counter,
+  ensureFreeRun,
   get,
   getKramcoWandererChance,
   have,
@@ -34,6 +36,7 @@ import {
   set,
   SourceTerminal,
   TrainSet,
+  tryFindFreeRun,
   withProperty,
 } from "libram";
 import { CandyTask, shouldRedigitize } from "./lib";
@@ -49,13 +52,34 @@ import {
 import { combatOutfit, digitizeOutfit } from "./outfit";
 import { Outfit } from "grimoire-kolmafia";
 import { CandyStrategy, Macro } from "./combat";
-import CandyState from "./state";
 
 const MARKET_QUESTS = [
   { pref: "questM23Meatsmith", url: "shop.php?whichshop=meatsmith&action=talk" },
   { pref: "questM24Doc", url: "shop.php?whichshop=doc&action=talk" },
   { pref: "questM25Armorer", url: "shop.php?whichshop=armory&action=talk" },
 ];
+
+let _digitizeInitialized = true;
+
+function digitizeInitialized() {
+  _digitizeInitialized = true;
+}
+
+let runSource: ActionSource | null = null;
+
+function getRunSource(): ActionSource {
+  if (!runSource)
+    runSource =
+      tryFindFreeRun() ??
+      ensureFreeRun({
+        requireUnlimited: () => true,
+        noFamiliar: () => true,
+        noRequirements: () => true,
+        maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
+      });
+  if (!runSource) abort("Unable to find free run with which to initialize digitize!");
+  return runSource;
+}
 
 const GLOBAL_TASKS: CandyTask[] = [
   ...MARKET_QUESTS.map(({ pref, url }) => ({
@@ -193,8 +217,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => adv1(drunkSafeWander("wanderer"), -1, ""),
     prepare: () =>
       shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
-    post: () =>
-      get("_sourceTerminalDigitizeMonsterCount") || (CandyState.digitizeInitialized = false),
+    post: () => get("_sourceTerminalDigitizeMonsterCount") || (_digitizeInitialized = false),
     outfit: digitizeOutfit,
     combat: new CandyStrategy(() => Macro.redigitize().default()),
   },
@@ -213,7 +236,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => getKramcoWandererChance() < 1,
     do: () => adv1(wanderWhere("wanderer"), -1, ""),
     sobriety: "sober",
-    canInitializeDigitize: true,
+    post: () => digitizeInitialized,
     outfit: () => combatOutfit({ offhand: $item`Kramco Sausage-o-Matic™` }),
     combat: new CandyStrategy(),
   },
@@ -223,7 +246,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Yellow`),
     do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
-    canInitializeDigitize: true,
+    post: () => digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
@@ -237,7 +260,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Yellow`),
     do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
-    canInitializeDigitize: true,
+    post: () => digitizeInitialized,
     outfit: () => combatOutfit({ shirt: $item`Jurassic Parka`, modes: { parka: "dilophosaur" } }),
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
@@ -251,7 +274,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Red`),
     do: () => adv1(wanderWhere("backup"), -1, ""),
     sobriety: "sober",
-    canInitializeDigitize: true,
+    post: () => digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(Macro.skill($skill`Free-For-All`)),
   },
@@ -259,23 +282,25 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Nemesis Assassin",
     completed: () => Counter.get("Nemesis Assassin window end") > 0,
     do: () => adv1(wanderWhere("wanderer"), -1, ""),
-    canInitializeDigitize: true,
+    post: () => digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(),
   },
   {
     name: "Initialize Digitize",
-    completed: () => CandyState.digitizeInitialized,
+    completed: () => _digitizeInitialized,
     do: (): void => {
-      CandyState.runSource?.prepare();
+      getRunSource()?.prepare();
       wanderWhere("backup");
     },
-    canInitializeDigitize: true,
-    post: () => (CandyState.runSource = null),
+    post: (): void => {
+      digitizeInitialized();
+      runSource = null;
+    },
     outfit: (): Outfit => {
-      CandyState.initializeRunSource();
-      const req = CandyState.runSource?.constraints?.equipmentRequirements?.();
-      const familiar = CandyState.runSource?.constraints?.familiar?.();
+      const run = getRunSource();
+      const req = run?.constraints?.equipmentRequirements?.();
+      const familiar = run?.constraints?.familiar?.();
       const outfit = new Outfit();
       if (familiar) outfit.equip(familiar);
       if (req) {
@@ -288,7 +313,7 @@ const GLOBAL_TASKS: CandyTask[] = [
         Object.fromEntries(Object.entries(outfit.spec()).filter(([, value]) => value))
       );
     },
-    combat: new CandyStrategy(() => Macro.step(CandyState.runSource?.macro ?? Macro.abort())),
+    combat: new CandyStrategy(() => Macro.step(getRunSource()?.macro ?? Macro.abort())),
   },
 ];
 
