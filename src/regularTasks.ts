@@ -61,14 +61,14 @@ const MARKET_QUESTS = [
 
 let _digitizeInitialized = true;
 
-function digitizeInitialized() {
+function digitizeInitialized(): void {
   _digitizeInitialized = true;
 }
 
 let runSource: ActionSource | null = null;
 
 function getRunSource(): ActionSource {
-  if (!runSource)
+  if (!runSource) {
     runSource =
       tryFindFreeRun() ??
       ensureFreeRun({
@@ -77,6 +77,7 @@ function getRunSource(): ActionSource {
         noRequirements: () => true,
         maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
       });
+  }
   if (!runSource) abort("Unable to find free run with which to initialize digitize!");
   return runSource;
 }
@@ -236,7 +237,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => getKramcoWandererChance() < 1,
     do: () => adv1(wanderWhere("wanderer"), -1, ""),
     sobriety: "sober",
-    post: () => digitizeInitialized,
+    post: digitizeInitialized,
     outfit: () => combatOutfit({ offhand: $item`Kramco Sausage-o-Matic™` }),
     combat: new CandyStrategy(),
   },
@@ -246,7 +247,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Yellow`),
     do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
-    post: () => digitizeInitialized,
+    post: digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
@@ -260,7 +261,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Yellow`),
     do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
-    post: () => digitizeInitialized,
+    post: digitizeInitialized,
     outfit: () => combatOutfit({ shirt: $item`Jurassic Parka`, modes: { parka: "dilophosaur" } }),
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
@@ -274,7 +275,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Red`),
     do: () => adv1(wanderWhere("backup"), -1, ""),
     sobriety: "sober",
-    post: () => digitizeInitialized,
+    post: digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(Macro.skill($skill`Free-For-All`)),
   },
@@ -282,7 +283,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Nemesis Assassin",
     completed: () => Counter.get("Nemesis Assassin window end") > 0,
     do: () => adv1(wanderWhere("wanderer"), -1, ""),
-    post: () => digitizeInitialized,
+    post: digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(),
   },
