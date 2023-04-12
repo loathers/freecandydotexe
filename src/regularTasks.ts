@@ -58,7 +58,11 @@ const MARKET_QUESTS = [
   { pref: "questM25Armorer", url: "shop.php?whichshop=armory&action=talk" },
 ];
 
-let digitizeInitialized = true;
+let _digitizeInitialized = true;
+
+function digitizeInitialized() {
+  _digitizeInitialized = true;
+}
 
 let runSource: ActionSource | null = null;
 
@@ -206,8 +210,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => adv1(drunkSafeWander("wanderer"), -1, ""),
     prepare: () =>
       shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
-    post: () => get("_sourceTerminalDigitizeMonsterCount") || (digitizeInitialized = false),
-    sobriety: "sober",
+    post: () => get("_sourceTerminalDigitizeMonsterCount") || (_digitizeInitialized = false),
     outfit: digitizeOutfit,
     combat: new CandyStrategy(() => Macro.redigitize().default()),
   },
@@ -226,7 +229,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => getKramcoWandererChance() < 1,
     do: () => adv1(wanderWhere("wanderer"), -1, ""),
     sobriety: "sober",
-    post: () => (digitizeInitialized = true),
+    post: () => digitizeInitialized,
     outfit: () => combatOutfit({ offhand: $item`Kramco Sausage-o-Matic™` }),
     combat: new CandyStrategy(),
   },
@@ -236,7 +239,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Yellow`),
     do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
-    post: () => (digitizeInitialized = true),
+    post: () => digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
@@ -250,7 +253,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Yellow`),
     do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
-    post: () => (digitizeInitialized = true),
+    post: () => digitizeInitialized,
     outfit: () => combatOutfit({ shirt: $item`Jurassic Parka`, modes: { parka: "dilophosaur" } }),
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
@@ -264,7 +267,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     completed: () => have($effect`Everything Looks Red`),
     do: () => adv1(wanderWhere("backup"), -1, ""),
     sobriety: "sober",
-    post: () => (digitizeInitialized = true),
+    post: () => digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(Macro.skill($skill`Free-For-All`)),
   },
@@ -272,19 +275,19 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Nemesis Assassin",
     completed: () => Counter.get("Nemesis Assassin window end") > 0,
     do: () => adv1(wanderWhere("wanderer"), -1, ""),
-    post: () => (digitizeInitialized = true),
+    post: () => digitizeInitialized,
     outfit: combatOutfit,
     combat: new CandyStrategy(),
   },
   {
     name: "Initialize Digitize",
-    completed: () => digitizeInitialized,
+    completed: () => _digitizeInitialized,
     do: (): void => {
       runSource?.prepare();
       wanderWhere("backup");
     },
     post: (): void => {
-      digitizeInitialized = true;
+      digitizeInitialized();
       runSource = null;
     },
     outfit: (): Outfit => {
