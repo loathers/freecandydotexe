@@ -157,7 +157,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Proton Ghost",
     completed: () => get("questPAGhost") === "unstarted",
     ready: () => have($item`protonic accelerator pack`) && !!get("ghostLocation"),
-    do: () => get("ghostLocation") ?? abort("Failed to find proper ghost location"),
+    do: () => adv1(get("ghostLocation") ?? abort("Failed to find proper ghost location"), -1, ""),
     outfit: () => combatOutfit({ back: $item`protonic accelerator pack` }),
     combat: new CandyStrategy(() =>
       Macro.trySkill($skill`Shoot Ghost`)
