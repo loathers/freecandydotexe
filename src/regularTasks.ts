@@ -25,7 +25,6 @@ import {
   $skill,
   AutumnAton,
   Counter,
-  ensureFreeRun,
   get,
   getKramcoWandererChance,
   have,
@@ -34,7 +33,6 @@ import {
   set,
   SourceTerminal,
   TrainSet,
-  tryFindFreeRun,
   withProperty,
 } from "libram";
 import { CandyTask, shouldRedigitize } from "./lib";
@@ -267,20 +265,9 @@ const GLOBAL_TASKS: CandyTask[] = [
       wanderWhere("backup");
     },
     canInitializeDigitize: true,
-    prepare: (): void => {
-      const run =
-        tryFindFreeRun() ??
-        ensureFreeRun({
-          requireUnlimited: () => true,
-          noFamiliar: () => true,
-          noRequirements: () => true,
-          maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
-        });
-      if (!run) abort("Unable to find free run with which to initialize digitize!");
-      CandyEngine.runSource = run;
-    },
     post: () => (CandyEngine.runSource = null),
     outfit: (): Outfit => {
+      CandyEngine.initializeRunSource();
       const req = CandyEngine.runSource?.constraints?.equipmentRequirements?.();
       const familiar = CandyEngine.runSource?.constraints?.familiar?.();
       const outfit = new Outfit();
@@ -291,7 +278,9 @@ const GLOBAL_TASKS: CandyTask[] = [
           if (!outfit.equip(item)) abort(`Failed to equip item ${item} for free running`);
         }
       }
-      return combatOutfit(outfit.spec());
+      return combatOutfit(
+        Object.fromEntries(Object.entries(outfit.spec()).filter(([, value]) => value))
+      );
     },
     combat: new CandyStrategy(() => Macro.step(CandyEngine.runSource?.macro ?? Macro.abort())),
   },

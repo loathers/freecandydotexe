@@ -1,5 +1,6 @@
 import { Engine, Outfit } from "grimoire-kolmafia";
 import {
+  abort,
   equip,
   handlingChoice,
   inebrietyLimit,
@@ -10,7 +11,17 @@ import {
   xpath,
 } from "kolmafia";
 import { CandyTask, printHighlight } from "./lib";
-import { $familiar, $item, ActionSource, get, PropertiesManager, Session, undelay } from "libram";
+import {
+  $familiar,
+  $item,
+  ActionSource,
+  ensureFreeRun,
+  get,
+  PropertiesManager,
+  Session,
+  tryFindFreeRun,
+  undelay,
+} from "libram";
 import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
@@ -22,6 +33,18 @@ export default class CandyEngine extends Engine<never, CandyTask> {
   static blocks = 0;
   static digitizeInitialized = true;
   static runSource: ActionSource | null = null;
+  static initializeRunSource(): void {
+    const run =
+      tryFindFreeRun() ??
+      ensureFreeRun({
+        requireUnlimited: () => true,
+        noFamiliar: () => true,
+        noRequirements: () => true,
+        maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
+      });
+    if (!run) abort("Unable to find free run with which to initialize digitize!");
+    CandyEngine.runSource = run;
+  }
   static propertyManager = new PropertiesManager();
   aaBossFlag: number;
 
