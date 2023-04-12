@@ -8,6 +8,7 @@ import {
   inebrietyLimit,
   myClass,
   myFullness,
+  myHp,
   myInebriety,
   retrieveItem,
   reverseNumberology,
@@ -79,6 +80,11 @@ const GLOBAL_TASKS: CandyTask[] = [
     },
     outfit: { familiar: $familiar`Reagnimated Gnome` },
     limit: { tries: 1 },
+  },
+  {
+    name: "Ow!",
+    completed: () => myHp() > 0,
+    do: () => abort("Ow! I have 0 hp!"),
   },
   {
     name: "Beaten Up!",
