@@ -6,7 +6,7 @@ import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
 import TRICK_TREAT_TASKS from "./trickTreatTasks";
 import { myAdventures } from "kolmafia";
-import STATE from "./state";
+import CandyState from "./state";
 
 export default function main(argstring = ""): void {
   Args.fill(args, argstring);
@@ -22,7 +22,7 @@ export default function main(argstring = ""): void {
     completed: () =>
       myAdventures() <= 0 ||
       (doingNemesis && nemesisStep() >= 25) ||
-      STATE.blocks >= args.blocks,
+      CandyState.blocks >= args.blocks,
     tasks: [...GLOBAL_TASKS, ...TRICK_TREAT_TASKS],
   };
 

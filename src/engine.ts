@@ -10,16 +10,9 @@ import {
   xpath,
 } from "kolmafia";
 import { CandyTask, printHighlight } from "./lib";
-import {
-  $familiar,
-  $item,
-  get,
-  PropertiesManager,
-  Session,
-  undelay,
-} from "libram";
+import { $familiar, $item, get, PropertiesManager, Session, undelay } from "libram";
 import args from "./args";
-import STATE from "./state";
+import CandyState from "./state";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   static propertyManager = new PropertiesManager();
@@ -49,7 +42,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     useFamiliar(args.familiar);
 
     printHighlight(
-      `freecandy has run ${STATE.blocks} blocks, and produced the following items:`
+      `freecandy has run ${CandyState.blocks} blocks, and produced the following items:`
     );
     for (const [item, quantity] of Session.current().diff(this.session).items) {
       printHighlight(` ${item}: ${quantity}`);
@@ -67,10 +60,10 @@ export default class CandyEngine extends Engine<never, CandyTask> {
   do(task: CandyTask): void {
     if (task.tricktreat) {
       const onPage = handlingChoice() && get("lastChoice") === "804";
-      if (!onPage) STATE.refreshBlock();
+      if (!onPage) CandyState.refreshBlock();
     }
     super.do(task);
-    if (task.canInitializeDigitize) STATE.digitizeInitialized = true;
+    if (task.canInitializeDigitize) CandyState.digitizeInitialized = true;
   }
 
   dress(task: CandyTask, outfit: Outfit): void {

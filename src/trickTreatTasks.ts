@@ -2,39 +2,39 @@ import { abort, inMultiFight, myAdventures, runChoice, runCombat, visitUrl } fro
 import { treatOutfit, trickOutfit } from "./outfit";
 import { CandyTask } from "./lib";
 import { CandyStrategy } from "./combat";
-import STATE from "./state";
+import CandyState from "./state";
 
 const HOUSE_NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const TRICK_TREAT_TASKS: CandyTask[] = [
   {
     name: "Treat",
-    ready: () => !STATE.treated,
-    completed: () => !STATE.blockHtml.match(/whichhouse=\d*>[^>]*?house_l/),
+    ready: () => !CandyState.treated,
+    completed: () => !CandyState.blockHtml.match(/whichhouse=\d*>[^>]*?house_l/),
     outfit: treatOutfit,
     do: (): void => {
       for (const house of HOUSE_NUMBERS) {
-        if (STATE.blockHtml.match(RegExp(`whichhouse=${house}>[^>]*?house_l`))) {
+        if (CandyState.blockHtml.match(RegExp(`whichhouse=${house}>[^>]*?house_l`))) {
           visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
-        } else if (STATE.blockHtml.match(RegExp(`whichhouse=${house}>[^>]*?starhouse`))) {
+        } else if (CandyState.blockHtml.match(RegExp(`whichhouse=${house}>[^>]*?starhouse`))) {
           visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
           runChoice(2);
-          STATE.refreshBlock();
+          CandyState.refreshBlock();
         }
       }
-      STATE.treated = true;
+      CandyState.treated = true;
     },
     tricktreat: true,
   },
   {
     name: "Trick",
-    ready: () => STATE.tricked.length < HOUSE_NUMBERS.length,
-    completed: () => !STATE.blockHtml.match(/whichhouse=\d*>[^>]*?house_d/),
+    ready: () => CandyState.tricked.length < HOUSE_NUMBERS.length,
+    completed: () => !CandyState.blockHtml.match(/whichhouse=\d*>[^>]*?house_d/),
     do: (): void => {
       for (const house of HOUSE_NUMBERS) {
-        if (STATE.tricked.includes(house)) continue;
-        STATE.tricked.push(house);
-        if (STATE.blockHtml.match(RegExp(`whichhouse=${house}>[^>]*?house_d`))) {
+        if (CandyState.tricked.includes(house)) continue;
+        CandyState.tricked.push(house);
+        if (CandyState.blockHtml.match(RegExp(`whichhouse=${house}>[^>]*?house_d`))) {
           visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
           do {
             runCombat();
@@ -50,14 +50,14 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
   {
     name: "Reset Block",
     completed: (): boolean => {
-      STATE.refreshBlock();
-      return STATE.blockHtml.includes("whichhouse=");
+      CandyState.refreshBlock();
+      return CandyState.blockHtml.includes("whichhouse=");
     },
     ready: () => myAdventures() >= 5,
     do: (): void => {
       visitUrl("choice.php?whichchoice=804&pwd&option=1");
-      STATE.resetBlock();
-      if (!STATE.blockHtml.includes("whichhouse="))
+      CandyState.resetBlock();
+      if (!CandyState.blockHtml.includes("whichhouse="))
         abort("Something went awry when finding a new block!");
     },
     tricktreat: true,

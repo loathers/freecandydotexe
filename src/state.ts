@@ -39,5 +39,5 @@ class CandyStateHandler {
   }
 }
 
-const STATE = new CandyStateHandler();
-export default STATE;
+const CandyState = new CandyStateHandler();
+export default CandyState;
