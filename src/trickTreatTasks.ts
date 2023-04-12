@@ -24,7 +24,6 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       }
       CandyState.treated = true;
     },
-    tricktreat: true,
   },
   {
     name: "Trick",
@@ -45,7 +44,6 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     },
     outfit: trickOutfit,
     combat: new CandyStrategy(),
-    tricktreat: true,
   },
   {
     name: "Reset Block",
@@ -60,8 +58,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       if (!CandyState.blockHtml.includes("whichhouse="))
         abort("Something went awry when finding a new block!");
     },
-    tricktreat: true,
   },
-];
+].map((task) => ({ ...task, tricktreat: true }));
 
 export default TRICK_TREAT_TASKS;
