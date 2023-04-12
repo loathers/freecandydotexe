@@ -5,6 +5,7 @@ import {
   historicalAge,
   historicalPrice,
   Item,
+  myAdventures,
   myHp,
   myMaxhp,
   myMaxmp,
@@ -13,7 +14,7 @@ import {
   restoreHp,
   restoreMp,
 } from "kolmafia";
-import { $item, get, getSaleValue, have, sum } from "libram";
+import { $item, get, getSaleValue, have, SourceTerminal, sum } from "libram";
 import { isDarkMode } from "kolmafia";
 import { Task } from "grimoire-kolmafia";
 
@@ -61,3 +62,15 @@ export function getHistoricalSaleValue(...items: Item[]): number {
 }
 
 export const today = Date.now() - gametimeToInt() - 1000 * 60 * 3.5;
+
+export function shouldRedigitize(): boolean {
+  if (!SourceTerminal.have()) return false;
+  return (
+    myAdventures() * 1.1 <
+    (SourceTerminal.getDigitizeUsesRemaining()) *
+      (5 *
+        (get("_sourceTerminalDigitizeMonsterCount") *
+          (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
+        3)
+  );
+}

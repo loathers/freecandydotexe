@@ -32,11 +32,12 @@ import {
   JuneCleaver,
   questStep,
   set,
+  SourceTerminal,
   TrainSet,
   tryFindFreeRun,
   withProperty,
 } from "libram";
-import { CandyTask } from "./lib";
+import { CandyTask, shouldRedigitize } from "./lib";
 import { drunkSafeWander, wanderWhere } from "./wanderer";
 import {
   bestAutumnatonLocation,
@@ -48,6 +49,7 @@ import {
 import CandyEngine from "./engine";
 import { combatOutfit, digitizeOutfit } from "./outfit";
 import { Outfit } from "grimoire-kolmafia";
+import { CandyStrategy, Macro } from "./combat";
 
 const MARKET_QUESTS = [
   { pref: "questM23Meatsmith", url: "shop.php?whichshop=meatsmith&action=talk" },
@@ -143,15 +145,26 @@ const GLOBAL_TASKS: CandyTask[] = [
       }),
     choices: juneCleaverChoices,
     outfit: { weapon: $item`June cleaver` },
+    combat: new CandyStrategy(Macro.abort()),
+  },
+  {
+    name: "Terminal Skills",
+    ready: () => SourceTerminal.have(),
+    completed: () => SourceTerminal.isCurrentSkill([$skill`Extract`, $skill`Duplicate`]),
+    do: () => SourceTerminal.educate([$skill`Extract`, $skill`Duplicate`]),
   },
   {
     name: "Proton Ghost",
     completed: () => get("questPAGhost") === "unstarted",
-    ready: () =>
-      have($item`protonic accelerator pack`) &&
-      !!get("ghostLocation"),
+    ready: () => have($item`protonic accelerator pack`) && !!get("ghostLocation"),
     do: () => get("ghostLocation") ?? abort("Failed to find proper ghost location"),
     outfit: () => combatOutfit({ back: $item`protonic accelerator pack` }),
+    combat: new CandyStrategy(() =>
+      Macro.trySkill($skill`Shoot Ghost`)
+        .trySkill($skill`Shoot Ghost`)
+        .trySkill($skill`Shoot Ghost`)
+        .trySkill($skill`Trap Ghost`)
+    ),
   },
   {
     name: "Vote Wanderer",
@@ -162,14 +175,18 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => drunkSafeWander("wanderer"),
     completed: () => get("lastVoteMonsterTurn") === totalTurnsPlayed(),
     outfit: () => combatOutfit({ acc1: $item`"I Voted!" sticker` }),
+    combat: new CandyStrategy(),
   },
   {
     name: "Digitize Wanderer",
     completed: () => Counter.get("Digitize") > 0,
     do: () => drunkSafeWander("wanderer"),
+    prepare: () =>
+      shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
     post: () =>
       get("_sourceTerminalDigitizeMonsterCount") || (CandyEngine.digitizeInitialized = false),
     outfit: digitizeOutfit,
+    combat: new CandyStrategy(() => Macro.redigitize().default()),
   },
   {
     name: "Void Monster",
@@ -178,6 +195,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => drunkSafeWander("wanderer"),
     sobriety: "sober",
     outfit: () => combatOutfit({ offhand: $item`cursed magnifying glass` }),
+    combat: new CandyStrategy(),
   },
   {
     name: "Kramco",
@@ -187,6 +205,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: () => combatOutfit({ offhand: $item`Kramco Sausage-o-Matic™` }),
+    combat: new CandyStrategy(),
   },
   {
     name: "Yellow Ray: Fondeluge",
@@ -196,6 +215,11 @@ const GLOBAL_TASKS: CandyTask[] = [
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: combatOutfit,
+    combat: new CandyStrategy(() =>
+      Macro.tryHaveSkill($skill`Duplicate`)
+        .trySkill($skill`Fondeluge`)
+        .abort()
+    ),
   },
   {
     name: "Yellow Ray: Jurassic Parka",
@@ -205,6 +229,11 @@ const GLOBAL_TASKS: CandyTask[] = [
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: () => combatOutfit({ shirt: $item`Jurassic Parka`, modes: { parka: "dilophosaur" } }),
+    combat: new CandyStrategy(() =>
+      Macro.tryHaveSkill($skill`Duplicate`)
+        .trySkill($skill`Spit jurassic acid`)
+        .abort()
+    ),
   },
   {
     name: "Free-for-All",
@@ -214,6 +243,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: combatOutfit,
+    combat: new CandyStrategy(Macro.skill($skill`Free-For-All`)),
   },
   {
     name: "Nemesis Assassin",
@@ -221,6 +251,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => wanderWhere("wanderer"),
     canInitializeDigitize: true,
     outfit: combatOutfit,
+    combat: new CandyStrategy(),
   },
   {
     name: "Initialize Digitize",
@@ -256,6 +287,7 @@ const GLOBAL_TASKS: CandyTask[] = [
       }
       return combatOutfit(outfit.spec());
     },
+    combat: new CandyStrategy(() => Macro.step(CandyEngine.runSource?.macro ?? Macro.abort())),
   },
 ];
 

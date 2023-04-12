@@ -2,6 +2,7 @@ import { abort, inMultiFight, myAdventures, runChoice, runCombat, visitUrl } fro
 import CandyEngine from "./engine";
 import { treatOutfit, trickOutfit } from "./outfit";
 import { CandyTask } from "./lib";
+import { CandyStrategy } from "./combat";
 
 const HOUSE_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
@@ -43,6 +44,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       abort("We thought we had more blocks to trick, but we didn't!");
     },
     outfit: trickOutfit,
+    combat: new CandyStrategy(),
   },
   {
     name: "Reset Block",
