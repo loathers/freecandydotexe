@@ -67,7 +67,7 @@ export function shouldRedigitize(): boolean {
   if (!SourceTerminal.have()) return false;
   return (
     myAdventures() * 1.1 <
-    (SourceTerminal.getDigitizeUsesRemaining()) *
+    SourceTerminal.getDigitizeUsesRemaining() *
       (5 *
         (get("_sourceTerminalDigitizeMonsterCount") *
           (1 + get("_sourceTerminalDigitizeMonsterCount"))) -
