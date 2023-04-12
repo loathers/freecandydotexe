@@ -44,7 +44,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     ready: () => !treated,
     completed: () => !getBlockHtml().match(/whichhouse=\d*>[^>]*?house_l/),
     outfit: treatOutfit,
-    prepare: () => ensureInHalloween(),
+    prepare: ensureInHalloween,
     do: (): void => {
       for (const house of HOUSE_NUMBERS) {
         if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?house_l`))) {
