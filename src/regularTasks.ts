@@ -172,7 +172,7 @@ const GLOBAL_TASKS: CandyTask[] = [
       have($item`"I Voted!" sticker`) &&
       totalTurnsPlayed() % 11 === 1 &&
       get("_voteFreeFights") < 3,
-    do: () => drunkSafeWander("wanderer"),
+    do: () => adv1(drunkSafeWander("wanderer"), -1, ""),
     completed: () => get("lastVoteMonsterTurn") === totalTurnsPlayed(),
     outfit: () => combatOutfit({ acc1: $item`"I Voted!" sticker` }),
     combat: new CandyStrategy(),
@@ -180,7 +180,7 @@ const GLOBAL_TASKS: CandyTask[] = [
   {
     name: "Digitize Wanderer",
     completed: () => Counter.get("Digitize") > 0,
-    do: () => drunkSafeWander("wanderer"),
+    do: () => adv1(drunkSafeWander("wanderer"), -1, ""),
     prepare: () =>
       shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
     post: () =>
@@ -192,7 +192,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Void Monster",
     ready: () => have($item`cursed magnifying glass`) && get("cursedMagnifyingGlassCount") === 13,
     completed: () => get("_voidFreeFights") >= 5,
-    do: () => drunkSafeWander("wanderer"),
+    do: () => adv1(drunkSafeWander("wanderer"), -1, ""),
     sobriety: "sober",
     outfit: () => combatOutfit({ offhand: $item`cursed magnifying glass` }),
     combat: new CandyStrategy(),
@@ -201,7 +201,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Kramco",
     ready: () => have($item`Kramco Sausage-o-Matic™`),
     completed: () => getKramcoWandererChance() < 1,
-    do: () => wanderWhere("wanderer"),
+    do: () => adv1(wanderWhere("wanderer"), -1, ""),
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: () => combatOutfit({ offhand: $item`Kramco Sausage-o-Matic™` }),
@@ -211,7 +211,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Yellow Ray: Fondeluge",
     ready: () => have($skill`Fondeluge`),
     completed: () => have($effect`Everything Looks Yellow`),
-    do: () => wanderWhere("yellow ray"),
+    do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: combatOutfit,
@@ -225,7 +225,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Yellow Ray: Jurassic Parka",
     ready: () => have($item`Jurassic Parka`) && have($skill`Torso Awareness`),
     completed: () => have($effect`Everything Looks Yellow`),
-    do: () => wanderWhere("yellow ray"),
+    do: () => adv1(wanderWhere("yellow ray"), -1, ""),
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: () => combatOutfit({ shirt: $item`Jurassic Parka`, modes: { parka: "dilophosaur" } }),
@@ -239,7 +239,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Free-for-All",
     ready: () => have($skill`Free-For-All`),
     completed: () => have($effect`Everything Looks Red`),
-    do: () => wanderWhere("backup"),
+    do: () => adv1(wanderWhere("backup"), -1, ""),
     sobriety: "sober",
     canInitializeDigitize: true,
     outfit: combatOutfit,
@@ -248,7 +248,7 @@ const GLOBAL_TASKS: CandyTask[] = [
   {
     name: "Nemesis Assassin",
     completed: () => Counter.get("Nemesis Assassin window end") > 0,
-    do: () => wanderWhere("wanderer"),
+    do: () => adv1(wanderWhere("wanderer"), -1, ""),
     canInitializeDigitize: true,
     outfit: combatOutfit,
     combat: new CandyStrategy(),

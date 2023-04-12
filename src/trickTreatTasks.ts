@@ -4,7 +4,7 @@ import { treatOutfit, trickOutfit } from "./outfit";
 import { CandyTask } from "./lib";
 import { CandyStrategy } from "./combat";
 
-const HOUSE_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+const HOUSE_NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 const TRICK_TREAT_TASKS: CandyTask[] = [
   {
@@ -24,6 +24,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       }
       CandyEngine.treated = true;
     },
+    tricktreat: true,
   },
   {
     name: "Trick",
@@ -41,14 +42,17 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
           return;
         }
       }
-      abort("We thought we had more blocks to trick, but we didn't!");
     },
     outfit: trickOutfit,
     combat: new CandyStrategy(),
+    tricktreat: true,
   },
   {
     name: "Reset Block",
-    completed: () => CandyEngine.blockHtml.includes("whichhouse="),
+    completed: (): boolean => {
+      CandyEngine.refreshBlock();
+      return CandyEngine.blockHtml.includes("whichhouse=");
+    },
     ready: () => myAdventures() >= 5,
     do: (): void => {
       visitUrl("choice.php?whichchoice=804&pwd&option=1");
@@ -56,6 +60,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
       if (!CandyEngine.blockHtml.includes("whichhouse="))
         abort("Something went awry when finding a new block!");
     },
+    tricktreat: true,
   },
 ];
 

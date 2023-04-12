@@ -9,7 +9,7 @@ import {
   xpath,
 } from "kolmafia";
 import { CandyTask } from "./lib";
-import { $familiar, $item, ActionSource, get, PropertiesManager } from "libram";
+import { $familiar, $item, ActionSource, get, PropertiesManager, undelay } from "libram";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   static #blockHtml = "";
@@ -79,6 +79,12 @@ export default class CandyEngine extends Engine<never, CandyTask> {
 
     if (itemAmount($item`tiny stillsuit`)) {
       equip($familiar`Mosquito`, $item`tiny stillsuit`);
+    }
+  }
+
+  setChoices(task: CandyTask, manager: PropertiesManager): void {
+    for (const [key, func] of Object.entries(task.choices ?? {})) {
+      manager.setChoice(parseInt(key), undelay(func));
     }
   }
 }
