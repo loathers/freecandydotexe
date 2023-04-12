@@ -7,7 +7,7 @@ import {
   myAdventures,
   toMonster,
 } from "kolmafia";
-import { $items, AutumnAton, get, getSaleValue, maxBy, sum } from "libram";
+import { $items, AutumnAton, flat, get, getSaleValue, maxBy, sum } from "libram";
 import { getHistoricalSaleValue } from "../lib";
 
 export function bestAutumnatonLocation(locations: Location[]): Location {
@@ -30,15 +30,12 @@ function averageAutumnatonValue(
   } else {
     const maximumDrops = slotOverride ?? AutumnAton.zoneItems();
     const acuityCutoff = 20 - (acuityOverride ?? AutumnAton.visualAcuity()) * 5;
-    const validDrops = monsters
-      .map((m) => itemDropsArray(m))
-      .flat()
-      .map(({ rate, type, drop }) => ({
-        value: !["c", "0"].includes(type) ? getHistoricalSaleValue(drop) : 0,
-        preAcuityExpectation: ["c", "0", ""].includes(type) ? (2 * rate) / 100 : 0,
-        postAcuityExpectation:
-          rate >= acuityCutoff && ["c", "0", ""].includes(type) ? (8 * rate) / 100 : 0,
-      }));
+    const validDrops = flat(monsters.map((m) => itemDropsArray(m))).map(({ rate, type, drop }) => ({
+      value: !["c", "0"].includes(type) ? getHistoricalSaleValue(drop) : 0,
+      preAcuityExpectation: ["c", "0", ""].includes(type) ? (2 * rate) / 100 : 0,
+      postAcuityExpectation:
+        rate >= acuityCutoff && ["c", "0", ""].includes(type) ? (8 * rate) / 100 : 0,
+    }));
     const overallExpectedDropQuantity = sum(
       validDrops,
       ({ preAcuityExpectation, postAcuityExpectation }) =>
