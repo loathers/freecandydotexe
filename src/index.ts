@@ -20,7 +20,7 @@ export default function main(argstring = ""): void {
     name: "hacking your system",
     completed: () =>
       myAdventures() <= 0 ||
-      !(doingNemesis || nemesisStep() < 25) ||
+      (doingNemesis && nemesisStep() >= 25) ||
       CandyEngine.blocks >= args.blocks,
     tasks: [...GLOBAL_TASKS, ...TRICK_TREAT_TASKS],
   };
