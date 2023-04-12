@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/8014761/189776285-15b3468e-6ae9-46f2-8394-f1dc6a86b658.png" alt="greenbox logo" style="width: 50%;">
 
-**freecandy.exe** is a script meant to farm the recurring [Halloween](https://kol.coldfront.net/thekolwiki/index.php/Halloween) holiday within the [Kingdom of Loathing](https://www.kingdomofloathing.com/). On Halloween, players can derive high profits by visiting the infinitely recurring trick-or-treating blockss; this script aims to run your treat-filled Halloween turns in the quickest way possible.
+**freecandy.exe** is a script meant to farm the recurring [Hallowe'en](https://kol.coldfront.net/thekolwiki/index.php/Halloween) holiday within the [Kingdom of Loathing](https://www.kingdomofloathing.com/). On Hallowe'en, players can derive high profits by visiting the infinitely recurring trick-or-treating blockss; this script aims to run your treat-filled Hallowe'en turns in the quickest way possible.
 
 To install, run the following command on an up-to-date KolMafia version:
 

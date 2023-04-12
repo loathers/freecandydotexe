@@ -38,3 +38,7 @@ With this addressed, let's outline things that this script does and does not do,
   - These include: invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, and the mummy costume. We would highly recommend purchasing one of these before running freecandy, although the script will try to equip you with the lowest-pain possible outfit you own instead, if needed.
   - It is willing to use certain two-item outfits, but it prefers not to. Because two items are worse than one.
 - **freecandy.exe will track its gains, and report them to you at the end of the day.**
+
+## TL;DR
+
+This is not very long! Not reading it is the work of a madman, and failing to read this is grounds for me calling you a "silly goose" and ignoring you if you report a bug or issue. That being said, there is one big punchy summary I would like to leave you with: **freecandy.exe is designed to do run blocks and do tasks that a reasonable person would want to complete while running blocks; it is not designed to do tasks that might occur _before_ or _after_ running blocks**. That is the great running theme of this page; I wrote freecandy because I was tired of running tricktreat.ash (a great and venerable script to which freecandy owes a debt of blood) and constantly interrupting it to fight digitized monsters, or guaranteed kramcos, or a third example. It is not intended to be an all-day script for hallowe'en.
