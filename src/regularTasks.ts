@@ -45,10 +45,10 @@ import {
   rotateTrainToOptimalCycle,
   willRotateTrainset,
 } from "./resources";
-import CandyEngine from "./engine";
 import { combatOutfit, digitizeOutfit } from "./outfit";
 import { Outfit } from "grimoire-kolmafia";
 import { CandyStrategy, Macro } from "./combat";
+import STATE from "./state";
 
 const MARKET_QUESTS = [
   { pref: "questM23Meatsmith", url: "shop.php?whichshop=meatsmith&action=talk" },
@@ -188,7 +188,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     prepare: () =>
       shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
     post: () =>
-      get("_sourceTerminalDigitizeMonsterCount") || (CandyEngine.digitizeInitialized = false),
+      get("_sourceTerminalDigitizeMonsterCount") || (STATE.digitizeInitialized = false),
     outfit: digitizeOutfit,
     combat: new CandyStrategy(() => Macro.redigitize().default()),
   },
@@ -259,17 +259,17 @@ const GLOBAL_TASKS: CandyTask[] = [
   },
   {
     name: "Initialize Digitize",
-    completed: () => CandyEngine.digitizeInitialized,
+    completed: () => STATE.digitizeInitialized,
     do: (): void => {
-      CandyEngine.runSource?.prepare();
+      STATE.runSource?.prepare();
       wanderWhere("backup");
     },
     canInitializeDigitize: true,
-    post: () => (CandyEngine.runSource = null),
+    post: () => (STATE.runSource = null),
     outfit: (): Outfit => {
-      CandyEngine.initializeRunSource();
-      const req = CandyEngine.runSource?.constraints?.equipmentRequirements?.();
-      const familiar = CandyEngine.runSource?.constraints?.familiar?.();
+      STATE.initializeRunSource();
+      const req = STATE.runSource?.constraints?.equipmentRequirements?.();
+      const familiar = STATE.runSource?.constraints?.familiar?.();
       const outfit = new Outfit();
       if (familiar) outfit.equip(familiar);
       if (req) {
@@ -282,7 +282,7 @@ const GLOBAL_TASKS: CandyTask[] = [
         Object.fromEntries(Object.entries(outfit.spec()).filter(([, value]) => value))
       );
     },
-    combat: new CandyStrategy(() => Macro.step(CandyEngine.runSource?.macro ?? Macro.abort())),
+    combat: new CandyStrategy(() => Macro.step(STATE.runSource?.macro ?? Macro.abort())),
   },
 ];
 

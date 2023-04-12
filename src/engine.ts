@@ -1,6 +1,5 @@
 import { Engine, Outfit } from "grimoire-kolmafia";
 import {
-  abort,
   equip,
   handlingChoice,
   inebrietyLimit,
@@ -14,55 +13,19 @@ import { CandyTask, printHighlight } from "./lib";
 import {
   $familiar,
   $item,
-  ActionSource,
-  ensureFreeRun,
   get,
   PropertiesManager,
   Session,
-  tryFindFreeRun,
   undelay,
 } from "libram";
 import args from "./args";
+import STATE from "./state";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
-  session: Session;
-
-  static #blockHtml = "";
-  static treated = false;
-  static tricked: number[] = [];
-  static blocks = 0;
-  static digitizeInitialized = true;
-  static runSource: ActionSource | null = null;
-  static initializeRunSource(): void {
-    const run =
-      tryFindFreeRun() ??
-      ensureFreeRun({
-        requireUnlimited: () => true,
-        noFamiliar: () => true,
-        noRequirements: () => true,
-        maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
-      });
-    if (!run) abort("Unable to find free run with which to initialize digitize!");
-    CandyEngine.runSource = run;
-  }
   static propertyManager = new PropertiesManager();
+
+  session: Session;
   aaBossFlag: number;
-
-  static get blockHtml(): string {
-    this.#blockHtml ||= visitUrl("place.php?whichplace=town&action=town_trickortreat");
-    return this.#blockHtml;
-  }
-
-  static refreshBlock(): void {
-    this.#blockHtml = visitUrl("place.php?whichplace=town&action=town_trickortreat");
-  }
-
-  static resetBlock(): void {
-    this.refreshBlock();
-    this.treated = false;
-    this.tricked = [];
-    this.blocks++;
-  }
 
   constructor(tasks: CandyTask[]) {
     super(tasks);
@@ -86,7 +49,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     useFamiliar(args.familiar);
 
     printHighlight(
-      `freecandy has run ${CandyEngine.blocks} blocks, and produced the following items:`
+      `freecandy has run ${STATE.blocks} blocks, and produced the following items:`
     );
     for (const [item, quantity] of Session.current().diff(this.session).items) {
       printHighlight(` ${item}: ${quantity}`);
@@ -104,10 +67,10 @@ export default class CandyEngine extends Engine<never, CandyTask> {
   do(task: CandyTask): void {
     if (task.tricktreat) {
       const onPage = handlingChoice() && get("lastChoice") === "804";
-      if (!onPage) CandyEngine.refreshBlock();
+      if (!onPage) STATE.refreshBlock();
     }
     super.do(task);
-    if (task.canInitializeDigitize) CandyEngine.digitizeInitialized = true;
+    if (task.canInitializeDigitize) STATE.digitizeInitialized = true;
   }
 
   dress(task: CandyTask, outfit: Outfit): void {
