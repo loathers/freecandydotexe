@@ -45,8 +45,6 @@ export function printError(message: string): void {
 
 export type CandyTask = Task & {
   sobriety?: "sober" | "drunk";
-  tricktreat?: boolean;
-  canInitializeDigitize?: boolean;
 };
 
 export function getHistoricalSaleValue(...items: Item[]): number {
