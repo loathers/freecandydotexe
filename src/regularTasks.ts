@@ -66,17 +66,18 @@ function digitizeInitialized() {
 
 let runSource: ActionSource | null = null;
 
-function initializeRunSource(): void {
-  const run =
-    tryFindFreeRun() ??
-    ensureFreeRun({
-      requireUnlimited: () => true,
-      noFamiliar: () => true,
-      noRequirements: () => true,
-      maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
-    });
-  if (!run) abort("Unable to find free run with which to initialize digitize!");
-  runSource = run;
+function getRunSource(): ActionSource {
+  if (!runSource)
+    runSource =
+      tryFindFreeRun() ??
+      ensureFreeRun({
+        requireUnlimited: () => true,
+        noFamiliar: () => true,
+        noRequirements: () => true,
+        maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
+      });
+  if (!runSource) abort("Unable to find free run with which to initialize digitize!");
+  return runSource;
 }
 
 const GLOBAL_TASKS: CandyTask[] = [
@@ -283,7 +284,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     name: "Initialize Digitize",
     completed: () => _digitizeInitialized,
     do: (): void => {
-      runSource?.prepare();
+      getRunSource()?.prepare();
       wanderWhere("backup");
     },
     post: (): void => {
@@ -291,9 +292,9 @@ const GLOBAL_TASKS: CandyTask[] = [
       runSource = null;
     },
     outfit: (): Outfit => {
-      initializeRunSource();
-      const req = runSource?.constraints?.equipmentRequirements?.();
-      const familiar = runSource?.constraints?.familiar?.();
+      const run = getRunSource();
+      const req = run?.constraints?.equipmentRequirements?.();
+      const familiar = run?.constraints?.familiar?.();
       const outfit = new Outfit();
       if (familiar) outfit.equip(familiar);
       if (req) {
@@ -306,7 +307,7 @@ const GLOBAL_TASKS: CandyTask[] = [
         Object.fromEntries(Object.entries(outfit.spec()).filter(([, value]) => value))
       );
     },
-    combat: new CandyStrategy(() => Macro.step(runSource?.macro ?? Macro.abort())),
+    combat: new CandyStrategy(() => Macro.step(getRunSource()?.macro ?? Macro.abort())),
   },
 ];
 
