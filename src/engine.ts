@@ -3,6 +3,7 @@ import {
   equip,
   inebrietyLimit,
   itemAmount,
+  lastChoice,
   myInebriety,
   useFamiliar,
   visitUrl,
