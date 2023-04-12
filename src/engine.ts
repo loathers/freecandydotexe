@@ -61,6 +61,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
     }
   }
 
+  // I have no idea why this is necessary but it is.
   setChoices(task: CandyTask, manager: PropertiesManager): void {
     for (const [key, func] of Object.entries(task.choices ?? {})) {
       manager.setChoice(parseInt(key), undelay(func));
