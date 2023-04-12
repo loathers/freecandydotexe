@@ -9,11 +9,13 @@ import {
   visitUrl,
   xpath,
 } from "kolmafia";
-import { CandyTask } from "./lib";
-import { $familiar, $item, ActionSource, get, PropertiesManager, undelay } from "libram";
+import { CandyTask, printHighlight } from "./lib";
+import { $familiar, $item, ActionSource, get, PropertiesManager, Session, undelay } from "libram";
 import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
+  session: Session;
+
   static #blockHtml = "";
   static treated = false;
   static tricked: number[] = [];
@@ -49,6 +51,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
         ? 1
         : 0;
     this.propertyManager = CandyEngine.propertyManager;
+    this.session = Session.current();
   }
 
   destruct(): void {
@@ -58,6 +61,10 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       true
     );
     useFamiliar(args.familiar);
+    printHighlight("Session Results:");
+    for (const [item, quantity] of Session.current().diff(this.session).items) {
+      printHighlight(` ${item}: ${quantity}`);
+    }
   }
 
   available(task: CandyTask): boolean {
