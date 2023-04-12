@@ -388,6 +388,17 @@ let askedAboutTwoPiece = false;
 const trickHats = $items`invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume`;
 const twoPieces = ["Eldritch Equipage", "Bugbear Costume", "Filthy Hippy Disguise"];
 export function trickOutfit(): Outfit {
+  if (args.trickOutfit) {
+    const outfit = new Outfit();
+    outfit.equip(args.familiar);
+    for (const piece of outfitPieces(args.trickOutfit)) {
+      if (!outfit.equip(piece)) {
+        abort(`Failed to equip ${piece} from trick outfit ${args.trickOutfit}`);
+      }
+    }
+    return outfit;
+  }
+
   if (!trickHats.some((hat) => have(hat))) {
     buy(1, maxBy(trickHats, mallPrice, true));
   }
