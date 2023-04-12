@@ -5,7 +5,7 @@ import {
   Location,
   toMonster,
 } from "kolmafia";
-import { maxBy, sum } from "libram";
+import { maxBy, SourceTerminal, sum } from "libram";
 import {
   canAdventureOrUnlock,
   canWander,
@@ -23,13 +23,21 @@ function averageYrValue(location: Location) {
     .map((m) => toMonster(m))
     .filter((m) => !badAttributes.some((s) => m.attributes.includes(s)) && rates[m.name] > 0);
 
+  const canDuplicate = SourceTerminal.have() && SourceTerminal.duplicateUsesRemaining() > 0;
   if (monsters.length === 0) {
     return 0;
   } else {
     return (
       sum(monsters, (m) => {
         const items = itemDropsArray(m).filter((drop) => ["", "n"].includes(drop.type));
-        return sum(items, ({ drop }) => 0.9 * getHistoricalSaleValue(drop));
+        const duplicateFactor = canDuplicate && !m.attributes.includes("NOCOPY") ? 2 : 1;
+        return (
+          duplicateFactor *
+          sum(items, (drop) => {
+            const yrRate = (drop.type === "" ? 100 : drop.rate) / 100;
+            return yrRate * getHistoricalSaleValue(drop.drop);
+          })
+        );
       }) / monsters.length
     );
   }
@@ -65,7 +73,7 @@ export function yellowRayFactory(
     }
     if (bestZones.size > 0) {
       return [...bestZones].map(
-        (l) => new WandererTarget(`Yellow Ray ${l}`, l, locationValues.get(l) ?? 0)
+        (l: Location) => new WandererTarget(`Yellow Ray ${l}`, l, locationValues.get(l) ?? 0)
       );
     }
   }
