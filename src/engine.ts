@@ -5,11 +5,13 @@ import {
   inebrietyLimit,
   itemAmount,
   myInebriety,
+  useFamiliar,
   visitUrl,
   xpath,
 } from "kolmafia";
 import { CandyTask } from "./lib";
 import { $familiar, $item, ActionSource, get, PropertiesManager, undelay } from "libram";
+import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
   static #blockHtml = "";
@@ -55,6 +57,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       `account.php?actions[]=flag_aabosses&flag_aabosses=${this.aaBossFlag}&action=Update`,
       true
     );
+    useFamiliar(args.familiar);
   }
 
   available(task: CandyTask): boolean {
