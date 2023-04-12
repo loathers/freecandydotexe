@@ -61,7 +61,10 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       true
     );
     useFamiliar(args.familiar);
-    printHighlight("Session Results:");
+
+    printHighlight(
+      `freecandy has run ${CandyEngine.blocks} blocks, and produced the following items:`
+    );
     for (const [item, quantity] of Session.current().diff(this.session).items) {
       printHighlight(` ${item}: ${quantity}`);
     }
