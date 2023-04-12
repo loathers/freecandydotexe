@@ -5,7 +5,7 @@ import { CandyTask } from "./lib";
 import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
 import TRICK_TREAT_TASKS from "./trickTreatTasks";
-import { myAdventures } from "kolmafia";
+import { myAdventures, print } from "kolmafia";
 import CandyState from "./state";
 
 export default function main(argstring = ""): void {
@@ -17,12 +17,34 @@ export default function main(argstring = ""): void {
 
   const nemesisStep = () => questStep("questG04Nemesis");
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
+
+  const noMoreAdventures = () => {
+    if (myAdventures() <= 0) {
+      print("Out of adventures! Stopping.", "red");
+      return true;
+    }
+    return false;
+  };
+
+  const doneWithNemesis = () => {
+    if (doingNemesis && nemesisStep() >= 25) {
+      print("Fought the final nemesis wanderer! Stopping.", "red");
+      return true;
+    }
+    return false;
+  };
+
+  const doneWithBlocks = () => {
+    if (CandyState.blocks >= args.blocks) {
+      print(`Finished ${args.blocks} blocks!`, "red");
+      return true;
+    }
+    return false;
+  };
+
   const quest: Quest<CandyTask> = {
     name: "hacking your system",
-    completed: () =>
-      myAdventures() <= 0 ||
-      (doingNemesis && nemesisStep() >= 25) ||
-      CandyState.blocks >= args.blocks,
+    completed: () => noMoreAdventures() || doneWithNemesis() || doneWithBlocks(),
     tasks: [...GLOBAL_TASKS, ...TRICK_TREAT_TASKS],
   };
 
