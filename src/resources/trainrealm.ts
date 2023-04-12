@@ -1,5 +1,5 @@
 import { getHistoricalSaleValue, today } from "../lib";
-import { $item, $items, get, getSaleValue, maxBy, set, sum, TrainSet } from "libram";
+import { $item, $items, arrayEquals, get, getSaleValue, maxBy, set, sum, TrainSet } from "libram";
 
 const TRAIN_CANDIES = [
   $item`cotton candy bale`,
@@ -139,5 +139,10 @@ export function rotateTrainToOptimalCycle(): boolean {
 }
 
 export function willRotateTrainset(): boolean {
-  return !get("trainsetConfiguration") || !getPrioritizedStations().includes(TrainSet.next());
+  return (
+    TrainSet.canConfigure() &&
+    (!get("trainsetConfiguration") ||
+      (!getPrioritizedStations().includes(TrainSet.next()) &&
+        !arrayEquals(getRotatedCycle(), TrainSet.cycle())))
+  );
 }
