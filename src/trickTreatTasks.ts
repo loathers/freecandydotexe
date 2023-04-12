@@ -48,8 +48,10 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     do: (): void => {
       for (const house of HOUSE_NUMBERS) {
         if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?house_l`))) {
+          tricked.push(house);
           visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
         } else if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?starhouse`))) {
+          tricked.push(house);
           visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
           runChoice(2);
           refreshBlock();
@@ -74,6 +76,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
           } while (inMultiFight());
           return;
         }
+        abort("We thought there were unvisited trickable houses left, but alas! there are not!");
       }
     },
     outfit: trickOutfit,
