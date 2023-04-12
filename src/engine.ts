@@ -4,13 +4,14 @@ import {
   handlingChoice,
   inebrietyLimit,
   itemAmount,
+  lastChoice,
   myInebriety,
   useFamiliar,
   visitUrl,
   xpath,
 } from "kolmafia";
 import { CandyTask, printHighlight } from "./lib";
-import { $familiar, $item, get, PropertiesManager, Session, undelay } from "libram";
+import { $familiar, $item, PropertiesManager, Session, undelay } from "libram";
 import args from "./args";
 import CandyState from "./state";
 
@@ -59,7 +60,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
 
   do(task: CandyTask): void {
     if (task.tricktreat) {
-      const onPage = handlingChoice() && get("lastChoice") === "804";
+      const onPage = handlingChoice() && lastChoice() === 804;
       if (!onPage) CandyState.refreshBlock();
     }
     super.do(task);
