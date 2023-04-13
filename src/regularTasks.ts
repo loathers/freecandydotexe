@@ -24,6 +24,7 @@ import {
   $familiar,
   $item,
   $location,
+  $phylum,
   $skill,
   ActionSource,
   AutumnAton,
@@ -35,6 +36,7 @@ import {
   JuneCleaver,
   questStep,
   set,
+  Snapper,
   SourceTerminal,
   TrainSet,
   tryFindFreeRun,
@@ -53,6 +55,7 @@ import {
 import { combatOutfit, digitizeOutfit } from "./outfit";
 import { Outfit } from "grimoire-kolmafia";
 import { CandyStrategy, Macro } from "./combat";
+import args from "./args";
 
 const MARKET_QUESTS = [
   { pref: "questM23Meatsmith", url: "shop.php?whichshop=meatsmith&action=talk" },
@@ -171,6 +174,12 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () => TrainSet.installed(),
     completed: () => !willRotateTrainset(),
     do: rotateTrainToOptimalCycle,
+  },
+  {
+    name: "Tune Snapper",
+    ready: () => args.familiar === $familiar`Red-Nosed Snapper`,
+    completed: () => Snapper.getTrackedPhylum() === $phylum`dude`,
+    do: () => Snapper.trackPhylum($phylum`dude`),
   },
   {
     name: "June Cleaver",
