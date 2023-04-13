@@ -1,8 +1,8 @@
 import { Item, Location } from "kolmafia";
 import { $item, $location, get, getSaleValue } from "libram";
-import { realmAvailable, WandererTarget } from "./lib";
+import { realmAvailable, RealmType, WandererTarget } from "./lib";
 
-type LovebugTarget = { element: string; location: Location; target: Item; cost: number };
+type LovebugTarget = { element: RealmType; location: Location; target: Item; cost: number };
 const LovebugTargets: LovebugTarget[] = [
   {
     element: "cold",

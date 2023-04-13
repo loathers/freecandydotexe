@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source
-# code across multiple Node.js versions, and lint the project.
-
 name: Build & Lint
 
 on:
@@ -8,72 +5,69 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 env:
-  # Default version of Node.js for jobs
-  node-version: "12"
+  node-version: "18"
+  path: "KoLmafia" # The directory where your assets are generated, should match build.mjs
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: ["12", "14", "16"]
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: yarn install --frozen-lockfile
-      - run: yarn run build
-      #- run: yarn run test TODO: Readd once we have tests
+          node-version: ${{ env.node-version }}
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn run build
 
   lint:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
-      - run: yarn install --frozen-lockfile
-      - run: yarn run lint
 
-  build:
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: ESLint & Prettier
+        run: yarn run lint
+
+  push:
     runs-on: ubuntu-latest
     needs: [test, lint]
     if: github.ref == 'refs/heads/main'
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Use Node.js ${{ env.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ env.node-version }}
-      - run: |
-          git config user.name "Gh.O.S.T."
-          git config user.email "<>"
-      - run: |
-          cp -R mafia mafiafiles
-      - run: yarn install --frozen-lockfile
-      - run: yarn run build
-      - run: |
-          git fetch --all
-          git switch release
-          rm -r scripts/
-          rm -r ccs/
-          mv mafiafiles/ccs ./ccs
-          mv mafiafiles/dependencies.txt dependencies.txt
-          mv KoLmafia/scripts scripts
-      - run: |
-          git add scripts/
-          git add ccs/
-          git add dependencies.txt
-          {
-            git commit -m "${{github.event.commits[0].message}}"
-            git push origin release
-          } || exit 0
+
+      - name: Install Dependencies
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn run build
+
+      - name: Push to Release
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: release
+          FOLDER: ${{ env.path }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build: ({sha}) {msg}"
+          SKIP_EMPTY_COMMITS: true

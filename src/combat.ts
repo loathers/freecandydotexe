@@ -1,7 +1,21 @@
-import { $item, $items, $skill, have, SourceTerminal, StrictMacro } from "libram";
+import {
+  $familiars,
+  $item,
+  $items,
+  $monster,
+  $skill,
+  $skills,
+  Delayed,
+  have,
+  SourceTerminal,
+  StrictMacro,
+} from "libram";
 import { Item, Skill } from "kolmafia";
+import { CombatStrategy } from "grimoire-kolmafia";
+import { shouldRedigitize } from "./lib";
+import args from "./args";
 
-export default class Macro extends StrictMacro {
+export class Macro extends StrictMacro {
   tryHaveSkill(skill: Skill | null): Macro {
     if (!skill) return this;
     return this.externalIf(have(skill), Macro.trySkill(skill));
@@ -35,11 +49,10 @@ export default class Macro extends StrictMacro {
   }
 
   stasisItem(): Macro {
-    const spammableItem = $items`dictionary, facsimile dictionary, spices, seal tooth`.find(
-      (item) => have(item)
-    );
-    if (spammableItem) return Macro.item(spammableItem);
-    return Macro.item($item`seal tooth`);
+    const spammableItem =
+      $items`dictionary, facsimile dictionary, spices`.find((item) => have(item)) ??
+      $item`seal tooth`;
+    return Macro.item(spammableItem);
   }
 
   static stasisItem(): Macro {
@@ -90,5 +103,39 @@ export default class Macro extends StrictMacro {
 
   static stasis(): Macro {
     return new Macro().stasis();
+  }
+
+  redigitize(): Macro {
+    return this.externalIf(shouldRedigitize(), Macro.trySkill($skill`Digitize`));
+  }
+
+  static redigitize(): Macro {
+    return new Macro().redigitize();
+  }
+
+  default(): Macro {
+    return this.if_($monster`All-Hallow's Steve`, Macro.abort())
+      .externalIf(
+        $familiars`Stocking Mimic, Ninja Pirate Zombie Robot, Comma Chameleon, Feather Boa Constrictor, Cocoabo`.includes(
+          args.familiar
+        ),
+        Macro.stasis(),
+        Macro.try([
+          ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
+          $item`porquoise-handled sixgun`,
+        ]).externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
+      )
+      .kill();
+  }
+
+  static default(): Macro {
+    return new Macro().default();
+  }
+}
+
+export class CandyStrategy extends CombatStrategy {
+  constructor(macro: Delayed<Macro> = () => Macro.default()) {
+    super();
+    this.autoattack(macro).macro(macro);
   }
 }
