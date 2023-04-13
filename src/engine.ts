@@ -9,7 +9,7 @@ import {
   xpath,
 } from "kolmafia";
 import { CandyTask, printHighlight, State } from "./lib";
-import { $familiar, $item, PropertiesManager, Session, undelay } from "libram";
+import { $familiar, $item, PropertiesManager, Session } from "libram";
 import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
@@ -58,13 +58,6 @@ export default class CandyEngine extends Engine<never, CandyTask> {
 
     if (itemAmount($item`tiny stillsuit`)) {
       equip($familiar`Mosquito`, $item`tiny stillsuit`);
-    }
-  }
-
-  // I have no idea why this is necessary but it is.
-  setChoices(task: CandyTask, manager: PropertiesManager): void {
-    for (const [key, func] of Object.entries(task.choices ?? {})) {
-      manager.setChoice(parseInt(key), undelay(func));
     }
   }
 }
