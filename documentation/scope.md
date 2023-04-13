@@ -23,6 +23,7 @@ With this addressed, let's outline things that this script does and does not do,
 - **freecandy.exe will not cast or recast buffs.**
   - We would recommend you utilize mafia's [mood architecture](https://wiki.kolmafia.us/index.php/Mood) if you would like mafia to recast buffs while using freecandy.
 - **freecandy.exe will not work at all if you leave your items in Hagnks.**
+- **freecandy.exe will not work well (or possibly at all) if mafia has an incorrect image of your character-state, which can be caused by playing KoL outside of mafia, or by playing KoL in a different mafia installation.**
 
 ## In-Scope
 

@@ -46,6 +46,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     outfit: treatOutfit,
     prepare: ensureInHalloween,
     do: (): void => {
+      // We do all treat houses in a row as one task for speed reasons
       for (const house of HOUSE_NUMBERS) {
         if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?house_l`))) {
           tricked.push(house);
@@ -66,6 +67,7 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
     completed: () => !getBlockHtml().match(/whichhouse=\d*>[^>]*?house_d/),
     prepare: ensureInHalloween,
     do: (): void => {
+      // We return after doing one combat because combats change character-state enough we want to go through our non-hallowe'en tasks agaijn
       for (const house of HOUSE_NUMBERS) {
         if (tricked.includes(house)) continue;
         tricked.push(house);
