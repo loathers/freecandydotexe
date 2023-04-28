@@ -4,12 +4,16 @@ import {
   inebrietyLimit,
   itemAmount,
   myInebriety,
+  myMaxhp,
+  myMaxmp,
+  restoreHp,
+  restoreMp,
   useFamiliar,
   visitUrl,
   xpath,
 } from "kolmafia";
 import { CandyTask, printHighlight, State } from "./lib";
-import { $familiar, $item, PropertiesManager, Session } from "libram";
+import { $familiar, $item, clamp, PropertiesManager, Session } from "libram";
 import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
@@ -58,6 +62,17 @@ export default class CandyEngine extends Engine<never, CandyTask> {
 
     if (itemAmount($item`tiny stillsuit`)) {
       equip($familiar`Mosquito`, $item`tiny stillsuit`);
+    }
+  }
+
+  prepare(task: CandyTask): void {
+    super.prepare(task);
+
+    if ("combat" in task) {
+      const hpTarget = clamp(0.4 * myMaxhp(), 200, 2000);
+      restoreHp(hpTarget);
+      const mpTarget = Math.min(150, myMaxmp());
+      restoreMp(mpTarget);
     }
   }
 }
