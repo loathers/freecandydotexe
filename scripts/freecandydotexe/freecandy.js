@@ -7872,6 +7872,16 @@ var CandyEngine = /* @__PURE__ */ function(_Engine) {
     value: function(task, outfit2) {
       _get2(_getPrototypeOf4(CandyEngine2.prototype), "dress", this).call(this, task, outfit2), (0, import_kolmafia29.itemAmount)($item(_templateObject130 || (_templateObject130 = _taggedTemplateLiteral16(["tiny stillsuit"])))) && (0, import_kolmafia29.equip)($familiar(_templateObject229 || (_templateObject229 = _taggedTemplateLiteral16(["Mosquito"]))), $item(_templateObject326 || (_templateObject326 = _taggedTemplateLiteral16(["tiny stillsuit"]))));
     }
+  }, {
+    key: "prepare",
+    value: function(task) {
+      if (_get2(_getPrototypeOf4(CandyEngine2.prototype), "prepare", this).call(this, task), "combat" in task) {
+        var hpTarget = clamp(0.4 * (0, import_kolmafia29.myMaxhp)(), 200, 2e3);
+        (0, import_kolmafia29.restoreHp)(hpTarget);
+        var mpTarget = Math.min(150, (0, import_kolmafia29.myMaxmp)());
+        (0, import_kolmafia29.restoreMp)(mpTarget);
+      }
+    }
   }]), CandyEngine2;
 }(Engine);
 _defineProperty12(CandyEngine, "propertyManager", new PropertiesManager());
