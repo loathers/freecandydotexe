@@ -38,6 +38,7 @@ import {
   $slot,
   $slots,
   clamp,
+  CrownOfThrones,
   findLeprechaunMultiplier,
   get,
   getAverageAdventures,
@@ -47,16 +48,44 @@ import {
   maxBy,
   SongBoom,
   sum,
+  sumNumbers,
 } from "libram";
 import { printError, printHighlight } from "./lib";
 import { getBestPantsgivingFood, juneCleaverBonusEquip } from "./resources";
-import { chooseRider, riderValue } from "./bjorn";
 
 function treatValue(outfit: string): number {
   return sum(
     Object.entries(outfitTreats(outfit)),
     ([candyName, probability]) => probability * getSaleValue(toItem(candyName))
   );
+}
+
+function dropsValueFunction(drops: Item[] | Map<Item, number>): number {
+  return Array.isArray(drops)
+    ? getSaleValue(...drops)
+    : sum([...drops.entries()], ([item, quantity]) => quantity * getSaleValue(item)) /
+        sumNumbers([...drops.values()]);
+}
+
+function ensureBjorn(weightValue: number, meatValue = 0): CrownOfThrones.FamiliarRider {
+  const key = `weight:${weightValue.toFixed(3)};meat:${meatValue}`;
+  if (!CrownOfThrones.hasRiderMode(key)) {
+    CrownOfThrones.createRiderMode(key, {
+      dropsValueFunction,
+      modifierValueFunction: CrownOfThrones.createModifierValueFunction(
+        ["Familiar Weight", "Meat Drop"],
+        {
+          "Familiar Weight": (x) => weightValue * x,
+          "Meat Drop": (x) => meatValue * x,
+        }
+      ),
+    });
+  }
+
+  const result = CrownOfThrones.pickRider(key);
+  if (!result) abort("Failed to make sensible bjorn decision!");
+
+  return result;
 }
 
 export function getTreatOutfit(): string {
@@ -237,12 +266,18 @@ function getEffectWeight(): number {
 
 function overallAdventureValue(): number {
   const bonuses = easyBonuses();
+  const bjornChoice = ensureBjorn(0);
+  const bjornValue =
+    bjornChoice && (bjornChoice.dropPredicate?.() ?? true)
+      ? bjornChoice.probability *
+        (typeof bjornChoice.drops === "number"
+          ? bjornChoice.drops
+          : dropsValueFunction(bjornChoice.drops))
+      : 0;
   const itemAndMeatValue =
     sum(Slot.all(), (slot) => bonuses.get(equippedItem(slot)) ?? 0) +
     baseAdventureValue() +
-    (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`)
-      ? riderValue(chooseRider())
-      : 0);
+    (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`) ? bjornValue : 0);
 
   const stasisData = stasisFamiliars.get(args.familiar);
   if (stasisData) {
@@ -338,23 +373,14 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
     outfit.equip($item`protonic accelerator pack`);
   }
 
-  if (have($item`Buddy Bjorn`)) {
-    outfit.equip($item`Buddy Bjorn`);
-    outfit.bjornify(chooseRider().familiar);
-  } else if (have($item`Crown of Thrones`)) {
-    outfit.equip($item`Crown of Thrones`);
-    outfit.enthrone(chooseRider().familiar);
-  }
-
+  let weightValue = 0;
   if (!outfit.familiar) {
     abort(
       "It looks like we're about to go adventuring without a familiar, and that feels deeply wrong"
     );
   }
   if (adventureFamiliars.includes(outfit.familiar)) {
-    outfit.modifier.push(
-      `${Math.round(MAGIC_NUMBER * baseAdventureValue() * 100) / 100} Familiar Weight`
-    );
+    weightValue = Math.round(MAGIC_NUMBER * baseAdventureValue() * 100) / 100;
   } else {
     const stasisData = stasisFamiliars.get(outfit.familiar);
     if (stasisData) {
@@ -370,13 +396,26 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
         0,
         1
       );
-      const weightValue = fullRate * stasisData.meatPerLb;
-      outfit.modifier.push(`${Math.round(weightValue * 100) / 100} Familiar Weight`);
+      weightValue = fullRate * stasisData.meatPerLb;
     } else if (SongBoom.song() === "Total Eclipse of Your Meat") {
       outfit.modifier.push("0.25 Meat Drop");
     } else {
       outfit.modifier.push("0.01 Item Drop");
     }
+  }
+
+  if (weightValue) {
+    const rounded = 1000 * Math.round(weightValue / 1000);
+    outfit.modifier.push(`${rounded} Familiar Weight`);
+  }
+
+  const bjornChoice = ensureBjorn(weightValue);
+  if (have($item`Buddy Bjorn`)) {
+    outfit.equip($item`Buddy Bjorn`);
+    outfit.bjornify(bjornChoice.familiar);
+  } else if (have($item`Crown of Thrones`)) {
+    outfit.equip($item`Crown of Thrones`);
+    outfit.enthrone(bjornChoice.familiar);
   }
 
   outfit.bonuses = fullBonuses();
@@ -439,16 +478,21 @@ export function digitizeOutfit(): Outfit {
       findLeprechaunMultiplier
     );
     outfit.equip(meatFamiliar);
+    const baseMeat = 1000 + (SongBoom.song() === "Total Eclipse of Your Meat" ? 25 : 0);
 
+    const leprechaunMultiplier = findLeprechaunMultiplier(meatFamiliar);
+    const leprechaunCoefficient =
+      (baseMeat / 100) * (2 * leprechaunMultiplier + Math.sqrt(leprechaunMultiplier));
+
+    const bjornChoice = ensureBjorn(leprechaunCoefficient, baseMeat / 100);
     if (have($item`Buddy Bjorn`)) {
       outfit.equip($item`Buddy Bjorn`);
-      outfit.bjornify(chooseRider().familiar);
+      outfit.bjornify(bjornChoice.familiar);
     } else if (have($item`Crown of Thrones`)) {
       outfit.equip($item`Crown of Thrones`);
-      outfit.enthrone(chooseRider().familiar);
+      outfit.enthrone(bjornChoice.familiar);
     }
 
-    const baseMeat = 1000 + (SongBoom.song() === "Total Eclipse of Your Meat" ? 25 : 0);
     outfit.modifier.push(`${baseMeat / 100} Meat Drop`);
     outfit.modifier.push("0.72 Item Drop");
 
