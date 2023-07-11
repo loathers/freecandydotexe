@@ -62,9 +62,10 @@ let choiceAdventuresValue: number;
 export function juneCleaverBonusEquip(): Map<Item, number> {
   if (!JuneCleaver.have() || myAdventures() < get("_juneCleaverFightsLeft")) return new Map();
 
-  choiceAdventuresValue ??= sum([...JuneCleaver.choices], (choice) =>
-    valueJuneCleaverOption(juneCleaverChoiceValues[choice][bestJuneCleaverOption(choice)])
-  );
+  choiceAdventuresValue ??=
+    sum([...JuneCleaver.choices], (choice) =>
+      valueJuneCleaverOption(juneCleaverChoiceValues[choice][bestJuneCleaverOption(choice)])
+    ) / JuneCleaver.choices.length;
 
   return new Map([[JuneCleaver.cleaver, choiceAdventuresValue / JuneCleaver.getInterval()]]);
 }
