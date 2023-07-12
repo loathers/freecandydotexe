@@ -111,6 +111,23 @@ const GLOBAL_TASKS: CandyTask[] = [
     limit: { tries: 1 },
   },
   {
+    name: "Entotify Chameleon",
+    ready: () => have($familiar`Comma Chameleon`) && !have($familiar`Trick-or-Treating Tot`),
+    completed: () => get("commaFamiliar") === $familiar`Trick-or-Treating Tot`,
+    do: (): void => {
+      visitUrl(
+        `inv_equip.php?which=2&action=equip&whichitem=${$item`li'l unicorn costume`.id}&pwd`
+      );
+      visitUrl("charpane.php");
+    },
+    limit: { tries: 1 },
+    acquire: [
+      {
+        item: $item`li'l unicorn costume`,
+      },
+    ],
+  },
+  {
     name: "Ow!",
     completed: () => myHp() > 0,
     do: () => abort("Ow! I have 0 hp!"),

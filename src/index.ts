@@ -1,11 +1,11 @@
 import { Args, getTasks, Quest } from "grimoire-kolmafia";
 import args from "./args";
-import { questStep } from "libram";
+import { $item, questStep } from "libram";
 import { CandyTask, State } from "./lib";
 import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
 import TRICK_TREAT_TASKS from "./trickTreatTasks";
-import { myAdventures, print } from "kolmafia";
+import { itemAmount, myAdventures, print } from "kolmafia";
 
 export default function main(argstring = ""): void {
   Args.fill(args, argstring);
@@ -33,6 +33,15 @@ export default function main(argstring = ""): void {
     return false;
   };
 
+  const startingPrunets = itemAmount($item`Prunets`);
+  const gainedPrunets = () => {
+    if (itemAmount($item`Prunets`) > startingPrunets) {
+      print("Gained prunets! We did it!", "red");
+      return true;
+    }
+    return false;
+  };
+
   const doneWithBlocks = () => {
     if (State.blocks >= args.blocks) {
       print(`Finished ${args.blocks} blocks!`, "red");
@@ -43,7 +52,7 @@ export default function main(argstring = ""): void {
 
   const quest: Quest<CandyTask> = {
     name: "hacking your system",
-    completed: () => noMoreAdventures() || doneWithNemesis() || doneWithBlocks(),
+    completed: () => gainedPrunets() || noMoreAdventures() || doneWithNemesis() || doneWithBlocks(),
     tasks: [...GLOBAL_TASKS, ...TRICK_TREAT_TASKS],
   };
 

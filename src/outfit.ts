@@ -327,6 +327,7 @@ export function treatOutfit(): Outfit {
 
   outfit.equip($item`lucky Crimbo tiki necklace`);
   outfit.equip($familiar`Trick-or-Treating Tot`);
+  outfit.equip($familiar`Comma Chameleon`)
   return outfit;
 }
 
