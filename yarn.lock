@@ -2307,10 +2307,10 @@ graceful-fs@^4.1.11:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
-grimoire-kolmafia@^0.3.16:
-  version "0.3.16"
-  resolved "https://registry.yarnpkg.com/grimoire-kolmafia/-/grimoire-kolmafia-0.3.16.tgz#0c5373591564f12b0289f5f82495573d88335bd9"
-  integrity sha512-BN3vBAspsw3jjAV5uMrffok7IcxBVmJBOqxqpm5nXftS4+kCUnLnoVdKQwKR2PRGXVmU0FrFHdnYXxeBxedq0w==
+grimoire-kolmafia@^0.3.18:
+  version "0.3.18"
+  resolved "https://registry.yarnpkg.com/grimoire-kolmafia/-/grimoire-kolmafia-0.3.18.tgz#363e5a5ca7fcb2c81a325c51ca100236491e4e70"
+  integrity sha512-+zVTiIPlS2MTNQcBNfto1C3g0B/8L00k+1HcUd09Ui3QwoCkdyA+0owMfbWUgfZxKHgDarPOdoVcLWRN12poag==
   dependencies:
     core-js "^3.16.4"
 
@@ -2631,10 +2631,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
-kolmafia@^5.27324.0:
-  version "5.27324.0"
-  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27324.0.tgz#61f9e32b41338f49984b31da8681c1fe53bd3b31"
-  integrity sha512-hX316ZxTW6UwiMeSV//PX0KSNzcoxgy0dOiym0yTmMd5RItr7FQXEI5pGugOLIyRFcyGXRM4YPIpeiEwSRDKiQ==
+kolmafia@^5.27464.0:
+  version "5.27464.0"
+  resolved "https://registry.yarnpkg.com/kolmafia/-/kolmafia-5.27464.0.tgz#0c9089f33cbd5e66cd46ed5fd0a03dc2cdd6a8d5"
+  integrity sha512-BJ4GwriCVSTyJBPMLxzTo/JZdcD60xKMHw2m8nBA9E0oWhi305H22ZyUO7GW0Pm1MyGSU2aZP3e0Dsg5V80Z2A==
 
 levn@^0.4.1:
   version "0.4.1"
@@ -2645,9 +2645,9 @@ levn@^0.4.1:
     type-check "~0.4.0"
 
 libram@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/libram/-/libram-0.8.0.tgz#a4b6e6dc23b3f6f8fb065a157fa1578a18dc894c"
-  integrity sha512-h1w0cQwi4omc+4Id1BoDTm/Hp+wFQHKZJ5MVTyva6Rp+DyQButLEG5pLDdrMOKEQd+y4sc5hfPH8p82MIhTtqg==
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/libram/-/libram-0.8.3.tgz#4cb960a2fc5ef2b4b48a05004b1d2f325f389520"
+  integrity sha512-TL7t/BdlaQdTtfkZCS4e1bOIgqq11O6I02xdzFhVQqNqjo3SvkbaH2vTusdSmyO7aUrCFgn4daL1RpIDjsJThQ==
 
 loader-utils@^1.4.0:
   version "1.4.0"

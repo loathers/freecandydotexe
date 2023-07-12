@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "core-js": "^3.16.4",
-    "grimoire-kolmafia": "^0.3.16",
-    "kolmafia": "^5.27324.0",
+    "grimoire-kolmafia": "^0.3.18",
+    "kolmafia": "^5.27464.0",
     "libram": "^0.8.0"
   },
   "author": "loathers",
