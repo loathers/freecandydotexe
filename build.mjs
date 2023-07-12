@@ -4,7 +4,7 @@ import babel from "esbuild-plugin-babel";
 
 build({
   entryPoints: {
-    freecandy: "src/index.ts",
+    freekarma: "src/index.ts",
   },
   outdir: "KoLmafia/scripts/freecandydotexe",
   bundle: true,
