@@ -15,6 +15,7 @@ import {
   reverseNumberology,
   runChoice,
   totalTurnsPlayed,
+  use,
   useSkill,
   visitUrl,
 } from "kolmafia";
@@ -23,6 +24,7 @@ import {
   $effect,
   $familiar,
   $item,
+  $items,
   $location,
   $phylum,
   $skill,
@@ -139,6 +141,20 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () => Object.values(reverseNumberology()).includes(69) && get("skillLevel144") <= 3,
     completed: () => get("_universeCalculated") >= get("skillLevel144"),
     do: () => cliExecute("numberology 69"),
+  },
+  {
+    name: "Magical Sauasage",
+    ready: () =>
+      $items`magical sausage, magical sausage casing`.some((i) => have(i)) &&
+      $items`Kramco Sausage-o-Matic™, replica Kramco Sausage-o-Matic™`.some((i) => have(i)),
+    completed: () => get("_sausagesEaten") >= 23,
+    do: () => eat($item`magical sausage`),
+  },
+  {
+    name: "License to Chill",
+    ready: () => have($item`License to Chill`),
+    completed: () => get("_licenseToChillUsed"),
+    do: () => use($item`License to Chill`),
   },
   {
     name: "Fill Pantsgiving Fullness",
