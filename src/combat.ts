@@ -121,8 +121,8 @@ export class Macro extends StrictMacro {
         ),
         Macro.stasis(),
         Macro.try([
-          ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along`,
-          $item`porquoise-handled sixgun`,
+          ...$skills`Curse of Weaksauce, Micrometeorite, Sing Along, Bowl Straight Up`,
+          ...$items`porquoise-handled sixgun, Rain-Doh indigo cup`,
         ]).externalIf(SourceTerminal.isCurrentSkill($skill`Extract`), Macro.skill($skill`Extract`))
       )
       .kill();
