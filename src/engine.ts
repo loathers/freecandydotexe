@@ -17,7 +17,7 @@ import { $familiar, $item, clamp, PropertiesManager, Session } from "libram";
 import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
-  static propertyManager = new PropertiesManager();
+  static propertyManager: PropertiesManager | null = null;
 
   session: Session;
   aaBossFlag: number;
@@ -31,7 +31,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       )[0] === "checked"
         ? 1
         : 0;
-    this.propertyManager = CandyEngine.propertyManager;
+    CandyEngine.propertyManager = this.propertyManager;
     this.session = Session.current();
   }
 
