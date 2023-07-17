@@ -78,9 +78,9 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
           } while (inMultiFight());
           return;
         }
-        if (tricked.length < HOUSE_NUMBERS.length) {
-          abort("We thought there were unvisited trickable houses left, but alas! there are not!");
-        }
+      }
+      if (tricked.length < HOUSE_NUMBERS.length) {
+        abort("We thought there were unvisited trickable houses left, but alas! there are not!");
       }
     },
     outfit: trickOutfit,
