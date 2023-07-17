@@ -10071,7 +10071,7 @@ var TRICK_TREAT_TASKS = [{
             while ((0, import_kolmafia41.inMultiFight)());
             return;
           }
-          (0, import_kolmafia41.abort)("We thought there were unvisited trickable houses left, but alas! there are not!");
+          tricked.length < HOUSE_NUMBERS.length && (0, import_kolmafia41.abort)("We thought there were unvisited trickable houses left, but alas! there are not!");
         }
       }
     } catch (err) {
