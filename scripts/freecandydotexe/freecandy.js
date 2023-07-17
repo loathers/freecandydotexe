@@ -7747,7 +7747,7 @@ var CandyEngine = /* @__PURE__ */ function(_Engine) {
   var _super = _createSuper4(CandyEngine2);
   function CandyEngine2(tasks) {
     var _this;
-    return _classCallCheck13(this, CandyEngine2), _this = _super.call(this, tasks), _defineProperty12(_assertThisInitialized4(_this), "session", void 0), _defineProperty12(_assertThisInitialized4(_this), "aaBossFlag", void 0), _this.aaBossFlag = (0, import_kolmafia29.xpath)((0, import_kolmafia29.visitUrl)("account.php?tab=combat"), "//*[@id=\"opt_flag_aabosses\"]/label/input[@type='checkbox']@checked")[0] === "checked" ? 1 : 0, _this.propertyManager = CandyEngine2.propertyManager, _this.session = Session.current(), _this;
+    return _classCallCheck13(this, CandyEngine2), _this = _super.call(this, tasks), _defineProperty12(_assertThisInitialized4(_this), "session", void 0), _defineProperty12(_assertThisInitialized4(_this), "aaBossFlag", void 0), _this.aaBossFlag = (0, import_kolmafia29.xpath)((0, import_kolmafia29.visitUrl)("account.php?tab=combat"), "//*[@id=\"opt_flag_aabosses\"]/label/input[@type='checkbox']@checked")[0] === "checked" ? 1 : 0, CandyEngine2.propertyManager = _this.propertyManager, _this.session = Session.current(), _this;
   }
   return _createClass11(CandyEngine2, [{
     key: "destruct",
@@ -7788,7 +7788,7 @@ var CandyEngine = /* @__PURE__ */ function(_Engine) {
     }
   }]), CandyEngine2;
 }(Engine);
-_defineProperty12(CandyEngine, "propertyManager", new PropertiesManager());
+_defineProperty12(CandyEngine, "propertyManager", null);
 
 // src/regularTasks.ts
 var import_kolmafia40 = require("kolmafia");
@@ -8458,8 +8458,8 @@ function wanderWhere(type) {
     return wanderWhere(type, [].concat(_toConsumableArray14(nameSkiplist), _toConsumableArray14(failed.map(function(target) {
       return target.name;
     }))), [].concat(_toConsumableArray14(locationSkiplist), badLocation));
-  var _unsupportedChoices$g;
-  CandyEngine.propertyManager.setChoices((_unsupportedChoices$g = unsupportedChoices.get(candidate.location)) !== null && _unsupportedChoices$g !== void 0 ? _unsupportedChoices$g : {});
+  var _CandyEngine$property, _unsupportedChoices$g;
+  (_CandyEngine$property = CandyEngine.propertyManager) === null || _CandyEngine$property === void 0 || _CandyEngine$property.setChoices((_unsupportedChoices$g = unsupportedChoices.get(candidate.location)) !== null && _unsupportedChoices$g !== void 0 ? _unsupportedChoices$g : {});
   var targets = candidate.targets.map(function(t) {
     return t.name;
   }).join("; "), value = candidate.value.toFixed(2);
