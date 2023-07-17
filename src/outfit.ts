@@ -405,7 +405,7 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
   }
 
   if (weightValue) {
-    const rounded = 1000 * Math.round(weightValue / 1000);
+    const rounded = Math.round(1000 * weightValue) / 1000;
     outfit.modifier.push(`${rounded} Familiar Weight`);
   }
 
