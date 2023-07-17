@@ -88,7 +88,7 @@ export function wanderWhere(
       [...locationSkiplist, ...badLocation]
     );
   } else {
-    CandyEngine.propertyManager.setChoices(unsupportedChoices.get(candidate.location) ?? {});
+    CandyEngine.propertyManager?.setChoices(unsupportedChoices.get(candidate.location) ?? {});
     const targets = candidate.targets.map((t) => t.name).join("; ");
     const value = candidate.value.toFixed(2);
     printHighlight(`Wandering at ${candidate.location} for expected value ${value} (${targets})`);
