@@ -1,6 +1,6 @@
 import { Args, getTasks, Quest } from "grimoire-kolmafia";
 import args from "./args";
-import { questStep } from "libram";
+import { questStep, set } from "libram";
 import { CandyTask, State } from "./lib";
 import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
@@ -40,6 +40,9 @@ export default function main(argstring = ""): void {
     }
     return false;
   };
+
+  // Allow re-running after losing a combat
+  set("_lastCombatLost", false);
 
   const quest: Quest<CandyTask> = {
     name: "hacking your system",
