@@ -9234,7 +9234,7 @@ function combatOutfit() {
       SongBoom_exports.song() === "Total Eclipse of Your Meat" ? outfit2.modifier.push("0.25 Meat Drop") : outfit2.modifier.push("0.01 Item Drop");
   }
   if (weightValue) {
-    var rounded = 1e3 * Math.round(weightValue / 1e3);
+    var rounded = Math.round(1e3 * weightValue) / 1e3;
     outfit2.modifier.push("".concat(rounded, " Familiar Weight"));
   }
   var bjornChoice = ensureBjorn(weightValue);
