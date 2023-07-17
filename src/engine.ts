@@ -31,7 +31,7 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       )[0] === "checked"
         ? 1
         : 0;
-    CandyEngine.propertyManager = this.propertyManager
+    CandyEngine.propertyManager = this.propertyManager;
     this.session = Session.current();
   }
 
