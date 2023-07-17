@@ -10063,15 +10063,12 @@ var TRICK_TREAT_TASKS = [{
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
         var house = _step2.value;
-        if (!tricked.includes(house)) {
-          if (tricked.push(house), getBlockHtml().match(RegExp("whichhouse=".concat(house, ">[^>]*?house_d")))) {
-            (0, import_kolmafia41.visitUrl)("choice.php?whichchoice=804&option=3&whichhouse=".concat(house, "&pwd"));
-            do
-              (0, import_kolmafia41.runCombat)();
-            while ((0, import_kolmafia41.inMultiFight)());
-            return;
-          }
-          tricked.length < HOUSE_NUMBERS.length && (0, import_kolmafia41.abort)("We thought there were unvisited trickable houses left, but alas! there are not!");
+        if (!tricked.includes(house) && (tricked.push(house), getBlockHtml().match(RegExp("whichhouse=".concat(house, ">[^>]*?house_d"))))) {
+          (0, import_kolmafia41.visitUrl)("choice.php?whichchoice=804&option=3&whichhouse=".concat(house, "&pwd"));
+          do
+            (0, import_kolmafia41.runCombat)();
+          while ((0, import_kolmafia41.inMultiFight)());
+          return;
         }
       }
     } catch (err) {
@@ -10079,6 +10076,7 @@ var TRICK_TREAT_TASKS = [{
     } finally {
       _iterator2.f();
     }
+    tricked.length < HOUSE_NUMBERS.length && (0, import_kolmafia41.abort)("We thought there were unvisited trickable houses left, but alas! there are not!");
   },
   outfit: trickOutfit,
   combat: new CandyStrategy()
