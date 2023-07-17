@@ -118,13 +118,13 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => abort("Ow! I have 0 hp!"),
   },
   {
-    name: "Beaten Up!",
-    completed: () => !have($effect`Beaten Up`),
-    ready: () => !["Poetic Justice", "Lost and Found"].includes(get("lastEncounter")),
-    do: () => abort("Beaten up!"),
+    name: "Check combat lost",
+    completed: () => !get("_lastCombatLost", false),
+    do: () => abort("Lost in combat!"),
   },
   {
     name: "Lick wounds",
+    ready: () => have($skill`Tongue of the Walrus`),
     completed: () => !have($effect`Beaten Up`),
     do: () => useSkill($skill`Tongue of the Walrus`),
   },
