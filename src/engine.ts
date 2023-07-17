@@ -16,9 +16,9 @@ import { CandyTask, printHighlight, State } from "./lib";
 import { $familiar, $item, clamp, PropertiesManager, Session } from "libram";
 import args from "./args";
 
-export default class CandyEngine extends Engine<never, CandyTask> {
-  static propertyManager = new PropertiesManager();
+export const propertyManager = new PropertiesManager();
 
+export default class CandyEngine extends Engine<never, CandyTask> {
   session: Session;
   aaBossFlag: number;
 
@@ -31,12 +31,12 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       )[0] === "checked"
         ? 1
         : 0;
-    this.propertyManager = CandyEngine.propertyManager;
     this.session = Session.current();
   }
 
   destruct(): void {
     super.destruct();
+    propertyManager.resetAll();
     visitUrl(
       `account.php?actions[]=flag_aabosses&flag_aabosses=${this.aaBossFlag}&action=Update`,
       true
