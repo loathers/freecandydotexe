@@ -9645,18 +9645,18 @@ var GLOBAL_TASKS = [].concat(_toConsumableArray20(MARKET_QUESTS.map(function(_re
     return (0, import_kolmafia40.abort)("Ow! I have 0 hp!");
   }
 }, {
-  name: "Beaten Up!",
+  name: "Check combat lost",
   completed: function() {
-    return !have($effect(_templateObject438 || (_templateObject438 = _taggedTemplateLiteral27(["Beaten Up"]))));
-  },
-  ready: function() {
-    return !["Poetic Justice", "Lost and Found"].includes(get("lastEncounter"));
+    return !get("_lastCombatLost", !1);
   },
   do: function() {
-    return (0, import_kolmafia40.abort)("Beaten up!");
+    return (0, import_kolmafia40.abort)("Lost in combat!");
   }
 }, {
   name: "Lick wounds",
+  ready: function() {
+    return have($skill(_templateObject438 || (_templateObject438 = _taggedTemplateLiteral27(["Tongue of the Walrus"]))));
+  },
   completed: function() {
     return !have($effect(_templateObject531 || (_templateObject531 = _taggedTemplateLiteral27(["Beaten Up"]))));
   },
