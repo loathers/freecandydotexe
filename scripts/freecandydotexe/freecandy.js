@@ -10246,7 +10246,9 @@ function main() {
     return doingNemesis && nemesisStep() >= 25 ? ((0, import_kolmafia42.print)("Fought the final nemesis wanderer! Stopping.", "red"), !0) : !1;
   }, doneWithBlocks = function() {
     return State.blocks >= args_default.blocks ? ((0, import_kolmafia42.print)("Finished ".concat(args_default.blocks, " blocks!"), "red"), !0) : !1;
-  }, quest = {
+  };
+  _set("_lastCombatLost", !1);
+  var quest = {
     name: "hacking your system",
     completed: function() {
       return noMoreAdventures() || doneWithNemesis() || doneWithBlocks();
