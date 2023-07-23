@@ -16,7 +16,8 @@ import {
 } from "kolmafia";
 import { $item, get, getSaleValue, have, SourceTerminal, sum } from "libram";
 import { isDarkMode } from "kolmafia";
-import { Task } from "grimoire-kolmafia";
+import { StrictCombatTask } from "grimoire-kolmafia";
+import { CandyStrategy } from "./combat";
 
 export function safeRestore(): void {
   if (myHp() < myMaxhp() * 0.5) {
@@ -43,7 +44,7 @@ export function printError(message: string): void {
   print(message, color);
 }
 
-export type CandyTask = Task & {
+export type CandyTask = StrictCombatTask<never, CandyStrategy> & {
   sobriety?: "sober" | "drunk";
 };
 
