@@ -9440,7 +9440,7 @@ function combatOutfit() {
     outfit2.modifier.push("".concat(rounded, " Familiar Weight"));
   }
   var bjornChoice = ensureBjorn(weightValue);
-  return have($item(_templateObject529 || (_templateObject529 = _taggedTemplateLiteral25(["Buddy Bjorn"])))) ? (outfit2.equip($item(_templateObject535 || (_templateObject535 = _taggedTemplateLiteral25(["Buddy Bjorn"])))), outfit2.bjornify(bjornChoice.familiar)) : have($item(_templateObject545 || (_templateObject545 = _taggedTemplateLiteral25(["Crown of Thrones"])))) && (outfit2.equip($item(_templateObject555 || (_templateObject555 = _taggedTemplateLiteral25(["Crown of Thrones"])))), outfit2.enthrone(bjornChoice.familiar)), outfit2.bonuses = fullBonuses(), outfit2;
+  return have($item(_templateObject529 || (_templateObject529 = _taggedTemplateLiteral25(["Buddy Bjorn"])))) ? (outfit2.equip($item(_templateObject535 || (_templateObject535 = _taggedTemplateLiteral25(["Buddy Bjorn"])))), outfit2.bjornify(bjornChoice.familiar)) : have($item(_templateObject545 || (_templateObject545 = _taggedTemplateLiteral25(["Crown of Thrones"])))) && (outfit2.equip($item(_templateObject555 || (_templateObject555 = _taggedTemplateLiteral25(["Crown of Thrones"])))), outfit2.enthrone(bjornChoice.familiar)), outfit2.setBonuses(fullBonuses()), outfit2;
 }
 var askedAboutTwoPiece = !1, trickHats = $items(_templateObject564 || (_templateObject564 = _taggedTemplateLiteral25(["invisible bag, witch hat, beholed bedsheet, wolfman mask, pumpkinhead mask, mummy costume"]))), twoPieces = ["Eldritch Equipage", "Bugbear Costume", "Filthy Hippy Disguise"];
 function trickOutfit() {
@@ -9497,7 +9497,7 @@ function digitizeOutfit() {
     }), findLeprechaunMultiplier);
     outfit2.equip(meatFamiliar);
     var baseMeat = 1e3 + (SongBoom_exports.song() === "Total Eclipse of Your Meat" ? 25 : 0), leprechaunMultiplier = findLeprechaunMultiplier(meatFamiliar), leprechaunCoefficient = baseMeat / 100 * (2 * leprechaunMultiplier + Math.sqrt(leprechaunMultiplier)), bjornChoice = ensureBjorn(leprechaunCoefficient, baseMeat / 100);
-    return have($item(_templateObject584 || (_templateObject584 = _taggedTemplateLiteral25(["Buddy Bjorn"])))) ? (outfit2.equip($item(_templateObject594 || (_templateObject594 = _taggedTemplateLiteral25(["Buddy Bjorn"])))), outfit2.bjornify(bjornChoice.familiar)) : have($item(_templateObject604 || (_templateObject604 = _taggedTemplateLiteral25(["Crown of Thrones"])))) && (outfit2.equip($item(_templateObject6110 || (_templateObject6110 = _taggedTemplateLiteral25(["Crown of Thrones"])))), outfit2.enthrone(bjornChoice.familiar)), outfit2.modifier.push("".concat(baseMeat / 100, " Meat Drop")), outfit2.modifier.push("0.72 Item Drop"), outfit2.bonuses = fullBonuses(), outfit2;
+    return have($item(_templateObject584 || (_templateObject584 = _taggedTemplateLiteral25(["Buddy Bjorn"])))) ? (outfit2.equip($item(_templateObject594 || (_templateObject594 = _taggedTemplateLiteral25(["Buddy Bjorn"])))), outfit2.bjornify(bjornChoice.familiar)) : have($item(_templateObject604 || (_templateObject604 = _taggedTemplateLiteral25(["Crown of Thrones"])))) && (outfit2.equip($item(_templateObject6110 || (_templateObject6110 = _taggedTemplateLiteral25(["Crown of Thrones"])))), outfit2.enthrone(bjornChoice.familiar)), outfit2.modifier.push("".concat(baseMeat / 100, " Meat Drop")), outfit2.modifier.push("0.72 Item Drop"), outfit2.setBonuses(fullBonuses()), outfit2;
   }
   return combatOutfit();
 }
