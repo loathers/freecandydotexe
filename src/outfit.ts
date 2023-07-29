@@ -426,7 +426,7 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
     outfit.enthrone(bjornChoice.familiar);
   }
 
-  outfit.bonuses = fullBonuses();
+  outfit.setBonuses(fullBonuses());
 
   return outfit;
 }
@@ -504,7 +504,7 @@ export function digitizeOutfit(): Outfit {
     outfit.modifier.push(`${baseMeat / 100} Meat Drop`);
     outfit.modifier.push("0.72 Item Drop");
 
-    outfit.bonuses = fullBonuses();
+    outfit.setBonuses(fullBonuses());
     return outfit;
   }
 
