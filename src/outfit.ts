@@ -176,10 +176,10 @@ function pantogram() {
 }
 
 /*
-calculated 27 July 2023, via the following snippet in the CLI
+calculated 17 Oct 2023, via the following snippet in the CLI
 js const possibleDrops = Item.all().filter((i) => i.tradeable && i.discardable && (i.inebriety || i.fullness || i.potion)); const value = possibleDrops.reduce((total, item) => total + (mallPrice(item) > Math.max(100, 2 * autosellPrice(item)) ? Math.min(0.9 * mallPrice(item), 100000) : autosellPrice(item)), 0); print((value / possibleDrops.length).toFixed(3));
 */
-const SNEEGLEEB_DROP_VALUE = 5500;
+const SNEEGLEEB_DROP_VALUE = 6001.625;
 
 function reallyEasyBonuses() {
   return new Map<Item, number>(
