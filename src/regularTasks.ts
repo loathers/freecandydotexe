@@ -7,6 +7,7 @@ import {
   getWorkshed,
   inebrietyLimit,
   Location,
+  mallPrices,
   myClass,
   myFullness,
   myHp,
@@ -14,6 +15,8 @@ import {
   retrieveItem,
   reverseNumberology,
   runChoice,
+  sessionStorage,
+  todayToString,
   totalTurnsPlayed,
   use,
   useSkill,
@@ -89,6 +92,14 @@ function getRunSource(): ActionSource {
 }
 
 const GLOBAL_TASKS: CandyTask[] = [
+  {
+    name: "Search the Mall",
+    completed: () => sessionStorage.getItem("last mallprices") === todayToString(),
+    do: (): void => {
+      mallPrices("allitems");
+      sessionStorage.setItem("last mallprices", todayToString());
+    },
+  },
   ...MARKET_QUESTS.map(({ pref, url }) => ({
     name: `Start Quest: ${pref}`,
     completed: () => questStep(pref) > -1,
