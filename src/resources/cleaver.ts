@@ -1,5 +1,6 @@
 import { Item, myAdventures } from "kolmafia";
-import { $item, get, getSaleValue, JuneCleaver, maxBy, sum } from "libram";
+import { $item, get, JuneCleaver, maxBy, sum } from "libram";
+import { freecandyValue } from "../value";
 
 const juneCleaverChoiceValues = {
   1467: {
@@ -22,7 +23,7 @@ const juneCleaverChoiceValues = {
 } as const;
 
 function valueJuneCleaverOption(result: Item | number): number {
-  return result instanceof Item ? getSaleValue(result) : result;
+  return result instanceof Item ? freecandyValue(result) : result;
 }
 
 function bestJuneCleaverOption(id: typeof JuneCleaver.choices[number]): 1 | 2 | 3 {
@@ -48,15 +49,13 @@ function getJuneCleaverskipChoices(): typeof JuneCleaver.choices[number][] {
   return [];
 }
 
-export const juneCleaverChoices = Object.fromEntries(
-  JuneCleaver.choices.map((choice) => [
-    choice,
-    () => {
-      if (getJuneCleaverskipChoices().includes(choice)) return 4;
-      return bestJuneCleaverOption(choice);
-    },
-  ])
-);
+export const juneCleaverChoices = (): { [x in number]: number } =>
+  Object.fromEntries(
+    JuneCleaver.choices.map((choice) => [
+      choice,
+      getJuneCleaverskipChoices().includes(choice) ? 4 : bestJuneCleaverOption(choice),
+    ])
+  );
 
 let choiceAdventuresValue: number;
 export function juneCleaverBonusEquip(): Map<Item, number> {

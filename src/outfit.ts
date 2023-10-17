@@ -43,7 +43,6 @@ import {
   get,
   getAverageAdventures,
   getFoldGroup,
-  getSaleValue,
   have,
   maxBy,
   SongBoom,
@@ -52,18 +51,19 @@ import {
 } from "libram";
 import { printError, printHighlight } from "./lib";
 import { getBestPantsgivingFood, juneCleaverBonusEquip } from "./resources";
+import { freecandyAverageValue, freecandyValue } from "./value";
 
 function treatValue(outfit: string): number {
   return sum(
     Object.entries(outfitTreats(outfit)),
-    ([candyName, probability]) => probability * getSaleValue(toItem(candyName))
+    ([candyName, probability]) => probability * freecandyValue(toItem(candyName))
   );
 }
 
 function dropsValueFunction(drops: Item[] | Map<Item, number>): number {
   return Array.isArray(drops)
-    ? getSaleValue(...drops)
-    : sum([...drops.entries()], ([item, quantity]) => quantity * getSaleValue(item)) /
+    ? freecandyAverageValue(...drops)
+    : sum([...drops.entries()], ([item, quantity]) => quantity * freecandyValue(item)) /
         sumNumbers([...drops.values()]);
 }
 
@@ -112,9 +112,9 @@ function baseAdventureValue(): number {
   if (!_baseAdventureValue) {
     const outfitCandyValue = treatValue(getTreatOutfit());
     const totOutfitCandyMultiplier = have($familiar`Trick-or-Treating Tot`) ? 1.6 : 1;
-    const bowlValue = (1 / 5) * getSaleValue($item`huge bowl of candy`);
+    const bowlValue = (1 / 5) * freecandyValue($item`huge bowl of candy`);
     const prunetsValue = have($familiar`Trick-or-Treating Tot`)
-      ? 4 * 0.2 * getSaleValue($item`Prunets`)
+      ? 4 * 0.2 * freecandyValue($item`Prunets`)
       : 0;
 
     const outfitCandyTotal = 3 * outfitCandyValue * totOutfitCandyMultiplier;
@@ -126,7 +126,7 @@ function baseAdventureValue(): number {
 function snowSuit() {
   if (!have($item`Snow Suit`) || get("_carrotNoseDrops") >= 3) return new Map<Item, number>([]);
 
-  return new Map<Item, number>([[$item`Snow Suit`, getSaleValue($item`carrot nose`) / 10]]);
+  return new Map<Item, number>([[$item`Snow Suit`, freecandyValue($item`carrot nose`) / 10]]);
 }
 
 function mayflowerBouquet() {
@@ -140,7 +140,7 @@ function mayflowerBouquet() {
     return new Map<Item, number>([]);
 
   const averageFlowerValue =
-    getSaleValue(
+    freecandyAverageValue(
       ...$items`tin magnolia, upsy daisy, lesser grodulated violet, half-orchid, begpwnia`
     ) * Math.max(0.01, 0.5 - get("_mayflowerDrops") * 0.11);
   return new Map<Item, number>([[$item`Mayflower bouquet`, averageFlowerValue]]);

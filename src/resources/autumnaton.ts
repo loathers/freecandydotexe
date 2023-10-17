@@ -7,8 +7,8 @@ import {
   myAdventures,
   toMonster,
 } from "kolmafia";
-import { $items, AutumnAton, flat, get, getSaleValue, maxBy, sum } from "libram";
-import { getHistoricalSaleValue } from "../lib";
+import { $items, AutumnAton, flat, get, maxBy, sum } from "libram";
+import { freecandyAverageValue, freecandyValue } from "../value";
 
 export function bestAutumnatonLocation(locations: Location[]): Location {
   return maxBy(mostValuableUpgrade(locations), averageAutumnatonValue);
@@ -31,7 +31,7 @@ function averageAutumnatonValue(
     const maximumDrops = slotOverride ?? AutumnAton.zoneItems();
     const acuityCutoff = 20 - (acuityOverride ?? AutumnAton.visualAcuity()) * 5;
     const validDrops = flat(monsters.map((m) => itemDropsArray(m))).map(({ rate, type, drop }) => ({
-      value: !["c", "0"].includes(type) ? getHistoricalSaleValue(drop) : 0,
+      value: !["c", "0"].includes(type) ? freecandyValue(drop) : 0,
       preAcuityExpectation: ["c", "0", ""].includes(type) ? (2 * rate) / 100 : 0,
       postAcuityExpectation:
         rate >= acuityCutoff && ["c", "0", ""].includes(type) ? (8 * rate) / 100 : 0,
@@ -58,7 +58,7 @@ function averageAutumnatonValue(
 function seasonalItemValue(location: Location, seasonalOverride?: number): number {
   // Find the value of the drops based on zone difficulty/type
   const autumnItems = $items`autumn leaf, AutumnFest ale, autumn breeze, autumn dollar, autumn years wisdom`;
-  const avgValueOfRandomAutumnItem = getSaleValue(...autumnItems);
+  const avgValueOfRandomAutumnItem = freecandyAverageValue(...autumnItems);
   const autumnMeltables = $items`autumn debris shield, autumn leaf pendant, autumn sweater-weather sweater`;
   const autumnItem = AutumnAton.getUniques(location)?.item;
   const seasonalItemDrops = seasonalOverride ?? AutumnAton.seasonalItems();
@@ -70,7 +70,7 @@ function seasonalItemValue(location: Location, seasonalOverride?: number): numbe
           availableAmount(autumnItem) > 0
           ? avgValueOfRandomAutumnItem
           : 0
-        : getHistoricalSaleValue(autumnItem))
+        : freecandyValue(autumnItem))
     );
   } else {
     // If we're in a location without any uniques, we still get cowcatcher items

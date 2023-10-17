@@ -1,10 +1,6 @@
 import {
-  autosellPrice,
   eat,
   gametimeToInt,
-  historicalAge,
-  historicalPrice,
-  Item,
   myAdventures,
   myHp,
   myMaxhp,
@@ -14,7 +10,7 @@ import {
   restoreHp,
   restoreMp,
 } from "kolmafia";
-import { $item, get, getSaleValue, have, SourceTerminal, sum } from "libram";
+import { $item, get, have, SourceTerminal } from "libram";
 import { isDarkMode } from "kolmafia";
 import { StrictCombatTask } from "grimoire-kolmafia";
 import { CandyStrategy } from "./combat";
@@ -47,18 +43,6 @@ export function printError(message: string): void {
 export type CandyTask = StrictCombatTask<never, CandyStrategy> & {
   sobriety?: "sober" | "drunk";
 };
-
-export function getHistoricalSaleValue(...items: Item[]): number {
-  return (
-    sum(items, (item) => {
-      if (historicalAge(item) <= 7.0 && historicalPrice(item) > 0) {
-        const isMallMin = historicalPrice(item) === Math.max(100, 2 * autosellPrice(item));
-        return isMallMin ? autosellPrice(item) : 0.9 * historicalPrice(item);
-      }
-      return getSaleValue(item);
-    }) / items.length
-  );
-}
 
 export const State = {
   blocks: 0,
