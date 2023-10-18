@@ -9884,7 +9884,7 @@ var GLOBAL_TASKS = [].concat(_toConsumableArray20(MARKET_QUESTS.map(function(_re
 }, {
   name: "Numberology",
   ready: function() {
-    return Object.values((0, import_kolmafia40.reverseNumberology)()).includes(69) && get("skillLevel144") <= 3;
+    return Object.values((0, import_kolmafia40.reverseNumberology)()).includes(69);
   },
   completed: function() {
     return get("_universeCalculated") >= get("skillLevel144");
