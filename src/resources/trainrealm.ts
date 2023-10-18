@@ -1,5 +1,6 @@
-import { getHistoricalSaleValue, today } from "../lib";
-import { $item, $items, arrayEquals, get, getSaleValue, maxBy, set, sum, TrainSet } from "libram";
+import { today } from "../lib";
+import { $item, $items, arrayEquals, get, maxBy, set, sum, TrainSet } from "libram";
+import { freecandyAverageValue } from "../value";
 
 const TRAIN_CANDIES = [
   $item`cotton candy bale`,
@@ -53,7 +54,7 @@ const TRAIN_CANDIES = [
 function candyFactoryValue(): number {
   const lastCalculated = get("garbo_candyFactoryValueDate", 0);
   if (!get("garbo_candyFactoryValue", 0) || today - lastCalculated > 7 * 24 * 60 * 60 * 1000) {
-    const averageDropValue = getHistoricalSaleValue(...TRAIN_CANDIES);
+    const averageDropValue = freecandyAverageValue(...TRAIN_CANDIES);
     set("garbo_candyFactoryValue", averageDropValue);
     set("garbo_candyFactoryValueDate", today);
   }
@@ -65,21 +66,21 @@ const GOOD_TRAIN_STATIONS = [
   {
     // Some day this'll be better
     piece: TrainSet.Station.TRACKSIDE_DINER,
-    value: () => getSaleValue(...$items`bowl of cottage cheese, hot buttered roll, toast`),
+    value: () => freecandyAverageValue(...$items`bowl of cottage cheese, hot buttered roll, toast`),
   },
   { piece: TrainSet.Station.CANDY_FACTORY, value: candyFactoryValue },
   {
     piece: TrainSet.Station.GRAIN_SILO,
     value: () =>
       2 *
-      getSaleValue(
+      freecandyAverageValue(
         ...$items`bottle of gin, bottle of vodka, bottle of whiskey, bottle of rum, bottle of tequila, boxed wine`
       ),
   },
   {
     piece: TrainSet.Station.ORE_HOPPER,
     value: () =>
-      getSaleValue(
+      freecandyAverageValue(
         ...$items`linoleum ore, asbestos ore, chrome ore, teflon ore, vinyl ore, velcro ore, bubblewrap ore, cardboard ore, styrofoam ore`
       ),
   },

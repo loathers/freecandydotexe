@@ -13,12 +13,10 @@ import {
   xpath,
 } from "kolmafia";
 import { CandyTask, printHighlight, State } from "./lib";
-import { $familiar, $item, clamp, PropertiesManager, Session } from "libram";
+import { $familiar, $item, clamp, Session } from "libram";
 import args from "./args";
 
 export default class CandyEngine extends Engine<never, CandyTask> {
-  static propertyManager: PropertiesManager | null = null;
-
   session: Session;
   aaBossFlag: number;
 
@@ -31,7 +29,6 @@ export default class CandyEngine extends Engine<never, CandyTask> {
       )[0] === "checked"
         ? 1
         : 0;
-    CandyEngine.propertyManager = this.propertyManager;
     this.session = Session.current();
   }
 

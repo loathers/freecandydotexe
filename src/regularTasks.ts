@@ -6,7 +6,9 @@ import {
   fullnessLimit,
   getWorkshed,
   inebrietyLimit,
+  Item,
   Location,
+  mallPrices,
   myClass,
   myFullness,
   myHp,
@@ -14,6 +16,8 @@ import {
   retrieveItem,
   reverseNumberology,
   runChoice,
+  sessionStorage,
+  todayToString,
   totalTurnsPlayed,
   use,
   useSkill,
@@ -45,7 +49,6 @@ import {
   withProperty,
 } from "libram";
 import { CandyTask, shouldRedigitize } from "./lib";
-import { drunkSafeWander, wanderWhere } from "./wanderer";
 import {
   bestAutumnatonLocation,
   coldMedicineCabinet,
@@ -55,9 +58,11 @@ import {
   willRotateTrainset,
 } from "./resources";
 import { combatOutfit, digitizeOutfit } from "./outfit";
-import { Outfit } from "grimoire-kolmafia";
+import { Modes, Outfit } from "grimoire-kolmafia";
 import { CandyStrategy, Macro } from "./combat";
 import args from "./args";
+import { wanderer } from "./wanderer";
+import { DraggableFight, WanderDetails } from "garbo-lib";
 
 const MARKET_QUESTS = [
   { pref: "questM23Meatsmith", url: "shop.php?whichshop=meatsmith&action=talk" },
@@ -88,7 +93,40 @@ function getRunSource(): ActionSource {
   return runSource;
 }
 
+function makeWandererTask(
+  type: DraggableFight,
+  drunkSafe: boolean,
+  base: Omit<CandyTask, "do" | "outfit" | "sobriety" | "choices"> &
+    Partial<{
+      combat: CandyStrategy;
+      do: () => Location;
+      sobriety: "sober" | "drunk";
+      outfit: () => Outfit;
+    }>,
+  equip: Item[] = [],
+  modes: Modes = {}
+): CandyTask {
+  const sobriety = drunkSafe ? undefined : "sober";
+  const options: WanderDetails = drunkSafe ? { wanderer: type, drunkSafe } : type;
+  return {
+    sobriety,
+    do: () => wanderer().getTarget(options),
+    choices: () => wanderer().getChoices(options),
+    combat: new CandyStrategy(),
+    outfit: () => combatOutfit({ equip: wanderer().getEquipment(options).concat(equip), modes }),
+    ...base,
+  };
+}
+
 const GLOBAL_TASKS: CandyTask[] = [
+  {
+    name: "Search the Mall",
+    completed: () => sessionStorage.getItem("last mallprices") === todayToString(),
+    do: (): void => {
+      mallPrices("allitems");
+      sessionStorage.setItem("last mallprices", todayToString());
+    },
+  },
   ...MARKET_QUESTS.map(({ pref, url }) => ({
     name: `Start Quest: ${pref}`,
     completed: () => questStep(pref) > -1,
@@ -229,97 +267,102 @@ const GLOBAL_TASKS: CandyTask[] = [
         .trySkill($skill`Trap Ghost`)
     ),
   },
-  {
-    name: "Vote Wanderer",
-    ready: () =>
-      have($item`"I Voted!" sticker`) &&
-      totalTurnsPlayed() % 11 === 1 &&
-      get("_voteFreeFights") < 3,
-    do: () => drunkSafeWander("wanderer"),
-    completed: () => get("lastVoteMonsterTurn") === totalTurnsPlayed(),
-    outfit: () => combatOutfit({ acc1: $item`"I Voted!" sticker` }),
-    combat: new CandyStrategy(),
-  },
-  {
+  makeWandererTask(
+    "wanderer",
+    true,
+    {
+      name: "Vote Wanderer",
+      ready: () =>
+        have($item`"I Voted!" sticker`) &&
+        totalTurnsPlayed() % 11 === 1 &&
+        get("_voteFreeFights") < 3,
+      completed: () => get("lastVoteMonsterTurn") === totalTurnsPlayed(),
+      combat: new CandyStrategy(),
+    },
+    $items`"I Voted!" sticker`
+  ),
+  makeWandererTask("wanderer", true, {
     name: "Digitize Wanderer",
     completed: () => Counter.get("Digitize") > 0,
-    do: () => drunkSafeWander("wanderer"),
     prepare: () =>
       shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
     post: () => get("_sourceTerminalDigitizeMonsterCount") || (_digitizeInitialized = false),
     outfit: digitizeOutfit,
     combat: new CandyStrategy(() => Macro.redigitize().default()),
-  },
-  {
-    name: "Void Monster",
-    ready: () => have($item`cursed magnifying glass`) && get("cursedMagnifyingGlassCount") === 13,
-    completed: () => get("_voidFreeFights") >= 5,
-    do: () => drunkSafeWander("wanderer"),
-    outfit: () => combatOutfit({ offhand: $item`cursed magnifying glass` }),
-    combat: new CandyStrategy(),
-  },
-  {
-    name: "Kramco",
-    ready: () => have($item`Kramco Sausage-o-Matic™`),
-    completed: () => getKramcoWandererChance() < 1,
-    do: () => drunkSafeWander("wanderer"),
-    post: digitizeInitialized,
-    outfit: () => combatOutfit({ offhand: $item`Kramco Sausage-o-Matic™` }),
-    combat: new CandyStrategy(),
-  },
-  {
+  }),
+  makeWandererTask(
+    "wanderer",
+    true,
+    {
+      name: "Void Monster",
+      ready: () => have($item`cursed magnifying glass`) && get("cursedMagnifyingGlassCount") === 13,
+      completed: () => get("_voidFreeFights") >= 5,
+    },
+    $items`cursed magnifying glass`
+  ),
+  makeWandererTask(
+    "wanderer",
+    true,
+    {
+      name: "Kramco",
+      ready: () => have($item`Kramco Sausage-o-Matic™`),
+      completed: () => getKramcoWandererChance() < 1,
+      post: digitizeInitialized,
+      combat: new CandyStrategy(),
+    },
+    $items`Kramco Sausage-o-Matic™`
+  ),
+  makeWandererTask("yellow ray", false, {
     name: "Yellow Ray: Fondeluge",
     ready: () => have($skill`Fondeluge`),
     completed: () => have($effect`Everything Looks Yellow`),
-    do: () => wanderWhere("yellow ray"),
     sobriety: "sober",
     post: digitizeInitialized,
-    outfit: combatOutfit,
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
         .trySkill($skill`Fondeluge`)
         .abort()
     ),
-  },
-  {
-    name: "Yellow Ray: Jurassic Parka",
-    ready: () => have($item`Jurassic Parka`) && have($skill`Torso Awareness`),
-    completed: () => have($effect`Everything Looks Yellow`),
-    do: () => wanderWhere("yellow ray"),
-    sobriety: "sober",
-    post: digitizeInitialized,
-    outfit: () => combatOutfit({ shirt: $item`Jurassic Parka`, modes: { parka: "dilophosaur" } }),
-    combat: new CandyStrategy(() =>
-      Macro.tryHaveSkill($skill`Duplicate`)
-        .trySkill($skill`Spit jurassic acid`)
-        .abort()
-    ),
-  },
-  {
+  }),
+  makeWandererTask(
+    "yellow ray",
+    false,
+    {
+      name: "Yellow Ray: Jurassic Parka",
+      ready: () => have($item`Jurassic Parka`) && have($skill`Torso Awareness`),
+      completed: () => have($effect`Everything Looks Yellow`),
+      sobriety: "sober",
+      post: digitizeInitialized,
+      combat: new CandyStrategy(() =>
+        Macro.tryHaveSkill($skill`Duplicate`)
+          .trySkill($skill`Spit jurassic acid`)
+          .abort()
+      ),
+    },
+    $items`Jurassic Parka`,
+    { parka: "dilophosaur" }
+  ),
+  makeWandererTask("freefight", false, {
     name: "Free-for-All",
     ready: () => have($skill`Free-For-All`),
     completed: () => have($effect`Everything Looks Red`),
-    do: () => wanderWhere("backup"),
     sobriety: "sober",
     post: digitizeInitialized,
-    outfit: combatOutfit,
     combat: new CandyStrategy(Macro.skill($skill`Free-For-All`)),
-  },
-  {
+  }),
+  makeWandererTask("wanderer", true, {
     name: "Nemesis Assassin",
     completed: () => Counter.get("Nemesis Assassin window end") > 0,
-    do: () => drunkSafeWander("wanderer"),
     post: digitizeInitialized,
-    outfit: combatOutfit,
-    combat: new CandyStrategy(),
-  },
+  }),
   {
     name: "Initialize Digitize",
     completed: () => _digitizeInitialized,
     do: (): Location => {
       getRunSource()?.prepare();
-      return wanderWhere("backup");
+      return wanderer().getTarget("backup");
     },
+    choices: () => wanderer().getChoices("backup"),
     post: (): void => {
       digitizeInitialized();
       runSource = null;

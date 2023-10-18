@@ -1,5 +1,5 @@
 import { descToItem, Item, runChoice, visitUrl } from "kolmafia";
-import { getSaleValue } from "libram";
+import { freecandyValue } from "../value";
 
 export function coldMedicineCabinet(): void {
   const options = visitUrl("campground.php?action=workshed");
@@ -15,7 +15,7 @@ export function coldMedicineCabinet(): void {
   }
 
   const bestItem = Array.from(itemChoices.keys())
-    .map((i) => [i, getSaleValue(i)] as [Item, number])
+    .map((i) => [i, freecandyValue(i)] as [Item, number])
     .sort((a, b) => b[1] - a[1])[0][0];
   const bestChoice = itemChoices.get(bestItem);
   if (bestChoice && bestChoice > 0) {

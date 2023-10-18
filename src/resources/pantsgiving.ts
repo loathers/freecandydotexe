@@ -1,5 +1,6 @@
 import { abort, isAccessible, Item, mallPrice, myLevel, runChoice, visitUrl } from "kolmafia";
-import { $coinmaster, $item, get, getSaleValue, have, maxBy } from "libram";
+import { $coinmaster, $item, get, have, maxBy } from "libram";
+import { freecandyValue } from "../value";
 
 type PantsgivingFood = {
   food: Item;
@@ -32,7 +33,10 @@ const pantsgivingFoods: PantsgivingFood[] = [
     food: $item`Dreadsylvanian stew`,
     costOverride: () =>
       (10 / 20) *
-      Math.max(getSaleValue($item`electric Kool-Aid`), getSaleValue($item`bottle of Bloodweiser`)),
+      Math.max(
+        freecandyValue($item`electric Kool-Aid`),
+        freecandyValue($item`bottle of Bloodweiser`)
+      ),
     canGet: () =>
       have($item`Freddy Kruegerand`, 10) &&
       isAccessible($coinmaster`The Terrified Eagle Inn`) &&
