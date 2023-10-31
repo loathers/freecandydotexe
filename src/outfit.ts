@@ -196,6 +196,7 @@ function reallyEasyBonuses() {
         [$item`Mr. Screege's spectacles`, 180],
         [$item`KoL Con 13 snowglobe`, sneegleebDropValue()],
         [$item`can of mixed everything`, sneegleebDropValue() / 2],
+        [$item`tiny stillsuit`, 69],
       ] as [Item, number][]
     ).filter(([item]) => have(item))
   );
