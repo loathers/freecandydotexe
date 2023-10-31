@@ -333,7 +333,6 @@ export function treatOutfit(): Outfit {
       abort(`Could not equip all pieces of treat outfit: aborted on ${piece}`);
   }
 
-  outfit.equip($item`lucky Crimbo tiki necklace`);
   outfit.equip($familiar`Trick-or-Treating Tot`);
   return outfit;
 }
