@@ -1,6 +1,5 @@
 import {
   eat,
-  gametimeToInt,
   myAdventures,
   myHp,
   myMaxhp,
@@ -47,8 +46,6 @@ export type CandyTask = StrictCombatTask<never, CandyStrategy> & {
 export const State = {
   blocks: 0,
 };
-
-export const today = Date.now() - gametimeToInt() - 1000 * 60 * 3.5;
 
 export function shouldRedigitize(): boolean {
   if (!SourceTerminal.have()) return false;

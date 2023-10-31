@@ -1,5 +1,4 @@
-import { today } from "../lib";
-import { $item, $items, arrayEquals, get, maxBy, set, sum, TrainSet } from "libram";
+import { $item, $items, arrayEquals, get, maxBy, sum, TrainSet } from "libram";
 import { freecandyAverageValue } from "../value";
 
 const TRAIN_CANDIES = [
@@ -51,14 +50,9 @@ const TRAIN_CANDIES = [
   $item`Yummy Tummy bean`,
 ];
 
+let _candyFactoryValue: number;
 function candyFactoryValue(): number {
-  const lastCalculated = get("garbo_candyFactoryValueDate", 0);
-  if (!get("garbo_candyFactoryValue", 0) || today - lastCalculated > 7 * 24 * 60 * 60 * 1000) {
-    const averageDropValue = freecandyAverageValue(...TRAIN_CANDIES);
-    set("garbo_candyFactoryValue", averageDropValue);
-    set("garbo_candyFactoryValueDate", today);
-  }
-  return get("garbo_candyFactoryValue", 0);
+  return (_candyFactoryValue ??= freecandyAverageValue(...TRAIN_CANDIES));
 }
 
 const GOOD_TRAIN_STATIONS = [
