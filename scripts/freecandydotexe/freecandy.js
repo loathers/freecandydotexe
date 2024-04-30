@@ -25274,7 +25274,7 @@ var GLOBAL_TASKS = [{
     return (0, import_kolmafia91.cliExecute)("numberology 69");
   }
 }, {
-  name: "Magical Sauasage",
+  name: "Magical Sausage",
   ready: function() {
     return $items(_templateObject938 || (_templateObject938 = _taggedTemplateLiteral77(["magical sausage, magical sausage casing"]))).some(function(i) {
       return have(i);
@@ -25283,7 +25283,7 @@ var GLOBAL_TASKS = [{
     });
   },
   completed: function() {
-    return get("_sausagesEaten") >= 23;
+    return get("_sausagesEaten") >= 23 || (0, import_kolmafia91.myFullness)() > (0, import_kolmafia91.fullnessLimit)();
   },
   do: function() {
     return (0, import_kolmafia91.eat)($item(_templateObject1130 || (_templateObject1130 = _taggedTemplateLiteral77(["magical sausage"]))));
