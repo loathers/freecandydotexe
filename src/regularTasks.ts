@@ -181,7 +181,7 @@ const GLOBAL_TASKS: CandyTask[] = [
     do: () => cliExecute("numberology 69"),
   },
   {
-    name: "Magical Sauasage",
+    name: "Magical Sausage",
     ready: () =>
       $items`magical sausage, magical sausage casing`.some((i) => have(i)) &&
       $items`Kramco Sausage-o-Matic™, replica Kramco Sausage-o-Matic™`.some((i) => have(i)),
