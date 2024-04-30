@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.mjs",
     "lint": "eslint src && prettier --check src",
-    "lint:fix": "eslint src --fix && prettier --check src",
+    "lint:fix": "eslint src --fix && prettier --write src",
     "watch": "webpack --watch --progress"
   },
   "devDependencies": {
@@ -19,8 +19,8 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
     "babel-loader": "^8.2.2",
     "esbuild": "0.17.0",
     "esbuild-plugin-babel": "0.2.3",
