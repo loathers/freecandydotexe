@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build.mjs",
     "lint": "eslint src && prettier --check src",
-    "lint:fix": "eslint src --fix && prettier --check src",
+    "lint:fix": "eslint src --fix && prettier --write src",
     "watch": "webpack --watch --progress"
   },
   "devDependencies": {
@@ -19,23 +19,23 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
     "babel-loader": "^8.2.2",
     "esbuild": "0.17.0",
     "esbuild-plugin-babel": "0.2.3",
-    "eslint": "^7.28.0",
+    "eslint": "8.56.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-libram": "^0.3.3",
+    "eslint-plugin-libram": "^0.4.5",
     "prettier": "^2.3.1",
     "typescript": "^4.5.2"
   },
   "dependencies": {
     "core-js": "^3.16.4",
-    "garbo-lib": "^0.0.1",
+    "garbo-lib": "^1.0.0",
     "grimoire-kolmafia": "^0.3.23",
     "kolmafia": "^5.27651.0",
-    "libram": "^0.8.14"
+    "libram": "^0.8.27"
   },
   "author": "loathers",
   "license": "ISC",
