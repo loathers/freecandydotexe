@@ -1,6 +1,8 @@
 import {
   eat,
+  fullnessLimit,
   myAdventures,
+  myFullness,
   myHp,
   myMaxhp,
   myMaxmp,
@@ -22,7 +24,8 @@ export function safeRestore(): void {
   if (myMp() < mpTarget) {
     if (
       (have($item`magical sausage`) || have($item`magical sausage casing`)) &&
-      get("_sausagesEaten") < 23
+      get("_sausagesEaten") < 23 &&
+      myFullness() <= fullnessLimit()
     ) {
       eat($item`magical sausage`);
     } else restoreMp(mpTarget);
