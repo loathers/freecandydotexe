@@ -37,6 +37,7 @@ import {
   $skill,
   $slot,
   $slots,
+  BurningLeaves,
   clamp,
   CrownOfThrones,
   findLeprechaunMultiplier,
@@ -202,6 +203,17 @@ function reallyEasyBonuses() {
   );
 }
 
+function rakeLeaves(): Map<Item, number> {
+  if (!BurningLeaves.have()) {
+    return new Map();
+  }
+  const rakeValue = freecandyValue($item`inflammable leaf`) * 1.5;
+  return new Map<Item, number>([
+    [$item`rake`, rakeValue],
+    [$item`tiny rake`, rakeValue],
+  ]);
+}
+
 function easyBonuses() {
   return new Map<Item, number>([
     ...reallyEasyBonuses(),
@@ -210,6 +222,7 @@ function easyBonuses() {
     ...mayflowerBouquet(),
     ...sweatpants(),
     ...pantogram(),
+    ...rakeLeaves(),
   ]);
 }
 

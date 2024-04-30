@@ -26,7 +26,7 @@
     "esbuild-plugin-babel": "0.2.3",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-libram": "^0.3.3",
+    "eslint-plugin-libram": "^0.4.5",
     "prettier": "^2.3.1",
     "typescript": "^4.5.2"
   },
@@ -35,7 +35,7 @@
     "garbo-lib": "^0.0.1",
     "grimoire-kolmafia": "^0.3.23",
     "kolmafia": "^5.27651.0",
-    "libram": "^0.8.14"
+    "libram": "^0.8.27"
   },
   "author": "loathers",
   "license": "ISC",
