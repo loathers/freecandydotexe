@@ -35,4 +35,4 @@ For more details beyond this blisteringly important note:
 - For more information about what freecandy.exe does and does not do, [click here](documentation/scope.md).
 - To peruse frequently asked questions about freecandy, [click here](documentation/faq.md).
 
-To report bugs, please post issues on this GitHub repository or send messages and report bugs in the Ascension Speed Society [discord](https://discord.gg/tbUCRT5), within the **#mafia-and-scripting** channel.
+To report bugs, please post issues on this GitHub repository.
