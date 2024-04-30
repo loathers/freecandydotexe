@@ -8,7 +8,6 @@ function freecandyValueFunctions(): ValueFunctions {
   if (!_valueFunctions) {
     _valueFunctions = makeValue({
       itemValues: new Map([[$item`fake hand`, 50000]]),
-      quick: false,
     });
   }
   return _valueFunctions;

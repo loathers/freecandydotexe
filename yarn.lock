@@ -2240,10 +2240,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-garbo-lib@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/garbo-lib/-/garbo-lib-0.0.1.tgz#260324142563e7c1ba6663d63a63c2f557472955"
-  integrity sha512-gAvUDfoEAzv4lk/h2BtuIyy1DsjfCrcaxaT/B6ddIhnaaKavDD71+VCSNdc7u56cN5PU41eGjZJTPGpRtrM1rg==
+garbo-lib@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/garbo-lib/-/garbo-lib-1.0.0.tgz#7800ba41975f7246c97b9b2b997546e8b4e7cb3f"
+  integrity sha512-E1ODkWbsR2mA7Af7UmU4fgRqxqQyFGc0b5IP24T61IQBIVat1LC0rjI2WHFVqzYzYmBilL5lAOSuslfQtwGdhA==
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
