@@ -19,6 +19,7 @@ import {
   numericModifier,
   outfitPieces,
   outfitTreats,
+  retrieveItem,
   Slot,
   toEffect,
   toItem,
@@ -39,6 +40,7 @@ import {
   $slots,
   BurningLeaves,
   clamp,
+  CommaChameleon,
   CrownOfThrones,
   findLeprechaunMultiplier,
   get,
@@ -406,7 +408,10 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
       "It looks like we're about to go adventuring without a familiar, and that feels deeply wrong"
     );
   }
-  if (adventureFamiliars.includes(outfit.familiar)) {
+  if (
+    adventureFamiliars.includes(outfit.familiar) ||
+    $familiar`Comma Chameleon` === outfit.familiar
+  ) {
     weightValue = Math.round(MAGIC_NUMBER * baseAdventureValue() * 100) / 100;
   } else {
     const stasisData = stasisFamiliars.get(outfit.familiar);
@@ -434,6 +439,16 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
   if (weightValue) {
     const rounded = Math.round(1000 * weightValue) / 1000;
     outfit.modifier.push(`${rounded} Familiar Weight`);
+  }
+
+  if (
+    outfit.familiar === $familiar`Comma Chameleon` &&
+    CommaChameleon.currentFamiliar() !== $familiar`Temporal Riftlet`
+  ) {
+    if (mallPrice($item`1.21 jigawatts`) > 0.05 * 40 * get("valueOfAdventure"))
+      throw "I dunno, Chameleon seems pretty expensive. Are you sure you want that?";
+    retrieveItem($item`1.21 jigawatts`);
+    CommaChameleon.transform($familiar`Temporal Riftlet`);
   }
 
   const bjornChoice = ensureBjorn(weightValue);

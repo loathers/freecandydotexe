@@ -35,7 +35,7 @@
     "garbo-lib": "^1.0.0",
     "grimoire-kolmafia": "^0.3.23",
     "kolmafia": "^5.27651.0",
-    "libram": "^0.8.27"
+    "libram": "^0.11.10"
   },
   "author": "loathers",
   "license": "ISC",
@@ -51,5 +51,6 @@
   "bugs": {
     "url": "https://github.com/loathers/freecandydotexe/issues"
   },
-  "homepage": "https://github.com/loathers/freecandydotexe#readme"
+  "homepage": "https://github.com/loathers/freecandydotexe#readme",
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
