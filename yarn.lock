@@ -2405,6 +2405,11 @@ html-entities@^2.4.0:
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.4.0.tgz#edd0cee70402584c8c76cc2c0556db09d1f45061"
   integrity sha512-igBTJcNNNhvZFRtm8uA6xMY6xYleeDwn3PeBCkDz7tHttv4F2hsDI2aPgNERWzvRcNYHNT3ymRaQzllmXj4YsQ==
 
+html-entities@^2.5.2:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-2.6.0.tgz#7c64f1ea3b36818ccae3d3fb48b6974208e984f8"
+  integrity sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==
+
 ignore@^5.2.0:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.1.tgz#5073e554cd42c5b33b394375f538b8593e34d4ef"
@@ -2685,12 +2690,12 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-libram@^0.8.27:
-  version "0.8.27"
-  resolved "https://registry.yarnpkg.com/libram/-/libram-0.8.27.tgz#cd672fdc4e7455311e1605fb23fccdb2aaf9986a"
-  integrity sha512-Xw043wV31pTSGMOep163g+4zHX/R7iwKxjvntvPvA0CbcQQtNii/4YtqVwatUOqLHuze/fta1m5EKwkCbsU63w==
+libram@^0.11.11:
+  version "0.11.11"
+  resolved "https://registry.yarnpkg.com/libram/-/libram-0.11.11.tgz#b87b9e68b1e45ff0d69fc1e2762684acd522a905"
+  integrity sha512-Y4dFrQ2sHEl1h0RIK5Cl42JGrmAM+PfFrsigWm2A9xWbtnuFA2SEruxoPnuxwfJwCY5JL6wZEP9FQ7hpothH6A==
   dependencies:
-    html-entities "^2.4.0"
+    html-entities "^2.5.2"
 
 loader-utils@^1.4.0:
   version "1.4.0"
