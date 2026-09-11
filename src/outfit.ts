@@ -92,7 +92,7 @@ function ensureBjorn(weightValue: number, meatValue = 0): CrownOfThrones.Familia
 export function getTreatOutfit(): string {
   if (!args.treatOutfit) {
     const availableOutfits = getOutfits().filter((name) =>
-      outfitPieces(name).every((piece) => canEquip(piece))
+      outfitTattoo(name) !== undefined && outfitPieces(name).every((piece) => canEquip(piece))
     );
 
     printError(`No treatOutfit given--doing some math to decide what to use`);
@@ -345,10 +345,17 @@ function fullBonuses() {
   return new Map([...easyBonuses(), ...pantsgiving()]);
 }
 
+function getOutfitPieces(outfit: string): boolean {
+  const pieces = outfitPieces(outfit);
+  if (!pieces.length) {
+    abort(`The outfit ${outfit} does not appear to be a valid outfit`);
+  }
+  return pieces;
+}
+
 export function treatOutfit(): Outfit {
   const outfit = new Outfit();
-  const pieces = outfitPieces(getTreatOutfit());
-  for (const piece of pieces) {
+  for (const piece of getOutfitPieces(getTreatOutfit()) {
     if (!outfit.equip(piece))
       abort(`Could not equip all pieces of treat outfit: aborted on ${piece}`);
   }
@@ -457,7 +464,7 @@ export function trickOutfit(): Outfit {
   if (args.trickOutfit) {
     const outfit = new Outfit();
     outfit.equip(args.familiar);
-    for (const piece of outfitPieces(args.trickOutfit)) {
+    for (const piece of getOutfitPieces(args.trickOutfit)) {
       if (!outfit.equip(piece)) {
         abort(`Failed to equip ${piece} from trick outfit ${args.trickOutfit}`);
       }
