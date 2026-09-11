@@ -346,7 +346,7 @@ function fullBonuses() {
   return new Map([...easyBonuses(), ...pantsgiving()]);
 }
 
-function getOutfitPieces(outfit: string): boolean {
+function getOutfitPieces(outfit: string): Item[] {
   const pieces = outfitPieces(outfit);
   if (!pieces.length) {
     abort(`The outfit ${outfit} does not appear to be a valid outfit`);
