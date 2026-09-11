@@ -18,6 +18,7 @@ import {
   myInebriety,
   numericModifier,
   outfitPieces,
+  outfitTattoo,
   outfitTreats,
   Slot,
   toEffect,
