@@ -93,7 +93,7 @@ function ensureBjorn(weightValue: number, meatValue = 0): CrownOfThrones.Familia
 export function getTreatOutfit(): string {
   if (!args.treatOutfit) {
     const availableOutfits = getOutfits().filter((name) =>
-      outfitTattoo(name) !== undefined && outfitPieces(name).every((piece) => canEquip(piece))
+      outfitTattoo(name) && outfitPieces(name).every((piece) => canEquip(piece))
     );
 
     printError(`No treatOutfit given--doing some math to decide what to use`);
