@@ -356,7 +356,7 @@ function getOutfitPieces(outfit: string): boolean {
 
 export function treatOutfit(): Outfit {
   const outfit = new Outfit();
-  for (const piece of getOutfitPieces(getTreatOutfit()) {
+  for (const piece of getOutfitPieces(getTreatOutfit())) {
     if (!outfit.equip(piece))
       abort(`Could not equip all pieces of treat outfit: aborted on ${piece}`);
   }
