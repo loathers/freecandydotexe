@@ -42,7 +42,7 @@ export function printError(message: string): void {
   print(message, color);
 }
 
-export type CandyTask = StrictCombatTask<never, CandyStrategy> & {
+export type CandyTask = StrictCombatTask<never, void, CandyStrategy> & {
   sobriety?: "sober" | "drunk";
 };
 
