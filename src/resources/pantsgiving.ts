@@ -44,7 +44,7 @@ const pantsgivingFoods: PantsgivingFood[] = [
   },
   {
     food: $item`FantasyRealm turkey leg`,
-    costOverride: () => 0,
+    costOverride: () => 100 * freecandyValue($item`Rubee™`),
     canGet: () => {
       if (!have($item`Rubee™`, 100)) return false;
       if (!get("_frToday") && !get("frAlways")) return false;
