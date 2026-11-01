@@ -81,7 +81,7 @@ function makeWandererTask(
   const options: WanderDetails = drunkSafe ? { wanderer: type, drunkSafe } : type;
   return {
     sobriety,
-    do: () => wanderer().getTarget(options),
+    do: (): Location => wanderer().getTarget(options).location,
     choices: () => wanderer().getChoices(options),
     combat: new CandyStrategy(),
     outfit: () => combatOutfit({ equip: wanderer().getEquipment(options).concat(equip), modes }),
