@@ -8,7 +8,6 @@ import {
   inebrietyLimit,
   Item,
   Location,
-  mallPrices,
   myClass,
   myFullness,
   myHp,
@@ -16,8 +15,6 @@ import {
   retrieveItem,
   reverseNumberology,
   runChoice,
-  sessionStorage,
-  todayToString,
   totalTurnsPlayed,
   use,
   useSkill,
@@ -32,10 +29,8 @@ import {
   $location,
   $phylum,
   $skill,
-  ActionSource,
   AutumnAton,
   Counter,
-  ensureFreeRun,
   get,
   getKramcoWandererChance,
   have,
@@ -45,7 +40,6 @@ import {
   Snapper,
   SourceTerminal,
   TrainSet,
-  tryFindFreeRun,
   withProperty,
 } from "libram";
 import { CandyTask, shouldRedigitize } from "./lib";
@@ -70,29 +64,6 @@ const MARKET_QUESTS = [
   { pref: "questM25Armorer", url: "shop.php?whichshop=armory&action=talk" },
 ];
 
-let _digitizeInitialized = true;
-
-function digitizeInitialized(): void {
-  _digitizeInitialized = true;
-}
-
-let runSource: ActionSource | null = null;
-
-function getRunSource(): ActionSource {
-  if (!runSource) {
-    runSource =
-      tryFindFreeRun() ??
-      ensureFreeRun({
-        requireUnlimited: () => true,
-        noFamiliar: () => true,
-        noRequirements: () => true,
-        maximumCost: () => get("autoBuyPriceLimit") ?? 20000,
-      });
-  }
-  if (!runSource) abort("Unable to find free run with which to initialize digitize!");
-  return runSource;
-}
-
 function makeWandererTask(
   type: DraggableFight,
   drunkSafe: boolean,
@@ -110,7 +81,7 @@ function makeWandererTask(
   const options: WanderDetails = drunkSafe ? { wanderer: type, drunkSafe } : type;
   return {
     sobriety,
-    do: () => wanderer().getTarget(options),
+    do: (): Location => wanderer().getTarget(options).location,
     choices: () => wanderer().getChoices(options),
     combat: new CandyStrategy(),
     outfit: () => combatOutfit({ equip: wanderer().getEquipment(options).concat(equip), modes }),
@@ -119,14 +90,6 @@ function makeWandererTask(
 }
 
 const GLOBAL_TASKS: CandyTask[] = [
-  {
-    name: "Search the Mall",
-    completed: () => sessionStorage.getItem("last mallprices") === todayToString(),
-    do: (): void => {
-      mallPrices("allitems");
-      sessionStorage.setItem("last mallprices", todayToString());
-    },
-  },
   ...MARKET_QUESTS.map(({ pref, url }) => ({
     name: `Start Quest: ${pref}`,
     completed: () => questStep(pref) > -1,
@@ -200,11 +163,12 @@ const GLOBAL_TASKS: CandyTask[] = [
       !$classes`Vampyre, Grey Goo`.includes(myClass()) && myFullness() + 1 === fullnessLimit(),
     completed: () => myFullness() >= fullnessLimit(),
     do: (): void => {
-      const { food } = getBestPantsgivingFood();
+      const { food, prepare } = getBestPantsgivingFood();
       if (!get("_fudgeSporkUsed")) {
         retrieveItem($item`fudge spork`);
         eat($item`fudge spork`);
       }
+      prepare?.();
       retrieveItem(food);
       eat(food);
     },
@@ -283,10 +247,9 @@ const GLOBAL_TASKS: CandyTask[] = [
   ),
   makeWandererTask("wanderer", true, {
     name: "Digitize Wanderer",
-    completed: () => Counter.get("Digitize") > 0,
+    completed: () => Counter.get("Digitize Monster") > 0,
     prepare: () =>
       shouldRedigitize() && SourceTerminal.educate([$skill`Digitize`, $skill`Extract`]),
-    post: () => get("_sourceTerminalDigitizeMonsterCount") || (_digitizeInitialized = false),
     outfit: digitizeOutfit,
     combat: new CandyStrategy(() => Macro.redigitize().default()),
   }),
@@ -307,7 +270,6 @@ const GLOBAL_TASKS: CandyTask[] = [
       name: "Kramco",
       ready: () => have($item`Kramco Sausage-o-Matic™`),
       completed: () => getKramcoWandererChance() < 1,
-      post: digitizeInitialized,
       combat: new CandyStrategy(),
     },
     $items`Kramco Sausage-o-Matic™`
@@ -317,7 +279,6 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () => have($skill`Fondeluge`),
     completed: () => have($effect`Everything Looks Yellow`),
     sobriety: "sober",
-    post: digitizeInitialized,
     combat: new CandyStrategy(() =>
       Macro.tryHaveSkill($skill`Duplicate`)
         .trySkill($skill`Fondeluge`)
@@ -332,7 +293,6 @@ const GLOBAL_TASKS: CandyTask[] = [
       ready: () => have($item`Jurassic Parka`) && have($skill`Torso Awareness`),
       completed: () => have($effect`Everything Looks Yellow`),
       sobriety: "sober",
-      post: digitizeInitialized,
       combat: new CandyStrategy(() =>
         Macro.tryHaveSkill($skill`Duplicate`)
           .trySkill($skill`Spit jurassic acid`)
@@ -347,43 +307,12 @@ const GLOBAL_TASKS: CandyTask[] = [
     ready: () => have($skill`Free-For-All`),
     completed: () => have($effect`Everything Looks Red`),
     sobriety: "sober",
-    post: digitizeInitialized,
     combat: new CandyStrategy(Macro.skill($skill`Free-For-All`)),
   }),
   makeWandererTask("wanderer", true, {
     name: "Nemesis Assassin",
     completed: () => Counter.get("Nemesis Assassin window end") > 0,
-    post: digitizeInitialized,
   }),
-  {
-    name: "Initialize Digitize",
-    completed: () => _digitizeInitialized,
-    do: (): Location => {
-      getRunSource()?.prepare();
-      return wanderer().getTarget("backup");
-    },
-    choices: () => wanderer().getChoices("backup"),
-    post: (): void => {
-      digitizeInitialized();
-      runSource = null;
-    },
-    outfit: (): Outfit => {
-      const run = getRunSource();
-      const req = run?.constraints?.equipmentRequirements?.();
-      const familiar = run?.constraints?.familiar?.();
-      const outfit = new Outfit();
-      if (familiar) outfit.equip(familiar);
-      if (req) {
-        if (req.maximizeParameters) outfit.modifier = req.maximizeParameters;
-        for (const item of req.maximizeOptions.forceEquip ?? []) {
-          if (!outfit.equip(item)) abort(`Failed to equip item ${item} for free running`);
-        }
-      }
-      return combatOutfit(outfit.spec());
-    },
-    combat: new CandyStrategy(() => Macro.step(getRunSource()?.macro ?? Macro.abort())),
-    sobriety: "sober",
-  },
 ];
 
 export default GLOBAL_TASKS;

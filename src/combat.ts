@@ -144,7 +144,7 @@ export class Macro extends StrictMacro {
 }
 
 export class CandyStrategy extends CombatStrategy {
-  constructor(macro: Delayed<Macro> = () => Macro.default()) {
+  constructor(macro: Delayed<Macro, [void]> = () => Macro.default()) {
     super();
     this.autoattack(macro).macro(macro);
   }

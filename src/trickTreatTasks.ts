@@ -1,87 +1,45 @@
-import {
-  abort,
-  handlingChoice,
-  inMultiFight,
-  lastChoice,
-  myAdventures,
-  runChoice,
-  runCombat,
-  visitUrl,
-} from "kolmafia";
+import { abort, handlingChoice, lastChoice, myAdventures, runChoice, visitUrl } from "kolmafia";
+import { get } from "libram";
 import { treatOutfit, trickOutfit } from "./outfit";
 import { CandyTask, State } from "./lib";
 import { CandyStrategy } from "./combat";
-const HOUSE_NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-let blockHtml = "";
-let treated = false;
-let tricked: number[] = [];
-
-function getBlockHtml(): string {
-  blockHtml ||= visitUrl("place.php?whichplace=town&action=town_trickortreat");
-  return blockHtml;
-}
-
-function refreshBlock(): void {
-  blockHtml = visitUrl("place.php?whichplace=town&action=town_trickortreat");
-}
-
-function resetBlock(): void {
-  refreshBlock();
-  treated = false;
-  tricked = [];
-  State.blocks++;
-}
-
-function ensureInHalloween(): void {
+export function ensureInHalloween(): void {
   const onPage = handlingChoice() && lastChoice() === 804;
-  if (!onPage) refreshBlock();
+  if (!onPage) visitUrl("place.php?whichplace=town&action=town_trickortreat");
+  if (!handlingChoice() || lastChoice() !== 804) {
+    abort("Unable to enter the trick-or-treating block!");
+  }
+}
+
+function visitHouse(house: number): void {
+  ensureInHalloween();
+  runChoice(3, `whichhouse=${house}`);
 }
 
 const TRICK_TREAT_TASKS: CandyTask[] = [
   {
     name: "Treat",
-    ready: () => !treated,
-    completed: () => !getBlockHtml().match(/whichhouse=\d*>[^>]*?house_l/),
+    completed: () => !/[LS]/.test(get("_trickOrTreatBlock")),
     outfit: treatOutfit,
-    prepare: ensureInHalloween,
     do: (): void => {
       // We do all treat houses in a row as one task for speed reasons
-      for (const house of HOUSE_NUMBERS) {
-        if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?house_l`))) {
-          tricked.push(house);
-          visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
-        } else if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?starhouse`))) {
-          tricked.push(house);
-          visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
-          runChoice(2);
-          refreshBlock();
+      for (const [index, house] of [...get("_trickOrTreatBlock")].entries()) {
+        if (house === "L" || house === "S") {
+          visitHouse(index);
+          if (house === "S") runChoice(2);
         }
       }
-      treated = true;
     },
   },
   {
     name: "Trick",
-    ready: () => tricked.length < HOUSE_NUMBERS.length,
-    completed: () => !getBlockHtml().match(/whichhouse=\d*>[^>]*?house_d/),
-    prepare: ensureInHalloween,
+    completed: () => !get("_trickOrTreatBlock").includes("D"),
     do: (): void => {
-      // We return after doing one combat because combats change character-state enough we want to go through our non-hallowe'en tasks agaijn
-      for (const house of HOUSE_NUMBERS) {
-        if (tricked.includes(house)) continue;
-        tricked.push(house);
-        if (getBlockHtml().match(RegExp(`whichhouse=${house}>[^>]*?house_d`))) {
-          visitUrl(`choice.php?whichchoice=804&option=3&whichhouse=${house}&pwd`);
-          do {
-            runCombat();
-          } while (inMultiFight());
-          return;
-        }
-      }
-      if (tricked.length < HOUSE_NUMBERS.length) {
-        abort("We thought there were unvisited trickable houses left, but alas! there are not!");
-      }
+      // Return after one house so other tasks can react to changes from combat.
+      // Grimoire handles combat and any following multifights.
+      const house = get("_trickOrTreatBlock").indexOf("D");
+      if (house >= 0) visitHouse(house);
     },
     outfit: trickOutfit,
     combat: new CandyStrategy(),
@@ -89,16 +47,14 @@ const TRICK_TREAT_TASKS: CandyTask[] = [
   {
     name: "Reset Block",
     ready: () => myAdventures() >= 5,
-    completed: (): boolean => {
-      refreshBlock();
-      return getBlockHtml().includes("whichhouse=");
-    },
-    prepare: ensureInHalloween,
+    completed: () => /[LDS]/.test(get("_trickOrTreatBlock")),
     do: (): void => {
-      visitUrl("choice.php?whichchoice=804&pwd&option=1");
-      resetBlock();
-      if (!getBlockHtml().includes("whichhouse="))
+      ensureInHalloween();
+      runChoice(1);
+      if (!/[LDS]/.test(get("_trickOrTreatBlock"))) {
         abort("Something went awry when finding a new block!");
+      }
+      State.blocks++;
     },
   },
 ];

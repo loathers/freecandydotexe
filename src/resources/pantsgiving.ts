@@ -1,4 +1,4 @@
-import { abort, isAccessible, Item, mallPrice, myLevel, runChoice, visitUrl } from "kolmafia";
+import { abort, buy, isAccessible, Item, mallPrice, myLevel, runChoice, visitUrl } from "kolmafia";
 import { $coinmaster, $item, get, have, maxBy } from "libram";
 import { freecandyValue } from "../value";
 
@@ -6,6 +6,7 @@ type PantsgivingFood = {
   food: Item;
   costOverride?: () => number;
   canGet: () => boolean;
+  prepare?: () => void;
 };
 const pantsgivingFoods: PantsgivingFood[] = [
   {
@@ -30,6 +31,29 @@ const pantsgivingFoods: PantsgivingFood[] = [
     canGet: () => true,
   },
   {
+    food: $item`meteoreo`,
+    canGet: () => true,
+  },
+  {
+    food: $item`deviled egg`,
+    canGet: () => myLevel() >= 5,
+  },
+  {
+    food: $item`jumping horseradish`,
+    canGet: () => true,
+  },
+  {
+    food: $item`campfire hot dog`,
+    costOverride: () => mallPrice($item`stick of firewood`),
+    canGet: () => have($item`campfire hot dog`) || isAccessible($coinmaster`Your Campfire`),
+    prepare: () => {
+      // KoLmafia can retrieve the hot dog once we supply its firewood.
+      if (!have($item`campfire hot dog`) && !have($item`stick of firewood`)) {
+        buy(1, $item`stick of firewood`, mallPrice($item`stick of firewood`));
+      }
+    },
+  },
+  {
     food: $item`Dreadsylvanian stew`,
     costOverride: () =>
       (10 / 20) *
@@ -44,7 +68,7 @@ const pantsgivingFoods: PantsgivingFood[] = [
   },
   {
     food: $item`FantasyRealm turkey leg`,
-    costOverride: () => 0,
+    costOverride: () => 100 * freecandyValue($item`Rubee™`),
     canGet: () => {
       if (!have($item`Rubee™`, 100)) return false;
       if (!get("_frToday") && !get("frAlways")) return false;

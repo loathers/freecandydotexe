@@ -13,17 +13,13 @@ import {
   Item,
   mallPrice,
   myAdventures,
-  myEffects,
   myFullness,
   myInebriety,
   numericModifier,
   outfitPieces,
   outfitTreats,
-  Slot,
-  toEffect,
   toItem,
   toJson,
-  toSlot,
   totalTurnsPlayed,
   userConfirm,
 } from "kolmafia";
@@ -34,8 +30,6 @@ import {
   $item,
   $items,
   $monster,
-  $skill,
-  $slot,
   $slots,
   BurningLeaves,
   clamp,
@@ -46,9 +40,12 @@ import {
   getFoldGroup,
   have,
   maxBy,
+  ReagnimatedGnome,
   SongBoom,
   sum,
   sumNumbers,
+  TemporalRiftlet,
+  totalFamiliarWeight,
 } from "libram";
 import { printError, printHighlight } from "./lib";
 import { getBestPantsgivingFood, juneCleaverBonusEquip } from "./resources";
@@ -178,14 +175,15 @@ function pantogram() {
 
 let _sneegleebDropValue: number;
 function sneegleebDropValue(): number {
-  return (_sneegleebDropValue ??=
-    0.13 *
-    sum(
-      Item.all().filter(
-        (i) => i.tradeable && i.discardable && (i.inebriety || i.fullness || i.potion)
-      ),
-      (i) => clamp(freecandyValue(i), 0, 100_000)
-    ));
+  if (_sneegleebDropValue === undefined) {
+    const drops = Item.all().filter(
+      (item) =>
+        item.tradeable && item.discardable && (item.inebriety || item.fullness || item.potion)
+    );
+    _sneegleebDropValue =
+      (0.13 * sum(drops, (item) => clamp(freecandyValue(item), 0, 100_000))) / drops.length;
+  }
+  return _sneegleebDropValue;
 }
 
 function reallyEasyBonuses() {
@@ -226,70 +224,21 @@ function easyBonuses() {
   ]);
 }
 
-let estimatedOutfitWeight: number;
-function getEstimatedOutfitWeight(): number {
-  if (!estimatedOutfitWeight) {
-    const bonuses = easyBonuses();
-
-    const freeAccessories = 3 - clamp([...easyBonuses().keys()].length, 0, 3);
-    const openSlots = [
-      ...$slots`shirt, weapon, off-hand`,
-      ...(have($item`Buddy Bjorn`) ? [] : $slots`back`),
-      ...(bonuses.has($item`pantogram pants`) ? [] : $slots`pants`),
-    ];
-
-    const viableItems = Item.all().filter(
-      (item) =>
-        have(item) &&
-        (openSlots.includes(toSlot(item)) || (toSlot(item) === $slot`acc1` && freeAccessories > 0))
-    );
-
-    const nonAccessoryWeightEquips = openSlots.map((slot) =>
-      maxBy(
-        viableItems.filter((item) => toSlot(item) === slot),
-        (item) => numericModifier(item, "Familiar Weight")
-      )
-    );
-
-    const accessoryWeightEquips = freeAccessories
-      ? viableItems
-          .filter((item) => toSlot(item) === $slot`acc1`)
-          .sort(
-            (a, b) => numericModifier(b, "Familiar Weight") - numericModifier(a, "Familiar Weight")
-          )
-          .splice(0, freeAccessories)
-      : [];
-
-    estimatedOutfitWeight =
-      sum([...accessoryWeightEquips, ...nonAccessoryWeightEquips], (item: Item) =>
-        numericModifier(item, "Familiar Weight")
-      ) +
-      (have($familiar`Temporal Riftlet`) ? 10 : 0) +
-      (have($skill`Amphibian Sympathy`) ? 5 : 0);
-  }
-
-  return estimatedOutfitWeight;
+function estimatedFamiliarWeight(familiar: Familiar): number {
+  const outfitWeight = sum(
+    $slots`hat, back, shirt, weapon, off-hand, pants, acc1, acc2, acc3, familiar`,
+    (slot) => numericModifier(equippedItem(slot), "Familiar Weight")
+  );
+  // An outfit might add about 20 lb; linearize around its midpoint.
+  return Math.max(1, totalFamiliarWeight(familiar) - outfitWeight + 10);
 }
 
-let effectWeight: number;
-function getEffectWeight(): number {
-  if (!effectWeight) {
-    effectWeight = sum(
-      Object.entries(myEffects())
-        .map(([name, duration]) => {
-          return {
-            effect: toEffect(name),
-            duration: duration,
-          };
-        })
-        .filter(
-          ({ effect, duration }) =>
-            numericModifier(effect, "Familiar Weight") && duration >= myAdventures()
-        ),
-      ({ effect }) => numericModifier(effect, "Familiar Weight")
-    );
-  }
-  return effectWeight;
+function adventureValueMultiplier(familiar: Familiar, weight: number): number {
+  const adventures =
+    familiar === $familiar`Reagnimated Gnome`
+      ? ReagnimatedGnome.expectedAdvsPerCombat(weight)
+      : TemporalRiftlet.expectedAdvsPerCombat(weight);
+  return 1 / (1 - adventures);
 }
 
 function overallAdventureValue(): number {
@@ -303,7 +252,7 @@ function overallAdventureValue(): number {
           : dropsValueFunction(bjornChoice.drops))
       : 0;
   const itemAndMeatValue =
-    sum(Slot.all(), (slot) => bonuses.get(equippedItem(slot)) ?? 0) +
+    sum($slots.all(), (slot) => bonuses.get(equippedItem(slot)) ?? 0) +
     baseAdventureValue() +
     (haveEquipped($item`Buddy Bjorn`) || haveEquipped($item`Crown of Thrones`) ? bjornValue : 0);
 
@@ -311,12 +260,15 @@ function overallAdventureValue(): number {
   if (stasisData) {
     return (
       itemAndMeatValue +
-      (20 + getEstimatedOutfitWeight() + getEffectWeight()) *
+      estimatedFamiliarWeight(args.familiar) *
         stasisData.meatPerLb *
         clamp(stasisData.baseRate + actionRateBonus(), 0, 1)
     );
   } else if (adventureFamiliars.includes(args.familiar)) {
-    return (itemAndMeatValue * 1000) / (1000 - getEffectWeight() - getEstimatedOutfitWeight() - 20);
+    return (
+      itemAndMeatValue *
+      adventureValueMultiplier(args.familiar, estimatedFamiliarWeight(args.familiar))
+    );
   } else return itemAndMeatValue;
 }
 
@@ -358,9 +310,6 @@ export function treatOutfit(): Outfit {
 }
 
 const adventureFamiliars = $familiars`Temporal Riftlet, Reagnimated Gnome`;
-// https://www.desmos.com/calculator/y8iszw6rfk
-// Very basic linear approximation of the value of additional weight
-const MAGIC_NUMBER = 0.00123839009288;
 
 type stasisValue = {
   baseRate: number;
@@ -407,7 +356,11 @@ export function combatOutfit(base: OutfitSpec = {}): Outfit {
     );
   }
   if (adventureFamiliars.includes(outfit.familiar)) {
-    weightValue = Math.round(MAGIC_NUMBER * baseAdventureValue() * 100) / 100;
+    const weight = estimatedFamiliarWeight(outfit.familiar);
+    weightValue =
+      baseAdventureValue() *
+      (adventureValueMultiplier(outfit.familiar, weight + 1) -
+        adventureValueMultiplier(outfit.familiar, weight));
   } else {
     const stasisData = stasisFamiliars.get(outfit.familiar);
     if (stasisData) {
