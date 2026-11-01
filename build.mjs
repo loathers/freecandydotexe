@@ -1,8 +1,9 @@
 /* eslint-env node */
+import { copyFile } from "node:fs/promises";
 import { build } from "esbuild";
 import babel from "esbuild-plugin-babel";
 
-build({
+await build({
   entryPoints: {
     freecandy: "src/index.ts",
   },
@@ -19,3 +20,5 @@ build({
     "process.env.NODE_ENV": '"production"',
   },
 });
+
+await copyFile("static/dependencies.txt", "KoLmafia/dependencies.txt");

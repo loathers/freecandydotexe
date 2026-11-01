@@ -4,8 +4,8 @@ import { questStep, set } from "libram";
 import { CandyTask, State } from "./lib";
 import CandyEngine from "./engine";
 import GLOBAL_TASKS from "./regularTasks";
-import TRICK_TREAT_TASKS from "./trickTreatTasks";
-import { myAdventures, print } from "kolmafia";
+import TRICK_TREAT_TASKS, { ensureInHalloween } from "./trickTreatTasks";
+import { cliExecute, myAdventures, print } from "kolmafia";
 
 export default function main(argstring = ""): void {
   Args.fill(args, argstring);
@@ -13,6 +13,8 @@ export default function main(argstring = ""): void {
     Args.showHelp(args);
     return;
   }
+
+  cliExecute("mallcheck.js");
 
   const nemesisStep = () => questStep("questG04Nemesis");
   const doingNemesis = nemesisStep() >= 17 && nemesisStep() < 25;
@@ -53,6 +55,8 @@ export default function main(argstring = ""): void {
   const engine = new CandyEngine(getTasks([quest]));
 
   try {
+    // Synchronize KoLmafia's block state before the engine selects its first task.
+    ensureInHalloween();
     engine.run();
   } finally {
     engine.destruct();
