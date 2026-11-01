@@ -163,11 +163,12 @@ const GLOBAL_TASKS: CandyTask[] = [
       !$classes`Vampyre, Grey Goo`.includes(myClass()) && myFullness() + 1 === fullnessLimit(),
     completed: () => myFullness() >= fullnessLimit(),
     do: (): void => {
-      const { food } = getBestPantsgivingFood();
+      const { food, prepare } = getBestPantsgivingFood();
       if (!get("_fudgeSporkUsed")) {
         retrieveItem($item`fudge spork`);
         eat($item`fudge spork`);
       }
+      prepare?.();
       retrieveItem(food);
       eat(food);
     },
